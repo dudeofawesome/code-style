@@ -1,0 +1,243 @@
+inherit_from:
+  - node_modules/@prettier/plugin-ruby/rubocop.yml
+require:
+  - rubocop-performance
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - node_modules/**/*
+    - vendor/bundle/**/*
+  DisplayCopNames: true
+  NewCops: enable
+  SuggestExtensions:
+    rubocop-rails: false # passing on this for now
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'test/**/*'
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - 'test/**/*'
+Metrics/ClassLength:
+  Max: 250
+  Exclude:
+    - 'test/**/*'
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - 'test/**/*'
+Metrics/CyclomaticComplexity:
+  Max: 12
+  Exclude:
+    - 'test/**/*'
+Metrics/PerceivedComplexity:
+  Max: 15
+  Exclude:
+    - 'test/**/*'
+Metrics/BlockLength:
+  Max: 40
+  Exclude:
+    - 'test/**/*'
+    - 'config/**/*'
+    - 'lib/tasks/*'
+Metrics/ParameterLists:
+  Exclude:
+    - 'test/**/*'
+Metrics/ModuleLength:
+  Exclude:
+    - 'test/**/*'
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+  IncludeTernaryExpressions: false
+Style/IfUnlessModifier: # We can use if/unless modifiers, we just don't want to force them everywhere
+  Enabled: false
+Style/InverseMethods:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/MixinGrouping:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Naming/VariableNumber: # Allow for variable_1 instead of variable1
+  Enabled: false
+Naming/MethodParameterName: # It's ok to have shorter paramenter names
+  Enabled: false
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+    - 'app/policies/**/*'
+    - 'app/controllers/application_controller.rb'
+    - 'app/policies/**/*'
+    - 'config/application.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/DocumentationMethod:
+  Enabled: true
+  Exclude:
+    - 'test/**/*'
+    - 'config/**/*'
+    - 'app/policies/**/*'
+    - 'app/helpers/**/*'
+    - 'app/controllers/api/v1/emails_controller.rb'
+    - 'app/controllers/api/v2/facilities_controller.rb'
+    - 'app/controllers/api/v2/main_controller.rb'
+    - 'app/controllers/api/v2/sensors_controller.rb'
+    - 'app/controllers/api/v2/sensor_data_controller.rb'
+    - 'app/controllers/api/v2/sensor_metrics_controller.rb'
+    - 'app/controllers/api/v2/sensor_models_controller.rb'
+    - 'app/controllers/api/v2/tanks_controller.rb'
+    - 'app/controllers/api/v2/tank_metrics_controller.rb'
+    - 'app/controllers/api/v2/tank_reading_controller.rb'
+    - 'app/controllers/application_controller.rb'
+    - 'app/controllers/concerns/authorize_crop_batch.rb'
+    - 'app/controllers/concerns/crop_setup.rb'
+    - 'app/controllers/concerns/current_facility.rb'
+    - 'app/controllers/concerns/features.rb'
+    - 'app/controllers/concerns/ghosting.rb'
+    - 'app/controllers/concerns/javascript_bundle.rb'
+    - 'app/controllers/concerns/render_json_api_errors.rb'
+    - 'app/controllers/concerns/require_user.rb'
+    - 'app/controllers/concerns/user_permissions.rb'
+    - 'app/controllers/ops_controller.rb'
+    - 'app/controllers/portal_data/barcodes_controller.rb'
+    - 'app/controllers/portal_data/crops_controller.rb'
+    - 'app/controllers/portal_data/crop_batch_discards_controller.rb'
+    - 'app/controllers/portal_data/custom_data_controller.rb'
+    - 'app/controllers/portal_data/custom_fields_controller.rb'
+    - 'app/controllers/portal_data/facilities_controller.rb'
+    - 'app/controllers/portal_data/growth_cycles_controller.rb'
+    - 'app/controllers/portal_data/harvest_options_controller.rb'
+    - 'app/controllers/portal_data/kpis_controller.rb'
+    - 'app/controllers/portal_data/kpi_exports_controller.rb'
+    - 'app/controllers/portal_data/main_controller.rb'
+    - 'app/controllers/portal_data/memberships_controller.rb'
+    - 'app/controllers/portal_data/notes_controller.rb'
+    - 'app/controllers/portal_data/organizations_controller.rb'
+    - 'app/controllers/portal_data/photos_controller.rb'
+    - 'app/controllers/portal_data/resource_units_controller.rb'
+    - 'app/controllers/portal_data/seeding_units_controller.rb'
+    - 'app/controllers/portal_data/tasks_controller.rb'
+    - 'app/controllers/portal_data/task_categories_controller.rb'
+    - 'app/controllers/portal_data/users_controller.rb'
+    - 'app/controllers/portal_data/zones_controller.rb'
+    - 'app/controllers/users/confirmations_controller.rb'
+    - 'app/controllers/users/invitations_controller.rb'
+    - 'app/controllers/users/sessions_controller.rb'
+    - 'app/deserializables/application_deserializable.rb'
+    - 'app/jobs/application_job.rb'
+    - 'app/jobs/basic_prediction_change_harvest_job.rb'
+    - 'app/jobs/basic_prediction_update_quantity_job.rb'
+    - 'app/jobs/kpi_export_job.rb'
+    - 'app/jobs/lacrosse_processor.rb'
+    - 'app/jobs/notification_job.rb'
+    - 'app/jobs/organization_simulator.rb'
+    - 'app/jobs/organization_subscriber.rb'
+    - 'app/jobs/priva_processor.rb'
+    - 'app/jobs/push_sensor_data_to_today.rb'
+    - 'app/jobs/send_text_message.rb'
+    - 'app/jobs/sensor_data_import_job.rb'
+    - 'app/jobs/wadsworth_processor.rb'
+    - 'app/mailers/alert_mailer.rb'
+    - 'app/mailers/application_mailer.rb'
+    - 'app/mailers/organization_mailer.rb'
+    - 'app/mailers/report_mailer.rb'
+    - 'app/models/alert_setting.rb'
+    - 'app/models/apikey.rb'
+    - 'app/models/application_record.rb'
+    - 'app/models/barcode.rb'
+    - 'app/models/billing_plan.rb'
+    - 'app/models/changelog.rb'
+    - 'app/models/concerns/arbitrary_id.rb'
+    - 'app/models/concerns/auditable.rb'
+    - 'app/models/concerns/cacheable.rb'
+    - 'app/models/concerns/pagination.rb'
+    - 'app/models/concerns/repeatable.rb'
+    - 'app/models/concerns/seeding_quantity.rb'
+    - 'app/models/concerns/slugified_name.rb'
+    - 'app/models/concerns/store_converted_unit.rb'
+    - 'app/models/concerns/zoned.rb'
+    - 'app/models/crop.rb'
+    - 'app/models/crop_variety.rb'
+    - 'app/models/custom_datum.rb'
+    - 'app/models/custom_field.rb'
+    - 'app/models/facility.rb'
+    - 'app/models/feature_flag.rb'
+    - 'app/models/file_import.rb'
+    - 'app/models/kpi_export.rb'
+    - 'app/models/membership.rb'
+    - 'app/models/note.rb'
+    - 'app/models/notification.rb'
+    - 'app/models/organization.rb'
+    - 'app/models/organization_seeding_unit.rb'
+    - 'app/models/organization_sub_unit.rb'
+    - 'app/models/photo.rb'
+    - 'app/models/repeat_date_parser.rb'
+    - 'app/models/search_result.rb'
+    - 'app/models/seeding_unit.rb'
+    - 'app/models/sensor.rb'
+    - 'app/models/sensor_datum.rb'
+    - 'app/models/sensor_email_import.rb'
+    - 'app/models/sensor_metric.rb'
+    - 'app/models/sensor_zone_map.rb'
+    - 'app/models/subscription.rb'
+    - 'app/models/sub_zone.rb'
+    - 'app/models/tank.rb'
+    - 'app/models/tank_breakdown.rb'
+    - 'app/models/tank_reading.rb'
+    - 'app/models/tank_zone_map.rb'
+    - 'app/models/task_category.rb'
+    - 'app/models/tooltip.rb'
+    - 'app/models/uploaded_document.rb'
+    - 'app/models/user.rb'
+    - 'app/models/zone.rb'
+    - 'app/serializables/serializable_barcode.rb'
+    - 'app/serializables/serializable_crop.rb'
+    - 'app/serializables/serializable_crop_variety.rb'
+    - 'app/serializables/serializable_custom_datum.rb'
+    - 'app/serializables/serializable_custom_field.rb'
+    - 'app/serializables/serializable_facility.rb'
+    - 'app/serializables/serializable_harvest_option.rb'
+    - 'app/serializables/serializable_kpi_export.rb'
+    - 'app/serializables/serializable_membership.rb'
+    - 'app/serializables/serializable_note.rb'
+    - 'app/serializables/serializable_organization.rb'
+    - 'app/serializables/serializable_photo.rb'
+    - 'app/serializables/serializable_seeding_option.rb'
+    - 'app/serializables/serializable_seeding_unit.rb'
+    - 'app/serializables/serializable_sub_zone.rb'
+    - 'app/serializables/serializable_task_category.rb'
+    - 'app/serializables/serializable_uploaded_document.rb'
+    - 'app/serializables/serializable_user.rb'
+    - 'app/serializables/serializable_zone.rb'
+    - 'app/services/parsers/spreadsheet/agrowtek.rb'
+    - 'app/services/parsers/spreadsheet/base.rb'
+    - 'app/texters/alert_texter.rb'
+    - 'app/texters/application_texter.rb'
+    - 'app/texters/report_texter.rb'
+    - 'lib/agrilyst-sensors.rb'
+    - 'lib/agrilyst-sensors/lacrosse.rb'
+    - 'lib/agrilyst-sensors/priva.rb'
+    - 'lib/agrilyst-sensors/sensor.rb'
+    - 'lib/agrilyst-sensors/wadsworth.rb'
+    - 'lib/agrilyst/name_generator.rb'
+    - 'lib/portal.rb'
+    - 'lib/rails_admin/que_link.rb'
+    - 'lib/slug_finder.rb'

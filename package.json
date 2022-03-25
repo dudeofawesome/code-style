@@ -1,0 +1,28 @@
+{
+  "name": "@iunu/code-style",
+  "version": "0.0.1",
+  "description": "IUNU's code style configs",
+  "bin": {
+    "iunu-code-style": "scripts/add-iunu-style.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab-internal.iunu.com/app/code-style.git"
+  },
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "format"
+  ],
+  "author": "Louis Orleans <lorleans@iunu.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@iunu/eslint-config": "file:../eslint-config",
+    "@prettier/plugin-ruby": "^2.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.0",
+    "stylelint": "^14.6.0",
+    "stylelint-prettier": "^2.0.0"
+  }
+}
