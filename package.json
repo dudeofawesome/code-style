@@ -2,6 +2,9 @@
   "name": "@iunu/code-style",
   "version": "0.0.1",
   "description": "IUNU's code style configs",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
   "bin": {
     "iunu-code-style": "scripts/add-iunu-style.sh"
   },
