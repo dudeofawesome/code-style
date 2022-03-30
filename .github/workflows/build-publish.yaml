@@ -1,0 +1,40 @@
+name: 'Publish NPM Package'
+
+on:
+  push:
+    # branches:
+    #   - 'master'
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+permissions:
+  contents: 'read'
+
+jobs:
+  publish:
+    runs-on: 'ubuntu-latest'
+    strategy:
+      matrix:
+        node-version:
+          - '16'
+    steps:
+      - name: 'Checkout Repository'
+        uses: 'actions/checkout@v2'
+
+      - name: 'Use Node.js ${{ matrix.node-version }}'
+        uses: 'actions/setup-node@v2'
+        with:
+          node-version: '${{ matrix.node-version }}'
+          cache: 'npm'
+      - name: 'Install packages'
+        run: 'npm install'
+
+      - name: 'Test'
+        run: 'npm test'
+
+      - name: 'Publish to NPM'
+        uses: 'JS-DevTools/npm-publish@v1'
+        env:
+          token: '${{ secrets.NPM_AUTH_TOKEN }}'
+          check-version: yes
