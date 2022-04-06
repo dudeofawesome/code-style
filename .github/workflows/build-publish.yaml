@@ -18,6 +18,12 @@ jobs:
       matrix:
         node-version:
           - '16'
+        package:
+          - 'code-style'
+          - 'eslint-config'
+    defaults:
+      run:
+        working-directory: '${{ matrix.package }}'
     steps:
       - name: 'Checkout Repository'
         uses: 'actions/checkout@v2'
