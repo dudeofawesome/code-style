@@ -6,7 +6,7 @@
     "test": "echo 'No tests'; exit 0"
   },
   "bin": {
-    "iunu-code-style": "scripts/add-iunu-style.sh"
+    "add-code-style": "scripts/add-code-style.sh"
   },
   "repository": {
     "type": "git",
