@@ -1,0 +1,15 @@
+extends:
+  - 'plugin:prettier/recommended'
+parserOptions:
+  ecmaVersion: 2021 # Version is inline with Node 16
+  sourceType: 'module'
+rules:
+  no-new: 'warn'
+  no-var: 'error'
+  eol-last: ['error', 'always']
+  no-unused-vars:
+    - 'warn'
+    # Account for closure compiler conventions. See docs/closure-compiler.md
+    # Ignores: MDC[PascalCase]Adapter (records), [PascalCase]Type (typedefs)
+    - varsIgnorePattern: '^(?:(?:MDC(?:(?:[A-Z][a-z0-9]+)+)Adapter)|(?:(?:(?:[A-Z][a-z0-9]+)+)Type))$'
+  prefer-const: 'error'

@@ -1,0 +1,26 @@
+{
+  "name": "@iunu/eslint-config",
+  "version": "1.0.0",
+  "description": "IUNU's base ESLint config",
+  "main": ".eslintrc.yaml",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab-internal.iunu.com/app/eslint-config.git"
+  },
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "author": "Louis Orleans <lorleans@iunu.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "eslint": "^8.11.0"
+  },
+  "peerDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.0"
+  }
+}
