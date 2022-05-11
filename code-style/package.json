@@ -1,5 +1,5 @@
 {
-  "name": "@iunu/code-style",
+  "name": "@iunu-inc/code-style",
   "version": "0.0.1",
   "description": "IUNU's code style configs",
   "scripts": {
@@ -10,7 +10,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab-internal.iunu.com/app/code-style.git"
+    "url": "git@github.com:iunu/code-style.git",
+    "directory": "/code-style"
   },
   "keywords": [
     "style",

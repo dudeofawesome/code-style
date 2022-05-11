@@ -1,11 +1,12 @@
 {
-  "name": "@iunu/eslint-config",
-  "version": "1.0.0",
+  "name": "@iunu-inc/eslint-config",
+  "version": "0.0.1",
   "description": "IUNU's base ESLint config",
   "main": ".eslintrc.yaml",
   "repository": {
     "type": "git",
-    "url": "git@gitlab-internal.iunu.com/app/eslint-config.git"
+    "url": "git@github.com:iunu/code-style.git",
+    "directory": "/eslint-config"
   },
   "keywords": [
     "style",
