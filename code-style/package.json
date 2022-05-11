@@ -2,12 +2,6 @@
   "name": "@iunu-inc/code-style",
   "version": "0.0.1",
   "description": "IUNU's code style configs",
-  "scripts": {
-    "test": "echo 'No tests'; exit 0"
-  },
-  "bin": {
-    "add-code-style": "scripts/add-code-style.sh"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:iunu/code-style.git",
@@ -21,6 +15,12 @@
   ],
   "author": "Louis Orleans <lorleans@iunu.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
+  "bin": {
+    "add-code-style": "scripts/add-code-style.sh"
+  },
   "dependencies": {
     "@iunu/eslint-config": "file:../eslint-config",
     "@prettier/plugin-ruby": "^2.0.0",

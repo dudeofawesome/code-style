@@ -2,7 +2,6 @@
   "name": "@iunu-inc/eslint-config",
   "version": "0.0.1",
   "description": "IUNU's base ESLint config",
-  "main": ".eslintrc.yaml",
   "repository": {
     "type": "git",
     "url": "git@github.com:iunu/code-style.git",
@@ -16,6 +15,10 @@
   ],
   "author": "Louis Orleans <lorleans@iunu.com>",
   "license": "MIT",
+  "main": ".eslintrc.yaml",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
   "dependencies": {
     "eslint": "^8.11.0"
   },
