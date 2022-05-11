@@ -20,7 +20,7 @@
     "format"
   ],
   "author": "Louis Orleans <lorleans@iunu.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@iunu/eslint-config": "file:../eslint-config",
     "@prettier/plugin-ruby": "^2.0.0",

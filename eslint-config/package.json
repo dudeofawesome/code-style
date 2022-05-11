@@ -15,7 +15,7 @@
     "eslint"
   ],
   "author": "Louis Orleans <lorleans@iunu.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "eslint": "^8.11.0"
   },
