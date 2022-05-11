@@ -43,6 +43,6 @@ jobs:
 
       - name: 'Publish to NPM'
         uses: 'JS-DevTools/npm-publish@v1'
-        env:
+        with:
           token: '${{ secrets.NPM_AUTH_TOKEN }}'
           check-version: yes
