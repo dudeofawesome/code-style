@@ -12,7 +12,7 @@ write_files () {
   # configure editorconfig
   if [ $editorconfig = true ] && ([ ! -f .editorconfig ] || [ $overwrite = true ]); then
     if [ $overwrite = true ]; then rm .editorconfig; fi;
-    ln -s node_modules/@iunu/code-style/.editorconfig .editorconfig;
+    ln -s node_modules/@iunu-inc/code-style/.editorconfig .editorconfig;
     echo "Symlinked .editorconfig";
   else
     echo "Skipping editorconfig";
@@ -21,7 +21,7 @@ write_files () {
   # configure prettier
   if [ $prettier = true ] && ([ ! -f .prettierrc ] || [ $overwrite = true ]); then
     if [ $overwrite = true ]; then rm .prettierrc; fi;
-    cp node_modules/@iunu/code-style/examples/.prettierrc .;
+    cp node_modules/@iunu-inc/code-style/examples/.prettierrc .;
     echo "Created .prettierrc";
   else
     echo "Skipping prettier";
@@ -30,7 +30,7 @@ write_files () {
   # configure eslint
   if [ $eslint = true ] && ([ ! -f .eslintrc.yml ] || [ $overwrite = true ]); then
     if [ $overwrite = true ]; then rm .eslintrc.yml; fi;
-    cp node_modules/@iunu/code-style/examples/.eslintrc.yml .;
+    cp node_modules/@iunu-inc/code-style/examples/.eslintrc.yml .;
     echo "Created base .eslintrc.yml";
     echo "You probably want to add a 'parserOptions.ecmaVersion' to match this project's target"
   else
@@ -40,7 +40,7 @@ write_files () {
   # configure stylelint
   if [ $stylelint = true ] && ([ ! -f .stylelintrc.json ] || [ $overwrite = true ]); then
     if [ $overwrite = true ]; then rm .stylelintrc.json; fi;
-    cp node_modules/@iunu/code-style/examples/.stylelintrc.json .;
+    cp node_modules/@iunu-inc/code-style/examples/.stylelintrc.json .;
     echo "Created base .stylelintrc.json";
   else
     echo "Skipping stylelint";
@@ -49,7 +49,7 @@ write_files () {
   # configure rubocop
   if [ $rubocop = true ] && ([ ! -f .rubocop.yml ] || [ $overwrite = true ]); then
     if [ $overwrite = true ]; then rm .rubocop.yml; fi;
-    cp node_modules/@iunu/code-style/examples/.rubocop.yml .;
+    cp node_modules/@iunu-inc/code-style/examples/.rubocop.yml .;
     echo "Created base .rubocop.yml";
   else
     echo "Skipping rubocop";

@@ -7,7 +7,7 @@ A bunch of configuration files for code style standards. Intended to be shared a
 #### Add config files
 
 ```sh
-npm i --save-dev @iunu/code-style
+npm i --save-dev @iunu-inc/code-style
 npx add-code-style
 ```
 

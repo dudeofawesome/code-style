@@ -22,7 +22,7 @@
     "add-code-style": "scripts/add-code-style.sh"
   },
   "dependencies": {
-    "@iunu/eslint-config": "@iunu-inc/eslint-config",
+    "@iunu-inc/eslint-config": "*",
     "@prettier/plugin-ruby": "^2.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.0",

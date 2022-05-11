@@ -1,3 +1,3 @@
 {
-  "extends": ["@iunu/code-style/.stylelintrc.json"]
+  "extends": ["@iunu-inc/code-style/.stylelintrc.json"]
 }
