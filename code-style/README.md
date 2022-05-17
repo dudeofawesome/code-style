@@ -72,3 +72,21 @@ This will automatically apply formatting to your files.
 1. Add formatting commit hash to `.git-blame-ignore-revs`
 
     This makes `git blame` ignore the formatting commit so you can see the actual author of the line.
+
+1. Commit `.git-blame-ignore-revs`
+
+    ````sh
+    git add .git-blame-ignore-revs
+    git commit -m "🔧 add git-blame-ignore-revs" -m \
+    'Run the following command to ignore the repo-wide prettier format
+
+    ```sh
+    git config blame.ignoreRevsFile .git-blame-ignore-revs
+    ```'
+    ````
+
+1. Setup git to ignore the formatting commit
+
+    ```sh
+    git config blame.ignoreRevsFile .git-blame-ignore-revs
+    ```
