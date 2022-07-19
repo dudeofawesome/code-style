@@ -5,6 +5,7 @@ prettier=true
 eslint=true
 stylelint=true
 rubocop=true
+vscode=true
 
 overwrite=false
 
@@ -54,6 +55,29 @@ write_files () {
   else
     echo "Skipping rubocop";
   fi
+
+  # configure vscode
+  if [ $vscode = true ]; then
+    mkdir .vscode
+
+    if ([ ! -f .vscode/settings.json ] || [ $overwrite = true ]); then
+      if [ $overwrite = true ]; then rm .vscode/settings.json; fi;
+      cp node_modules/@iunu-inc/code-style/.vscode/settings.json .vscode/;
+      echo "Created base .vscode/settings.json";
+    else
+      echo "Skipping .vscode/settings.json";
+    fi
+
+    if ([ ! -f .vscode/extensions.json ] || [ $overwrite = true ]); then
+      if [ $overwrite = true ]; then rm .vscode/extensions.json; fi;
+      cp node_modules/@iunu-inc/code-style/.vscode/extensions.json .vscode/;
+      echo "Created base .vscode/extensions.json";
+    else
+      echo "Skipping .vscode/settings.json";
+    fi
+  else
+    echo "Skipping vscode";
+  fi
 }
 
 only_files () {
@@ -62,6 +86,7 @@ only_files () {
   eslint=false
   stylelint=false
   rubocop=false
+  vscode=false
 
   for f in $@; do
     set_file_toggle $f true
@@ -81,6 +106,7 @@ set_file_toggle () {
     eslint) eslint=$2;;
     stylelint) stylelint=$2;;
     rubocop) rubocop=$2;;
+    vscode) vscode=$2;;
     *) echo "Unknown file '$1'"; exit 1;;
   esac
 }
