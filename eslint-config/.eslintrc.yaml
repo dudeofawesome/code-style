@@ -1,15 +1,15 @@
 extends:
+  - 'plugin:@shopify/esnext'
   - 'plugin:prettier/recommended'
 parserOptions:
-  ecmaVersion: 2021 # Version is inline with Node 16
-  sourceType: 'module'
+  ecmaVersion: 2022 # Version is inline with Node 16
+env:
+  jest/globals: yes
+
 rules:
-  no-new: 'warn'
-  no-var: 'error'
-  eol-last: ['error', 'always']
-  no-unused-vars:
-    - 'warn'
-    # Account for closure compiler conventions. See docs/closure-compiler.md
-    # Ignores: MDC[PascalCase]Adapter (records), [PascalCase]Type (typedefs)
-    - varsIgnorePattern: '^(?:(?:MDC(?:(?:[A-Z][a-z0-9]+)+)Adapter)|(?:(?:(?:[A-Z][a-z0-9]+)+)Type))$'
-  prefer-const: 'error'
+  prettier/prettier: 'warn'
+  node/exports-style: 'off'
+  line-comment-position: 'off'
+  no-warning-comments: 'warn'
+  require-atomic-updates: 'warn'
+  no-negated-condition: 'off'
