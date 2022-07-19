@@ -6,44 +6,47 @@ A bunch of configuration files for code style standards. Intended to be shared a
 
 ### Add config files
 
-```sh
-npm i --save-dev @iunu-inc/code-style
-npx add-code-style
-```
+1. Install the files
+
+    ```sh
+    npm i -D @iunu-inc/code-style
+    npx add-code-style
+    ```
+
+1. Verify settings match the type of project you're working on.
+
+    ESLint in particular has a bunch of settings that will vary base on the type of project you're working on. Node vs browser, what version of ES / TS you're working with, etc.
 
 ### Consider adding some editor settings
 
 -   VS Code
 
-    ```json
-    {
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.formatOnPaste": true,
-        "typescript.format.enable": false,
-        "javascript.format.enable": false,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-
-        "[ruby]": {
-            "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
-    }
-    ```
+    [.vscode/settings.json](.vscode/settings.json)
 
 -   Vim
+
     ```vim
     let g:prettier#autoformat_config_present = 1
     let g:prettier#autoformat_require_pragma = 0
     ```
 
-### Consider installing an editor plugin
+### Consider installing editor plugins
 
-This will automatically apply formatting to your files.
+This will automatically apply formatting and linting to your files.
 
--   VS Code
-    -   https://github.com/prettier/prettier-vscode
+-   [VS Code](.vscode/extensions.json)
 -   Vim
     -   https://github.com/prettier/vim-prettier
+    -   https://github.com/editorconfig/editorconfig-vim
+    -   https://github.com/vim-syntastic/syntastic
+-   IntelliJ IDEA
+    -   https://www.jetbrains.com/help/idea/prettier.html
+    -   https://www.jetbrains.com/help/idea/editorconfig.html
+    -   https://www.jetbrains.com/help/idea/eslint.html
+-   Sublime Text
+    -   https://packagecontrol.io/packages/JsPrettier
+    -   https://packagecontrol.io/packages/EditorConfig
+    -   https://github.com/SublimeLinter/SublimeLinter-eslint
 
 ### Formatting a pre-existing project
 
