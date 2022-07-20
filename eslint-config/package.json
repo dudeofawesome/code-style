@@ -1,7 +1,7 @@
 {
   "name": "@iunu-inc/eslint-config",
-  "version": "0.0.4",
   "description": "IUNU's base ESLint config",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "git@github.com:iunu/code-style.git",
