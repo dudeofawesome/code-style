@@ -12,7 +12,7 @@ IUNU's Typescript eslint config
 
 1. Add the plugin to your `eslintrc`.
 
-    You'll also want to have another eslint config for your environment. In this example, we'll use [the node one](/eslint-config-node/README.md) (which you'll need to install separately).
+    You'll also want to have another eslint config for your environment. In this example, we'll use [the node one](../eslint-config-node/README.md) (which you'll need to install separately).
 
     ```yaml
     extends:

@@ -19,8 +19,8 @@ A bunch of configuration files for code style standards. Intended to be shared a
 
     We provide some other eslint configs for different environments:
 
-    - [`@iunu-inc/node`](/eslint-config-node/README.md)
-    - [`@iunu-inc/typescript`](/eslint-config-typescript/README.md)
+    - [`@iunu-inc/node`](../eslint-config-node/README.md)
+    - [`@iunu-inc/typescript`](../eslint-config-typescript/README.md)
 
 ### Consider adding some editor settings
 
