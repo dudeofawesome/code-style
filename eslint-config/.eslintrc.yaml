@@ -9,9 +9,20 @@ env:
   jest/globals: yes
 
 rules:
-  prettier/prettier: 'warn'
-  node/exports-style: 'off'
+  '@babel/new-cap': 'off'
+  id-length: 'off'
+  import/order:
+    - 'warn'
+    - groups:
+        - 'builtin'
+        - 'external'
+        - 'internal'
   line-comment-position: 'off'
-  no-warning-comments: 'warn'
-  require-atomic-updates: 'warn'
+  no-empty-function: 'warn'
   no-negated-condition: 'off'
+  no-nested-ternary: 'off'
+  no-warning-comments: 'warn'
+  node/exports-style: 'warn'
+  prettier/prettier: 'warn'
+  require-atomic-updates: 'warn'
+  sort-class-members/sort-class-members: 'off'
