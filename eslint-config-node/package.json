@@ -20,6 +20,7 @@
     "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
-    "@iunu-inc/eslint-config": "*"
+    "@iunu-inc/eslint-config": "*",
+    "@shopify/eslint-plugin": "^42.0.1"
   }
 }
