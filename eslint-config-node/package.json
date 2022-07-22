@@ -1,0 +1,25 @@
+{
+  "name": "@iunu-inc/eslint-config-node",
+  "description": "IUNU's node ESLint config",
+  "version": "0.0.8",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iunu/code-style.git",
+    "directory": "/eslint-config-node"
+  },
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "author": "Louis Orleans <lorleans@iunu.com>",
+  "license": "MIT",
+  "main": ".eslintrc.yaml",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
+  "dependencies": {
+    "@iunu-inc/eslint-config": "*"
+  }
+}

@@ -1,0 +1,7 @@
+extends:
+  - 'plugin:@shopify/node'
+  - '@iunu-inc'
+
+rules:
+  no-console: 'error'
+  radix: 'off'
