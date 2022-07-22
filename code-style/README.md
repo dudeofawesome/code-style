@@ -17,6 +17,11 @@ A bunch of configuration files for code style standards. Intended to be shared a
 
     ESLint in particular has a bunch of settings that will vary base on the type of project you're working on. Node vs browser, what version of ES / TS you're working with, etc.
 
+    We provide some other eslint configs for different environments:
+
+    - [`@iunu-inc/node`](/eslint-config-node/README.md)
+    - [`@iunu-inc/typescript`](/eslint-config-typescript/README.md)
+
 ### Consider adding some editor settings
 
 -   VS Code
