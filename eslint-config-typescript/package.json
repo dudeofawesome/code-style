@@ -1,0 +1,30 @@
+{
+  "name": "@iunu-inc/eslint-config-node",
+  "description": "IUNU's Typescript ESLint config",
+  "version": "0.0.8",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iunu/code-style.git",
+    "directory": "/eslint-config-typescript"
+  },
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "author": "Louis Orleans <lorleans@iunu.com>",
+  "license": "MIT",
+  "main": ".eslintrc.yaml",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
+  "dependencies": {
+    "@iunu-inc/eslint-config": "*",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7"
+  },
+  "peerDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

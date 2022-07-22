@@ -23,6 +23,7 @@ jobs:
           - 'code-style'
           - 'eslint-config'
           - 'eslint-config-node'
+          - 'eslint-config-typescript'
     defaults:
       run:
         working-directory: '${{ matrix.package }}'
