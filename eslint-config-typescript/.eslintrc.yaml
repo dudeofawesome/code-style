@@ -1,5 +1,7 @@
 extends:
   - 'plugin:@typescript-eslint/recommended'
-  - '@iunu-inc'
 plugins:
   - '@typescript-eslint'
+
+rules:
+  prettier/prettier: 'warn'
