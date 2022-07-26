@@ -1,4 +1,5 @@
 extends:
   - 'plugin:@typescript-eslint/recommended'
+  - '@iunu-inc'
 plugins:
   - '@typescript-eslint'
