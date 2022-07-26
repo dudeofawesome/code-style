@@ -1,7 +1,7 @@
 {
   "name": "@iunu-inc/eslint-config-typescript",
   "description": "IUNU's Typescript ESLint config",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "repository": {
     "type": "git",
     "url": "git@github.com:iunu/code-style.git",
