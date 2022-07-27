@@ -73,7 +73,7 @@ write_files () {
       cp node_modules/@iunu-inc/code-style/.vscode/extensions.json .vscode/;
       echo "Created base .vscode/extensions.json";
     else
-      echo "Skipping .vscode/settings.json";
+      echo "Skipping .vscode/extensions.json";
     fi
   else
     echo "Skipping vscode";
@@ -112,7 +112,7 @@ set_file_toggle () {
 }
 
 list_support_files () {
-  echo -e "editorconfig prettier eslint stylelint rubocop"
+  echo -e "editorconfig prettier eslint stylelint rubocop vscode"
 }
 
 help () {
