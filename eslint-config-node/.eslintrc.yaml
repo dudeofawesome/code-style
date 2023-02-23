@@ -1,6 +1,6 @@
 extends:
   - 'plugin:@shopify/node'
-  - '@iunu-inc'
+  - '@dudeofawesome'
 
 rules:
   no-console: 'error'

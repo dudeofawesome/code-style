@@ -1,10 +1,10 @@
 {
-  "name": "@iunu-inc/eslint-config-node",
-  "description": "IUNU's node ESLint config",
+  "name": "@dudeofawesome/eslint-config-node",
+  "description": "My node ESLint config",
   "version": "0.0.11",
   "repository": {
     "type": "git",
-    "url": "git@github.com:iunu/code-style.git",
+    "url": "git@github.com:dudeofawesome/code-style.git",
     "directory": "/eslint-config-node"
   },
   "keywords": [
@@ -13,14 +13,14 @@
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <lorleans@iunu.com>",
+  "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
   "main": ".eslintrc.yaml",
   "scripts": {
     "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
-    "@iunu-inc/eslint-config": "*",
+    "@dudeofawesome/eslint-config": "*",
     "@shopify/eslint-plugin": "^42.0.1"
   }
 }

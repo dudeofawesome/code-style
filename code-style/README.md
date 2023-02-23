@@ -1,6 +1,6 @@
-# IUNU Code Style Guide
+# My Code Style Guide
 
-A bunch of configuration files for code style standards. Intended to be shared across all IUNU's repos.
+A bunch of configuration files for code style standards. Intended to be shared across all of my repos.
 
 ## Usage
 
@@ -9,7 +9,7 @@ A bunch of configuration files for code style standards. Intended to be shared a
 1. Install the files
 
     ```sh
-    npm i -D @iunu-inc/code-style
+    npm i -D @dudeofawesome/code-style
     npx add-code-style
     ```
 
@@ -19,8 +19,8 @@ A bunch of configuration files for code style standards. Intended to be shared a
 
     We provide some other eslint configs for different environments:
 
-    - [`@iunu-inc/node`](../eslint-config-node/README.md)
-    - [`@iunu-inc/typescript`](../eslint-config-typescript/README.md)
+    - [`@dudeofawesome/node`](../eslint-config-node/README.md)
+    - [`@dudeofawesome/typescript`](../eslint-config-typescript/README.md)
 
 ### Consider adding some editor settings
 

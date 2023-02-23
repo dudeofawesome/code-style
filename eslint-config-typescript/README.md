@@ -1,13 +1,13 @@
-# @iunu-inc/eslint-config-typescript
+# @dudeofawesome/eslint-config-typescript
 
-IUNU's Typescript eslint config
+My Typescript eslint config
 
 ## Usage
 
 1. Install this config plugin as a dev dependency.
 
     ```sh
-    npm i -D @iunu-inc/eslint-config-typescript
+    npm i -D @dudeofawesome/eslint-config-typescript
     ```
 
 1. Add the plugin to your `eslintrc`.
@@ -16,8 +16,8 @@ IUNU's Typescript eslint config
 
     ```yaml
     extends:
-        - '@iunu-inc/node'
-        - '@iunu-inc/typescript'
+        - '@dudeofawesome/node'
+        - '@dudeofawesome/typescript'
     ```
 
 1. You might want to add some `ignorePatterns` to not lint your transpiled JS.

@@ -1,10 +1,10 @@
 {
-  "name": "@iunu-inc/code-style",
-  "description": "IUNU's code style configs",
+  "name": "@dudeofawesome/code-style",
+  "description": "My code style configs",
   "version": "0.0.12",
   "repository": {
     "type": "git",
-    "url": "git@github.com:iunu/code-style.git",
+    "url": "git@github.com:dudeofawesome/code-style.git",
     "directory": "/code-style"
   },
   "keywords": [
@@ -13,7 +13,7 @@
     "config",
     "format"
   ],
-  "author": "Louis Orleans <lorleans@iunu.com>",
+  "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
   "scripts": {
     "test": "echo 'No tests'; exit 0"
@@ -22,7 +22,7 @@
     "add-code-style": "scripts/add-code-style.sh"
   },
   "dependencies": {
-    "@iunu-inc/eslint-config": "*",
+    "@dudeofawesome/eslint-config": "*",
     "@prettier/plugin-ruby": "^3.1.2",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",

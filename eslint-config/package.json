@@ -1,10 +1,10 @@
 {
-  "name": "@iunu-inc/eslint-config",
-  "description": "IUNU's base ESLint config",
+  "name": "@dudeofawesome/eslint-config",
+  "description": "My base ESLint config",
   "version": "0.0.10",
   "repository": {
     "type": "git",
-    "url": "git@github.com:iunu/code-style.git",
+    "url": "git@github.com:dudeofawesome/code-style.git",
     "directory": "/eslint-config"
   },
   "keywords": [
@@ -13,7 +13,7 @@
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <lorleans@iunu.com>",
+  "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
   "main": ".eslintrc.yaml",
   "scripts": {
