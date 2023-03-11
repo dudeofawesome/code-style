@@ -1,7 +1,7 @@
 {
   "name": "@dudeofawesome/eslint-config-typescript",
   "description": "My Typescript ESLint config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git@github.com:dudeofawesome/code-style.git",
