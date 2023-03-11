@@ -5,3 +5,4 @@ extends:
 rules:
   no-console: 'error'
   radix: 'off'
+  node/exports-style: 'warn'

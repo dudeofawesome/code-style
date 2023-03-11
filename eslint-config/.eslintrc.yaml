@@ -22,7 +22,6 @@ rules:
   no-negated-condition: 'off'
   no-nested-ternary: 'off'
   no-warning-comments: 'off'
-  node/exports-style: 'warn'
   prettier/prettier: 'warn'
   require-atomic-updates: ['warn', { allowProperties: true }]
   sort-class-members/sort-class-members: 'off'
