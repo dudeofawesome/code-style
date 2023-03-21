@@ -1,0 +1,32 @@
+{
+  "name": "code-style-monorepo",
+  "description": "My code style configs",
+  "version": "0.1.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dudeofawesome/code-style.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dudeofawesome/code-style/issues"
+  },
+  "homepage": "https://github.com/dudeofawesome/code-style#readme",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "license": "MIT",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "format"
+  ],
+  "workspaces": [
+    "code-style",
+    "eslint-config",
+    "eslint-config-node",
+    "eslint-config-typescript"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@dudeofawesome/code-style": "^0.1.1"
+  }
+}

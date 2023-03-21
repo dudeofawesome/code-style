@@ -17,36 +17,22 @@ jobs:
     environment: 'production'
     strategy:
       matrix:
-        node-version:
-          - '16'
         package:
-          - 'code-style'
           - 'eslint-config'
           - 'eslint-config-node'
           - 'eslint-config-typescript'
-    defaults:
-      run:
-        working-directory: '${{ matrix.package }}'
+          - 'code-style'
     steps:
-      - name: 'Checkout Repository'
-        uses: 'actions/checkout@v3'
-
-      - name: 'Use Node.js ${{ matrix.node-version }}'
-        uses: 'actions/setup-node@v3'
+      - name: 'Setup node 🛎️'
+        uses: 'dudeofawesome/actions/node-setup@v1'
         with:
-          node-version: '${{ matrix.node-version }}'
-          cache: 'npm'
-          cache-dependency-path: '${{ matrix.package }}/package-lock.json'
-      - name: 'Install packages'
-        run: 'npm install'
+          install-modules: false
 
-      - name: 'Test'
-        run: 'npm test'
-
-      - name: 'Publish to NPM'
-        uses: 'JS-DevTools/npm-publish@v1'
-        with:
-          package: '${{ matrix.package }}/package.json'
-          access: 'public'
-          token: '${{ secrets.NPM_AUTH_TOKEN }}'
-          check-version: true
+      - name: 'Publish to NPM 🚀'
+        if: '${{ github.ref_name }} == ${{ github.event.repository.default_branch }}'
+        env:
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
+        run: |-
+          npm publish \
+            --access public \
+            -w "${{ matrix.package }}"
