@@ -15,14 +15,6 @@ jobs:
   publish:
     runs-on: 'ubuntu-latest'
     environment: 'production'
-    strategy:
-      matrix:
-        package:
-          - 'eslint-config'
-          - 'eslint-config-node'
-          - 'eslint-config-jest'
-          - 'eslint-config-typescript'
-          - 'code-style'
     steps:
       - name: 'Setup node 🛎️'
         uses: 'dudeofawesome/actions/node-setup@v1'
@@ -36,4 +28,4 @@ jobs:
         run: |-
           npm publish \
             --access public \
-            -w "${{ matrix.package }}"
+            --workspaces
