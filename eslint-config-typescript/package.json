@@ -20,11 +20,11 @@
     "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
-    "@dudeofawesome/eslint-config": "*",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7"
   },
   "peerDependencies": {
+    "@dudeofawesome/eslint-config": "*",
     "typescript": "^4.7.4"
   }
 }

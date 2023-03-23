@@ -14,6 +14,7 @@ My node eslint config
 
     ```yaml
     extends:
+        - '@dudeofawesome'
         - '@dudeofawesome/node'
     ```
 

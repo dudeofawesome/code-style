@@ -1,2 +1,3 @@
-extends: '@dudeofawesome'
+extends:
+  - '@dudeofawesome'
 root: true
