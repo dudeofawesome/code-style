@@ -1,12 +1,8 @@
 extends:
   - 'plugin:@shopify/esnext'
   - 'plugin:prettier/recommended'
-plugins:
-  - 'jest'
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
-env:
-  jest/globals: yes
 
 rules:
   '@babel/new-cap': 'off'

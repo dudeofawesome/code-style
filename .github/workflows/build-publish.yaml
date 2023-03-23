@@ -20,6 +20,7 @@ jobs:
         package:
           - 'eslint-config'
           - 'eslint-config-node'
+          - 'eslint-config-jest'
           - 'eslint-config-typescript'
           - 'code-style'
     steps:
