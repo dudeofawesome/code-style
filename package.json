@@ -28,6 +28,6 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "@dudeofawesome/code-style": "^0.1.1"
+    "@dudeofawesome/code-style": "^1.0.0"
   }
 }
