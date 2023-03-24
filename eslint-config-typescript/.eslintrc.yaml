@@ -9,8 +9,20 @@ plugins:
 parser: '@typescript-eslint/parser'
 
 rules:
-  prettier/prettier: 'warn'
+  'id-length': 'off'
+  'no-negated-condition': 'off'
+  'no-nested-ternary': 'off'
   '@typescript-eslint/no-inferrable-types': 'off'
   '@typescript-eslint/no-unused-vars':
     ['warn', { args: 'none', destructuredArrayIgnorePattern: '^_' }]
   '@typescript-eslint/no-use-before-define': 'error'
+  '@typescript-eslint/naming-convention': 'off'
+  'prettier/prettier': 'warn'
+  'import/order':
+    - 'error'
+    - groups:
+        - 'builtin'
+        - 'external'
+      newlines-between: 'ignore'
+  'import/no-cycle': 'off'
+  '@shopify/binary-assignment-parens': 'off'
