@@ -13,6 +13,7 @@ rules:
         - 'builtin'
         - 'external'
         - 'internal'
+  import/no-default-export: 'error'
   line-comment-position: 'off'
   no-empty-function: 'warn'
   no-negated-condition: 'off'
