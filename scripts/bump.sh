@@ -43,7 +43,7 @@ main () {
     esac
   done
 
-  bump
+  bump "$@"
 }
 
 main "$@"
