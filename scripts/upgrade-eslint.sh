@@ -5,7 +5,7 @@ upgrade_eslint() {
   workspaces="$( \
     jq --raw-output \
       '[.workspaces[]
-        | select(. | match("^eslint-config$"))]
+        | select(. | match("^eslint-config$|^code-style$"))]
         | map("--workspace=\(.)")
         | .[]' \
       package.json)"
@@ -17,7 +17,7 @@ upgrade_eslint() {
 
 help () {
   echo -e ""
-  echo -e "Usage:\t$(basename $0) [options] <newversion>|major|minor|patch|premajor|preminor|prepatch|prerelease"
+  echo -e "Usage:\t$(basename $0) [options] [<version>|latest]"
   echo -e ""
   echo -e "Options:"
   echo -e "   -h, --help           Show this message"
