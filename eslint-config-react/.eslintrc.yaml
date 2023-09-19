@@ -1,0 +1,7 @@
+extends:
+  - 'plugin:@shopify/node'
+
+rules:
+  no-console: 'error'
+  radix: 'off'
+  node/exports-style: 'warn'

@@ -24,7 +24,10 @@
     "eslint-config",
     "eslint-config-jest",
     "eslint-config-node",
-    "eslint-config-typescript"
+    "eslint-config-typescript",
+    "eslint-config-browser",
+    "eslint-config-react",
+    "test/eslint/node"
   ],
   "scripts": {
     "bump": "scripts/bump.sh"
