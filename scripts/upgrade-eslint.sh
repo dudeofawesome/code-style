@@ -1,26 +1,28 @@
 #!/usr/bin/env bash
 set -e
 
-bump() {
-  npm version --no-git-tag-version "$1"
+upgrade_eslint() {
+  workspaces="$( \
+    jq --raw-output \
+      '[.workspaces[]
+        | select(. | startswith("eslint-config"))]
+        | map("--workspace=\(.)")
+        | .[]' \
+      package.json)"
 
-  version="$(jq --raw-output '.version' package.json)"
-
-  npm version "$version" --ws
-
-  git add package*.json **/package*.json
-  git commit --message "🚀🔖 release v$version"
-  git tag "v$version"
+  npm install \
+    "eslint@${1:-latest}" \
+    $workspaces
 }
 
 help () {
   echo -e ""
-  echo -e "Usage:\t$(basename $0) <newversion>|major|minor|patch|premajor|preminor|prepatch|prerelease"
+  echo -e "Usage:\t$(basename $0) [options] <newversion>|major|minor|patch|premajor|preminor|prepatch|prerelease"
   echo -e ""
   echo -e "Options:"
   echo -e "   -h, --help           Show this message"
   echo -e ""
-  echo -e "Bumps all package versions in project to the specified version."
+  echo -e "Upgrades all eslint versions together."
 }
 
 option_error () {
@@ -43,7 +45,7 @@ main () {
     esac
   done
 
-  bump "$@"
+  upgrade_eslint "$@"
 }
 
 main "$@"
