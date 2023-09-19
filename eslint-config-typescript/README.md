@@ -21,6 +21,13 @@ My Typescript eslint config
         - '@dudeofawesome/typescript'
     ```
 
+1. You might also want to specify an `ecmaVersion`.
+
+    ```yaml
+    parserOptions:
+        ecmaVersion: 2022
+    ```
+
 1. You might want to add some `ignorePatterns` to not lint your transpiled JS.
 
     ```yaml
