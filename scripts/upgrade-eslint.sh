@@ -5,7 +5,7 @@ upgrade_eslint() {
   workspaces="$( \
     jq --raw-output \
       '[.workspaces[]
-        | select(. | startswith("eslint-config"))]
+        | select(. | match("^eslint-config$"))]
         | map("--workspace=\(.)")
         | .[]' \
       package.json)"
