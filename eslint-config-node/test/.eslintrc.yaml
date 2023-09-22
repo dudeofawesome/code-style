@@ -1,0 +1,6 @@
+root: true
+extends:
+  - '@dudeofawesome'
+  - '@dudeofawesome/node'
+parserOptions:
+  ecmaVersion: 2022
