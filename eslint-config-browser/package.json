@@ -20,7 +20,7 @@
     "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
-    "@shopify/eslint-plugin": "^42.0.1"
+    "@shopify/eslint-plugin": "^43.0.0"
   },
   "peerDependencies": {
     "@dudeofawesome/eslint-config": "^1.0.0"

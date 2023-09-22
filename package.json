@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "bump": "scripts/bump.sh",
-    "upgrade-eslint": "scripts/upgrade-eslint.sh"
+    "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
     "@dudeofawesome/code-style": "^1.0.0"
