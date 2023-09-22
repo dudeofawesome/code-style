@@ -26,12 +26,12 @@
     "eslint-config-node",
     "eslint-config-typescript",
     "eslint-config-browser",
-    "eslint-config-react",
-    "test/eslint/node"
+    "eslint-config-react"
   ],
   "scripts": {
     "bump": "scripts/bump.sh",
-    "upgrade-packages": "scripts/upgrade-packages.sh"
+    "upgrade-packages": "scripts/upgrade-packages.sh",
+    "test": "npm run test --ws"
   },
   "devDependencies": {
     "@dudeofawesome/code-style": "^1.0.0"
