@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": ".eslintrc.yaml",
   "scripts": {
-    "test": "echo 'No tests'; exit 0"
+    "test": "node --require ts-node/register --test test/index.ts"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.7",
