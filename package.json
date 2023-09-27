@@ -22,12 +22,12 @@
   "workspaces": [
     "code-style",
     "eslint-config",
+    "eslint-config-browser",
     "eslint-config-cli",
     "eslint-config-jest",
     "eslint-config-node",
+    "eslint-config-react",
     "eslint-config-typescript",
-    "eslint-config-browser",
-    "eslint-config-react"
     "typescript-configs"
   ],
   "scripts": {
