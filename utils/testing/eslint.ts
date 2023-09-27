@@ -2,8 +2,15 @@ import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
 import { ESLint } from 'eslint';
 
+export function filePath(typescript: boolean = false): string {
+  return `index.${typescript ? 'ts' : 'js'}`;
+}
+
 export function defaultTestSet(linter: ESLint) {
   describe('[standard tests] passes', () => {
+    it(`should parse javascript`, () =>
+      testNoFail(linter, `((a) => a.split(''))()\n`));
+
     it(`should allow nested ternaries`, () =>
       testNoFail(
         linter,
@@ -24,10 +31,10 @@ export function defaultTestSet(linter: ESLint) {
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
-    lint_results[0].errorCount,
+    lint_results[0]?.errorCount,
     0,
-    `Expected there to be no lint errors, but found:\n${lint_results[0].messages
-      .map((m) => `  "${m.ruleId}": ${m.message}`)
+    `Expected there to be no lint errors, but found:\n${lint_results[0]?.messages
+      .map((m) => `  ${m.ruleId}: ${m.message}`)
       .join('\n')}`,
   );
 }
@@ -39,11 +46,12 @@ export function singleLintMessage(lint_results: ESLint.LintResult[]) {
     `Expected there to be only one lint result.`,
   );
   strictEqual(
-    lint_results[0].messages.length,
+    lint_results[0]?.messages.length,
     1,
-    `Expected there to be one lint message, but there were ${
-      lint_results[0].messages.length
-    }:\n${lint_results[0].messages.map((m) => `  "${m.message}"`).join('\n')}`,
+    `Expected there to be one lint message, but there were ${lint_results[0]
+      ?.messages.length}:\n${lint_results[0]?.messages
+      .map((m) => `  "${m.message}"`)
+      .join('\n')}`,
   );
 }
 
@@ -54,11 +62,11 @@ export async function testRuleFail(
   typescript: boolean = false,
 ) {
   const res = await linter.lintText(code, {
-    filePath: `index.${typescript ? 'ts' : 'js'}`,
+    filePath: filePath(typescript),
   });
   singleLintMessage(res);
-  strictEqual(res[0].source, code);
-  strictEqual(res[0].messages[0].ruleId, ruleId);
+  strictEqual(res[0]?.source, code);
+  strictEqual(res[0]?.messages[0]?.ruleId, ruleId);
 }
 
 export async function testNoFail(
@@ -67,7 +75,7 @@ export async function testNoFail(
   typescript: boolean = false,
 ) {
   const res = await linter.lintText(code, {
-    filePath: `index.${typescript ? 'ts' : 'js'}`,
+    filePath: filePath(typescript),
   });
   noLintMessage(res);
 }

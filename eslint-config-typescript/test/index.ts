@@ -6,7 +6,11 @@ import {
   testRuleFail,
 } from '../../utils/testing/eslint';
 
-const linter = new ESLint({ cwd: __dirname });
+// const linter = new ESLint({ cwd: __dirname });
+const linter = new ESLint({
+  cwd: __dirname,
+  overrideConfigFile: '.eslintrc.yaml',
+});
 
 describe('eslint-config-typescript', () => {
   defaultTestSet(linter);
@@ -15,16 +19,8 @@ describe('eslint-config-typescript', () => {
     it(`should parse typescript`, () =>
       testNoFail(linter, `((a: string): string[] => a.split(''))()\n`, true));
 
-    it(`should parse javascript`, () =>
-      testNoFail(linter, `((a) => a.split(''))()\n`));
-
     it(`should not give eslint error on use before define`, () =>
-      testNoFail(
-        linter,
-        `Number(a);
-const a = 10;\n`,
-        true,
-      ));
+      testNoFail(linter, `Number(a);\nconst a = 10;\n`, true));
   });
 
   describe('fails', () => {

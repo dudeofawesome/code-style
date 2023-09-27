@@ -1,0 +1,4 @@
+{
+  "extends": "@dudeofawesome/typescript-configs/node.json",
+  "files": ["index.ts", "index.js"]
+}
