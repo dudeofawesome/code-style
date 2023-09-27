@@ -8,20 +8,7 @@
   "javascript.format.enable": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-  "files.associations": {
-    "**/typescript-configs/*.json": "jsonc"
-  },
-  "json.schemas": [
-    {
-      "fileMatch": ["typescript-configs/*.json"],
-      "url": "https://json.schemastore.org/tsconfig"
-    },
-    {
-      "fileMatch": ["eslint-config*/*.yaml"],
-      "url": "https://json.schemastore.org/eslintrc"
-    }
-  ],
-  "material-icon-theme.files.associations": {
-    "eslint-config*/*.yaml": "eslint"
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
