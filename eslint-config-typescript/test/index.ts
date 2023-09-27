@@ -6,11 +6,7 @@ import {
   testRuleFail,
 } from '../../utils/testing/eslint';
 
-// const linter = new ESLint({ cwd: __dirname });
-const linter = new ESLint({
-  cwd: __dirname,
-  overrideConfigFile: '.eslintrc.yaml',
-});
+const linter = new ESLint({ cwd: __dirname });
 
 describe('eslint-config-typescript', () => {
   defaultTestSet(linter);
