@@ -1,0 +1,27 @@
+{
+  "name": "@dudeofawesome/typescript-configs",
+  "description": "My Typescript configs",
+  "version": "1.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dudeofawesome/code-style.git",
+    "directory": "/typescript-configs"
+  },
+  "keywords": [
+    "typescript",
+    "tsconfig"
+  ],
+  "author": "Louis Orleans <louis@orleans.io>",
+  "license": "MIT",
+  "main": "base.json",
+  "scripts": {
+    "test": "# node --require ts-node/register --test test/index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0, <5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.3",
+    "ts-node": "^10.9.1"
+  }
+}

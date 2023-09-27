@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    // input
+    "skipLibCheck": false, // TODO: do we actually want false?
+    "allowJs": true,
+    "incremental": true,
+    "forceConsistentCasingInFileNames": false,
+    "resolveJsonModule": true,
+
+    // output
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+
+    // config
+    "baseUrl": "./",
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
+    // "verbatimModuleSyntax": true, // TODO: what is this?
+    "moduleDetection": "force", // TODO: what is this?
+
+    // strictness
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    // "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true,
+    "noUncheckedIndexedAccess": true // TODO: can we actually do this?
+  },
+  "include": ["src/"],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+}

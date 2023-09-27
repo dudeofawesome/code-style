@@ -28,6 +28,7 @@
     "eslint-config-typescript",
     "eslint-config-browser",
     "eslint-config-react"
+    "typescript-configs"
   ],
   "scripts": {
     "bump": "scripts/bump.sh",
