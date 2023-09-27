@@ -22,6 +22,7 @@
   "workspaces": [
     "code-style",
     "eslint-config",
+    "eslint-config-cli",
     "eslint-config-jest",
     "eslint-config-node",
     "eslint-config-typescript",

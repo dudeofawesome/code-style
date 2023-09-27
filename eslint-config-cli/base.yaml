@@ -1,0 +1,5 @@
+extends:
+  - '@dudeofawesome/node'
+
+rules:
+  no-console: 'off'
