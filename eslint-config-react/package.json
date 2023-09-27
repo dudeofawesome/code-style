@@ -15,7 +15,7 @@
   ],
   "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
-  "main": ".eslintrc.yaml",
+  "main": "base.yaml",
   "scripts": {
     "test": "echo 'No tests'; exit 0"
   },

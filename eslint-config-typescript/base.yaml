@@ -1,6 +1,10 @@
 extends:
-  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@typescript-eslint/strict'
+  # - 'plugin:@shopify/typescript'
   - 'plugin:import/typescript'
+
+parserOptions:
+  project: true
 
 rules:
   '@typescript-eslint/no-inferrable-types': 'off'

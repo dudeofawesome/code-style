@@ -15,7 +15,7 @@
   ],
   "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
-  "main": ".eslintrc.yaml",
+  "main": "base.yaml",
   "scripts": {
     "test": "node --require ts-node/register --test test/index.ts"
   },

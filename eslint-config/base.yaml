@@ -36,3 +36,5 @@ rules:
   no-use-before-define: 'off'
   eslint-comments/no-use: 'warn'
   '@shopify/binary-assignment-parens': 'off'
+  no-console: 'error'
+  # TODO: ban barrels

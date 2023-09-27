@@ -2,6 +2,6 @@ extends:
   - 'plugin:@shopify/node'
 
 rules:
-  no-console: 'error'
   radix: 'off'
   node/exports-style: 'warn'
+  no-console: 'error' # this is a dupe from the base config, but shopify overrides it
