@@ -1,1 +1,8 @@
-../code-style/.vscode/extensions.json
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ghmcadams.lintlens"
+  ]
+}
