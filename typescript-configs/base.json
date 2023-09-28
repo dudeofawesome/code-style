@@ -6,9 +6,11 @@
     // input
     "skipLibCheck": false, // TODO: do we actually want false?
     "allowJs": true,
+    "checkJs": true,
     "incremental": true,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "lib": ["ES2022"],
 
     // output
     "declaration": true,
@@ -34,7 +36,5 @@
     // "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
     "noUncheckedIndexedAccess": true // TODO: can we actually do this?
-  },
-  "include": ["src/"],
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+  }
 }

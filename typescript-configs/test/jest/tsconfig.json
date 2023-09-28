@@ -1,0 +1,5 @@
+{
+  "extends": ["@dudeofawesome/typescript-configs/node.json"],
+  "include": ["src/"],
+  "exclude": ["dist/", "test/"]
+}

@@ -1,3 +1,7 @@
 {
-  "extends": "./base.json"
+  "extends": "./base.json",
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "target": "ES2019" // TODO: what browsers do we want to support?
+  }
 }
