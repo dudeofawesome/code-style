@@ -2,4 +2,7 @@ extends:
   - '@dudeofawesome/node'
 
 rules:
+  # allow scripts to log simply
   no-console: 'off'
+  # allow scripts to exit
+  n/no-process-exit: 'off'
