@@ -1,7 +1,49 @@
 extends:
-  - 'plugin:@shopify/node'
+  - 'plugin:n/recommended-module'
+
+env:
+  node: true
+
+# plugin:n/recommended-module disables some globals we still want
+globals:
+  __dirname: 'readonly'
+  __filename: 'readonly'
+  require: 'readonly'
 
 rules:
+  # node has a consistent radix for parseInt
   radix: 'off'
-  node/exports-style: 'warn'
-  no-console: 'error' # this is a dupe from the base config, but shopify overrides it
+  # we should be reading any env config into a specific config module
+  n/no-process-env: 'error'
+  # Enforce return upon a callback
+  n/callback-return: ['error', ['callback', 'cb', 'next']]
+  # Disallow require() outside of the top-level module scope
+  n/global-require: 'error'
+  # Enforces error handling in callbacks
+  n/handle-callback-err: ['error', '^.*[eE]rr(or)?$']
+  # Disallow mixing regular variable and require declarations
+  n/no-mixed-requires: 'error'
+  # Disallow use of new operator with the require function
+  n/no-new-require: 'error'
+  # Disallow string concatenation with __dirname and __filename
+  n/no-path-concat: 'error'
+  # Restrict usage of specified node modules
+  n/no-restricted-import: 'off'
+  n/no-restricted-require: 'off'
+  # Disallow use of synchronous methods
+  n/no-sync: 'error'
+  # defer to import/no-extraneous-dependencies
+  n/no-extraneous-import: 'off'
+  n/no-extraneous-require: 'off'
+  # use `module.exports` for commonjs
+  n/exports-style: ['error', 'module.exports']
+  # use imports instead of globals
+  n/prefer-global/text-decoder: 'never'
+  n/prefer-global/text-encoder: 'never'
+  n/prefer-global/url-search-params: 'never'
+  n/prefer-global/url: 'never'
+  # use promise APIs
+  n/prefer-promises/dns: 'error'
+  n/prefer-promises/fs: 'error'
+  # make sure callbacks pass error as 1st param
+  node/no-callback-literal: 'error'
