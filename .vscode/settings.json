@@ -22,9 +22,9 @@
     }
   ],
   "material-icon-theme.files.associations": {
-    "eslint-config*/*.yaml": "eslint"
+    "eslint-config*/**/*.yaml": "eslint"
   },
   "yaml.schemas": {
-    "https://json.schemastore.org/eslintrc": ["eslint-config*/*.yaml"]
+    "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"]
   }
 }

@@ -1,0 +1,15 @@
+rules:
+  # don't compare vars to themselves
+  no-self-compare: 'error'
+
+  # don't use `this` when `this` is `undefined`
+  no-invalid-this: 'error'
+
+  # catch some race conditions
+  require-atomic-updates: ['warn', { allowProperties: true }]
+
+  # don't use `new` keyword when it shouldn't be used
+  no-new-native-nonconstructor: 'error'
+
+  # ensure thrown value extend `Error`
+  no-throw-literal: 'error'

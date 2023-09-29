@@ -1,0 +1,44 @@
+rules:
+  # warn about deprecated imports
+  import/no-deprecated: 'warn'
+
+  # don't export mutable vars
+  import/no-mutable-exports: 'error'
+
+  # don't allow AMD modules
+  import/no-amd: 'error'
+
+  # TODO: can we actually ban this? probably not
+  # don't allow commonjs modules
+  import/no-commonjs: 'error'
+
+  # don't allow mixing ESM with commonjs exports
+  import/no-import-module-exports: 'error'
+
+  # don't allow importing yourself
+  import/no-self-import: 'error'
+
+  # don't allow webpack imports
+  import/no-webpack-loader-syntax: 'error'
+
+  # ensure imports come first in file
+  import/first: 'error'
+
+  # ensure imports are seperated from the rest of the file
+  import/newline-after-import: 'error'
+
+  # don't allow default exports
+  import/no-default-export: 'error'
+
+  # ensure consistent ordering of imports
+  import/order:
+    - 'warn'
+    - groups:
+        - 'builtin'
+        - 'external'
+        - 'internal'
+      newlines-between: 'ignore'
+
+  # TODO: do I need this?
+  # Sort import declarations within module
+  sort-imports: 'off'

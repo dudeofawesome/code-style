@@ -1,0 +1,21 @@
+rules:
+  # use template literals instead of string concatenation
+  prefer-template: 'error'
+
+  # don't use .apply()
+  prefer-spread: 'error'
+
+  # use `**` instead of `Math.pow`
+  prefer-exponentiation-operator: 'error'
+
+  # use a rest parameter instead of `arguments`
+  prefer-rest-params: 'error'
+
+  # Require method and property shorthand syntax for object literals
+  object-shorthand: ['error', 'always', { avoidQuotes: true }]
+
+  # Suggest using arrow functions as callbacks
+  prefer-arrow-callback: ['error', { allowNamedFunctions: true }]
+
+  # use const for vars that are never modified
+  prefer-const: 'error'

@@ -1,0 +1,4 @@
+rules:
+  # don't allow eval
+  no-eval: 'error'
+  no-implied-eval: 'error'

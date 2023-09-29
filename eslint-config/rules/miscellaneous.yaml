@@ -1,0 +1,20 @@
+rules:
+  # prevent `console` and `alert` calls from making it into prod
+  no-console: 'error'
+  no-alert: 'error'
+
+  # warn about prettier style issues
+  prettier/prettier: 'warn'
+
+  # TODO: do we really want to force a style for comments?
+  # ensure comments start with a space
+  spaced-comment: ['error', 'always', { 'block': { 'exceptions': ['-=*'] } }]
+
+  # disallow renaming import, export, and destructured assignments to the same name
+  no-useless-rename: 'error'
+
+  # require symbol to have a description
+  symbol-description: 'error'
+
+  # require switch's default case to be last
+  default-case-last: 'error'

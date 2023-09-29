@@ -6,7 +6,7 @@ import {
   testNoFail,
   testRuleFail,
 } from '../../utils/testing/eslint';
-import { equal, strictEqual } from 'node:assert';
+import { equal, match, strictEqual } from 'node:assert';
 
 const linter = new ESLint({ cwd: __dirname });
 
@@ -26,10 +26,7 @@ describe('eslint-config', () => {
         })
         .then((res) => {
           equal(res[0].messages[0].ruleId, null);
-          strictEqual(
-            res[0].messages[0].message,
-            'Parsing error: Unexpected token, expected "," (1:3)',
-          );
+          match(res[0].messages[0].message, /^Parsing error: Unexpected token/);
         }));
 
     it(`should fail no-console`, async () => {
@@ -38,8 +35,17 @@ describe('eslint-config', () => {
       strictEqual(res[0].messages[0].ruleId, 'no-console');
     });
 
-    // TODO: test for shopify rule
-
-    // TODO: test for prettier rule
+    it(`should only log single duplicate-import error`, async () =>
+      linter
+        .lintText(
+          `import path from 'path';\nimport { join } from 'path';\n\njoin(path.cwd);\n`,
+          {
+            filePath: filePath(true),
+          },
+        )
+        .then((res) => {
+          // strictEqual(res[0]?.source, code);
+          strictEqual(res[0]?.messages[0]?.ruleId, 'import/no-duplicates');
+        }));
   });
 });

@@ -1,40 +1,19 @@
 extends:
-  - 'plugin:@shopify/esnext'
+  - 'eslint:recommended'
   - 'plugin:prettier/recommended'
+  - 'plugin:promise/recommended'
+  - 'plugin:import/recommended'
+
+  - './rules/bugs.yaml'
+  - './rules/deprecated.yaml'
+  - './rules/footguns.yaml'
+  - './rules/imports.yaml'
+  - './rules/miscellaneous.yaml'
+  - './rules/modern-code.yaml'
+  - './rules/promises.yaml'
+  - './rules/readability.yaml'
+  - './rules/security.yaml'
+
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
   sourceType: 'module'
-
-rules:
-  '@babel/new-cap': 'off'
-  id-length: 'off'
-  import/order:
-    - 'warn'
-    - groups:
-        - 'builtin'
-        - 'external'
-        - 'internal'
-      newlines-between: 'ignore'
-  import/no-default-export: 'error'
-  line-comment-position: 'off'
-  no-empty-function: 'warn'
-  no-negated-condition: 'off'
-  no-nested-ternary: 'off'
-  no-warning-comments: 'off'
-  prettier/prettier: 'warn'
-  require-atomic-updates: ['warn', { allowProperties: true }]
-  sort-class-members/sort-class-members: 'off'
-  import/extensions: 'off'
-  no-useless-constructor: 'off'
-  consistent-return: 'off'
-  require-await: 'off'
-  no-shadow: 'off'
-  promise/no-nesting: 'off'
-  import/no-cycle: 'off'
-  lines-between-class-members: 'off'
-  no-useless-return: 'off'
-  no-use-before-define: 'off'
-  eslint-comments/no-use: 'warn'
-  '@shopify/binary-assignment-parens': 'off'
-  no-console: 'error'
-  # TODO: ban barrels

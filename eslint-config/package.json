@@ -23,7 +23,9 @@
     "@shopify/eslint-plugin": "^43.0.0",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^5.0.0"
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1"
   },
   "peerDependencies": {
     "prettier": "^3.0.3"

@@ -14,7 +14,7 @@ export function defaultTestSet(linter: ESLint) {
     it(`should allow nested ternaries`, () =>
       testNoFail(
         linter,
-        `(() => (Number === true ? 1 : Boolean === true ? 2 : 3))();\n`,
+        `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
         true,
       ));
   });

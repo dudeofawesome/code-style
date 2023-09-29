@@ -1,0 +1,46 @@
+rules:
+  # require `parseInt` to have a radix specified since some browsers don't default to base 10
+  radix: 'error'
+
+  # require the use of `===` since `==` has some weird behavior
+  eqeqeq: ['error', 'smart']
+
+  # TODO: ban barrels
+  # barrel files can lead to a number of hard to debug issues
+
+  # prefer binary, octal, and hexadecimal literals instead of parseInt('F', 16)
+  prefer-numeric-literals: 'error'
+
+  # ensure that functional array methods are chainable
+  array-callback-return: 'error'
+
+  # don't return in a constructor
+  no-constructor-return: 'error'
+
+  # don't allow array constructors with multiple params
+  no-array-constructor: 'error'
+
+  # don't use arguments.caller
+  no-caller: 'error'
+
+  # TODO: this is an error by default. should it only be a warn?
+  # don't allow `delete` since it can have unexpected consequences
+  no-delete-var: 'warn'
+
+  # don't allow monkeypatching
+  no-extend-native: 'error'
+
+  # don't allow sequences
+  no-sequences: ['error', { allowInParentheses: false }]
+
+  # don't allow the void keyword
+  no-void: 'error'
+
+  # ensure regexp uses certain flags
+  require-unicode-regexp: 'error'
+
+  # prevent unintentional numeric literal values (eg: `071 === 51`)
+  no-octal: 'error'
+
+  # prevent labels from sharing name with variable
+  no-label-var: 'error'

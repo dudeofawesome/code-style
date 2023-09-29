@@ -1,0 +1,21 @@
+rules:
+  # use `else if` instead
+  no-lonely-if: 'error'
+
+  # ensure any constant numbers are properly named to increase readability
+  no-magic-numbers: 'error'
+
+  # don't allow multiple variable creation with single keyword
+  one-var: ['error', 'never']
+
+  # don't allow floating decimals
+  no-floating-decimal: 'error'
+
+  # require dot notation when possible
+  dot-notation: 'error'
+
+  # TODO: what should our max be? should we even have one?
+  max-lines: ['error', { max: 1000, skipBlankLines: true, skipComments: true }]
+
+  # treat method params as const
+  no-param-reassign: 'error'
