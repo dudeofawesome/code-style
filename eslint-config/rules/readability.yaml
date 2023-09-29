@@ -3,7 +3,12 @@ rules:
   no-lonely-if: 'error'
 
   # ensure any constant numbers are properly named to increase readability
-  no-magic-numbers: 'error'
+  no-magic-numbers:
+    - 'error'
+    - enforceConst: true
+      ignoreArrayIndexes: true
+      ignoreDefaultValues: true
+      ignoreClassFieldInitialValues: true
 
   # don't allow multiple variable creation with single keyword
   one-var: ['error', 'never']

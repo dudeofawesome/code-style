@@ -23,8 +23,12 @@ describe('eslint-config-typescript', () => {
     it(`should fail radix`, async () =>
       testRuleFail(linter, `parseInt('10');\n`, 'radix', true));
 
-    // TODO: test for shopify rule
-
-    // TODO: test for prettier rule
+    it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
+      testRuleFail(
+        linter,
+        `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+        '@typescript-eslint/strict-boolean-expressions',
+        true,
+      ));
   });
 });

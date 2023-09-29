@@ -1,14 +1,55 @@
 extends:
-  - 'plugin:@typescript-eslint/strict'
-  # - 'plugin:@shopify/typescript'
+  - 'plugin:@typescript-eslint/strict-type-checked'
+  - 'plugin:@typescript-eslint/stylistic-type-checked'
   - 'plugin:import/typescript'
 
 parserOptions:
   project: true
-
 rules:
+  # allow specifying a type that could be inferred
   '@typescript-eslint/no-inferrable-types': 'off'
+
+  # prevent unused vars
   '@typescript-eslint/no-unused-vars':
     ['warn', { args: 'none', destructuredArrayIgnorePattern: '^_' }]
-  '@typescript-eslint/naming-convention': 'off'
-  '@shopify/binary-assignment-parens': 'off'
+
+  # ensure only boolean types are used for conditions
+  '@typescript-eslint/strict-boolean-expressions':
+    - 'error'
+    - allowString: false
+      allowNumber: false
+      allowNullableObject: false
+
+  # ensure switches on union types handle all cases
+  '@typescript-eslint/switch-exhaustiveness-check': 'error'
+
+  # ensure any constant numbers are properly named to increase readability
+  '@typescript-eslint/no-magic-numbers':
+    - 'error'
+    - enforceConst: true
+      ignoreArrayIndexes: true
+      ignoreDefaultValues: true
+      ignoreClassFieldInitialValues: true
+
+      ignoreEnums: true
+      ignoreNumericLiteralTypes: true
+      ignoreReadonlyClassProperties: true
+      ignoreTypeIndexes: true
+  no-magic-numbers: 'off'
+
+  # TODO: do we want this?
+  # require enum values to be initialized in order to prevent value shifting
+  '@typescript-eslint/prefer-enum-initializers': 'error'
+
+  # allow use of both `type` and `interface`
+  '@typescript-eslint/consistent-type-definitions': 'off'
+
+  # ensure private members are marked readonly when possible
+  '@typescript-eslint/prefer-readonly': 'error'
+
+  # allow `indexOf()`
+  '@typescript-eslint/prefer-includes': 'off'
+
+  # typescript handles these rules for us
+  consistent-return: 'off'
+  no-invalid-this: 'off'

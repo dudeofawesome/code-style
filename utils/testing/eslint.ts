@@ -9,7 +9,15 @@ export function filePath(typescript: boolean = false): string {
 export function defaultTestSet(linter: ESLint) {
   describe('[standard tests] passes', () => {
     it(`should parse javascript`, () =>
-      testNoFail(linter, `((a) => a.split(''))()\n`));
+      testNoFail(
+        linter,
+        `
+(
+  /** @param {string} a */
+  (a) => a.split('')
+)('test');
+`,
+      ));
 
     it(`should allow nested ternaries`, () =>
       testNoFail(
