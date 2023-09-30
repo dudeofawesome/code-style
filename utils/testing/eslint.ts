@@ -9,29 +9,37 @@ export function filePath(typescript: boolean = false): string {
 export function defaultTestSet(linter: ESLint) {
   describe('[standard tests] passes', () => {
     it(`should parse javascript`, () =>
-      testNoFail(
+      testNoFail({
         linter,
-        `
+        code: `
 (
   /** @param {string} a */
   (a) => a.split('')
 )('test');
 `,
-      ));
+      }));
 
     it(`should allow nested ternaries`, () =>
-      testNoFail(
+      testNoFail({
         linter,
-        `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
-        true,
-      ));
+        code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
+        typescript: true,
+      }));
   });
   describe('[standard tests] fails', () => {
     it(`should fail eqeqeq`, () =>
-      testRuleFail(linter, `if (Number == true) Number();\n`, 'eqeqeq'));
+      testRuleFail({
+        linter,
+        code: `if (Number == true) Number();\n`,
+        ruleId: 'eqeqeq',
+      }));
 
     it(`should warn on prettier`, () =>
-      testRuleFail(linter, `Number( '5')`, 'prettier/prettier'));
+      testRuleFail({
+        linter,
+        code: `Number( '5')`,
+        ruleId: 'prettier/prettier',
+      }));
 
     // TODO: test for shopify rule
   });
@@ -63,27 +71,42 @@ export function singleLintMessage(lint_results: ESLint.LintResult[]) {
   );
 }
 
-export async function testRuleFail(
-  linter: ESLint,
-  code: string,
-  ruleId: string,
-  typescript: boolean = false,
-) {
+interface TestRuleFailOpts {
+  linter: ESLint;
+  code: string;
+  ruleId: string;
+  typescript?: boolean;
+  file_path?: string;
+}
+export async function testRuleFail({
+  linter,
+  code,
+  ruleId,
+  typescript = false,
+  file_path = filePath(typescript),
+}: TestRuleFailOpts) {
   const res = await linter.lintText(code, {
-    filePath: filePath(typescript),
+    filePath: file_path,
   });
   singleLintMessage(res);
   strictEqual(res[0]?.source, code);
   strictEqual(res[0]?.messages[0]?.ruleId, ruleId);
 }
 
-export async function testNoFail(
-  linter: ESLint,
-  code: string,
-  typescript: boolean = false,
-) {
+interface TestNoFailOpts {
+  linter: ESLint;
+  code: string;
+  typescript?: boolean;
+  file_path?: string;
+}
+export async function testNoFail({
+  linter,
+  code,
+  typescript = false,
+  file_path = filePath(typescript),
+}: TestNoFailOpts) {
   const res = await linter.lintText(code, {
-    filePath: filePath(typescript),
+    filePath: file_path,
   });
   noLintMessage(res);
 }

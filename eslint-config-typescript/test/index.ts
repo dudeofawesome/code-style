@@ -13,22 +13,35 @@ describe('eslint-config-typescript', () => {
 
   describe('passes', () => {
     it(`should parse typescript`, () =>
-      testNoFail(linter, `((a: string): string[] => a.split(''))()\n`, true));
+      testNoFail({
+        linter,
+        code: `((a: string): string[] => a.split(''))()\n`,
+        typescript: true,
+      }));
 
     it(`should not give eslint error on use before define`, () =>
-      testNoFail(linter, `Number(a);\nconst a = 10;\n`, true));
+      testNoFail({
+        linter,
+        code: `Number(a);\nconst a = 10;\n`,
+        typescript: true,
+      }));
   });
 
   describe('fails', () => {
     it(`should fail radix`, async () =>
-      testRuleFail(linter, `parseInt('10');\n`, 'radix', true));
+      testRuleFail({
+        linter,
+        code: `parseInt('10');\n`,
+        ruleId: 'radix',
+        typescript: true,
+      }));
 
     it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
-      testRuleFail(
+      testRuleFail({
         linter,
-        `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
-        '@typescript-eslint/strict-boolean-expressions',
-        true,
-      ));
+        code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+        ruleId: '@typescript-eslint/strict-boolean-expressions',
+        typescript: true,
+      }));
   });
 });

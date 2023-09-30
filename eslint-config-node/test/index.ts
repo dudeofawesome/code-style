@@ -13,11 +13,15 @@ describe('eslint-config-node', () => {
 
   describe('passes', () => {
     it(`should pass radix`, async () =>
-      testNoFail(linter, `parseInt('10');\n`));
+      testNoFail({ linter, code: `parseInt('10');\n` }));
   });
 
   describe('fails', () => {
     it(`should fail no-console`, () =>
-      testRuleFail(linter, `console.log('foo');\n`, 'no-console'));
+      testRuleFail({
+        linter,
+        code: `console.log('foo');\n`,
+        ruleId: 'no-console',
+      }));
   });
 });
