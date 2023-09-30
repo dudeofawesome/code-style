@@ -17,12 +17,16 @@
   },
   "json.schemas": [
     {
-      "fileMatch": ["typescript-configs/*.json"],
+      "fileMatch": [
+        "typescript-configs/*.json",
+        "!typescript-configs/package.json"
+      ],
       "url": "https://json.schemastore.org/tsconfig"
     }
   ],
   "material-icon-theme.files.associations": {
-    "eslint-config*/**/*.yaml": "eslint"
+    "eslint-config*/**/*.yaml": "eslint",
+    "typescript-configs/*.json": "tsconfig"
   },
   "yaml.schemas": {
     "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"]
