@@ -1,4 +1,27 @@
-plugins:
-  - 'jest'
-env:
-  jest/globals: yes
+# extends:
+#   - 'plugin:jest/recommended'
+
+overrides:
+  - files:
+      - 'test/**'
+      - '__test__/**'
+      - '*.test.*'
+      - '*.spec.*'
+      - '*.unit.*'
+      - '*.e2e.*'
+    extends:
+      - 'plugin:jest/recommended'
+    settings:
+      jest:
+        version: 'detect'
+
+    rules:
+      # prevent return statements in tests
+      jest/no-test-return-statement: 'error'
+
+      # use jest comparators instead of comparing booleans
+      jest/prefer-comparison-matcher: 'error'
+      jest/prefer-equality-matcher: 'error'
+
+      # require hooks to be inside a describe
+      jest/require-top-level-describe: 'error'
