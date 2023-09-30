@@ -8,7 +8,7 @@ import {
 
 const linter = new ESLint({ cwd: __dirname });
 
-describe('eslint-config-node', () => {
+describe('eslint-config-cli', () => {
   defaultTestSet(linter);
 
   describe('passes', () => {
