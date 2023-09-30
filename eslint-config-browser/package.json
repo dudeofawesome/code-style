@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "base.yaml",
   "scripts": {
-    "test": "echo 'No tests'; exit 0"
+    "test": "node --require ts-node/register --test test/index.ts"
   },
   "dependencies": {
     "@shopify/eslint-plugin": "^43.0.0"
