@@ -12,10 +12,10 @@ describe('eslint-config-react', () => {
   defaultTestSet(linter);
 
   describe('passes', () => {
-    it(`should pass radix`, async () =>
+    it(`should parse jsx`, async () =>
       testNoFail({
         linter,
-        code: `parseInt('10');\n`,
+        code: `import React from 'react';\n\nexport const A = () => <div></div>;\n`,
         file_path: 'index.jsx',
       }));
   });
@@ -34,6 +34,18 @@ describe('eslint-config-react', () => {
         linter,
         code: `console.log('foo');\n`,
         ruleId: 'no-console',
+        file_path: 'index.jsx',
+      }));
+
+    it(`should fail react/jsx-key`, () =>
+      testRuleFail({
+        linter,
+        code: `import React from 'react';
+
+export const Foo = (props) => <div>{props}</div>;
+export const Bar = (props) => props.list.map((l) => <Foo text={l}></Foo>);
+`,
+        ruleId: 'react/jsx-key',
         file_path: 'index.jsx',
       }));
   });
