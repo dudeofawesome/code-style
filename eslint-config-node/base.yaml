@@ -6,6 +6,7 @@ env:
 
 # plugin:n/recommended-module disables some globals we still want
 globals:
+  # TODO: detect if project is type: module or not and remove the globals if so
   __dirname: 'readonly'
   __filename: 'readonly'
   require: 'readonly'
@@ -13,37 +14,51 @@ globals:
 rules:
   # node has a consistent radix for parseInt
   radix: 'off'
+
   # we should be reading any env config into a specific config module
   n/no-process-env: 'error'
+
   # enforce return upon a callback
   n/callback-return: ['error', ['callback', 'cb', 'next']]
+
   # disallow require() outside of the top-level module scope
   n/global-require: 'error'
+
   # enforces error handling in callbacks
   n/handle-callback-err: ['error', '^.*[eE]rr(or)?$']
+
   # disallow mixing regular variable and require declarations
   n/no-mixed-requires: 'error'
+
   # disallow use of new operator with the require function
   n/no-new-require: 'error'
+
   # disallow string concatenation with __dirname and __filename
   n/no-path-concat: 'error'
+
   # restrict usage of specified node modules
   n/no-restricted-import: 'off'
   n/no-restricted-require: 'off'
+
   # disallow use of synchronous methods
   n/no-sync: 'error'
+
   # defer to import/no-extraneous-dependencies
   n/no-extraneous-import: 'off'
   n/no-extraneous-require: 'off'
+
   # use `module.exports` for commonjs
   n/exports-style: ['error', 'module.exports']
+
   # use imports instead of globals
   n/prefer-global/text-decoder: ['error', 'never']
   n/prefer-global/text-encoder: ['error', 'never']
   n/prefer-global/url-search-params: ['error', 'never']
   n/prefer-global/url: ['error', 'never']
+
   # use promise APIs
   n/prefer-promises/dns: 'error'
   n/prefer-promises/fs: 'error'
+
   # make sure callbacks pass error as 1st param
   n/no-callback-literal: 'error'

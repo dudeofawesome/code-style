@@ -19,10 +19,12 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "sourceMap": true,
-    "outDir": "./dist",
+    // TODO: I guess I can't set dirs?
+    // "outDir": "./dist",
 
     // config
-    "baseUrl": "./",
+    // TODO: I guess I can't set dirs?
+    // "baseUrl": "./",
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     // "verbatimModuleSyntax": true, // TODO: what is this?
@@ -37,4 +39,8 @@
     "useUnknownInCatchVariables": true,
     "noUncheckedIndexedAccess": true // TODO: can we actually do this?
   }
+  // TODO: I guess I can't set dirs?
+  // "include": ["src/"],
+  // TODO: I guess I can't set dirs?
+  // "exclude": ["dist/"]
 }
