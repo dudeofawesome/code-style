@@ -20,13 +20,13 @@
     "test": "node --require ts-node/register --test test/index.ts"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "eslint-plugin-import": "^2.28.1"
   },
   "peerDependencies": {
     "eslint": "^8.49.0",
-    "typescript": "^5.0.0, <=5.2.0"
+    "typescript": "^5.0.0, <5.3.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
