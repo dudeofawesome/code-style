@@ -15,6 +15,10 @@
   ],
   "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "main": "base.yaml",
   "scripts": {
     "test": "function run() { node --require ts-node/register --test $@ 'test/index.ts'; }; run"
