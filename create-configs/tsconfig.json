@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/node.json",
+    "@dudeofawesome/typescript-configs/library.json"
+  ],
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "outDir": "dist/"
+  },
+  "include": ["src/"],
+  "exclude": ["dist/"]
+}

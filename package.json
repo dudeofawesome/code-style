@@ -21,6 +21,7 @@
   ],
   "workspaces": [
     "code-style",
+    "create-configs",
     "eslint-config",
     "eslint-config-browser",
     "eslint-config-cli",
