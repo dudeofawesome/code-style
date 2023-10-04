@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/node.json",
+    "@dudeofawesome/typescript-configs/jest.json"
+  ],
+  "files": ["index.ts"]
+}
