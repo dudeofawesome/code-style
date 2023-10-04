@@ -34,7 +34,9 @@ rules:
   no-sequences: ['error', { allowInParentheses: false }]
 
   # don't allow the void keyword
-  no-void: 'error'
+  no-void:
+    - 'error'
+    - allowAsStatement: true
 
   # ensure regexp uses certain flags
   require-unicode-regexp: 'error'

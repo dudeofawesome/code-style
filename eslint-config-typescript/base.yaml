@@ -54,6 +54,10 @@ rules:
   # allow returning the correct type, even if it might be slightly confusing
   '@typescript-eslint/no-confusing-void-expression': 'off'
 
+  '@typescript-eslint/no-empty-function':
+    - 'error'
+    - allow: ['decoratedFunctions']
+
   # typescript handles these rules for us
   consistent-return: 'off'
   no-invalid-this: 'off'
