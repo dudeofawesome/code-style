@@ -39,5 +39,10 @@
     "@dudeofawesome/code-style": "^1.0.0",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3"
+  },
+  "overrides": {
+    "eslint-plugin-import": {
+      "tsconfig-paths": "^4.2.0"
+    }
   }
 }
