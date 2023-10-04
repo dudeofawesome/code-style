@@ -27,7 +27,7 @@
     "build": "tsc",
     "start": "node .",
     "test": "echo 'No tests'; exit 0",
-    "lint": "eslint ."
+    "lint": "eslint . --ext ts --ext js"
   },
   "dependencies": {
     "@inquirer/prompts": "^3.2.0",

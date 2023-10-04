@@ -7,8 +7,8 @@ export function filePath(typescript: boolean = false): string {
 }
 
 export function defaultTestSet(linter: ESLint) {
-  describe('[standard tests] passes', () => {
-    it(`should parse javascript`, () =>
+  void describe('[standard tests] passes', () => {
+    void it(`should parse javascript`, () =>
       testNoFail({
         linter,
         code: `
@@ -19,29 +19,27 @@ export function defaultTestSet(linter: ESLint) {
 `,
       }));
 
-    it(`should allow nested ternaries`, () =>
+    void it(`should allow nested ternaries`, () =>
       testNoFail({
         linter,
         code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
         typescript: true,
       }));
   });
-  describe('[standard tests] fails', () => {
-    it(`should fail eqeqeq`, () =>
+  void describe('[standard tests] fails', () => {
+    void it(`should fail eqeqeq`, () =>
       testRuleFail({
         linter,
         code: `if (Number == true) Number();\n`,
         ruleId: 'eqeqeq',
       }));
 
-    it(`should warn on prettier`, () =>
+    void it(`should warn on prettier`, () =>
       testRuleFail({
         linter,
         code: `Number( '5')`,
         ruleId: 'prettier/prettier',
       }));
-
-    // TODO: test for shopify rule
   });
 }
 

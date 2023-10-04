@@ -34,7 +34,8 @@
   "scripts": {
     "bump": "scripts/bump.sh",
     "upgrade-packages": "scripts/upgrade-packages.sh",
-    "test": "npm run test --ws"
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces --if-present && eslint ."
   },
   "devDependencies": {
     "@dudeofawesome/code-style": "^1.0.0",

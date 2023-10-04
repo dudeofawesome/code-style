@@ -6,6 +6,8 @@ extends:
   - '@dudeofawesome/typescript'
 parserOptions:
   ecmaVersion: 2022
+ignorePatterns:
+  - '**/test/*/**'
 
 overrides:
   - files:

@@ -8,18 +8,18 @@ import {
 
 const linter = new ESLint({ cwd: __dirname });
 
-describe('eslint-config-typescript', () => {
+void describe('eslint-config-typescript', () => {
   defaultTestSet(linter);
 
-  describe('passes', () => {
-    it(`should parse typescript`, () =>
+  void describe('passes', () => {
+    void it(`should parse typescript`, () =>
       testNoFail({
         linter,
         code: `((a: string): string[] => a.split(''))()\n`,
         typescript: true,
       }));
 
-    it(`should not give eslint error on use before define`, () =>
+    void it(`should not give eslint error on use before define`, () =>
       testNoFail({
         linter,
         code: `Number(a);\nconst a = 10;\n`,
@@ -27,8 +27,8 @@ describe('eslint-config-typescript', () => {
       }));
   });
 
-  describe('fails', () => {
-    it(`should fail radix`, async () =>
+  void describe('fails', () => {
+    void it(`should fail radix`, async () =>
       testRuleFail({
         linter,
         code: `parseInt('10');\n`,
@@ -36,7 +36,7 @@ describe('eslint-config-typescript', () => {
         typescript: true,
       }));
 
-    it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
+    void it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
       testRuleFail({
         linter,
         code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
