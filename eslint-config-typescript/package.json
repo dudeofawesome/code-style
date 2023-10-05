@@ -21,7 +21,7 @@
   },
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require ts-node/register --test test/index.ts"
+    "test": "node --require tsm --test test/index.ts"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -35,6 +35,6 @@
   "devDependencies": {
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
-    "ts-node": "^10.9.1"
+    "tsm": "^2.3.0"
   }
 }

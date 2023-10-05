@@ -21,9 +21,12 @@
   },
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require ts-node/register --test test/index.ts"
+    "test": "node --require tsm --test test/index.ts"
   },
   "peerDependencies": {
     "eslint": "^8.49.0"
+  },
+  "devDependencies": {
+    "tsm": "^2.3.0"
   }
 }
