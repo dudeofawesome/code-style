@@ -5,13 +5,13 @@ import Yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import { Options } from 'yargs';
 import { checkbox, select, input } from '@inquirer/prompts';
-import chalk from 'chalk';
 import { stringify } from 'yaml';
 
 type ProjectType = 'web-app' | 'backend' | 'cli';
-type Language = 'js' | 'rb' | 'py';
-type Technology = 'ts' | 'react' | 'nestjs' | 'jest';
-type Builder = 'tsc' | 'esbuild' | 'swc' | 'babel' | 'none';
+type Language = 'ts' | 'js' | 'rb' | 'py' | 'css' | 'scss';
+type Technology = 'react' | 'nestjs' | 'jest' | 'vs-code';
+type Builder = 'tsc' | 'esbuild' | 'swc' | 'bun' | 'babel' | 'none';
+type Runtime = 'nodejs' | 'bun';
 
 // TODO(0): add support for VSCode settings & extensions
 // TODO: add support for ruby
@@ -20,6 +20,7 @@ type Builder = 'tsc' | 'esbuild' | 'swc' | 'babel' | 'none';
 
 export async function install_dependencies(
   project_type: ProjectType,
+  languages: Language[],
   technologies: Technology[],
 ) {
   const prod_packages: string[] = [];
@@ -37,17 +38,17 @@ export async function install_dependencies(
       }
       break;
     case 'backend':
-      if (technologies.includes('ts')) dev_packages.push('@types/node');
+      if (languages.includes('ts')) dev_packages.push('@types/node');
       dev_packages.push('@dudeofawesome/eslint-config-node');
       break;
     case 'cli':
-      if (technologies.includes('ts')) dev_packages.push('@types/node');
+      if (languages.includes('ts')) dev_packages.push('@types/node');
       dev_packages.push('@dudeofawesome/eslint-config-cli');
       break;
   }
 
-  for (const tech of technologies) {
-    switch (tech) {
+  for (const language of languages) {
+    switch (language) {
       case 'ts':
         dev_packages.push(
           'typescript',
@@ -55,6 +56,12 @@ export async function install_dependencies(
           '@dudeofawesome/typescript-configs',
         );
         break;
+      default:
+    }
+  }
+
+  for (const tech of technologies) {
+    switch (tech) {
       case 'jest':
         dev_packages.push(
           'jest',
@@ -64,7 +71,7 @@ export async function install_dependencies(
         break;
       case 'react':
         prod_packages.push('react');
-        if (technologies.includes('ts')) {
+        if (languages.includes('ts')) {
           dev_packages.push('@types/react');
         }
         break;
@@ -164,6 +171,7 @@ export async function create_ts_config(
 
 export async function create_eslint_config(
   project_type: ProjectType,
+  languages: Language[],
   technologies: Technology[],
 ) {
   const config = {
@@ -188,7 +196,7 @@ export async function create_eslint_config(
       break;
   }
 
-  if (technologies.includes('ts')) {
+  if (languages.includes('ts')) {
     config.extends.push('@dudeofawesome/typescript');
   }
   if (technologies.includes('jest')) {
@@ -220,7 +228,8 @@ export async function create_editor_config() {
 
 interface BuildOptions {
   project_type: ProjectType;
-  language: Language;
+  languages: Language[];
+  runtime?: Runtime;
   builder: Builder;
   input_dir?: string;
   output_dir?: string;
@@ -228,44 +237,23 @@ interface BuildOptions {
 }
 async function build({
   project_type,
-  language,
+  languages,
+  runtime,
   builder,
   input_dir = 'src/',
   output_dir = 'dist/',
   technologies = [],
 }: BuildOptions) {
   await create_editor_config();
+      await create_prettier_config();
 
-  switch (language) {
-    case 'js':
-      if (technologies.includes('ts')) {
-        await create_ts_config(
-          project_type,
-          technologies,
-          input_dir,
-          output_dir,
-        );
-      }
-      await create_eslint_config(project_type, technologies);
-      await create_prettier_config();
-      await install_dependencies(project_type, technologies);
-      break;
-    case 'rb':
-      await create_prettier_config();
-      break;
-    default:
-      error(chalk.red(`Unsupported language "${language}".`));
-      process.exit(1);
+  if (languages.includes('ts') || languages.includes('js')) {
+    await create_ts_config(project_type, technologies, input_dir, output_dir);
+    await create_eslint_config(project_type, languages, technologies);
+    await install_dependencies(project_type, languages, technologies);
   }
 }
 
-// questions to ask:
-// project type (web, cli, etc)
-// project languages (javascript, typescript, ruby?, css, scss)
-// project technologies (react, nestjs, jest, etc)
-// input files (src/)
-// output files (dist/)
-// builder (tsc, esbuild, swc, babel, none, etc)
 export async function main() {
   await Yargs(hideBin(process.argv))
     .scriptName('create-configs')
@@ -285,26 +273,38 @@ export async function main() {
           .option<string, { choices: Language[] } & Options>('language', {
             alias: 'l',
             describe: 'Pick a language',
-            choices: ['js', 'rb', 'py'],
+            choices: ['ts', 'js', 'rb', 'py', 'css', 'scss'],
+            array: true,
+            default: ['ts'],
+          })
+          .option<string, { choices: Runtime[] } & Options>('runtime', {
+            alias: 'r',
+            describe: 'Pick a runtime',
+            choices: ['nodejs', 'bun'],
+            default: 'nodejs',
           })
           .option<string, { choices: Builder[] } & Options>('builder', {
             alias: 'b',
             describe: 'Pick a builder',
-            choices: ['tsc', 'esbuild', 'swc', 'babel', 'none'],
+            choices: ['tsc', 'esbuild', 'swc', 'babel', 'bun', 'none'],
+            default: 'esbuild',
           })
           .option('input_dir', {
             alias: 'i',
             describe: 'Pick an input directory',
+            default: 'src/',
           })
           .option('output_dir', {
             alias: 'o',
             describe: 'Pick an output directory',
+            default: 'dist/',
           })
           .option<string, { choices: Technology[] } & Options>('technologies', {
             alias: 'c',
             describe: 'Choose some technologies you will use',
-            choices: ['ts', 'react', 'nestjs', 'jest'],
+            choices: ['react', 'nestjs', 'jest', 'vs-code'],
             array: true,
+            default: ['jest', 'vs-code'],
           });
       },
       async (argv) => {
@@ -316,8 +316,6 @@ export async function main() {
       'prompt',
       'Walk through a set of prompts to configure your new project',
       async (yargs) => {
-        // TODO(0): set defaults
-
         const project_type = await select<ProjectType>({
           message: 'project type',
           choices: [
@@ -326,12 +324,12 @@ export async function main() {
             { name: 'CLI tool', value: 'cli' },
           ],
         });
-        log(project_type);
 
-        const language = await select<Language>({
+        const languages = await checkbox<Language>({
           message: 'language',
           choices: [
-            { name: 'javascript/typescript', value: 'js' },
+            { name: 'javascript', value: 'js' },
+            { name: 'typescript', value: 'ts', checked: true },
             {
               name: 'ruby',
               value: 'rb',
@@ -344,18 +342,16 @@ export async function main() {
             },
           ],
         });
-        log(language);
 
+        let runtime: Runtime | undefined;
+        let builder: Builder = 'none';
         const technologies: Technology[] = [];
-        let builder: Builder | undefined;
 
-        switch (language) {
-          case 'js':
+        if (languages.includes('js') || languages.includes('ts')) {
             technologies.push(
               ...(await checkbox<Technology>({
-                message: 'language',
+              message: 'tools',
                 choices: [
-                  { name: 'Typescript', value: 'ts' },
                   {
                     name: 'React',
                     value: 'react',
@@ -366,41 +362,56 @@ export async function main() {
                     value: 'nestjs',
                     disabled: project_type !== 'backend',
                   },
-                  { name: 'Jest', value: 'jest' },
+                { name: 'Jest', value: 'jest', checked: true },
+                {
+                  name: 'Visual Studio Code',
+                  value: 'vs-code',
+                  checked: true,
+                },
                 ],
               })),
             );
 
+          runtime = await select<Runtime>({
+            message: 'runtime',
+            choices: [
+              { name: 'nodejs', value: 'nodejs' },
+              { name: 'bun', value: 'bun' },
+            ],
+          });
+
             builder = await select<Builder>({
-              message: 'language',
+            message: 'builder',
               choices: [
+              {
+                name: 'esbuild',
+                value: 'esbuild',
+                disabled: runtime !== 'nodejs',
+              },
                 {
                   name: 'tsc',
                   value: 'tsc',
-                  disabled: !technologies.includes('ts'),
+                disabled: !languages.includes('ts') || runtime !== 'nodejs',
                 },
-                { name: 'esbuild', value: 'esbuild' },
-                { name: 'SWC', value: 'swc' },
+              { name: 'SWC', value: 'swc', disabled: runtime !== 'nodejs' },
                 {
                   name: 'Babel',
                   value: 'babel',
-                  disabled: technologies.includes('ts'),
+                disabled: languages.includes('ts') || runtime !== 'nodejs',
+              },
+              {
+                name: 'Bun',
+                value: 'bun',
+                disabled: !languages.includes('ts') || runtime !== 'bun',
                 },
                 {
                   name: 'none',
                   value: 'none',
-                  disabled: technologies.includes('ts'),
+                disabled: languages.includes('ts') || runtime === 'bun',
                 },
               ],
             });
-
-            break;
-          default:
-            error(chalk.red(`Unsupported language "${language}".`));
-            process.exit(1);
         }
-
-        log(technologies);
 
         let input_dir: string | undefined;
         let output_dir: string | undefined;
@@ -413,12 +424,12 @@ export async function main() {
             message: 'output directory',
             default: 'dist/',
           });
-          log(input_dir, output_dir);
         }
 
         await build({
           project_type,
-          language,
+          languages,
+          runtime,
           builder,
           input_dir,
           output_dir,
