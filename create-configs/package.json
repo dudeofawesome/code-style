@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/create-configs",
-  "description": "A script to create config files",
+  "description": "A script to create configuration files to conform to code style standards.",
   "version": "1.3.0",
   "repository": {
     "type": "git",
@@ -27,7 +27,8 @@
     "build": "tsc",
     "start": "node .",
     "test": "echo 'No tests'; exit 0",
-    "lint": "eslint . --ext ts --ext js"
+    "lint": "eslint . --ext ts --ext js",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@inquirer/prompts": "^3.2.0",
