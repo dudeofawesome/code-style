@@ -5,7 +5,7 @@ rules:
   # require the use of `===` since `==` has some weird behavior
   eqeqeq: ['error', 'smart']
 
-  # TODO: ban barrels
+  # TODO(1): ban barrels
   # barrel files can lead to a number of hard to debug issues
 
   # prefer binary, octal, and hexadecimal literals instead of parseInt('F', 16)

@@ -6,7 +6,7 @@ env:
 
 # plugin:n/recommended-module disables some globals we still want
 globals:
-  # TODO: detect if project is type: module or not and remove the globals if so
+  # TODO(1): detect if project is type: module or not and remove the globals if so
   __dirname: 'readonly'
   __filename: 'readonly'
   require: 'readonly'

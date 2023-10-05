@@ -2,6 +2,7 @@ rules:
   # use `else if` instead
   no-lonely-if: 'error'
 
+  # TODO: do we want this? also check the TS version
   # ensure any constant numbers are properly named to increase readability
   no-magic-numbers:
     - 'error'

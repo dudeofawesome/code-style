@@ -13,6 +13,11 @@ type Language = 'js' | 'rb' | 'py';
 type Technology = 'ts' | 'react' | 'nestjs' | 'jest';
 type Builder = 'tsc' | 'esbuild' | 'swc' | 'babel' | 'none';
 
+// TODO(0): add support for VSCode settings & extensions
+// TODO: add support for ruby
+// TODO(0): add support for css
+// TODO(1): refactor this project into at least separate files
+
 export async function install_dependencies(
   project_type: ProjectType,
   technologies: Technology[],
@@ -147,9 +152,9 @@ export async function create_ts_config(
       break;
   }
 
-  // TODO: add support for library.json
+  // TODO(2): add support for library.json
 
-  // TODO: create a separate tsconfig for tests
+  // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
   //   config.extends.push('@dudeofawesome/typescript-configs/jest.json');
   // }
@@ -311,6 +316,8 @@ export async function main() {
       'prompt',
       'Walk through a set of prompts to configure your new project',
       async (yargs) => {
+        // TODO(0): set defaults
+
         const project_type = await select<ProjectType>({
           message: 'project type',
           choices: [

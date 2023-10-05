@@ -11,6 +11,7 @@ overrides:
     settings:
       jest:
         version: 'detect'
+    # TODO(0): support tsconfig.test.json
 
     rules:
       # prevent return statements in tests
