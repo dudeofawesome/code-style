@@ -15,8 +15,12 @@ describe('eslint-config-react', () => {
     it(`should parse jsx`, async () =>
       testNoFail({
         linter,
-        code: `import React from 'react';\n\nexport const A = () => <div></div>;\n`,
-        file_path: 'index.jsx',
+        files: [
+          {
+            code: `import React from 'react';\n\nexport const A = () => <div></div>;\n`,
+            path: 'index.jsx',
+          },
+        ],
       }));
   });
 

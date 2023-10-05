@@ -15,8 +15,9 @@ describe('eslint-config-jest', () => {
     it(`should have jest globals in test file`, () =>
       testNoFail({
         linter,
-        code: `describe('test', () => {});\n`,
-        file_path: 'test/thing.js',
+        files: [
+          { code: `describe('test', () => {});\n`, path: 'test/thing.js' },
+        ],
       }));
   });
 

@@ -1,4 +1,5 @@
 {
   "extends": "@dudeofawesome/typescript-configs/node.json",
+  "compilerOptions": { "outDir": "dist/" },
   "files": ["index.ts", "index.js"]
 }

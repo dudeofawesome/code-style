@@ -15,15 +15,18 @@ void describe('eslint-config-typescript', () => {
     void it(`should parse typescript`, () =>
       testNoFail({
         linter,
-        code: `((a: string): string[] => a.split(''))()\n`,
-        typescript: true,
+        files: [
+          {
+            code: `((a: string): string[] => a.split(''))()\n`,
+            typescript: true,
+          },
+        ],
       }));
 
     void it(`should not give eslint error on use before define`, () =>
       testNoFail({
         linter,
-        code: `Number(a);\nconst a = 10;\n`,
-        typescript: true,
+        files: [{ code: `Number(a);\nconst a = 10;\n`, typescript: true }],
       }));
   });
 

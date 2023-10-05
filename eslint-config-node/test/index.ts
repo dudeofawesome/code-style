@@ -13,7 +13,7 @@ describe('eslint-config-node', () => {
 
   describe('passes', () => {
     it(`should pass radix`, async () =>
-      testNoFail({ linter, code: `parseInt('10');\n` }));
+      testNoFail({ linter, files: [{ code: `parseInt('10');\n` }] }));
   });
 
   describe('fails', () => {

@@ -13,10 +13,10 @@ describe('eslint-config-cli', () => {
 
   describe('passes', () => {
     it(`should pass radix`, async () =>
-      testNoFail({ linter, code: `parseInt('10');\n` }));
+      testNoFail({ linter, files: [{ code: `parseInt('10');\n` }] }));
 
     it(`should pass no-console`, () =>
-      testNoFail({ linter, code: `console.log('foo');\n` }));
+      testNoFail({ linter, files: [{ code: `console.log('foo');\n` }] }));
   });
 
   describe('fails', () => {});

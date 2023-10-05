@@ -11,19 +11,26 @@ export function defaultTestSet(linter: ESLint) {
     void it(`should parse javascript`, () =>
       testNoFail({
         linter,
-        code: `
-(
+        files: [
+          {
+            code: `(
   /** @param {string} a */
   (a) => a.split('')
 )('test');
 `,
+          },
+        ],
       }));
 
     void it(`should allow nested ternaries`, () =>
       testNoFail({
         linter,
-        code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
-        typescript: true,
+        files: [
+          {
+            code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
+            typescript: true,
+          },
+        ],
       }));
   });
   void describe('[standard tests] fails', () => {
@@ -93,18 +100,26 @@ export async function testRuleFail({
 
 interface TestNoFailOpts {
   linter: ESLint;
-  code: string;
-  typescript?: boolean;
-  file_path?: string;
+  files: {
+    code: string;
+    typescript?: boolean;
+    path?: string;
+  }[];
 }
-export async function testNoFail({
-  linter,
-  code,
-  typescript = false,
-  file_path = filePath(typescript),
-}: TestNoFailOpts) {
-  const res = await linter.lintText(code, {
-    filePath: file_path,
-  });
-  noLintMessage(res);
+export async function testNoFail({ linter, files }: TestNoFailOpts) {
+  const _files = files.map((file) => ({
+    ...file,
+    typescript: file.typescript ?? false,
+    path: file.path ?? filePath(file.typescript),
+  }));
+
+  if (_files.length === 1 && _files[0] != null) {
+    const res = await linter.lintText(_files[0].code, {
+      filePath: _files[0].path,
+    });
+    noLintMessage(res);
+  } else {
+    // TODO: support multiple files with in-memory fs
+    throw new Error(`Linting multiple files is not supported at this time`);
+  }
 }
