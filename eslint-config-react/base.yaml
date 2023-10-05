@@ -4,6 +4,10 @@ extends:
   - 'plugin:react-hooks/recommended'
   - 'plugin:jsx-a11y/recommended'
 
+settings:
+  react:
+    version: 'detect'
+
 rules:
   # limit max element nesting to reduce component complexity
   react/jsx-max-depth: 'error'

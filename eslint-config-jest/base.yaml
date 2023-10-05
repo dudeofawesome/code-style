@@ -21,5 +21,8 @@ overrides:
       jest/prefer-comparison-matcher: 'error'
       jest/prefer-equality-matcher: 'error'
 
+      # use expect(foo()).resolve instead of expect(await foo())
+      jest/prefer-expect-resolves: 'error'
+
       # require hooks to be inside a describe
       jest/require-top-level-describe: 'error'
