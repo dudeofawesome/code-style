@@ -12,11 +12,21 @@ permissions:
   contents: 'read'
 
 jobs:
+  test:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Setup node 🛎️'
+        uses: 'dudeofawesome/actions/node-setup@v1'
+      - name: 'Test 🧪'
+        run: 'npm run test --workspaces'
+
   publish:
     runs-on: 'ubuntu-latest'
     environment: 'production'
     permissions:
       id-token: 'write'
+    needs:
+      - 'test'
     steps:
       - name: 'Setup node 🛎️'
         uses: 'dudeofawesome/actions/node-setup@v1'
