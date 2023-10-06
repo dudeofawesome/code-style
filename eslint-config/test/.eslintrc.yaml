@@ -1,5 +1,3 @@
 root: true
 extends:
   - '@dudeofawesome'
-parserOptions:
-  ecmaVersion: 2022

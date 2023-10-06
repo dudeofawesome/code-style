@@ -2,5 +2,3 @@ root: true
 extends:
   - '@dudeofawesome'
   - '@dudeofawesome/react'
-parserOptions:
-  ecmaVersion: 2022
