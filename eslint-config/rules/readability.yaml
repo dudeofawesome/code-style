@@ -2,18 +2,15 @@ rules:
   # use `else if` instead
   no-lonely-if: 'error'
 
-  # TODO: do we want this? also check the TS version
   # ensure any constant numbers are properly named to increase readability
   no-magic-numbers:
     - 'error'
     - enforceConst: true
-      ignore: [0, 1, 2, 4]
+      # TODO(0): consider adding 4, 24, 60, 100, 1000, 3600
+      ignore: [0, 1, 2]
       ignoreArrayIndexes: true
       ignoreDefaultValues: true
       ignoreClassFieldInitialValues: true
-
-  # don't allow multiple variable creation with single keyword
-  one-var: ['error', 'never']
 
   # don't allow floating decimals
   no-floating-decimal: 'error'
@@ -22,7 +19,7 @@ rules:
   dot-notation: 'error'
 
   # TODO: what should our max be? should we even have one?
-  max-lines: ['error', { max: 1000, skipBlankLines: true, skipComments: true }]
+  max-lines: ['error', { max: 2000, skipBlankLines: true, skipComments: true }]
 
   # treat method params as const
-  no-param-reassign: 'error'
+  no-param-reassign: 'warn'

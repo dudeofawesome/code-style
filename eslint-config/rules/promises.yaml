@@ -1,5 +1,4 @@
 rules:
-  # TODO: do we actually want this?
   # ensure promise errors are caught
   promise/catch-or-return: ['error', { allowThen: true }]
 

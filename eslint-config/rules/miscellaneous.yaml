@@ -6,10 +6,6 @@ rules:
   # warn about prettier style issues
   prettier/prettier: 'warn'
 
-  # TODO: do we really want to force a style for comments?
-  # ensure comments start with a space
-  spaced-comment: ['error', 'always', { 'block': { 'exceptions': ['-=*'] } }]
-
   # disallow renaming import, export, and destructured assignments to the same name
   no-useless-rename: 'error'
 

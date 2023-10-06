@@ -1,4 +1,5 @@
 rules:
+  # TODO(0): look into where parseInt isn't base 10
   # require `parseInt` to have a radix specified since some browsers don't default to base 10
   radix: 'error'
 
@@ -23,13 +24,10 @@ rules:
   # don't use arguments.caller
   no-caller: 'error'
 
-  # TODO: this is an error by default. should it only be a warn?
-  # don't allow `delete` since it can have unexpected consequences
-  no-delete-var: 'warn'
-
   # don't allow monkeypatching
   no-extend-native: 'error'
 
+  # TODO(2): are we sure we really want this? it's not _really_ necessary
   # don't allow sequences
   no-sequences: ['error', { allowInParentheses: false }]
 

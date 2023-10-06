@@ -8,7 +8,7 @@ rules:
   # don't allow AMD modules
   import/no-amd: 'error'
 
-  # TODO: can we actually ban this? probably not
+  # TODO(0): can we actually ban this? probably not
   # don't allow commonjs modules
   import/no-commonjs: 'error'
 
