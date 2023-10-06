@@ -1,17 +1,13 @@
 import { describe, it } from 'node:test';
-import { ESLint } from 'eslint';
-import {
-  defaultTestSet,
-  filePath,
-  testNoFail,
-  testRuleFail,
-} from '../../utils/testing/eslint';
 import { equal, match, strictEqual } from 'node:assert';
+import { ESLint } from 'eslint';
+import { testRuleFail, filePath } from '../../utils/testing/eslint';
+import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
 describe('eslint-config', () => {
-  defaultTestSet(linter);
+  eslintDefaultTestSet(linter);
 
   describe('passes', () => {});
 

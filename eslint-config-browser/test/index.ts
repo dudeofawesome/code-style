@@ -1,11 +1,12 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import { testRuleFail, defaultTestSet } from '../../utils/testing/eslint';
+import { testRuleFail } from '../../utils/testing/eslint';
+import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
 describe('eslint-config-browser', () => {
-  defaultTestSet(linter);
+  eslintDefaultTestSet(linter);
 
   describe('passes', () => {});
 

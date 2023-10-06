@@ -1,15 +1,12 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import {
-  testRuleFail,
-  testNoFail,
-  defaultTestSet,
-} from '../../utils/testing/eslint';
+import { testNoFail, testRuleFail } from '../../utils/testing/eslint';
+import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
 describe('eslint-config-node', () => {
-  defaultTestSet(linter);
+  eslintDefaultTestSet(linter);
 
   describe('passes', () => {
     it(`should pass radix`, async () =>

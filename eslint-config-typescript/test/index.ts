@@ -1,15 +1,12 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import {
-  defaultTestSet,
-  testNoFail,
-  testRuleFail,
-} from '../../utils/testing/eslint';
+import { testNoFail, testRuleFail } from '../../utils/testing/eslint';
+import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
 void describe('eslint-config-typescript', () => {
-  defaultTestSet(linter);
+  eslintDefaultTestSet(linter);
 
   void describe('passes', () => {
     void it(`should parse typescript`, () =>
