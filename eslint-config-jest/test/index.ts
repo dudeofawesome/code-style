@@ -13,7 +13,7 @@ describe('eslint-config-jest', () => {
       testNoFail({
         linter,
         files: [
-          { code: `describe('test', () => {});\n`, path: 'test/thing.js' },
+          { code: `describe('test', () => {});\n`, path: 'test/sample.js' },
         ],
       }));
   });

@@ -2,7 +2,7 @@ import { strictEqual } from 'node:assert';
 import { ESLint } from 'eslint';
 
 export function filePath(typescript: boolean = false): string {
-  return `index.${typescript ? 'ts' : 'js'}`;
+  return `sample.${typescript ? 'ts' : 'js'}`;
 }
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
