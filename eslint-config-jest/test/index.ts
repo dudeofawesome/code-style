@@ -22,8 +22,8 @@ describe('eslint-config-jest', () => {
     it(`should not have jest globals in non-test file`, () =>
       testRuleFail({
         linter,
-        code: `describe('test', () => {});\n`,
         ruleId: 'no-undef',
+        files: [{ code: `describe('test', () => {});\n` }],
       }));
   });
 });

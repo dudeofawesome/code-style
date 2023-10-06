@@ -17,8 +17,8 @@ describe('eslint-config-node', () => {
     it(`should fail no-console`, () =>
       testRuleFail({
         linter,
-        code: `console.log('foo');\n`,
         ruleId: 'no-console',
+        files: [{ code: `console.log('foo');\n` }],
       }));
   });
 });

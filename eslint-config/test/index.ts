@@ -13,7 +13,11 @@ describe('eslint-config', () => {
 
   describe('fails', () => {
     it(`should fail radix`, async () =>
-      testRuleFail({ linter, code: `parseInt('10');\n`, ruleId: 'radix' }));
+      testRuleFail({
+        linter,
+        ruleId: 'radix',
+        files: [{ code: `parseInt('10');\n` }],
+      }));
 
     it(`should not parse typescript`, () =>
       linter

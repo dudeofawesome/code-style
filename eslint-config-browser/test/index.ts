@@ -14,11 +14,15 @@ describe('eslint-config-browser', () => {
     it(`should fail no-console`, () =>
       testRuleFail({
         linter,
-        code: `console.log('foo');\n`,
         ruleId: 'no-console',
+        files: [{ code: `console.log('foo');\n` }],
       }));
 
     it(`should fail radix`, async () =>
-      testRuleFail({ linter, code: `parseInt('10');\n`, ruleId: 'radix' }));
+      testRuleFail({
+        linter,
+        ruleId: 'radix',
+        files: [{ code: `parseInt('10');\n` }],
+      }));
   });
 });

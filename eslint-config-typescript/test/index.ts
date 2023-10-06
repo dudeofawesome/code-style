@@ -31,17 +31,20 @@ void describe('eslint-config-typescript', () => {
     void it(`should fail radix`, async () =>
       testRuleFail({
         linter,
-        code: `parseInt('10');\n`,
         ruleId: 'radix',
-        typescript: true,
+        files: [{ code: `parseInt('10');\n`, typescript: true }],
       }));
 
     void it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
       testRuleFail({
         linter,
-        code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
         ruleId: '@typescript-eslint/strict-boolean-expressions',
-        typescript: true,
+        files: [
+          {
+            code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+            typescript: true,
+          },
+        ],
       }));
   });
 });

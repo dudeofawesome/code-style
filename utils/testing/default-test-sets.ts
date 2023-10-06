@@ -33,15 +33,15 @@ export function eslintDefaultTestSet(linter: ESLint) {
     void it(`should fail eqeqeq`, () =>
       testRuleFail({
         linter,
-        code: `if (Number == true) Number();\n`,
         ruleId: 'eqeqeq',
+        files: [{ code: `if (Number == true) Number();\n` }],
       }));
 
     void it(`should warn on prettier`, () =>
       testRuleFail({
         linter,
-        code: `Number( '5')`,
         ruleId: 'prettier/prettier',
+        files: [{ code: `Number( '5')` }],
       }));
   });
 }

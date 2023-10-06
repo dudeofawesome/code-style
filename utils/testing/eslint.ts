@@ -33,24 +33,35 @@ export function singleLintMessage(lint_results: ESLint.LintResult[]) {
 
 interface TestRuleFailOpts {
   linter: ESLint;
-  code: string;
   ruleId: string;
-  typescript?: boolean;
-  file_path?: string;
+  files: {
+    code: string;
+    typescript?: boolean;
+    path?: string;
+  }[];
 }
 export async function testRuleFail({
   linter,
-  code,
   ruleId,
-  typescript = false,
-  file_path = filePath(typescript),
+  files,
 }: TestRuleFailOpts) {
-  const res = await linter.lintText(code, {
-    filePath: file_path,
-  });
-  singleLintMessage(res);
-  strictEqual(res[0]?.source, code);
-  strictEqual(res[0]?.messages[0]?.ruleId, ruleId);
+  const _files = files.map((file) => ({
+    ...file,
+    typescript: file.typescript ?? false,
+    path: file.path ?? filePath(file.typescript),
+  }));
+
+  if (_files.length === 1 && _files[0] != null) {
+    const res = await linter.lintText(_files[0].code, {
+      filePath: _files[0].path,
+    });
+    singleLintMessage(res);
+    strictEqual(res[0]?.source, _files[0].code);
+    strictEqual(res[0]?.messages[0]?.ruleId, ruleId);
+  } else {
+    // TODO: support multiple files using in-memory fs
+    throw new Error(`Linting multiple files is not supported at this time`);
+  }
 }
 
 interface TestNoFailOpts {
@@ -74,7 +85,7 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
     });
     noLintMessage(res);
   } else {
-    // TODO: support multiple files with in-memory fs
+    // TODO: support multiple files using in-memory fs
     throw new Error(`Linting multiple files is not supported at this time`);
   }
 }

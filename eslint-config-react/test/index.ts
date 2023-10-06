@@ -25,29 +25,31 @@ describe('eslint-config-react', () => {
     it(`should fail radix`, async () =>
       testRuleFail({
         linter,
-        code: `parseInt('10');\n`,
         ruleId: 'radix',
-        file_path: 'index.jsx',
+        files: [{ code: `parseInt('10');\n`, path: 'index.jsx' }],
       }));
 
     it(`should fail no-console`, () =>
       testRuleFail({
         linter,
-        code: `console.log('foo');\n`,
         ruleId: 'no-console',
-        file_path: 'index.jsx',
+        files: [{ code: `console.log('foo');\n`, path: 'index.jsx' }],
       }));
 
     it(`should fail react/jsx-key`, () =>
       testRuleFail({
         linter,
-        code: `import React from 'react';
+        ruleId: 'react/jsx-key',
+        files: [
+          {
+            code: `import React from 'react';
 
 export const Foo = (props) => <div>{props}</div>;
 export const Bar = (props) => props.list.map((l) => <Foo text={l}></Foo>);
 `,
-        ruleId: 'react/jsx-key',
-        file_path: 'index.jsx',
+            path: 'index.jsx',
+          },
+        ],
       }));
   });
 });
