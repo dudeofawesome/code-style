@@ -1,8 +1,19 @@
 import { strictEqual } from 'node:assert';
 import { ESLint } from 'eslint';
 
-export function filePath(typescript: boolean = false): string {
-  return `sample.${typescript ? 'ts' : 'js'}`;
+export type FilePathResult = string;
+interface FilePathOpts {
+  ts?: boolean;
+  react?: boolean;
+  test?: boolean;
+}
+export function filePath({
+  ts = false,
+  react = false,
+  test = false,
+}: FilePathOpts): FilePathResult {
+  const ext = (ts ? 'ts' : 'js') + (react ? 'x' : '');
+  return `${test ? 'test/' : ''}sample-${ext}.${ext}`;
 }
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
@@ -31,14 +42,8 @@ export function singleLintMessage(lint_results: ESLint.LintResult[]) {
   );
 }
 
-interface TestRuleFailOpts {
-  linter: ESLint;
+interface TestRuleFailOpts extends TestNoFailOpts {
   ruleId: string;
-  files: {
-    code: string;
-    typescript?: boolean;
-    path?: string;
-  }[];
 }
 export async function testRuleFail({
   linter,
@@ -46,9 +51,8 @@ export async function testRuleFail({
   files,
 }: TestRuleFailOpts) {
   const _files = files.map((file) => ({
-    ...file,
-    typescript: file.typescript ?? false,
-    path: file.path ?? filePath(file.typescript),
+    code: file.code,
+    path: filePath(file),
   }));
 
   if (_files.length === 1 && _files[0] != null) {
@@ -66,17 +70,14 @@ export async function testRuleFail({
 
 interface TestNoFailOpts {
   linter: ESLint;
-  files: {
+  files: ({
     code: string;
-    typescript?: boolean;
-    path?: string;
-  }[];
+  } & FilePathOpts)[];
 }
 export async function testNoFail({ linter, files }: TestNoFailOpts) {
   const _files = files.map((file) => ({
-    ...file,
-    typescript: file.typescript ?? false,
-    path: file.path ?? filePath(file.typescript),
+    code: file.code,
+    path: filePath(file),
   }));
 
   if (_files.length === 1 && _files[0] != null) {

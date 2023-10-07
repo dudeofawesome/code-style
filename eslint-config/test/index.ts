@@ -22,7 +22,7 @@ describe('eslint-config', () => {
     it(`should not parse typescript`, () =>
       linter
         .lintText(`((a: string): string[] => a.split(''))()\n`, {
-          filePath: filePath(true),
+          filePath: filePath({ ts: true }),
         })
         .then((res) => {
           equal(res[0].messages[0].ruleId, null);
@@ -40,7 +40,7 @@ describe('eslint-config', () => {
         .lintText(
           `import path from 'path';\nimport { join } from 'path';\n\njoin(path.cwd);\n`,
           {
-            filePath: filePath(true),
+            filePath: filePath({ ts: true }),
           },
         )
         .then((res) => {

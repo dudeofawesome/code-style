@@ -24,7 +24,6 @@ export function eslintDefaultTestSet(linter: ESLint) {
         files: [
           {
             code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
-            typescript: true,
           },
         ],
       }));

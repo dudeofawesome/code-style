@@ -15,7 +15,7 @@ void describe('eslint-config-typescript', () => {
         files: [
           {
             code: `((a: string): string[] => a.split(''))()\n`,
-            typescript: true,
+            ts: true,
           },
         ],
       }));
@@ -23,7 +23,7 @@ void describe('eslint-config-typescript', () => {
     void it(`should not give eslint error on use before define`, () =>
       testNoFail({
         linter,
-        files: [{ code: `Number(a);\nconst a = 10;\n`, typescript: true }],
+        files: [{ code: `Number(a);\nconst a = 10;\n`, ts: true }],
       }));
   });
 
@@ -32,7 +32,7 @@ void describe('eslint-config-typescript', () => {
       testRuleFail({
         linter,
         ruleId: 'radix',
-        files: [{ code: `parseInt('10');\n`, typescript: true }],
+        files: [{ code: `parseInt('10');\n`, ts: true }],
       }));
 
     void it(`should fail @typescript-eslint/strict-boolean-expressions`, async () =>
@@ -42,7 +42,7 @@ void describe('eslint-config-typescript', () => {
         files: [
           {
             code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
-            typescript: true,
+            ts: true,
           },
         ],
       }));

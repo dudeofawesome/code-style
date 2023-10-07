@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import { testNoFail, testRuleFail } from '../../utils/testing/eslint';
+import { filePath, testNoFail, testRuleFail } from '../../utils/testing/eslint';
 import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
@@ -15,7 +15,7 @@ describe('eslint-config-react', () => {
         files: [
           {
             code: `import React from 'react';\n\nexport const A = () => <div></div>;\n`,
-            path: 'sample.jsx',
+            react: true,
           },
         ],
       }));
@@ -26,14 +26,14 @@ describe('eslint-config-react', () => {
       testRuleFail({
         linter,
         ruleId: 'radix',
-        files: [{ code: `parseInt('10');\n`, path: 'sample.jsx' }],
+        files: [{ code: `parseInt('10');\n`, react: true }],
       }));
 
     it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',
-        files: [{ code: `console.log('foo');\n`, path: 'sample.jsx' }],
+        files: [{ code: `console.log('foo');\n`, react: true }],
       }));
 
     it(`should fail react/jsx-key`, () =>
@@ -47,7 +47,7 @@ describe('eslint-config-react', () => {
 export const Foo = (props) => <div>{props}</div>;
 export const Bar = (props) => props.list.map((l) => <Foo text={l}></Foo>);
 `,
-            path: 'sample.jsx',
+            react: true,
           },
         ],
       }));

@@ -1,5 +1,5 @@
 {
   "extends": "@dudeofawesome/typescript-configs/node.json",
   "compilerOptions": { "outDir": "dist/" },
-  "files": ["sample.ts", "sample.js"]
+  "files": ["sample-ts.ts", "sample-js.js"]
 }
