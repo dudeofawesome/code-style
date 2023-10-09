@@ -22,14 +22,18 @@
   },
   "main": "base.yaml",
   "scripts": {
-    "test": "echo 'No tests'; exit 0"
+    "test": "node --require tsm --test test/index.ts"
   },
   "dependencies": {
-    "stylelint": "^15.10.3",
     "stylelint-order": "^6.0.3",
     "stylelint-prettier": "^4.0.2"
   },
   "peerDependencies": {
     "prettier": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.4",
+    "stylelint": "^15.10.3",
+    "tsm": "^2.3.0"
   }
 }

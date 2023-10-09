@@ -1,11 +1,16 @@
 import { describe, it } from 'node:test';
-import { testNoFail } from '../../utils/testing/stylelint/stylelint';
+import { testNoFail } from '../../utils/testing/stylelint';
+import { defaultTestSet } from '../../utils/testing/stylelint/default-test-sets';
 
 void describe('styleint-config-scss', () => {
+  const config = { extends: '@dudeofawesome/stylelint-config-scss' };
+
+  defaultTestSet(config);
+
   void describe('passes', () => {
     void it('should lint scss', () =>
       testNoFail({
-        config: { extends: '@dudeofawesome/stylelint-config-scss' },
+        config,
         files: [
           {
             code: `$myvar: 'red';
