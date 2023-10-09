@@ -1,6 +1,6 @@
 {
   "extends": ["@dudeofawesome/typescript-configs/node.json"],
   "compilerOptions": { "noEmit": true },
-  "include": ["utils"],
+  "include": ["*/test/", "utils/"],
   "exclude": ["dist"]
 }
