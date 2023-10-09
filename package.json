@@ -29,6 +29,8 @@
     "eslint-config-node",
     "eslint-config-react",
     "eslint-config-typescript",
+    "stylelint-config",
+    "stylelint-config-scss",
     "typescript-configs"
   ],
   "scripts": {

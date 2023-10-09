@@ -1,0 +1,8 @@
+extends:
+  - '@dudeofawesome/stylelint-config/base.yaml'
+  - 'stylelint-config-standard-scss'
+  - 'stylelint-config-sass-guidelines'
+rules:
+  scss/at-mixin-pattern: null
+  scss/dollar-variable-pattern: null
+  scss/percent-placeholder-pattern: null

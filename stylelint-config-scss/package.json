@@ -1,0 +1,41 @@
+{
+  "name": "@dudeofawesome/stylelint-config-scss",
+  "description": "My stylelint configs",
+  "version": "1.3.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dudeofawesome/code-style.git",
+    "directory": "/stylelint-config-scss"
+  },
+  "keywords": [
+    "stylelint",
+    "style",
+    "css",
+    "scss",
+    "lint",
+    "config"
+  ],
+  "author": "Louis Orleans <louis@orleans.io>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "main": "base.yaml",
+  "scripts": {
+    "test": "node --require tsm --test test/index.ts"
+  },
+  "dependencies": {
+    "@dudeofawesome/stylelint-config": "^1.3.0",
+    "stylelint-config-sass-guidelines": "^10.0.0",
+    "stylelint-config-standard-scss": "^11.0.0"
+  },
+  "peerDependencies": {
+    "sass-embedded": "^1.33.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.4",
+    "stylelint": "^15.10.3",
+    "tsm": "^2.3.0"
+  }
+}
