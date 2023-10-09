@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
 import { filePath, testNoFail, testRuleFail } from '../../utils/testing/eslint';
-import { eslintDefaultTestSet } from '../../utils/testing/eslint/default-test-sets';
+import { defaultTestSet } from '../../utils/testing/eslint/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
 describe('eslint-config-jest', () => {
-  eslintDefaultTestSet(linter);
+  defaultTestSet(linter);
 
   describe('passes', () => {
     it(`should have jest globals in test file`, () =>

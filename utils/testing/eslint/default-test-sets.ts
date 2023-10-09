@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
 import { testNoFail, testRuleFail } from '.';
 
-export function eslintDefaultTestSet(linter: ESLint) {
+export function defaultTestSet(linter: ESLint) {
   void describe('[standard tests] passes', () => {
     void it(`should parse javascript`, () =>
       testNoFail({
