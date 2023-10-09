@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/browser.json",
+    "@dudeofawesome/typescript-configs/react.json"
+  ],
+  "include": ["src/"],
+  "exclude": ["dist/"]
+}
