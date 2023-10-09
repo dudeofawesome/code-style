@@ -30,22 +30,22 @@ interface TestRuleFailOpts extends TestNoFailOpts {
   ruleId: string;
 }
 export async function testRuleFail({
-  linter,
+  config,
   ruleId,
   files,
 }: TestRuleFailOpts) {
-  const _files = files.map((file) => ({
-    code: file.code,
-    path: file.path ?? filePath(file),
-  }));
-
-  if (_files.length === 1 && _files[0] != null) {
-    const res = await linter.lintText(_files[0].code, {
-      filePath: _files[0].path,
+  if (files.length === 1 && files[0] != null) {
+    const lint_promise = stylelint.lint({
+      config,
+      code: files[0].code,
     });
+    await doesNotReject(lint_promise);
+    const result = await lint_promise;
+
+    ok(result.errored);
     ok(
-      res
-        .map((r) => r.messages.map((m) => m.ruleId))
+      result.results
+        .map((r) => r.warnings.map((w) => w.rule))
         .flat()
         .includes(ruleId),
     );

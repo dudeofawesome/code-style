@@ -19,6 +19,18 @@ export function defaultTestSet(config: Config) {
   });
 
   void describe('[standard tests] fails', () => {
-    return;
+    void it('should fail to length-zero-no-unit', () =>
+      testRuleFail({
+        config,
+        ruleId: 'length-zero-no-unit',
+        files: [
+          {
+            code: `html {
+  width: 0px;
+}
+`,
+          },
+        ],
+      }));
   });
 }
