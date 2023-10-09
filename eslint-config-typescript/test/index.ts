@@ -60,5 +60,12 @@ void describe('eslint-config-typescript', () => {
           },
         ],
       }));
+
+    void it(`should fail to import`, () =>
+      testRuleFail({
+        linter,
+        ruleId: 'import/no-unresolved',
+        files: [{ code: `import { a } from './nothing';\n\na();\n`, ts: true }],
+      }));
   });
 });
