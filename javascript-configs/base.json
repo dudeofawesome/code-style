@@ -1,0 +1,16 @@
+{
+  "extends": "@dudeofawesome/typescript-configs/base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "node",
+
+    // output
+    "noEmit": true,
+
+    // strictness
+    "noImplicitAny": false
+  },
+  "typeAcquisition": {
+    "enable": true
+  }
+}
