@@ -25,6 +25,20 @@ void describe('eslint-config-typescript', () => {
         linter,
         files: [{ code: `Number(a);\nconst a = 10;\n`, ts: true }],
       }));
+
+    void it(`should import`, () =>
+      testNoFail({
+        linter,
+        files: [
+          { code: `import { a } from './utils';\n\na();\n`, ts: true },
+          {
+            code: `export function a () {
+  return 1;
+}\n`,
+            path: 'utils.ts',
+          },
+        ],
+      }));
   });
 
   void describe('fails', () => {

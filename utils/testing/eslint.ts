@@ -1,4 +1,9 @@
+import { copyFile, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { strictEqual } from 'node:assert';
+import { dirname, join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { cwd } from 'node:process';
+import { after } from 'node:test';
 import { ESLint } from 'eslint';
 
 export type FilePathResult = string;
@@ -52,7 +57,7 @@ export async function testRuleFail({
 }: TestRuleFailOpts) {
   const _files = files.map((file) => ({
     code: file.code,
-    path: filePath(file),
+    path: file.path ?? filePath(file),
   }));
 
   if (_files.length === 1 && _files[0] != null) {
@@ -72,12 +77,13 @@ interface TestNoFailOpts {
   linter: ESLint;
   files: ({
     code: string;
+    path?: FilePathResult;
   } & FilePathOpts)[];
 }
 export async function testNoFail({ linter, files }: TestNoFailOpts) {
   const _files = files.map((file) => ({
     code: file.code,
-    path: filePath(file),
+    path: file.path ?? filePath(file),
   }));
 
   if (_files.length === 1 && _files[0] != null) {
@@ -86,7 +92,37 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
     });
     noLintMessage(res);
   } else {
-    // TODO: support multiple files using in-memory fs
-    throw new Error(`Linting multiple files is not supported at this time`);
+    const tmp_dir = join(tmpdir(), 'code-style-testing');
+    const created_files: string[] = await Promise.all(
+      _files
+        .map((f) => ({
+          ...f,
+          path: join(tmp_dir, f.path),
+        }))
+        .map((f) =>
+          mkdir(dirname(f.path))
+            .catch(() => {
+              return;
+            })
+            .then<string>(async () => {
+              await writeFile(f.path, f.code);
+              return f.path;
+            }),
+        ),
+    );
+    await Promise.all([
+      copyFile(
+        join(cwd(), 'test', '.eslintrc.yaml'),
+        join(tmp_dir, '.eslintrc.yaml'),
+      ),
+      copyFile(
+        join(cwd(), 'test', 'tsconfig.json'),
+        join(tmp_dir, 'tsconfig.json'),
+      ),
+      symlink(join(cwd(), '..', 'node_modules'), join(tmp_dir, 'node_modules')),
+    ]).catch(console.error);
+    after(() => rm(tmp_dir, { force: true, recursive: true }));
+
+    noLintMessage(await linter.lintFiles(created_files));
   }
 }
