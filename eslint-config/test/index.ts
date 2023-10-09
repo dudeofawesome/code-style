@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import { equal, match, strictEqual } from 'node:assert';
 import { ESLint } from 'eslint';
 import { testRuleFail, filePath } from '../../utils/testing/eslint';
-import { eslintDefaultTestSet } from '../../utils/testing/default-test-sets';
+import { eslintDefaultTestSet } from '../../utils/testing/eslint/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 

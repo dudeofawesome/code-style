@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import { testNoFail, testRuleFail } from './eslint';
+import { testNoFail, testRuleFail } from '.';
 
 export function eslintDefaultTestSet(linter: ESLint) {
   void describe('[standard tests] passes', () => {
