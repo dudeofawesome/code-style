@@ -29,8 +29,6 @@
     "@dudeofawesome/eslint-config": "^1.0.0",
     "@prettier/plugin-ruby": "^4.0.2",
     "eslint": "^8.49.0",
-    "prettier": "^3.0.3",
-    "stylelint": "^14.6.0",
-    "stylelint-prettier": "^2.0.0"
+    "prettier": "^3.0.3"
   }
 }
