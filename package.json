@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dudeofawesome/code-style.git"
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git"
   },
   "bugs": {
     "url": "https://github.com/dudeofawesome/code-style/issues"
