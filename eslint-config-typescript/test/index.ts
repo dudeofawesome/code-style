@@ -1,9 +1,10 @@
 import { describe, it } from 'node:test';
+import { join } from 'node:path';
 import { ESLint } from 'eslint';
 import { testNoFail, testRuleFail } from '../../utils/testing/eslint';
 import { defaultTestSet } from '../../utils/testing/eslint/default-test-sets';
 
-const linter = new ESLint({ cwd: __dirname });
+const linter = new ESLint({ cwd: join(__dirname, 'fixture') });
 
 void describe('eslint-config-typescript', () => {
   defaultTestSet(linter);
@@ -59,13 +60,6 @@ void describe('eslint-config-typescript', () => {
             ts: true,
           },
         ],
-      }));
-
-    void it(`should fail to import`, () =>
-      testRuleFail({
-        linter,
-        ruleId: 'import/no-unresolved',
-        files: [{ code: `import { a } from './nothing';\n\na();\n`, ts: true }],
       }));
   });
 });

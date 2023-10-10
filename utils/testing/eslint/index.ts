@@ -115,11 +115,11 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
     );
     await Promise.all([
       copyFile(
-        join(cwd(), 'test', '.eslintrc.yaml'),
+        join(cwd(), 'test', 'fixture', '.eslintrc.yaml'),
         join(tmp_dir, '.eslintrc.yaml'),
       ),
       copyFile(
-        join(cwd(), 'test', 'tsconfig.json'),
+        join(cwd(), 'test', 'fixture', 'tsconfig.json'),
         join(tmp_dir, 'tsconfig.json'),
       ),
       symlink(join(cwd(), '..', 'node_modules'), join(tmp_dir, 'node_modules')),
