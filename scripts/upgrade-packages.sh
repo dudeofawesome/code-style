@@ -51,7 +51,7 @@ upgrade_packages() {
 
   if [ -z "$relevant_workspaces" ]; then
     echo "No workspaces with specified packages found"
-    exit 1
+    exit 0
   fi
 
   npm install \
