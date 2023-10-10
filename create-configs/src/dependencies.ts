@@ -5,12 +5,14 @@ import {
   ProjectType,
   Language,
   Technology,
+  Builder,
 } from './types.js';
 
 export type InstallDependenciesOptions = {
   project_type: ProjectType;
   languages: Language[];
   technologies: Technology[];
+  builder: Builder;
 };
 export async function install_dependencies({
   project_type,
@@ -73,6 +75,22 @@ export async function install_dependencies({
         break;
       default:
     }
+  }
+
+  switch (builder) {
+    case 'babel':
+      dev_packages.push('babel');
+      break;
+    case 'esbuild':
+      dev_packages.push('esbuild');
+      break;
+    case 'swc':
+      dev_packages.push('@swc/cli', '@swc/core');
+      break;
+    case 'tsc': // we already added typescript
+    case 'bun': // bun is not installed via npm
+    case 'none': // this one is pretty obvious
+    default:
   }
 
   log(
