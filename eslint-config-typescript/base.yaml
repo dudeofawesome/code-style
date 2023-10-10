@@ -58,11 +58,6 @@ rules:
     - 'error'
     - allow: ['decoratedFunctions']
 
-  # allow type imports
-  'n/no-unpublished-import':
-    - 'error'
-    - ignoreTypeImport: true
-
   # typescript checks imports for us
   'import/no-unresolved': 'off'
   'n/no-missing-import': 'off'

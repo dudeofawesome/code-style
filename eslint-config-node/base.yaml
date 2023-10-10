@@ -62,3 +62,8 @@ rules:
 
   # make sure callbacks pass error as 1st param
   n/no-callback-literal: 'error'
+
+  # check that all imports are part of our package in production
+  n/no-unpublished-import:
+    - 'error'
+    - ignoreTypeImport: true
