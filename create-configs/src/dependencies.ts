@@ -1,18 +1,23 @@
 import { log, error } from 'node:console';
-import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
+import { exec as execCallback } from 'node:child_process';
 
 import {
   ProjectType,
   Language,
   Technology,
   Builder,
+  Runtime,
 } from './types.js';
+
+const exec = promisify(execCallback);
 
 export type InstallDependenciesOptions = {
   project_type: ProjectType;
   languages: Language[];
   technologies: Technology[];
   builder: Builder;
+  runtime?: Runtime;
 };
 export async function install_dependencies({
   project_type,
@@ -99,32 +104,38 @@ export async function install_dependencies({
     )} & ${dev_packages.join(', ')}`,
   );
 
+  const install_cmd = ((): string => {
+    switch (runtime) {
+      case 'bun':
+        return 'bun install';
+      case 'nodejs':
+      default:
+        return 'npm install';
+    }
+  })();
+  const install_cmd_prod = ((): string => {
+    switch (runtime) {
+      case 'bun':
+        return `${install_cmd} --production`;
+      case 'nodejs':
+      default:
+        return `${install_cmd} --save-prod`;
+    }
+  })();
+  const install_cmd_dev = ((): string => {
+    switch (runtime) {
+      case 'bun':
+        return `${install_cmd} --development`;
+      case 'nodejs':
+      default:
+        return `${install_cmd} --save-dev`;
+    }
+  })();
+
   if (prod_packages.length > 0) {
-    await new Promise<void>((resolve, reject) =>
-      exec(
-        `npm install --save-prod ${prod_packages.join(' ')}`,
-        (err, stderr, stdout): void => {
-          if (err != null) return reject(err);
-          if (stderr !== '') return reject(stderr);
-          log(stdout);
-          error(stderr);
-          return resolve();
-        },
-      ),
-    );
+    await exec(`${install_cmd_prod} ${prod_packages.join(' ')}`);
   }
   if (dev_packages.length > 0) {
-    await new Promise<void>((resolve, reject) =>
-      exec(
-        `npm install --save-dev ${dev_packages.join(' ')}`,
-        (err, stderr, stdout) => {
-          if (err != null) return reject(err);
-          if (stderr !== '') return reject(stderr);
-          log(stdout);
-          error(stderr);
-          return resolve();
-        },
-      ),
-    );
+    await exec(`${install_cmd_dev} ${dev_packages.join(' ')}`);
   }
 }
