@@ -4,6 +4,9 @@
   "publishConfig": {
     "access": "restricted"
   },
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
   "dependencies": {
     "eslint": "^8.51.0",
     "stylelint": "^15.10.3"

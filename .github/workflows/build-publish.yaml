@@ -9,6 +9,22 @@ permissions:
   contents: 'read'
 
 jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Setup node 🛎️'
+        uses: 'dudeofawesome/actions/node-setup@v1'
+      - name: 'Build 🏗️'
+        run: 'npm run build'
+
+  lint:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Setup node 🛎️'
+        uses: 'dudeofawesome/actions/node-setup@v1'
+      - name: 'Lint 🧪'
+        run: 'npm run lint'
+
   test:
     runs-on: 'ubuntu-latest'
     steps:
@@ -23,6 +39,8 @@ jobs:
     permissions:
       id-token: 'write'
     needs:
+      - 'build'
+      - 'lint'
       - 'test'
     steps:
       - name: 'Setup node 🛎️'

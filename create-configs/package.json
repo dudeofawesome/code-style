@@ -27,6 +27,7 @@
     "build": "tsc",
     "start": "node .",
     "test": "echo 'No tests'; exit 0",
+    "prelint": "npm run build",
     "lint": "eslint . --ext ts --ext js",
     "prepublishOnly": "npm run build"
   },
