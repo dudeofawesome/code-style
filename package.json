@@ -35,8 +35,12 @@
     "typescript-configs",
     "utils"
   ],
+  "type": "module",
+  "bin": {
+    "bump": "scripts/bump.ts"
+  },
   "scripts": {
-    "bump": "scripts/bump.sh",
+    "bump": "scripts/bump.ts",
     "upgrade-packages": "scripts/upgrade-packages.sh",
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces",
@@ -45,7 +49,9 @@
   "devDependencies": {
     "@dudeofawesome/code-style": "^1.0.0",
     "@types/eslint": "^8.44.2",
-    "@types/node": "^20.6.3"
+    "@types/node": "^20.8.4",
+    "tsm": "^2.3.0",
+    "yargs": "^17.7.2"
   },
   "overrides": {
     "eslint-plugin-import": {
