@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import { Config } from 'stylelint';
 import { testNoFail, testRuleFail } from '.';
 
-export function defaultTestSet(config: Config) {
+export function defaultTestSet(config: Config): void {
   void describe('[standard tests] passes', () => {
     void it('should lint css', () =>
       testNoFail({

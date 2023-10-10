@@ -11,18 +11,13 @@ export function noLintMessage(lint_results: LinterResult): void {
 }
 
 export function singleLintMessage(lint_results: LinterResult): void {
+  const result_count = lint_results.results
+    .map((r) => r.warnings.length)
+    .reduce((acc, curr) => acc + curr, 0);
   strictEqual(
-    lint_results.length,
+    result_count,
     1,
-    `Expected there to be only one lint result.`,
-  );
-  strictEqual(
-    lint_results.results[0]?.warnings.length,
-    1,
-    `Expected there to be one lint message, but there were ${lint_results[0]
-      ?.messages.length}:\n${lint_results[0]?.messages
-      .map((m) => `  "${m.message}"`)
-      .join('\n')}`,
+    `Expected there to be one lint message, but there were ${result_count}.`,
   );
 }
 

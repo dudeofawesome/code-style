@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
-import { testNoFail } from '../../utils/testing/stylelint';
-import { defaultTestSet } from '../../utils/testing/stylelint/default-test-sets';
+import { testNoFail } from '@code-style/utils/testing/stylelint';
+import { defaultTestSet } from '@code-style/utils/testing/stylelint/default-test-sets';
 
 void describe('styleint-config-scss', () => {
   const config = { extends: '@dudeofawesome/stylelint-config-scss' };

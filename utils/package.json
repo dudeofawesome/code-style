@@ -1,0 +1,11 @@
+{
+  "name": "@code-style/utils",
+  "private": true,
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "dependencies": {
+    "eslint": "^8.51.0",
+    "stylelint": "^15.10.3"
+  }
+}

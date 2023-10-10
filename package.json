@@ -32,7 +32,8 @@
     "javascript-configs",
     "stylelint-config",
     "stylelint-config-scss",
-    "typescript-configs"
+    "typescript-configs",
+    "utils"
   ],
   "scripts": {
     "bump": "scripts/bump.sh",
