@@ -1,4 +1,4 @@
-import { log, error } from 'node:console';
+import { log } from 'node:console';
 import { promisify } from 'node:util';
 import { exec as execCallback } from 'node:child_process';
 
@@ -26,8 +26,8 @@ export async function install_dependencies({
   builder,
   runtime,
 }: InstallDependenciesOptions) {
-  const prod_packages: string[] = [];
-  const dev_packages: string[] = [
+  const prod_packages: (string | undefined)[] = [];
+  const dev_packages: (string | undefined)[] = [
     '@dudeofawesome/code-style',
     '@dudeofawesome/eslint-config',
   ];
@@ -57,6 +57,18 @@ export async function install_dependencies({
           'typescript',
           '@dudeofawesome/eslint-config-typescript',
           '@dudeofawesome/typescript-configs',
+        );
+        break;
+      case 'css':
+        if (!languages.includes('scss')) {
+          dev_packages.push('stylelint', '@dudeofawesome/stylelint-config');
+        }
+        break;
+      case 'scss':
+        dev_packages.push(
+          'stylelint',
+          'scss-embedded',
+          '@dudeofawesome/stylelint-config-scss',
         );
         break;
       default:

@@ -1,4 +1,5 @@
 import { stringify } from 'yaml';
+import type { Config } from 'stylelint';
 
 import { create_file } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
@@ -38,4 +39,14 @@ export async function create_eslint_config(
   }
 
   await create_file('.eslintrc.yaml', stringify(config));
+}
+
+export async function create_stylelint_config(languages: Language[]) {
+  const config: Config = { extends: ['@dudeofawesome/stylelint-config'] };
+
+  if (languages.includes('scss')) {
+    config.extends = ['@dudeofawesome/stylelint-config-scss'];
+  }
+
+  await create_file('.stylelintrc.yaml', stringify(config));
 }

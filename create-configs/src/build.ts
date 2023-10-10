@@ -3,7 +3,10 @@ import {
   create_ts_config,
 } from './language-configuration.js';
 import { create_editor_config, create_prettier_config } from './formatting.js';
-import { create_eslint_config } from './lint-configuration.js';
+import {
+  create_eslint_config,
+  create_stylelint_config,
+} from './lint-configuration.js';
 import { install_dependencies } from './dependencies.js';
 import { create_vscode_config } from './editor.js';
 import {
@@ -36,8 +39,19 @@ export async function build({
   await create_prettier_config();
   await create_vscode_config(project_type, languages, technologies);
 
-  if (languages.includes('ts') || languages.includes('js')) {
+  if (languages.includes('css') || languages.includes('scss')) {
+    await create_stylelint_config(languages);
+  }
+
+  if (languages.includes('ts')) {
     await create_ts_config(project_type, technologies, input_dir, output_dir);
+  }
+
+  if (languages.includes('js') && !languages.includes('ts')) {
+    await create_js_config(project_type, technologies, input_dir, output_dir);
+  }
+
+  if (languages.includes('ts') || languages.includes('js')) {
     await create_eslint_config(project_type, languages, technologies);
     await install_dependencies({
       project_type,

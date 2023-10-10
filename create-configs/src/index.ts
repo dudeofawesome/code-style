@@ -13,8 +13,6 @@ import { build, BuildOptions } from './build.js';
 import { interactive_setup } from './interactive.js';
 
 // TODO(4): add support for ruby
-// TODO(0): add support for css
-// TODO(0): add support for jsconfig
 // TODO(1): add support for build systems
 // TODO(2): add support for runtimes
 // TODO(1): add npm scripts for build, lint, etc
