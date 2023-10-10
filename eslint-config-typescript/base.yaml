@@ -63,6 +63,10 @@ rules:
     - 'error'
     - ignoreTypeImport: true
 
+  # typescript checks imports for us
+  'import/no-unresolved': 'off'
+  'n/no-missing-import': 'off'
+
   # typescript handles these rules for us
   consistent-return: 'off'
   no-invalid-this: 'off'
