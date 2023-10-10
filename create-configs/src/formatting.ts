@@ -1,4 +1,4 @@
-import { mkdir, stat, symlink } from 'node:fs/promises';
+import { stat, symlink } from 'node:fs/promises';
 import { create_file } from './utils.js';
 
 export async function create_prettier_config() {
