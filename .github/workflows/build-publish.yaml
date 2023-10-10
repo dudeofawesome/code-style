@@ -2,8 +2,7 @@ name: 'Publish NPM Package'
 
 on:
   push:
-    branches:
-      - '*'
+  pull_request:
 
 permissions:
   contents: 'read'
@@ -38,6 +37,7 @@ jobs:
     environment: 'production'
     permissions:
       id-token: 'write'
+      packages: 'write'
     needs:
       - 'build'
       - 'lint'
