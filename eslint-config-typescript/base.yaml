@@ -58,6 +58,9 @@ rules:
     - 'error'
     - allow: ['decoratedFunctions']
 
+  # this rule doesn't work reliably
+  '@typescript-eslint/consistent-generic-constructors': 'off'
+
   # typescript checks imports for us
   'import/no-unresolved': 'off'
   'n/no-missing-import': 'off'
