@@ -1,7 +1,7 @@
 {
   "name": "@dudeofawesome/eslint-config-react",
   "description": "My react ESLint config",
-  "version": "1.3.0",
+  "version": "2.0.0-0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
@@ -24,7 +24,7 @@
     "test": "node --require tsm --test test/index.ts"
   },
   "dependencies": {
-    "@dudeofawesome/eslint-config-browser": "^1.3.0",
+    "@dudeofawesome/eslint-config-browser": "^2.0.0-0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0"
