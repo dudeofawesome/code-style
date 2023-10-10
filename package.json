@@ -47,7 +47,6 @@
     "lint": "npm run lint --workspaces --if-present && eslint ."
   },
   "devDependencies": {
-    "@dudeofawesome/code-style": "^1.0.0",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.8.4",
     "tsm": "^2.3.0",
