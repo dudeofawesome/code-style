@@ -37,7 +37,8 @@
   ],
   "type": "module",
   "bin": {
-    "bump": "scripts/bump.ts"
+    "bump": "scripts/bump.ts",
+    "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "scripts": {
     "bump": "scripts/bump.ts",
