@@ -58,6 +58,11 @@ rules:
     - 'error'
     - allow: ['decoratedFunctions']
 
+  # allow type imports
+  'n/no-unpublished-import':
+    - 'error'
+    - ignoreTypeImport: true
+
   # typescript handles these rules for us
   consistent-return: 'off'
   no-invalid-this: 'off'
