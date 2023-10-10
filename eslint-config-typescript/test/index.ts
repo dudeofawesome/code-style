@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
 import { join } from 'node:path';
 import { ESLint } from 'eslint';
-import { testNoFail, testRuleFail } from '../../utils/testing/eslint';
-import { defaultTestSet } from '../../utils/testing/eslint/default-test-sets';
+import { testNoFail, testRuleFail } from '@code-style/utils/testing/eslint';
+import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = new ESLint({ cwd: join(__dirname, 'fixture') });
 

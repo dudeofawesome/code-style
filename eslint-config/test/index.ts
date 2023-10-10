@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
 import { equal, match, strictEqual } from 'node:assert';
 import { ESLint } from 'eslint';
-import { testRuleFail, filePath } from '../../utils/testing/eslint';
-import { defaultTestSet } from '../../utils/testing/eslint/default-test-sets';
+import { testRuleFail, filePath } from '@code-style/utils/testing/eslint';
+import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 

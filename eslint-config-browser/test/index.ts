@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { ESLint } from 'eslint';
-import { testRuleFail } from '../../utils/testing/eslint';
-import { defaultTestSet } from '../../utils/testing/eslint/default-test-sets';
+import { testRuleFail } from '@code-style/utils/testing/eslint';
+import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = new ESLint({ cwd: __dirname });
 
