@@ -7,7 +7,7 @@ A script to create configuration files to conform to code style standards.
 1. Create your config files
 
     ```
-    $ npm init @dudeofawesome/create-configs
+    $ npm init @dudeofawesome/configs
     ```
 
 1. Verify settings match the type of project you're working on.

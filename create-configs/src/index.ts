@@ -18,12 +18,13 @@ import { interactive_setup } from './interactive.js';
 // TODO(1): add npm scripts for build, lint, etc
 
 export async function main() {
-  await Yargs(hideBin(process.argv))
+  const options = await Yargs(hideBin(process.argv))
     .scriptName('create-configs')
     .command(
       'create',
       'Create your new project with CLI arguments.',
       (yargs) => {
+        // TODO(0): bring yargs up to date with prompt
         yargs
           .option<string, { choices: ProjectType[] } & Options>(
             'project_type',
@@ -82,5 +83,11 @@ export async function main() {
       (argv) => {
         return;
       },
-    ).argv;
+    )
+    .parserConfiguration({
+      'strip-aliased': true,
+      'strip-dashed': true,
+    }).argv;
+
+  if (options._.length === 0) await interactive_setup();
 }
