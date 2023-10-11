@@ -55,6 +55,7 @@ jobs:
           echo "beta_version=false" >> "$GITHUB_OUTPUT"
 
       - name: 'Publish to NPM 🚀'
+        # TODO(0): this runs no matter what…
         if: |
           ${{ steps.vars.outputs.version_already_exists == 'false' }}
           && (

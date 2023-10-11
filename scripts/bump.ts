@@ -80,6 +80,7 @@ async function bump_subpackages(
     throw new Error(`Didn't find any leaves to bump!`);
   }
 
+  // TODO: this still seems to get confused when upgrading packages with dependents
   await run(
     `npm version "${version}" ${leaves
       .map((l) => `--workspace ${l.location}`)
