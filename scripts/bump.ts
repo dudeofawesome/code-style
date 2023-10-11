@@ -161,8 +161,8 @@ async function main() {
     })
     .help()
     .parserConfiguration({
-      'halt-at-non-option': true,
       'strip-aliased': true,
+      'strip-dashed': true,
     })
     .middleware([
       // hack to get positional arguments on root command
@@ -170,12 +170,9 @@ async function main() {
         const version = args._.shift();
         if (version != null) {
           args.newVersion = version.toString();
-          args['new-version'] = args.newVersion;
         }
       },
     ]).argv;
-
-  log(args);
 
   await bump(args.newVersion, args);
 }
