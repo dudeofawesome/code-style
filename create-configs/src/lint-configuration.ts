@@ -12,7 +12,9 @@ export async function create_eslint_config(
   const config = {
     root: true,
     extends: ['@dudeofawesome'],
-    parserOptions: 2022,
+    parserOptions: {
+      ecmaVersion: 2022,
+    },
   };
 
   switch (project_type) {
