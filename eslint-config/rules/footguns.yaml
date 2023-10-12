@@ -44,3 +44,17 @@ rules:
 
   # prevent labels from sharing name with variable
   no-label-var: 'error'
+
+  # prevent having the same package in dependencies and devDependencies
+  json-files/require-unique-dependency-names: 'error'
+
+  # require that specific ranges are specified in package.json dependencies
+  json-files/restrict-ranges:
+    - 'error'
+    - versionHint: 'caret'
+      dependencyTypes:
+        - 'dependencies'
+        - 'devDependencies'
+
+  # require that engines are specified in package.json
+  json-files/require-engines: 'error'

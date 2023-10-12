@@ -24,3 +24,6 @@ rules:
 
   # treat method params as const
   no-param-reassign: 'warn'
+
+  # reorder keys in package.json to improve readability & consistency across projects
+  json-files/sort-package-json: 'warn'
