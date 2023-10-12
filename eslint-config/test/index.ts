@@ -25,14 +25,17 @@ describe('eslint-config', () => {
           filePath: filePath({ ts: true }),
         })
         .then((res) => {
-          equal(res[0].messages[0].ruleId, null);
-          match(res[0].messages[0].message, /^Parsing error: Unexpected token/);
+          equal(res[0]?.messages[0]?.ruleId, null);
+          match(
+            res[0]?.messages[0]?.message ?? '',
+            /^Parsing error: Unexpected token/,
+          );
         }));
 
     it(`should fail no-console`, async () => {
       const res = await linter.lintText(`console.log('foo');\n`);
       // this gets 2 errors due to `console` not being defined
-      strictEqual(res[0].messages[0].ruleId, 'no-console');
+      strictEqual(res[0]?.messages[0]?.ruleId, 'no-console');
     });
 
     it(`should only log single duplicate-import error`, async () =>
