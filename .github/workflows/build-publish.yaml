@@ -51,8 +51,8 @@ jobs:
       - name: 'Get variables 📗'
         id: 'vars'
         run: |
-          echo "version_already_exists=true" >> "$GITHUB_OUTPUT"
-          echo "beta_version=false" >> "$GITHUB_OUTPUT"
+          echo "version_already_exists=false" >> "$GITHUB_OUTPUT"
+          echo "beta_version=true" >> "$GITHUB_OUTPUT"
 
       - name: 'Publish to NPM 🚀'
         if: |
