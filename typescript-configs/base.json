@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    // modules
     "module": "ESNext",
     "moduleResolution": "Node10",
+    "esModuleInterop": true,
+    // "verbatimModuleSyntax": true, // TODO: what is this?
+    "moduleDetection": "force", // TODO: what is this?
 
     // input
-    "skipLibCheck": false, // TODO: do we actually want false?
+    "skipLibCheck": false,
     "allowJs": true,
     "checkJs": true,
     "incremental": true,
@@ -19,11 +23,6 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "sourceMap": true,
-
-    // config
-    "esModuleInterop": true,
-    // "verbatimModuleSyntax": true, // TODO: what is this?
-    "moduleDetection": "force", // TODO: what is this?
 
     // strictness
     "strict": true,
