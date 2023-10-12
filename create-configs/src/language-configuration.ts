@@ -10,7 +10,7 @@ export async function create_ts_config(
   const config = {
     extends: [] as string[],
     compilerOptions: {
-      baseUrl: input_dir,
+      baseUrl: './',
       outDir: output_dir,
     },
     include: [input_dir],
