@@ -21,13 +21,13 @@
     "sourceMap": true,
 
     // config
-    "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     // "verbatimModuleSyntax": true, // TODO: what is this?
     "moduleDetection": "force", // TODO: what is this?
 
     // strictness
     "strict": true,
-    "noUncheckedIndexedAccess": true // TODO: can we actually do this?
+    "noUncheckedIndexedAccess": true, // TODO: can we actually do this?
+    "noFallthroughCasesInSwitch": true
   }
 }
