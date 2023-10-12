@@ -30,7 +30,12 @@ export async function create_ts_config(
       break;
   }
 
-  // TODO(2): add support for library.json
+  if (technologies.includes('nestjs')) {
+    config.extends.splice(
+      config.extends.indexOf('@dudeofawesome/typescript-configs/node.json'),
+    );
+    config.extends.push('@dudeofawesome/typescript-configs/nest.json');
+  }
 
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
