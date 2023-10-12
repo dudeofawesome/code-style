@@ -1,1 +1,12 @@
-../code-style/.vscode/launch.json
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach",
+      "skipFiles": ["<node_internals>/**"],
+      "restart": true,
+      "continueOnAttach": true
+    }
+  ]
+}
