@@ -1,7 +1,7 @@
 {
   "name": "@dudeofawesome/stylelint-config",
+  "version": "2.0.0-1",
   "description": "My stylelint configs",
-  "version": "2.0.0-0",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
