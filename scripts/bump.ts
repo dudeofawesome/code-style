@@ -1,5 +1,4 @@
 #!/usr/bin/env node --loader tsm
-// #!/usr/bin/env tsm
 
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
