@@ -4,10 +4,17 @@ const { execSync } = require('child_process');
 const deepmerge = require('deepmerge');
 
 /** @type {boolean} */
-const is_prettier_gem_installed =
-  execSync('gem list -i prettier_print').toString().trim() === 'true' &&
-  // disable ruby for now
-  false;
+const is_prettier_gem_installed = (() => {
+  try {
+    return (
+      execSync('gem list -i prettier_print').toString().trim() === 'true' &&
+      // disable ruby for now
+      false
+    );
+  } catch {
+    return false;
+  }
+})();
 
 /** @type {Record<string, import('prettier').Options>} */
 const option_sets = {
