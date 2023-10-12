@@ -15,7 +15,7 @@
     // output
     "declaration": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true, // TODO: what about the future?
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "sourceMap": true,
@@ -28,11 +28,6 @@
 
     // strictness
     "strict": true,
-    "strictBindCallApply": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    // "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
     "noUncheckedIndexedAccess": true // TODO: can we actually do this?
   }
 }
