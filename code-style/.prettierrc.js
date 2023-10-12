@@ -40,6 +40,10 @@ const option_sets = {
     vueIndentScriptAndStyle: false, // prettier default
   },
 
+  package_json: {
+    plugins: ['prettier-plugin-packagejson'],
+  },
+
   ruby: is_prettier_gem_installed
     ? {
         plugins: ['@prettier/plugin-ruby'],
