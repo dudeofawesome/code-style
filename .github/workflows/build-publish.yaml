@@ -55,12 +55,11 @@ jobs:
           echo "beta_version=false" >> "$GITHUB_OUTPUT"
 
       - name: 'Publish to NPM 🚀'
-        # TODO(0): this runs no matter what…
         if: |
-          ${{ steps.vars.outputs.version_already_exists == 'false' }}
+          steps.vars.outputs.version_already_exists == 'false'
           && (
-            ${{ github.ref_name }} == ${{ github.event.repository.default_branch }}
-            || ${{ steps.vars.outputs.beta_version == 'true' }}
+            github.ref_name == github.event.repository.default_branch
+            || steps.vars.outputs.beta_version == 'true'
           )
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
