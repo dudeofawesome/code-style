@@ -1,56 +1,61 @@
 // https://prettier.io/docs/en/options.html
 
-const exec = require('child_process').exec;
+const { execSync } = require('child_process');
+const deepmerge = require('deepmerge');
 
-const is_prettier_gem_installed = exec('gem list -i prettier') === 'true';
+/** @type {boolean} */
+const is_prettier_gem_installed =
+  execSync('gem list -i prettier_print').toString().trim() === 'true' &&
+  // disable ruby for now
+  false;
 
-const general = {
-  singleQuote: true,
-  semi: true,
-  trailingComma: 'all',
-  quoteProps: 'as-needed', // prettier default
-  bracketSpacing: true, // prettier default
-  bracketSameLine: false, // prettier default
-  arrowParens: 'always', // prettier default
-  proseWrap: 'preserve', // prettier default
-  singleAttributePerLine: false, // prettier default
-  embeddedLanguageFormatting: 'auto', // prettier default
-  // printWidth: // configured in .editorconfig->max_line_length
-  // useTabs: // configured in .editorconfig->indent_size
-  // tabWidth: // configured in .editorconfig->indent_style
-  // endOfLine: // configured in .editorconfig->end_of_line
+/** @type {Record<string, import('prettier').Options>} */
+const option_sets = {
+  general: {
+    singleQuote: true,
+    semi: true,
+    trailingComma: 'all',
+    quoteProps: 'as-needed', // prettier default
+    bracketSpacing: true, // prettier default
+    bracketSameLine: false, // prettier default
+    arrowParens: 'always', // prettier default
+    proseWrap: 'preserve', // prettier default
+    singleAttributePerLine: false, // prettier default
+    embeddedLanguageFormatting: 'auto', // prettier default
+    // printWidth: // configured in .editorconfig->max_line_length
+    // useTabs: // configured in .editorconfig->indent_style
+    // tabWidth: // configured in .editorconfig->indent_size
+    // endOfLine: // configured in .editorconfig->end_of_line
+  },
+
+  html: {
+    htmlWhitespaceSensitivity: 'css', // prettier default
+  },
+
+  jsx: {
+    jsxSingleQuote: false, // prettier default
+  },
+
+  vue: {
+    vueIndentScriptAndStyle: false, // prettier default
+  },
+
+  ruby: is_prettier_gem_installed
+    ? {
+        plugins: ['@prettier/plugin-ruby'],
+
+        // rubyArrayLiteral: true,
+        // rubyHashLabel: true,
+        // rubyModifier: true,
+        rubySingleQuote: true,
+        // rubyToProc: false,
+        // rubyPlugins: ['plugin/single_quotes'],
+      }
+    : {},
 };
 
-const html = {
-  htmlWhitespaceSensitivity: 'css', // prettier default
-};
-
-const jsx = {
-  jsxSingleQuote: false, // prettier default
-};
-
-const vue = {
-  vueIndentScriptAndStyle: false, // prettier default
-};
-
-const ruby = {
-  rubyArrayLiteral: true,
-  rubyHashLabel: true,
-  rubyModifier: true,
-  rubySingleQuote: true,
-  rubyToProc: false,
-};
-
-module.exports = {
-  ...general,
-  ...html,
-  ...jsx,
-  ...vue,
-};
-
-if (is_prettier_gem_installed) {
-  module.exports = {
-    ...module.exports,
-    ...ruby,
-  };
-}
+/** @type {import('prettier').Options} */
+module.exports = deepmerge.all([
+  {},
+  ...Object.entries(option_sets).map(([_, v]) => v),
+]);
