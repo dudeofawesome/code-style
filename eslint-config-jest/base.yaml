@@ -28,4 +28,4 @@ overrides:
       jest/require-top-level-describe: 'error'
 
       # prevent error from dev deps in tests
-      'n/no-unpublished-import': 'off'
+      n/no-unpublished-import: 'off'

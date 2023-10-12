@@ -10,7 +10,9 @@ settings:
 
 rules:
   # limit max element nesting to reduce component complexity
-  react/jsx-max-depth: 'error'
+  react/jsx-max-depth:
+    - 'error'
+    - max: 5
 
   # prefer ES6 classes
   react/prefer-es6-class: 'error'

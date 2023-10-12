@@ -11,7 +11,9 @@ rules:
 
   # prevent unused vars
   '@typescript-eslint/no-unused-vars':
-    ['warn', { args: 'none', destructuredArrayIgnorePattern: '^_' }]
+    - 'warn'
+    - args: 'none'
+      destructuredArrayIgnorePattern: '^_'
 
   # ensure only boolean types are used for conditions
   '@typescript-eslint/strict-boolean-expressions':
@@ -27,7 +29,7 @@ rules:
   '@typescript-eslint/no-magic-numbers':
     - 'error'
     - enforceConst: true
-      ignore: [0, 1, 2, 4]
+      ignore: [0, 1, 2]
       ignoreArrayIndexes: true
       ignoreDefaultValues: true
       ignoreClassFieldInitialValues: true
@@ -48,15 +50,10 @@ rules:
   # ensure private members are marked readonly when possible
   '@typescript-eslint/prefer-readonly': 'error'
 
-  # allow `indexOf()`
-  '@typescript-eslint/prefer-includes': 'off'
-
   # allow returning the correct type, even if it might be slightly confusing
   '@typescript-eslint/no-confusing-void-expression': 'off'
 
-  '@typescript-eslint/no-empty-function':
-    - 'error'
-    - allow: ['decoratedFunctions']
+  '@typescript-eslint/no-empty-function': 'off'
 
   # this rule doesn't work reliably
   '@typescript-eslint/consistent-generic-constructors': 'off'
