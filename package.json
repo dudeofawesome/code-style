@@ -45,7 +45,7 @@
     "upgrade-packages": "scripts/upgrade-packages.sh",
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces --if-present && eslint ."
+    "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",

@@ -1,6 +1,6 @@
 {
   "extends": ["@dudeofawesome/typescript-configs/node.json"],
-  "compilerOptions": { "noEmit": true, "module": "NodeNext" },
+  "compilerOptions": { "noEmit": true, "outDir": "dist/" },
   "include": ["*/test/", "utils/", "scripts/"],
-  "exclude": ["dist"]
+  "exclude": ["dist/", "typescript-configs/", "javascript-configs/"]
 }
