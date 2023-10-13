@@ -2,23 +2,19 @@
   "name": "@dudeofawesome/eslint-config-cli",
   "version": "2.0.0-1",
   "description": "My CLI ESLint config",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-cli"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/eslint-config-cli"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
@@ -33,5 +29,9 @@
   },
   "peerDependencies": {
     "eslint": "^8.49.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

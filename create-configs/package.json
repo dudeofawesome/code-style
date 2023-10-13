@@ -2,11 +2,6 @@
   "name": "@dudeofawesome/create-configs",
   "version": "2.0.0-1",
   "description": "A script to create configuration files to conform to code style standards.",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/create-configs"
-  },
   "keywords": [
     "style",
     "lint",
@@ -14,22 +9,23 @@
     "format",
     "setup"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/create-configs"
   },
-  "bin": "bin/create-configs.js",
-  "main": "dist/index.js",
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
+  "main": "dist/index.js",
+  "bin": "bin/create-configs.js",
   "scripts": {
     "build": "tsc",
-    "start": "node bin/create-configs.js",
-    "test": "echo 'No tests'; exit 0",
     "prelint": "npm run build",
     "lint": "eslint . --ext ts --ext js",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "start": "node bin/create-configs.js",
+    "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
     "@inquirer/prompts": "^3.2.0",
@@ -45,5 +41,9 @@
     "@types/common-tags": "^1.8.2",
     "stylelint": "^15.10.3",
     "typescript": "^5.2.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

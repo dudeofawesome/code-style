@@ -2,31 +2,31 @@
   "name": "@dudeofawesome/eslint-config-browser",
   "version": "2.0.0-1",
   "description": "My browser ESLint config",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-browser"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/eslint-config-browser"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
   },
+  "devDependencies": {
+    "tsm": "^2.3.0"
+  },
   "peerDependencies": {
     "eslint": "^8.49.0"
   },
-  "devDependencies": {
-    "tsm": "^2.3.0"
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

@@ -1,24 +1,29 @@
 {
   "name": "code-style-monorepo",
-  "description": "My code style configs",
   "version": "2.0.0-1",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git"
-  },
-  "bugs": {
-    "url": "https://github.com/dudeofawesome/code-style/issues"
-  },
-  "homepage": "https://github.com/dudeofawesome/code-style#readme",
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
+  "description": "My code style configs",
   "keywords": [
     "style",
     "lint",
     "config",
     "format"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style#readme",
+  "bugs": {
+    "url": "https://github.com/dudeofawesome/code-style/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "type": "module",
+  "bin": {
+    "bump": "scripts/bump.ts",
+    "upgrade-packages": "scripts/upgrade-packages.sh"
+  },
   "workspaces": [
     "code-style",
     "create-configs",
@@ -35,17 +40,12 @@
     "typescript-configs",
     "utils"
   ],
-  "type": "module",
-  "bin": {
-    "bump": "scripts/bump.ts",
-    "upgrade-packages": "scripts/upgrade-packages.sh"
-  },
   "scripts": {
-    "bump": "scripts/bump.ts",
-    "upgrade-packages": "scripts/upgrade-packages.sh",
     "build": "npm run build --workspaces --if-present",
+    "bump": "scripts/bump.ts",
+    "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit",
     "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit"
+    "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",

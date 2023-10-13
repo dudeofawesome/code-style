@@ -2,23 +2,19 @@
   "name": "@dudeofawesome/eslint-config-react",
   "version": "2.0.0-1",
   "description": "My react ESLint config",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-react"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/eslint-config-react"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
@@ -29,12 +25,16 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
-  "peerDependencies": {
-    "eslint": "^8.49.0"
-  },
   "devDependencies": {
     "@types/react": "^18.2.23",
     "react": "^18.2.0",
     "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.49.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

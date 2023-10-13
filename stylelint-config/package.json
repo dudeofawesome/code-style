@@ -2,11 +2,6 @@
   "name": "@dudeofawesome/stylelint-config",
   "version": "2.0.0-1",
   "description": "My stylelint configs",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/stylelint-config"
-  },
   "keywords": [
     "stylelint",
     "style",
@@ -14,12 +9,13 @@
     "lint",
     "config"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/stylelint-config"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
@@ -28,12 +24,16 @@
     "stylelint-order": "^6.0.3",
     "stylelint-prettier": "^4.0.2"
   },
-  "peerDependencies": {
-    "prettier": "^3.0.3"
-  },
   "devDependencies": {
     "@types/node": "^20.8.4",
     "stylelint": "^15.10.3",
     "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

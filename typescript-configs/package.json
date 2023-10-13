@@ -2,27 +2,20 @@
   "name": "@dudeofawesome/typescript-configs",
   "version": "2.0.0-1",
   "description": "My Typescript configs",
+  "keywords": [
+    "typescript",
+    "tsconfig"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
     "directory": "/typescript-configs"
   },
-  "keywords": [
-    "typescript",
-    "tsconfig"
-  ],
-  "author": "Louis Orleans <louis@orleans.io>",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.json",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0, <5.3.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.5",
@@ -30,5 +23,12 @@
     "@types/react": "^18.2.23",
     "tsm": "^2.3.0",
     "typescript": "^5.0.0, <5.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0, <5.3.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

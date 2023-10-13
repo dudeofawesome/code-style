@@ -2,23 +2,19 @@
   "name": "@dudeofawesome/eslint-config-node",
   "version": "2.0.0-1",
   "description": "My node ESLint config",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-node"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/eslint-config-node"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
@@ -26,12 +22,16 @@
   "dependencies": {
     "eslint-plugin-n": "^16.1.0"
   },
-  "peerDependencies": {
-    "eslint": "^8.49.0"
-  },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.49.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

@@ -2,33 +2,33 @@
   "name": "@dudeofawesome/code-style",
   "version": "2.0.0-1",
   "description": "My code style configs",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/code-style"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "format"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/code-style"
+  },
   "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "author": "Louis Orleans <louis@orleans.io>",
+  "bin": {
+    "add-code-style": "scripts/add-code-style.sh"
   },
   "scripts": {
     "test": "echo 'No tests'; exit 0"
-  },
-  "bin": {
-    "add-code-style": "scripts/add-code-style.sh"
   },
   "dependencies": {
     "@prettier/plugin-ruby": "^4.0.2",
     "deepmerge": "^4.3.1",
     "prettier": "^3.0.3",
     "prettier-plugin-packagejson": "^2.4.6"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

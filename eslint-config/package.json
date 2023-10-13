@@ -2,23 +2,19 @@
   "name": "@dudeofawesome/eslint-config",
   "version": "2.0.0-1",
   "description": "My base ESLint config",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config"
-  },
   "keywords": [
     "style",
     "lint",
     "config",
     "eslint"
   ],
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/eslint-config"
   },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
@@ -31,17 +27,21 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1"
   },
-  "overrides": {
-    "eslint-plugin-import": {
-      "tsconfig-paths": "^4.2.0"
-    }
-  },
-  "peerDependencies": {
-    "prettier": "^3.0.3"
-  },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "overrides": {
+    "eslint-plugin-import": {
+      "tsconfig-paths": "^4.2.0"
+    }
   }
 }
