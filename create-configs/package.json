@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/create-configs",
-  "version": "2.0.0-1",
+  "version": "2.0.0-2",
   "description": "A script to create configuration files to conform to code style standards.",
   "keywords": [
     "style",
@@ -34,10 +34,10 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@dudeofawesome/eslint-config": "^2.0.0-1",
-    "@dudeofawesome/eslint-config-cli": "^2.0.0-1",
-    "@dudeofawesome/eslint-config-typescript": "^2.0.0-1",
-    "@dudeofawesome/typescript-configs": "^2.0.0-1",
+    "@dudeofawesome/eslint-config": "^2.0.0-2",
+    "@dudeofawesome/eslint-config-cli": "^2.0.0-2",
+    "@dudeofawesome/eslint-config-typescript": "^2.0.0-2",
+    "@dudeofawesome/typescript-configs": "^2.0.0-2",
     "@types/common-tags": "^1.8.2",
     "stylelint": "^15.10.3",
     "typescript": "^5.2.2"
