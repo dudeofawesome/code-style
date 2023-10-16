@@ -6,14 +6,3 @@ extends:
   - '@dudeofawesome/typescript'
 ignorePatterns:
   - '**/test/*/**'
-
-overrides:
-  - files:
-      - '**/test/**'
-      - '**/__test__/**'
-      - '*.test.*'
-      - '*.spec.*'
-      - '*.unit.*'
-      - '*.e2e.*'
-    rules:
-      n/no-process-env: 'off'

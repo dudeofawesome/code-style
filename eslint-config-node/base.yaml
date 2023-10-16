@@ -67,3 +67,17 @@ rules:
   n/no-unpublished-import:
     - 'error'
     - ignoreTypeImport: true
+
+overrides:
+  - files:
+      # test files
+      - '**/test/**'
+      - '**/__test__/**'
+      - '*.test.*'
+      - '*.spec.*'
+      - '*.unit.*'
+      - '*.e2e.*'
+      # config files
+      - 'config.*'
+    rules:
+      n/no-process-env: 'off'
