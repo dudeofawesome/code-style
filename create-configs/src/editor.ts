@@ -45,28 +45,30 @@ export async function create_vscode_config(
     create_file(
       '.vscode/extensions.json',
       JSON.stringify(
-        [
-          ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
+        {
+          recommendations: [
+            ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
 
-          ...(languages.includes('js') || languages.includes('ts')
-            ? ['dbaeumer.vscode-eslint']
-            : []),
-          ...(languages.includes('rb')
-            ? ['Shopify.ruby-lsp', 'castwide.solargraph']
-            : []),
-          ...(languages.includes('py')
-            ? [
-                'ms-python.black-formatter',
-                'ms-python.python',
-                'ms-python.vscode-pylance',
-              ]
-            : []),
-          ...(languages.includes('css') || languages.includes('scss')
-            ? ['stylelint.vscode-stylelint']
-            : []),
+            ...(languages.includes('js') || languages.includes('ts')
+              ? ['dbaeumer.vscode-eslint']
+              : []),
+            ...(languages.includes('rb')
+              ? ['Shopify.ruby-lsp', 'castwide.solargraph']
+              : []),
+            ...(languages.includes('py')
+              ? [
+                  'ms-python.black-formatter',
+                  'ms-python.python',
+                  'ms-python.vscode-pylance',
+                ]
+              : []),
+            ...(languages.includes('css') || languages.includes('scss')
+              ? ['stylelint.vscode-stylelint']
+              : []),
 
-          ...(technologies.includes('jest') ? ['Orta.vscode-jest'] : []),
-        ],
+            ...(technologies.includes('jest') ? ['Orta.vscode-jest'] : []),
+          ],
+        },
         null,
         2,
       ),
