@@ -48,21 +48,7 @@ jobs:
         with:
           install-modules: false
 
-      - name: 'Get variables 📗'
-        id: 'vars'
-        run: |
-          echo "version_already_exists=false" >> "$GITHUB_OUTPUT"
-          echo "beta_version=true" >> "$GITHUB_OUTPUT"
-
       - name: 'Publish to NPM 🚀'
-        if: |
-          steps.vars.outputs.version_already_exists == 'false'
-          && (
-            github.ref_name == github.event.repository.default_branch
-            || steps.vars.outputs.beta_version == 'true'
-          )
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
-        run: |-
-          npm publish \
-            --workspaces
+        uses: 'dudeofawesome/actions/npm-publish@main'
