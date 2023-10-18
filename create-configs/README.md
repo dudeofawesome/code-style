@@ -4,11 +4,13 @@ A script to create configuration files to conform to code style standards.
 
 ## Usage
 
-1. Create your config files
+1. Create your config files.
 
     ```
     $ npm init @dudeofawesome/configs
     ```
+
+1. Answer the prompted questions.
 
 1. Verify settings match the type of project you're working on.
 
