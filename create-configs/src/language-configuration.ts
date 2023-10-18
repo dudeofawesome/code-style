@@ -37,6 +37,8 @@ export async function create_ts_config(
     config.extends.push('@dudeofawesome/typescript-configs/nest.json');
   }
 
+  // TODO(2): add support for library.json tsconfig
+
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
   //   config.extends.push('@dudeofawesome/typescript-configs/jest.json');

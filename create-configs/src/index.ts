@@ -12,10 +12,12 @@ import {
 import { build, BuildOptions } from './build.js';
 import { interactive_setup } from './interactive.js';
 
+// TODO(0): add usage/update docs to each created file
 // TODO(4): add support for ruby
 // TODO(1): add support for build systems
 // TODO(2): add support for runtimes
 // TODO(1): add npm scripts for build, lint, etc
+// TODO(1): run prettier on generated files
 
 export async function main() {
   const options = await Yargs(hideBin(process.argv))
