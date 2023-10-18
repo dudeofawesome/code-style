@@ -9,6 +9,7 @@
     "eslint",
     "jest"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-jest/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",

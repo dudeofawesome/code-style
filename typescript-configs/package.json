@@ -6,6 +6,7 @@
     "typescript",
     "tsconfig"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/typescript-configs/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",

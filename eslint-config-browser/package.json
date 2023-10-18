@@ -8,6 +8,7 @@
     "config",
     "eslint"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-browser/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",

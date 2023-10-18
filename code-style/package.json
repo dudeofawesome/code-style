@@ -8,6 +8,7 @@
     "config",
     "format"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/code-style/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
