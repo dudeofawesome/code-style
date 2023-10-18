@@ -1,13 +1,13 @@
-# @dudeofawesome/eslint-config-node
+# @dudeofawesome/eslint-config-react
 
-My node eslint config
+My React eslint config
 
 ## Usage
 
 1. Install this config plugin as a dev dependency.
 
     ```sh
-    npm i -D @dudeofawesome/eslint-config-node
+    npm i -D @dudeofawesome/eslint-config-react
     ```
 
 1. Add the plugin to your `eslintrc`.
@@ -15,7 +15,7 @@ My node eslint config
     ```yaml
     extends:
         - '@dudeofawesome'
-        - '@dudeofawesome/node'
+        - '@dudeofawesome/react'
     ```
 
 1. You might also want to specify an `ecmaVersion`.
