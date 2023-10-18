@@ -29,7 +29,7 @@ A script to create configuration files to conform to code style standards.
 
 -   VS Code
 
-    Handled by the script
+    Handled by this script
 
 -   Vim
 
@@ -44,7 +44,7 @@ This will automatically apply formatting and linting to your files as you work.
 
 -   VS Code
 
-    Handled by the script
+    Handled by this script
 
 -   Vim
     -   https://github.com/prettier/vim-prettier
