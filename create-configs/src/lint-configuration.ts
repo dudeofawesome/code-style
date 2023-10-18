@@ -1,15 +1,40 @@
 import { stringify } from 'yaml';
+import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
+import { stripIndent } from 'common-tags';
 
-import { create_file } from './utils.js';
+import { create_file, verify_missing } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
 
-export async function create_eslint_config(
+/** @private */
+export function _transform_eslint_package_name(extend: string): string {
+  if (extend.startsWith('@')) {
+    return extend
+      .replace(/^(@[^/]+)\/(\S+)$/iu, '$1/eslint-config-$2')
+      .replace(/^(@[^/]+)$/iu, '$1/eslint-config');
+  } else {
+    return extend.replace(/^([^@/]+)$/iu, 'eslint-config-$1');
+  }
+}
+
+/** @private */
+export function _generate_dependency_list(config: ESLint.ConfigData): string[] {
+  if (Array.isArray(config.extends)) {
+    return config.extends.map(_transform_eslint_package_name);
+  } else if (typeof config.extends === 'string') {
+    return [_transform_eslint_package_name(config.extends)];
+  } else {
+    return [];
+  }
+}
+
+/** @private */
+export function _generate_eslint_config(
   project_type: ProjectType,
   languages: Language[],
   technologies: Technology[],
-) {
-  const config = {
+): string {
+  const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
     extends: ['@dudeofawesome'],
     parserOptions: {
@@ -40,15 +65,47 @@ export async function create_eslint_config(
     config.extends.push('@dudeofawesome/jest');
   }
 
-  await create_file('.eslintrc.yaml', stringify(config));
+  return stripIndent`
+    # In order to update the this config, update:
+    ${_generate_dependency_list(config)
+      .map((p) => `#   ${p}`)
+      .join('\n')}
+    ${stringify(config)}
+  `;
 }
 
-export async function create_stylelint_config(languages: Language[]) {
+export async function create_eslint_config(
+  project_type: ProjectType,
+  languages: Language[],
+  technologies: Technology[],
+  overwrite: boolean = true,
+) {
+  const path = '.eslintrc.yaml';
+  if (await verify_missing(path, overwrite)) {
+    return create_file(
+      path,
+      _generate_eslint_config(project_type, languages, technologies),
+    );
+  }
+}
+
+/** @private */
+export function _generate_stylelint_config(languages: Language[]): string {
   const config: Config = { extends: ['@dudeofawesome/stylelint-config'] };
 
   if (languages.includes('scss')) {
     config.extends = ['@dudeofawesome/stylelint-config-scss'];
   }
 
-  await create_file('.stylelintrc.yaml', stringify(config));
+  return stringify(config);
+}
+
+export async function create_stylelint_config(
+  languages: Language[],
+  overwrite: boolean = true,
+) {
+  const path = '.stylelintrc.yaml';
+  if (await verify_missing(path, overwrite)) {
+    return create_file(path, _generate_stylelint_config(languages));
+  }
 }

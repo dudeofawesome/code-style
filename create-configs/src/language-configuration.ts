@@ -1,12 +1,14 @@
-import { create_file } from './utils.js';
+import { stripIndent } from 'common-tags';
+import { create_file, verify_missing } from './utils.js';
 import { ProjectType, Technology } from './types.js';
 
-export async function create_ts_config(
+/** @private */
+export function _generate_ts_config(
   project_type: ProjectType,
   technologies: Technology[],
   input_dir: string,
   output_dir: string,
-) {
+): string {
   const config = {
     extends: [] as string[],
     compilerOptions: {
@@ -39,20 +41,40 @@ export async function create_ts_config(
 
   // TODO(2): add support for library.json tsconfig
 
+  return stripIndent`
+    // In order to update the this config, update @dudeofawesome/typescript-configs
+    ${JSON.stringify(config, null, 2)}
+  `;
+}
+
+export async function create_ts_config(
+  project_type: ProjectType,
+  technologies: Technology[],
+  input_dir: string,
+  output_dir: string,
+  overwrite: boolean = true,
+) {
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
   //   config.extends.push('@dudeofawesome/typescript-configs/jest.json');
   // }
 
-  await create_file('tsconfig.json', JSON.stringify(config, null, 2));
+  const path = 'tsconfig.json';
+  if (await verify_missing(path, overwrite)) {
+    await create_file(
+      path,
+      _generate_ts_config(project_type, technologies, input_dir, output_dir),
+    );
+  }
 }
 
-export async function create_js_config(
+/** @private */
+export function _generate_js_config(
   project_type: ProjectType,
   technologies: Technology[],
   input_dir: string,
   output_dir: string,
-) {
+): string {
   const config = {
     extends: [] as string[],
     compilerOptions: {
@@ -76,10 +98,29 @@ export async function create_js_config(
       break;
   }
 
-  // TODO(2): create a separate tsconfig for tests
+  return stripIndent`
+    // In order to update the this config, update @dudeofawesome/javascript-configs
+    ${JSON.stringify(config, null, 2)}
+  `;
+}
+
+export async function create_js_config(
+  project_type: ProjectType,
+  technologies: Technology[],
+  input_dir: string,
+  output_dir: string,
+  overwrite: boolean = true,
+) {
+  // TODO(2): create a separate jsconfig for tests
   // if (technologies.includes('jest')) {
-  //   config.extends.push('@dudeofawesome/typescript-configs/jest.json');
+  //   config.extends.push('@dudeofawesome/javascript-configs/jest.json');
   // }
 
-  await create_file('jsconfig.json', JSON.stringify(config, null, 2));
+  const path = 'jsconfig.json';
+  if (await verify_missing(path, overwrite)) {
+    await create_file(
+      path,
+      _generate_js_config(project_type, technologies, input_dir, output_dir),
+    );
+  }
 }

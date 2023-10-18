@@ -26,39 +26,70 @@ export interface BuildOptions {
   output_dir?: string;
   technologies?: Technology[];
 }
-export async function build({
-  project_type,
-  languages,
-  runtime,
-  builder,
-  input_dir = 'src/',
-  output_dir = 'dist/',
-  technologies = [],
-}: BuildOptions) {
-  await create_editor_config();
-  await create_prettier_config();
-  await create_vscode_config(project_type, languages, technologies);
+export async function build(
+  {
+    project_type,
+    languages,
+    runtime,
+    builder,
+    input_dir = 'src/',
+    output_dir = 'dist/',
+    technologies = [],
+  }: BuildOptions,
+  overwrite: boolean = false,
+) {
+  await Promise.all([
+    create_editor_config(overwrite),
+    create_prettier_config(overwrite),
+  ]);
 
-  if (languages.includes('css') || languages.includes('scss')) {
-    await create_stylelint_config(languages);
-  }
+  await Promise.all(
+    [
+      create_vscode_config(project_type, languages, technologies, overwrite),
 
-  if (languages.includes('ts')) {
-    await create_ts_config(project_type, technologies, input_dir, output_dir);
-  }
+      languages.includes('css') || languages.includes('scss')
+        ? await create_stylelint_config(languages, overwrite)
+        : null,
 
-  if (languages.includes('js') && !languages.includes('ts')) {
-    await create_js_config(project_type, technologies, input_dir, output_dir);
-  }
+      languages.includes('ts')
+        ? await create_ts_config(
+            project_type,
+            technologies,
+            input_dir,
+            output_dir,
+            overwrite,
+          )
+        : null,
 
-  if (languages.includes('ts') || languages.includes('js')) {
-    await create_eslint_config(project_type, languages, technologies);
-    await install_dependencies({
-      project_type,
-      languages,
-      technologies,
-      runtime,
-      builder,
-    });
-  }
+      languages.includes('js') && !languages.includes('ts')
+        ? await create_js_config(
+            project_type,
+            technologies,
+            input_dir,
+            output_dir,
+            overwrite,
+          )
+        : null,
+
+      languages.includes('ts') || languages.includes('js')
+        ? [
+            await create_eslint_config(
+              project_type,
+              languages,
+              technologies,
+              overwrite,
+            ),
+            await install_dependencies({
+              project_type,
+              languages,
+              technologies,
+              runtime,
+              builder,
+            }),
+          ]
+        : null,
+    ]
+      .filter(Boolean)
+      .flat(),
+  );
 }

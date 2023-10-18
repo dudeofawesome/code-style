@@ -1,4 +1,5 @@
-import { stat, writeFile } from 'node:fs/promises';
+import { access, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { format, resolveConfig, resolveConfigFile, Options } from 'prettier';
 
 export async function create_file(
   path: string,
@@ -13,4 +14,54 @@ export async function create_file(
   }
 
   await writeFile(path, content, { mode: 0b110110100 });
+}
+
+/**
+ * @param path The path to check.
+ * @returns Whether or not the file exists.
+ */
+export function file_exists(path: string): Promise<boolean> {
+  return access(path)
+    .then(() => true)
+    .catch(() => false);
+}
+
+/**
+ * @param path The path of the file to possibly delete.
+ * @param remove Whether or not to delete the file should it exist.
+ * @returns Whether or not the file is missing.
+ */
+export async function verify_missing(
+  path: string,
+  remove: boolean,
+  reject: boolean = false,
+): Promise<boolean> {
+  if (await file_exists(path)) {
+    if (remove) {
+      await rm(path);
+      return true;
+    } else {
+      const message = `File "${path}" already exists.`;
+      if (reject) {
+        throw new Error(message);
+      } else {
+        console.info(message);
+        return false;
+      }
+    }
+  } else {
+    return true;
+  }
+}
+
+export async function prettify(path: string) {
+  const config: Options = await resolveConfigFile(path).then((config_path) =>
+    config_path != null
+      ? resolveConfig(config_path).then((cfg) => cfg ?? ({} as Options))
+      : ({} as Options),
+  );
+
+  const source = (await readFile(path)).toString();
+  const formatted = await format(source, config);
+  await writeFile(path, formatted);
 }

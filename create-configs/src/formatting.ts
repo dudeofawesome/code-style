@@ -1,22 +1,30 @@
 import { stat, symlink } from 'node:fs/promises';
-import { create_file } from './utils.js';
+import { stripIndent } from 'common-tags';
+import { create_file, verify_missing } from './utils.js';
 
-export async function create_prettier_config() {
-  await create_file(
-    '.prettierrc',
-    '"@dudeofawesome/code-style/.prettierrc.js"\n',
-  );
+export async function create_prettier_config(overwrite: boolean = false) {
+  const path = '.prettierrc';
+  if (await verify_missing(path, overwrite)) {
+    await create_file(
+      path,
+      stripIndent`
+      # https://prettier.io/docs/en/
+      # Prettier configuration file
+      # In order to update the this config, update @dudeofawesome/code-style
+      "@dudeofawesome/code-style/.prettierrc.js"
+    `,
+    );
+  }
 }
 
-export async function create_editor_config() {
-  if (
-    !(
-      await stat('.editorconfig').catch(() => ({ isFile: () => false }))
-    ).isFile()
-  ) {
-    await symlink(
-      'node_modules/@dudeofawesome/code-style/.editorconfig',
-      '.editorconfig',
-    );
+export async function create_editor_config(overwrite: boolean = false) {
+  const path = '.editorconfig';
+  if (await verify_missing(path, overwrite)) {
+    if (!(await stat(path).catch(() => ({ isFile: () => false }))).isFile()) {
+      await symlink(
+        'node_modules/@dudeofawesome/code-style/.editorconfig',
+        path,
+      );
+    }
   }
 }

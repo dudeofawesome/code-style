@@ -9,7 +9,7 @@ import {
   Runtime,
 } from './types.js';
 
-export async function interactive_setup() {
+export async function interactive_setup(overwrite: boolean = false) {
   const project_type = await select<ProjectType>({
     message: 'project type',
     choices: [
@@ -120,15 +120,18 @@ export async function interactive_setup() {
     });
   }
 
-  await build({
-    project_type,
-    languages,
-    runtime,
-    builder,
-    input_dir,
-    output_dir,
-    technologies,
-  });
+  await build(
+    {
+      project_type,
+      languages,
+      runtime,
+      builder,
+      input_dir,
+      output_dir,
+      technologies,
+    },
+    overwrite,
+  );
 
   process.exit(0);
 }
