@@ -51,4 +51,4 @@ jobs:
       - name: 'Publish to NPM 🚀'
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
-        uses: 'dudeofawesome/actions/npm-publish@main'
+        uses: 'dudeofawesome/actions/npm-publish@v1'

@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-typescript",
-  "version": "2.0.0-2",
+  "version": "2.0.0-3",
   "description": "My Typescript ESLint config",
   "keywords": [
     "style",
