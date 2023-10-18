@@ -8,4 +8,4 @@ You're probably looking to use this with one of our other configs:
 -   [`@dudeofawesome/browser`](../eslint-config-browser/README.md)
 -   [`@dudeofawesome/react`](../eslint-config-react/README.md)
 
-However, if you're trying to build a new config for a new environment (maybe some new frontend framework or something), you'll want to use this config as your base.
+However, if you're trying to build a new config for a new environment (maybe some new frontend framework or something), you'll want to use this config as a layer in your project.
