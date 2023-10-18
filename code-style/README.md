@@ -1,6 +1,6 @@
 # My Code Style Guide
 
-A bunch of configuration files for code style standards. Intended to be shared across all of my repos.
+A few configuration files for code style standards. Intended to be shared across all of my repos.
 
 ## Usage
 
