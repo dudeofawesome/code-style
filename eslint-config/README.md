@@ -3,6 +3,7 @@
 You're probably looking to use this with one of our other configs:
 
 -   [`@dudeofawesome/node`](../eslint-config-node/README.md)
+-   [`@dudeofawesome/cli`](../eslint-config-cli/README.md)
 -   [`@dudeofawesome/typescript`](../eslint-config-typescript/README.md)
 -   [`@dudeofawesome/jest`](../eslint-config-jest/README.md)
 -   [`@dudeofawesome/browser`](../eslint-config-browser/README.md)
