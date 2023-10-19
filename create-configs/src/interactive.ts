@@ -108,6 +108,11 @@ export async function interactive_setup(overwrite: boolean = false) {
         value: 'vs-code',
         checked: true,
       },
+      {
+        name: 'ES Modules',
+        value: 'esm',
+        checked: true,
+      },
     ],
   });
 

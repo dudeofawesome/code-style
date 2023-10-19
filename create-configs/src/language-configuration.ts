@@ -39,6 +39,10 @@ export function _generate_ts_config(
     config.extends.push('@dudeofawesome/typescript-configs/nest.json');
   }
 
+  if (technologies.includes('esm')) {
+    config.extends.push('@dudeofawesome/typescript-configs/esmodule.json');
+  }
+
   // TODO(2): add support for library.json tsconfig
 
   return stripIndent`

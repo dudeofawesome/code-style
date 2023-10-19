@@ -26,7 +26,7 @@
     "lint": "eslint . --ext ts --ext js",
     "prepublishOnly": "npm run build",
     "start": "node bin/create-configs.js",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
     "@inquirer/prompts": "^3.2.0",

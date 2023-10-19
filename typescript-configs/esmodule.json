@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    // modules
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    // "verbatimModuleSyntax": true, // TODO: what is this?
+    "moduleDetection": "force" // TODO: what is this?
+  }
+}

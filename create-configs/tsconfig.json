@@ -1,7 +1,7 @@
 {
   "extends": [
     "@dudeofawesome/typescript-configs/node.json",
-    "@dudeofawesome/typescript-configs/library.json"
+    "@dudeofawesome/typescript-configs/esmodule.json"
   ],
   "compilerOptions": {
     "baseUrl": "src/",

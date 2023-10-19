@@ -2,7 +2,7 @@ import { describe, it, expect } from '@jest/globals';
 import {
   _generate_eslint_config,
   _transform_eslint_package_name,
-} from './lint-configuration';
+} from './lint-configuration.js';
 
 describe('lint-configuration', () => {
   describe('generate_eslint_config', () => {
