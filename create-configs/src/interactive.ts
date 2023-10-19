@@ -145,6 +145,4 @@ export async function interactive_setup(overwrite: boolean = false) {
     },
     overwrite,
   );
-
-  process.exit(0);
 }
