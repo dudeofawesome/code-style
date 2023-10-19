@@ -1,4 +1,4 @@
-import { checkbox, select, input } from '@inquirer/prompts';
+import { checkbox, select, input, confirm } from '@inquirer/prompts';
 
 import { build } from './build.js';
 import {
@@ -122,6 +122,15 @@ export async function interactive_setup(overwrite: boolean = false) {
       message: 'Output directory',
       default: 'dist/',
     });
+  }
+
+  if (
+    !(await confirm({
+      message: 'Do all your choices look good?',
+      default: true,
+    }))
+  ) {
+    throw new Error(`User cancelled file creation.`);
   }
 
   await build(
