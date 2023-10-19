@@ -1,5 +1,6 @@
 import { access, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { format, resolveConfig, resolveConfigFile, Options } from 'prettier';
+import { Language } from './types.js';
 
 export async function create_file(
   path: string,
@@ -73,4 +74,7 @@ export async function prettify(
     return formatted;
   }
 }
+
+export function includes_js(languages: Language[]): boolean {
+  return languages.includes('js') || languages.includes('ts');
 }

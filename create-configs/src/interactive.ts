@@ -8,6 +8,7 @@ import {
   Builder,
   Runtime,
 } from './types.js';
+import { includes_js } from './utils.js';
 
 export async function interactive_setup(overwrite: boolean = false) {
   const project_type = await select<ProjectType>({
@@ -37,75 +38,77 @@ export async function interactive_setup(overwrite: boolean = false) {
     ],
   });
 
-  let runtime: Runtime | undefined;
-  let builder: Builder = 'none';
-  const technologies: Technology[] = [];
+  const runtime: Runtime | undefined = includes_js(languages)
+    ? await select<Runtime>({
+        message: 'runtime',
+        choices: [
+          { name: 'nodejs', value: 'nodejs' },
+          { name: 'bun', value: 'bun' },
+        ],
+      })
+    : undefined;
 
-  if (languages.includes('js') || languages.includes('ts')) {
-    technologies.push(
-      ...(await checkbox<Technology>({
-        message: 'tools',
+  const builder: Builder = includes_js(languages)
+    ? await select<Builder>({
+        message: 'Builder',
         choices: [
           {
-            name: 'React',
-            value: 'react',
-            disabled: project_type !== 'web-app',
+            name: 'esbuild',
+            value: 'esbuild',
+            disabled: runtime !== 'nodejs',
           },
           {
-            name: 'NestJS',
-            value: 'nestjs',
-            disabled: project_type !== 'backend',
+            name: 'tsc',
+            value: 'tsc',
+            disabled: !languages.includes('ts') || runtime !== 'nodejs',
           },
-          { name: 'Jest', value: 'jest', checked: true },
+          { name: 'SWC', value: 'swc', disabled: runtime !== 'nodejs' },
           {
-            name: 'Visual Studio Code',
-            value: 'vs-code',
-            checked: true,
+            name: 'Babel',
+            value: 'babel',
+            disabled: languages.includes('ts') || runtime !== 'nodejs',
+          },
+          {
+            name: 'Bun',
+            value: 'bun',
+            disabled: !languages.includes('ts') || runtime !== 'bun',
+          },
+          {
+            name: 'none',
+            value: 'none',
+            disabled: languages.includes('ts') || runtime === 'bun',
           },
         ],
-      })),
-    );
+      })
+    : 'none';
 
-    runtime = await select<Runtime>({
-      message: 'runtime',
-      choices: [
-        { name: 'nodejs', value: 'nodejs' },
-        { name: 'bun', value: 'bun' },
-      ],
-    });
-
-    builder = await select<Builder>({
-      message: 'builder',
-      choices: [
-        {
-          name: 'esbuild',
-          value: 'esbuild',
-          disabled: runtime !== 'nodejs',
-        },
-        {
-          name: 'tsc',
-          value: 'tsc',
-          disabled: !languages.includes('ts') || runtime !== 'nodejs',
-        },
-        { name: 'SWC', value: 'swc', disabled: runtime !== 'nodejs' },
-        {
-          name: 'Babel',
-          value: 'babel',
-          disabled: languages.includes('ts') || runtime !== 'nodejs',
-        },
-        {
-          name: 'Bun',
-          value: 'bun',
-          disabled: !languages.includes('ts') || runtime !== 'bun',
-        },
-        {
-          name: 'none',
-          value: 'none',
-          disabled: languages.includes('ts') || runtime === 'bun',
-        },
-      ],
-    });
-  }
+  const technologies: Technology[] = await checkbox<Technology>({
+    message: `Tools (Select any tools / frameworks you will be using for this project.)\n    `,
+    instructions: `(Press <space> to select and <enter> to proceed)`,
+    choices: [
+      {
+        name: 'React',
+        value: 'react',
+        disabled: !includes_js(languages) || project_type !== 'web-app',
+      },
+      {
+        name: 'NestJS',
+        value: 'nestjs',
+        disabled: !includes_js(languages) || project_type !== 'backend',
+      },
+      {
+        name: 'Jest',
+        value: 'jest',
+        checked: includes_js(languages),
+        disabled: !includes_js(languages),
+      },
+      {
+        name: 'Visual Studio Code',
+        value: 'vs-code',
+        checked: true,
+      },
+    ],
+  });
 
   let input_dir: string | undefined;
   let output_dir: string | undefined;
