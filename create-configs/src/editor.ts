@@ -1,5 +1,5 @@
 import { mkdir } from 'node:fs/promises';
-import { create_file, verify_missing } from './utils.js';
+import { create_file, prettify, verify_missing } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
 
 export async function create_vscode_config(
@@ -13,11 +13,12 @@ export async function create_vscode_config(
   await Promise.all([
     Promise.resolve('.vscode/settings.json')
       .then((path) => verify_missing(path, overwrite, true).then(() => path))
-      .then((path) =>
+      .then(async (path) =>
         create_file(
           path,
-          JSON.stringify(
-            {
+          await prettify(
+            path,
+            JSON.stringify({
               ...{
                 'editor.formatOnSave': true,
                 'editor.formatOnType': true,
@@ -40,20 +41,19 @@ export async function create_vscode_config(
                     },
                   }
                 : {}),
-            },
-            null,
-            2,
+            }),
           ),
         ),
       ),
 
     Promise.resolve('.vscode/extensions.json')
       .then((path) => verify_missing(path, overwrite, true).then(() => path))
-      .then((path) =>
+      .then(async (path) =>
         create_file(
           path,
-          JSON.stringify(
-            {
+          await prettify(
+            path,
+            JSON.stringify({
               recommendations: [
                 ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
 
@@ -76,20 +76,19 @@ export async function create_vscode_config(
 
                 ...(technologies.includes('jest') ? ['Orta.vscode-jest'] : []),
               ],
-            },
-            null,
-            2,
+            }),
           ),
         ),
       ),
 
     Promise.resolve('.vscode/launch.json')
       .then((path) => verify_missing(path, overwrite, true).then(() => path))
-      .then((path) =>
+      .then(async (path) =>
         create_file(
           path,
-          JSON.stringify(
-            {
+          await prettify(
+            path,
+            JSON.stringify({
               configurations: [
                 ...((languages.includes('js') || languages.includes('ts')) &&
                 ['backend', 'cli'].includes(project_type)
@@ -105,9 +104,7 @@ export async function create_vscode_config(
                     ]
                   : []),
               ],
-            },
-            null,
-            2,
+            }),
           ),
         ),
       ),

@@ -3,7 +3,7 @@ import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
 import { stripIndent } from 'common-tags';
 
-import { create_file, verify_missing } from './utils.js';
+import { create_file, prettify, verify_missing } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
 
 /** @private */
@@ -84,7 +84,10 @@ export async function create_eslint_config(
   if (await verify_missing(path, overwrite)) {
     return create_file(
       path,
-      _generate_eslint_config(project_type, languages, technologies),
+      await prettify(
+        path,
+        _generate_eslint_config(project_type, languages, technologies),
+      ),
     );
   }
 }
@@ -97,6 +100,7 @@ export function _generate_stylelint_config(languages: Language[]): string {
     config.extends = ['@dudeofawesome/stylelint-config-scss'];
   }
 
+  // TODO(0): add usage/update docs to each created file
   return stringify(config);
 }
 
@@ -106,6 +110,9 @@ export async function create_stylelint_config(
 ) {
   const path = '.stylelintrc.yaml';
   if (await verify_missing(path, overwrite)) {
-    return create_file(path, _generate_stylelint_config(languages));
+    return create_file(
+      path,
+      await prettify(path, _generate_stylelint_config(languages)),
+    );
   }
 }

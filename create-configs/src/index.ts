@@ -18,7 +18,6 @@ import { interactive_setup } from './interactive.js';
 // TODO(2): add support for runtimes
 // TODO(1): add npm scripts for build, lint, etc
 // TODO(0): allow overwriting files when an option is passed
-// TODO(1): run prettier on generated files
 
 export async function main() {
   const options = await Yargs(hideBin(process.argv))

@@ -54,14 +54,23 @@ export async function verify_missing(
   }
 }
 
-export async function prettify(path: string) {
+export async function prettify(
+  path: string,
+  content?: string,
+): Promise<string> {
   const config: Options = await resolveConfigFile(path).then((config_path) =>
     config_path != null
       ? resolveConfig(config_path).then((cfg) => cfg ?? ({} as Options))
       : ({} as Options),
   );
 
-  const source = (await readFile(path)).toString();
-  const formatted = await format(source, config);
-  await writeFile(path, formatted);
+  if (content != null) {
+    return await format(content, config);
+  } else {
+    const source = (await readFile(path)).toString();
+    const formatted = await format(source, config);
+    await writeFile(path, formatted);
+    return formatted;
+  }
+}
 }

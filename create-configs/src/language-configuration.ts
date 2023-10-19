@@ -1,5 +1,5 @@
 import { stripIndent } from 'common-tags';
-import { create_file, verify_missing } from './utils.js';
+import { create_file, prettify, verify_missing } from './utils.js';
 import { ProjectType, Technology } from './types.js';
 
 /** @private */
@@ -63,7 +63,10 @@ export async function create_ts_config(
   if (await verify_missing(path, overwrite)) {
     await create_file(
       path,
-      _generate_ts_config(project_type, technologies, input_dir, output_dir),
+      await prettify(
+        path,
+        _generate_ts_config(project_type, technologies, input_dir, output_dir),
+      ),
     );
   }
 }
@@ -120,7 +123,10 @@ export async function create_js_config(
   if (await verify_missing(path, overwrite)) {
     await create_file(
       path,
-      _generate_js_config(project_type, technologies, input_dir, output_dir),
+      await prettify(
+        path,
+        _generate_js_config(project_type, technologies, input_dir, output_dir),
+      ),
     );
   }
 }
