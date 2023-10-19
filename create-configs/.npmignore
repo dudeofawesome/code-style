@@ -5,5 +5,10 @@ npm-debug.log
 
 # source files
 examples/
-test/
 src/
+test/
+
+# config files
+tsconfig.*
+.eslint*
+jest.config.*
