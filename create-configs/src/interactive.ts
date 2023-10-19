@@ -12,7 +12,7 @@ import { includes_js } from './utils.js';
 
 export async function interactive_setup(overwrite: boolean = false) {
   const project_type = await select<ProjectType>({
-    message: 'project type',
+    message: 'Project type',
     choices: [
       { name: 'Web App', value: 'web-app' },
       { name: 'Backend', value: 'backend' },
@@ -21,7 +21,8 @@ export async function interactive_setup(overwrite: boolean = false) {
   });
 
   const languages = await checkbox<Language>({
-    message: 'language',
+    message: `Languages (Only select languages you will write source-code in.)\n    `,
+    instructions: `(Press <space> to select and <enter> to proceed)`,
     choices: [
       { name: 'javascript', value: 'js' },
       { name: 'typescript', value: 'ts', checked: true },
@@ -40,7 +41,7 @@ export async function interactive_setup(overwrite: boolean = false) {
 
   const runtime: Runtime | undefined = includes_js(languages)
     ? await select<Runtime>({
-        message: 'runtime',
+        message: 'Runtime',
         choices: [
           { name: 'nodejs', value: 'nodejs' },
           { name: 'bun', value: 'bun' },
@@ -114,11 +115,11 @@ export async function interactive_setup(overwrite: boolean = false) {
   let output_dir: string | undefined;
   if (builder !== 'none') {
     input_dir = await input({
-      message: 'input directory',
+      message: 'Input directory',
       default: 'src/',
     });
     output_dir = await input({
-      message: 'output directory',
+      message: 'Output directory',
       default: 'dist/',
     });
   }
