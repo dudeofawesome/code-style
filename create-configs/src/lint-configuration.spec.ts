@@ -5,7 +5,7 @@ import {
 } from './lint-configuration.js';
 
 describe('lint-configuration', () => {
-  describe('generate_eslint_config', () => {
+  describe(_generate_eslint_config.name, () => {
     it(`should parse multiline string to array`, () => {
       const output = _generate_eslint_config('web-app', ['ts'], ['jest']);
       expect(output).toMatch(/root: true/u);

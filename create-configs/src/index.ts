@@ -13,9 +13,8 @@ import { build, BuildOptions } from './build.js';
 import { interactive_setup } from './interactive.js';
 
 // TODO(4): add support for ruby
-// TODO(1): add support for build systems
-// TODO(2): add support for runtimes
-// TODO(0): allow overwriting files when an option is passed
+// TODO(1): add deeper support for build systems
+// TODO(2): add deeper support for runtimes
 
 export async function main() {
   const options = await Yargs(hideBin(process.argv))
