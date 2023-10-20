@@ -40,15 +40,13 @@ export type VerifyMissingOptions = {
   reject?: boolean;
 };
 /**
- * @param path The path of the file to possibly delete.
- * @param remove Whether or not to delete the file should it exist.
  * @returns Whether or not the file is missing.
  */
-export async function verify_missing(
-  path: string,
-  remove: boolean,
-  reject: boolean = false,
-): Promise<boolean> {
+export async function verify_missing({
+  path,
+  remove = false,
+  reject = false,
+}: VerifyMissingOptions): Promise<boolean> {
   if (await file_exists(path)) {
     if (remove) {
       await rm(path);

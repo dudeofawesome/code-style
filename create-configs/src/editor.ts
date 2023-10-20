@@ -13,7 +13,11 @@ export async function create_vscode_config(
 
   await Promise.all([
     Promise.resolve('.vscode/settings.json')
-      .then((path) => verify_missing(path, overwrite, true).then(() => path))
+      .then((path) =>
+        verify_missing({ path, remove: overwrite, reject: true }).then(
+          () => path,
+        ),
+      )
       .then(async (path) =>
         create_file(
           path,
@@ -48,7 +52,11 @@ export async function create_vscode_config(
       ),
 
     Promise.resolve('.vscode/extensions.json')
-      .then((path) => verify_missing(path, overwrite, true).then(() => path))
+      .then((path) =>
+        verify_missing({ path, remove: overwrite, reject: true }).then(
+          () => path,
+        ),
+      )
       .then(async (path) =>
         create_file(
           path,
@@ -57,30 +65,30 @@ export async function create_vscode_config(
             stripIndent`
               // A list of recommended extensions for this workspace.
               ${JSON.stringify({
-              recommendations: [
-                ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
+                recommendations: [
+                  ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
 
-                ...(languages.includes('js') || languages.includes('ts')
-                  ? ['dbaeumer.vscode-eslint']
-                  : []),
-                ...(languages.includes('rb')
-                  ? ['Shopify.ruby-lsp', 'castwide.solargraph']
-                  : []),
-                ...(languages.includes('py')
-                  ? [
-                      'ms-python.black-formatter',
-                      'ms-python.python',
-                      'ms-python.vscode-pylance',
-                    ]
-                  : []),
-                ...(languages.includes('css') || languages.includes('scss')
-                  ? ['stylelint.vscode-stylelint']
-                  : []),
+                  ...(languages.includes('js') || languages.includes('ts')
+                    ? ['dbaeumer.vscode-eslint']
+                    : []),
+                  ...(languages.includes('rb')
+                    ? ['Shopify.ruby-lsp', 'castwide.solargraph']
+                    : []),
+                  ...(languages.includes('py')
+                    ? [
+                        'ms-python.black-formatter',
+                        'ms-python.python',
+                        'ms-python.vscode-pylance',
+                      ]
+                    : []),
+                  ...(languages.includes('css') || languages.includes('scss')
+                    ? ['stylelint.vscode-stylelint']
+                    : []),
 
                   ...(technologies.includes('jest')
                     ? ['Orta.vscode-jest']
                     : []),
-              ],
+                ],
               })}
             `,
           ),
@@ -88,7 +96,11 @@ export async function create_vscode_config(
       ),
 
     Promise.resolve('.vscode/launch.json')
-      .then((path) => verify_missing(path, overwrite, true).then(() => path))
+      .then((path) =>
+        verify_missing({ path, remove: overwrite, reject: true }).then(
+          () => path,
+        ),
+      )
       .then(async (path) =>
         create_file(
           path,
@@ -97,21 +109,21 @@ export async function create_vscode_config(
             stripIndent`
               // https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations
               ${JSON.stringify({
-              configurations: [
-                ...((languages.includes('js') || languages.includes('ts')) &&
-                ['backend', 'cli'].includes(project_type)
-                  ? [
-                      {
-                        type: 'node',
-                        request: 'attach',
-                        name: 'Attach',
-                        skipFiles: ['<node_internals>/**'],
-                        restart: true,
-                        continueOnAttach: true,
-                      },
-                    ]
-                  : []),
-              ],
+                configurations: [
+                  ...((languages.includes('js') || languages.includes('ts')) &&
+                  ['backend', 'cli'].includes(project_type)
+                    ? [
+                        {
+                          type: 'node',
+                          request: 'attach',
+                          name: 'Attach',
+                          skipFiles: ['<node_internals>/**'],
+                          restart: true,
+                          continueOnAttach: true,
+                        },
+                      ]
+                    : []),
+                ],
               })}
             `,
           ),

@@ -64,7 +64,7 @@ export async function create_ts_config(
   // }
 
   const path = 'tsconfig.json';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     await create_file(
       path,
       await prettify(
@@ -124,7 +124,7 @@ export async function create_js_config(
   // }
 
   const path = 'jsconfig.json';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     await create_file(
       path,
       await prettify(

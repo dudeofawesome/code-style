@@ -4,7 +4,7 @@ import { create_file, verify_missing } from './utils.js';
 
 export async function create_prettier_config(overwrite: boolean = false) {
   const path = '.prettierrc';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     await create_file(
       path,
       stripIndent`
@@ -19,7 +19,7 @@ export async function create_prettier_config(overwrite: boolean = false) {
 
 export async function create_editor_config(overwrite: boolean = false) {
   const path = '.editorconfig';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     if (!(await stat(path).catch(() => ({ isFile: () => false }))).isFile()) {
       await symlink(
         'node_modules/@dudeofawesome/code-style/.editorconfig',

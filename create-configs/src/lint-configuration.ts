@@ -81,7 +81,7 @@ export async function create_eslint_config(
   overwrite: boolean = true,
 ) {
   const path = '.eslintrc.yaml';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     return create_file(
       path,
       await prettify(
@@ -113,7 +113,7 @@ export async function create_stylelint_config(
   overwrite: boolean = true,
 ) {
   const path = '.stylelintrc.yaml';
-  if (await verify_missing(path, overwrite)) {
+  if (await verify_missing({ path, remove: overwrite })) {
     return create_file(
       path,
       await prettify(path, _generate_stylelint_config(languages)),
