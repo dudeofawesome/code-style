@@ -5,6 +5,7 @@ const config = {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
+  rootDir: 'src/',
 };
 
 // eslint-disable-next-line import/no-default-export

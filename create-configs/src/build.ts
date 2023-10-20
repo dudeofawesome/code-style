@@ -16,6 +16,8 @@ import {
   Builder,
   Runtime,
 } from './types.js';
+import { includes_js } from './utils.js';
+import { add_npm_scripts } from './scripts.js';
 
 export interface BuildOptions {
   project_type: ProjectType;
@@ -71,7 +73,7 @@ export async function build(
           )
         : null,
 
-      languages.includes('ts') || languages.includes('js')
+      includes_js(languages)
         ? [
             await create_eslint_config(
               project_type,
@@ -85,7 +87,20 @@ export async function build(
               technologies,
               runtime,
               builder,
-            }),
+            })
+              /**
+               * Make sure that we're not trying to modify package.json at the
+               * same time as NPM.
+               */
+              .then(async () =>
+                add_npm_scripts({
+                  languages,
+                  technologies,
+                  runtime,
+                  builder,
+                  overwrite,
+                }),
+              ),
           ]
         : null,
     ]
