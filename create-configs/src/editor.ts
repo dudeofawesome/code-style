@@ -1,4 +1,5 @@
 import { mkdir } from 'node:fs/promises';
+import { stripIndent } from 'common-tags';
 import { create_file, prettify, verify_missing } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
 
@@ -53,7 +54,9 @@ export async function create_vscode_config(
           path,
           await prettify(
             path,
-            JSON.stringify({
+            stripIndent`
+              // A list of recommended extensions for this workspace.
+              ${JSON.stringify({
               recommendations: [
                 ...['editorconfig.editorconfig', 'esbenp.prettier-vscode'],
 
@@ -74,9 +77,12 @@ export async function create_vscode_config(
                   ? ['stylelint.vscode-stylelint']
                   : []),
 
-                ...(technologies.includes('jest') ? ['Orta.vscode-jest'] : []),
+                  ...(technologies.includes('jest')
+                    ? ['Orta.vscode-jest']
+                    : []),
               ],
-            }),
+              })}
+            `,
           ),
         ),
       ),
@@ -88,7 +94,9 @@ export async function create_vscode_config(
           path,
           await prettify(
             path,
-            JSON.stringify({
+            stripIndent`
+              // https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations
+              ${JSON.stringify({
               configurations: [
                 ...((languages.includes('js') || languages.includes('ts')) &&
                 ['backend', 'cli'].includes(project_type)
@@ -104,7 +112,8 @@ export async function create_vscode_config(
                     ]
                   : []),
               ],
-            }),
+              })}
+            `,
           ),
         ),
       ),

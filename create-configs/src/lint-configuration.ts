@@ -100,8 +100,12 @@ export function _generate_stylelint_config(languages: Language[]): string {
     config.extends = ['@dudeofawesome/stylelint-config-scss'];
   }
 
-  // TODO(0): add usage/update docs to each created file
-  return stringify(config);
+  return stripIndent`
+    # In order to update the this config, update ${
+      Array.isArray(config.extends) ? config.extends.join(', ') : config.extends
+    }
+    ${stringify(config)}
+  `;
 }
 
 export async function create_stylelint_config(
