@@ -1,32 +1,60 @@
 {
   "compilerOptions": {
-    // modules
-    "module": "ESNext",
+    //=== MODULES ===//
+    /**
+     * `Node16` integrates with node's esm support. Depending upon
+     * package.json's `type` setting, will either use CommonJS or ESM.
+     * You might also be interested in using `commonjs`.
+     */
+    "module": "Node16",
+    /**
+     * `Node10` supports only `require`, forcing transpilation of `import`s.
+     * You might also be interested in using `node16`.
+     * `bundler` should not be used.
+     */
     "moduleResolution": "Node10",
+    // fixes some issues around importing commonjs from esm
     "esModuleInterop": true,
-    // "verbatimModuleSyntax": true, // TODO: what is this?
-    "moduleDetection": "force", // TODO: what is this?
+    // synthesize default imports
+    "allowSyntheticDefaultImports": true,
+    // keep any imports that don't specify `import type`
+    "verbatimModuleSyntax": true,
 
-    // input
+    //=== INPUT ===//
+    // type-check .d.ts files
     "skipLibCheck": false,
+    // allow interop with JS files in project
     "allowJs": true,
+    // type-check JS
     "checkJs": true,
     "incremental": true,
+    // eliminates inconsistencies with case-sensitive filesystems
     "forceConsistentCasingInFileNames": true,
+    // enable importing json
     "resolveJsonModule": true,
+    // defines environment
     "lib": ["ES2022"],
 
-    // output
+    //=== OUTPUT ===//
+    // emit .d.ts files
     "declaration": true,
+    // emit metadata about decorators
     "emitDecoratorMetadata": true,
+    // enables pre-standardization decorators
     "experimentalDecorators": true, // TODO: what about the future?
-    "allowSyntheticDefaultImports": true,
+    // transpiles TS to es2022
     "target": "es2022",
+    // emit sourcemaps
     "sourceMap": true,
+    // use tslib helper functions instead of in-lining them
+    "importHelpers": true,
 
-    // strictness
+    //=== STRICTNESS ===//
+    // enable the strict family of TS flags
     "strict": true,
+    // ensure that array indexes aren't null upon access
     "noUncheckedIndexedAccess": true, // TODO: can we actually do this?
+    // prevent unexpected behavior with missing `break` statements
     "noFallthroughCasesInSwitch": true
   }
 }

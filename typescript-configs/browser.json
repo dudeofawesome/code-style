@@ -1,7 +1,10 @@
 {
   "extends": "./base.json",
   "compilerOptions": {
+    // TODO(0): does this layer onto the lib from base?
+    // defines environment
     "lib": ["DOM"],
+    // transpiles TS to es2019
     "target": "ES2019" // TODO: what browsers do we want to support?
   }
 }

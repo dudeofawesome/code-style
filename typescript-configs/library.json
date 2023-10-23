@@ -1,7 +1,15 @@
 {
+  /**
+   * This config sets up the compiler to emit type declarations, declaration
+   * maps, and source maps. This helps to improve usability of the published
+   * module.
+   */
   "compilerOptions": {
+    // enable type declaration generation
     "declaration": true,
+    // enable declaration-map generation
     "declarationMap": true,
+    // enable source-map generation
     "sourceMap": true
   }
 }

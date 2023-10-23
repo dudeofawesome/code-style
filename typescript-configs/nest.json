@@ -1,7 +1,14 @@
 {
   "extends": "./node.json",
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    //=== MODULES ===//
+    "module": "CommonJS",
+    "moduleResolution": "Node16",
+
+    //=== DECORATORS ===//
+    // emit metadata about decorators
+    "emitDecoratorMetadata": true,
+    // enables pre-standardization decorators
+    "experimentalDecorators": true
   }
 }

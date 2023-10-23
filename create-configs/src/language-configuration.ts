@@ -21,22 +21,20 @@ export function _generate_ts_config(
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@dudeofawesome/typescript-configs/browser.json');
       if (technologies.includes('react')) {
         config.extends.push('@dudeofawesome/typescript-configs/react.json');
+      } else {
+        config.extends.push('@dudeofawesome/typescript-configs/browser.json');
       }
       break;
     case 'backend':
     case 'cli':
-      config.extends.push('@dudeofawesome/typescript-configs/node.json');
+      if (technologies.includes('nestjs')) {
+        config.extends.push('@dudeofawesome/typescript-configs/nest.json');
+      } else {
+        config.extends.push('@dudeofawesome/typescript-configs/node.json');
+      }
       break;
-  }
-
-  if (technologies.includes('nestjs')) {
-    config.extends.splice(
-      config.extends.indexOf('@dudeofawesome/typescript-configs/node.json'),
-    );
-    config.extends.push('@dudeofawesome/typescript-configs/nest.json');
   }
 
   if (technologies.includes('esm')) {
@@ -94,9 +92,10 @@ export function _generate_js_config(
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@dudeofawesome/javascript-configs/browser.json');
       if (technologies.includes('react')) {
         config.extends.push('@dudeofawesome/javascript-configs/react.json');
+      } else {
+        config.extends.push('@dudeofawesome/javascript-configs/browser.json');
       }
       break;
     case 'backend':

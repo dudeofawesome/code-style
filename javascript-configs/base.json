@@ -1,16 +1,20 @@
 {
   "extends": "@dudeofawesome/typescript-configs/base.json",
   "compilerOptions": {
+    //=== MODULES ===//
     "module": "CommonJS",
     "moduleResolution": "node",
 
-    // output
+    //=== OUTPUT ===//
+    // don't transpile js
     "noEmit": true,
 
-    // strictness
+    //=== STRICTNESS ===//
+    // allow implicit any
     "noImplicitAny": false
   },
   "typeAcquisition": {
+    // automatically retrieve
     "enable": true
   }
 }
