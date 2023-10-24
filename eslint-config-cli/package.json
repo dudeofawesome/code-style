@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-cli",
-  "version": "2.0.0-3",
+  "version": "2.0.0-4",
   "description": "My CLI ESLint config",
   "keywords": [
     "style",
@@ -21,7 +21,7 @@
     "test": "node --require tsm --test test/index.ts"
   },
   "dependencies": {
-    "@dudeofawesome/eslint-config-node": "^2.0.0-3"
+    "@dudeofawesome/eslint-config-node": "^2.0.0-4"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
