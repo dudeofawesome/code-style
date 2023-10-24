@@ -16,8 +16,6 @@
     "esModuleInterop": true,
     // synthesize default imports
     "allowSyntheticDefaultImports": true,
-    // keep any imports that don't specify `import type`
-    "verbatimModuleSyntax": true,
 
     //=== INPUT ===//
     // type-check .d.ts files
