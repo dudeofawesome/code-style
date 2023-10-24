@@ -2,11 +2,10 @@
   "compilerOptions": {
     //=== MODULES ===//
     /**
-     * `Node16` integrates with node's esm support. Depending upon
-     * package.json's `type` setting, will either use CommonJS or ESM.
-     * You might also be interested in using `commonjs`.
+     * `CommonJS` will transpile your code to CommonJS for better compatability.
+     * You might be interested in using the `esmodule.json` config.
      */
-    "module": "Node16",
+    "module": "CommonJS",
     /**
      * `Node10` supports only `require`, forcing transpilation of `import`s.
      * You might also be interested in using `node16`.
