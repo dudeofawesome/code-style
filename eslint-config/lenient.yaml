@@ -1,0 +1,32 @@
+extends:
+  - './base.yaml'
+
+rules:
+  # require symbol to have a description
+  symbol-description: 'off'
+
+  # use template literals instead of string concatenation
+  prefer-template: 'off'
+
+  # don't use .apply()
+  prefer-spread: 'off'
+
+  # Suggest using arrow functions as callbacks
+  prefer-arrow-callback: 'off'
+
+  # prevent synchronous loops (prefering to use `Promise.all`)
+  no-await-in-loop: 'off'
+
+  # ensure promise errors are caught
+  promise/catch-or-return: 'off'
+
+  # ensure any constant numbers are properly named to increase readability
+  no-magic-numbers: 'off'
+
+  # require dot notation when possible
+  dot-notation: 'off'
+
+  max-lines: 'off'
+
+  # treat method params as const
+  no-param-reassign: 'off'

@@ -1,0 +1,19 @@
+extends:
+  - './base.yaml'
+
+rules:
+  # ensure only boolean types are used for conditions
+  '@typescript-eslint/strict-boolean-expressions':
+    - 'error'
+    - allowString: false
+      allowNumber: false
+      allowNullableObject: true
+
+  # ensure switches on union types handle all cases
+  '@typescript-eslint/switch-exhaustiveness-check': 'off'
+
+  # prevent unused vars
+  '@typescript-eslint/no-unused-vars': 'off'
+
+  # ensure any constant numbers are properly named to increase readability
+  '@typescript-eslint/no-magic-numbers': 'off'

@@ -1,0 +1,18 @@
+extends:
+  - './base.yaml'
+
+overrides:
+  - files:
+      - '**/test/**'
+      - '**/__test__/**'
+      - '*.test.*'
+      - '*.spec.*'
+      - '*.unit.*'
+      - '*.e2e.*'
+    rules:
+      # use jest comparators instead of comparing booleans
+      jest/prefer-comparison-matcher: 'off'
+      jest/prefer-equality-matcher: 'off'
+
+      # use expect(foo()).resolve instead of expect(await foo())
+      jest/prefer-expect-resolves: 'off'

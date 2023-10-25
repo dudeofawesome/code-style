@@ -1,0 +1,3 @@
+extends:
+  - './base.yaml'
+  - '@dudeofawesome/node/lenient.json'
