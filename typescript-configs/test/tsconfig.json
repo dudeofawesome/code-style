@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@dudeofawesome/typescript-configs/node.json",
-    "@dudeofawesome/typescript-configs/jest.json"
+    "@dudeofawesome/typescript-configs/roles/node.json",
+    "@dudeofawesome/typescript-configs/layers/jest.json"
   ],
   "files": ["index.ts"]
 }

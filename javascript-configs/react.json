@@ -1,3 +1,0 @@
-{
-  "extends": ["@dudeofawesome/typescript-configs/react.json", "./browser.json"]
-}

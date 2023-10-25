@@ -1,5 +1,5 @@
 {
-  "extends": ["./commonjs.json", "./strict.json"],
+  "extends": ["../layers/commonjs.json", "../layers/strict.json"],
   "compilerOptions": {
     //=== MODULES ===//
     // fixes some issues around importing commonjs from esm
@@ -25,10 +25,6 @@
     //=== OUTPUT ===//
     // emit .d.ts files
     "declaration": true,
-    // emit metadata about decorators
-    "emitDecoratorMetadata": true,
-    // enables pre-standardization decorators
-    "experimentalDecorators": true, // TODO: what about the future?
     // transpiles TS to es2022
     "target": "es2022",
     // emit sourcemaps

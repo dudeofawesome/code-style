@@ -22,23 +22,33 @@ export function _generate_ts_config(
   switch (project_type) {
     case 'web-app':
       if (technologies.includes('react')) {
-        config.extends.push('@dudeofawesome/typescript-configs/react.json');
+        config.extends.push(
+          '@dudeofawesome/typescript-configs/roles/react.json',
+        );
       } else {
-        config.extends.push('@dudeofawesome/typescript-configs/browser.json');
+        config.extends.push(
+          '@dudeofawesome/typescript-configs/roles/browser.json',
+        );
       }
       break;
     case 'backend':
     case 'cli':
       if (technologies.includes('nestjs')) {
-        config.extends.push('@dudeofawesome/typescript-configs/nest.json');
+        config.extends.push(
+          '@dudeofawesome/typescript-configs/roles/nest.json',
+        );
       } else {
-        config.extends.push('@dudeofawesome/typescript-configs/node.json');
+        config.extends.push(
+          '@dudeofawesome/typescript-configs/roles/node.json',
+        );
       }
       break;
   }
 
   if (technologies.includes('esm')) {
-    config.extends.push('@dudeofawesome/typescript-configs/esmodule.json');
+    config.extends.push(
+      '@dudeofawesome/typescript-configs/layers/esmodule.json',
+    );
   }
 
   // TODO(2): add support for library.json tsconfig
@@ -58,7 +68,7 @@ export async function create_ts_config(
 ) {
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
-  //   config.extends.push('@dudeofawesome/typescript-configs/jest.json');
+  //   config.extends.push('@dudeofawesome/typescript-configs/layers/jest.json');
   // }
 
   const path = 'tsconfig.json';
@@ -93,14 +103,18 @@ export function _generate_js_config(
   switch (project_type) {
     case 'web-app':
       if (technologies.includes('react')) {
-        config.extends.push('@dudeofawesome/javascript-configs/react.json');
+        config.extends.push(
+          '@dudeofawesome/javascript-configs/roles/react.json',
+        );
       } else {
-        config.extends.push('@dudeofawesome/javascript-configs/browser.json');
+        config.extends.push(
+          '@dudeofawesome/javascript-configs/roles/browser.json',
+        );
       }
       break;
     case 'backend':
     case 'cli':
-      config.extends.push('@dudeofawesome/javascript-configs/base.json');
+      config.extends.push('@dudeofawesome/javascript-configs/roles/base.json');
       break;
   }
 
@@ -119,7 +133,7 @@ export async function create_js_config(
 ) {
   // TODO(2): create a separate jsconfig for tests
   // if (technologies.includes('jest')) {
-  //   config.extends.push('@dudeofawesome/javascript-configs/jest.json');
+  //   config.extends.push('@dudeofawesome/javascript-configs/roles/jest.json');
   // }
 
   const path = 'jsconfig.json';

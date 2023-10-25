@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "./node.json",
+    "../layers/commonjs.json",
+    "../layers/decorators.json"
+  ]
+}

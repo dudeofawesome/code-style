@@ -1,5 +1,5 @@
 {
-  "extends": ["@dudeofawesome/typescript-configs/node.json"],
+  "extends": ["@dudeofawesome/typescript-configs/roles/node.json"],
   "compilerOptions": { "noEmit": true, "outDir": "dist/" },
   "include": ["*/test/", "utils/", "scripts/"],
   "exclude": ["dist/", "typescript-configs/", "javascript-configs/"]

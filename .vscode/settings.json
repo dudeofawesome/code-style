@@ -13,20 +13,20 @@
   },
 
   "files.associations": {
-    "**/typescript-configs/*.json": "jsonc",
-    "**/javascript-configs/*.json": "jsonc"
+    "**/typescript-configs/**/*.json": "jsonc",
+    "**/javascript-configs/**/*.json": "jsonc"
   },
   "json.schemas": [
     {
       "fileMatch": [
-        "typescript-configs/*.json",
+        "typescript-configs/**/*.json",
         "!typescript-configs/package.json"
       ],
       "url": "https://json.schemastore.org/tsconfig"
     },
     {
       "fileMatch": [
-        "javascript-configs/*.json",
+        "javascript-configs/**/*.json",
         "!javascript-configs/package.json"
       ],
       "url": "https://json.schemastore.org/jsconfig"
@@ -35,8 +35,8 @@
   "material-icon-theme.files.associations": {
     "eslint-config*/*.yaml": "eslint",
     "styleint-config/*.yaml": "stylelint",
-    "typescript-configs/*.json": "tsconfig",
-    "javascript-configs/*.json": "jsconfig"
+    "typescript-configs/**/*.json": "tsconfig",
+    "javascript-configs/**/*.json": "jsconfig"
   },
   "yaml.schemas": {
     "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"],

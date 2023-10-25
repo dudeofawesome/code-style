@@ -1,5 +1,5 @@
 {
-  "extends": ["@dudeofawesome/typescript-configs/node.json"],
+  "extends": ["@dudeofawesome/typescript-configs/roles/node.json"],
   "include": ["src/"],
   "exclude": ["dist/", "test/"]
 }

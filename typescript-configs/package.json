@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
-  "main": "base.json",
+  "main": "roles/base.json",
   "scripts": {
     "test": "node --require tsm --test test/index.ts"
   },

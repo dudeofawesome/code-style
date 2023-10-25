@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/roles/react.json",
+    "./browser.json"
+  ]
+}

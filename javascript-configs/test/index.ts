@@ -6,7 +6,7 @@ import { join } from 'node:path';
 
 const exec = promisify(execCallback);
 
-void describe('typescript-configs', () => {
+void describe('javascript-configs', () => {
   void describe('node', () =>
     transpile_and_test({
       dir: 'node',

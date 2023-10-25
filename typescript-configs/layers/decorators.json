@@ -1,10 +1,9 @@
 {
-  "extends": ["./node.json", "./commonjs.json"],
   "compilerOptions": {
     //=== DECORATORS ===//
     // emit metadata about decorators
     "emitDecoratorMetadata": true,
     // enables pre-standardization decorators
-    "experimentalDecorators": true
+    "experimentalDecorators": true // TODO: what about the future?
   }
 }
