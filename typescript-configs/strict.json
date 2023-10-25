@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    //=== STRICTNESS ===//
+    // enable the strict family of TS flags
+    "strict": true,
+    // ensure that array indexes aren't null upon access
+    "noUncheckedIndexedAccess": true, // TODO: can we actually do this?
+    // prevent unexpected behavior with missing `break` statements
+    "noFallthroughCasesInSwitch": true
+  }
+}
