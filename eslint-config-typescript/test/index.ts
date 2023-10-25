@@ -1,10 +1,16 @@
 import { describe, it } from 'node:test';
 import { join } from 'node:path';
-import { ESLint } from 'eslint';
-import { testNoFail, testRuleFail } from '@code-style/utils/testing/eslint';
+import {
+  initESLint,
+  testNoFail,
+  testRuleFail,
+} from '@code-style/utils/testing/eslint';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
-const linter = new ESLint({ cwd: join(__dirname, 'fixture') });
+const linter = initESLint(
+  { extends: ['@dudeofawesome', '@dudeofawesome/typescript'] },
+  { cwd: join(__dirname, 'fixture') },
+);
 
 void describe('eslint-config-typescript', () => {
   defaultTestSet(linter);

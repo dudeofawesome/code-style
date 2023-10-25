@@ -4,7 +4,18 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { cwd } from 'node:process';
 import { after } from 'node:test';
-import { ESLint } from 'eslint';
+import { ESLint, Linter } from 'eslint';
+
+export function initESLint(
+  config: Linter.Config<Linter.RulesRecord, Linter.RulesRecord>,
+  options: ESLint.Options = {},
+): ESLint {
+  return new ESLint({
+    useEslintrc: false,
+    overrideConfig: { root: true, ...config },
+    ...options,
+  });
+}
 
 export type FilePathResult = string;
 interface FilePathOpts {

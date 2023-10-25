@@ -1,10 +1,13 @@
 import { describe, it } from 'node:test';
 import { equal, match, strictEqual } from 'node:assert';
-import { ESLint } from 'eslint';
-import { testRuleFail, filePath } from '@code-style/utils/testing/eslint';
+import {
+  testRuleFail,
+  filePath,
+  initESLint,
+} from '@code-style/utils/testing/eslint';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
-const linter = new ESLint({ cwd: __dirname });
+const linter = initESLint({ extends: ['@dudeofawesome'] });
 
 describe('eslint-config', () => {
   defaultTestSet(linter);
