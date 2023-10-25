@@ -1,10 +1,6 @@
 {
-  "extends": "./node.json",
+  "extends": ["./node.json", "./commonjs.json"],
   "compilerOptions": {
-    //=== MODULES ===//
-    "module": "CommonJS",
-    "moduleResolution": "Node16",
-
     //=== DECORATORS ===//
     // emit metadata about decorators
     "emitDecoratorMetadata": true,
