@@ -1,25 +1,25 @@
 import { describe, it } from 'node:test';
+import { initESLint } from '@code-style/utils/testing/eslint';
 import {
-  initESLint,
-  testNoFail,
   testRuleFail,
-} from '@code-style/utils/testing/eslint';
+  testNoFail,
+} from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
   extends: ['@dudeofawesome', '@dudeofawesome/node'],
 });
 
-describe('eslint-config-node', () => {
+void describe('eslint-config-node', () => {
   defaultTestSet(linter);
 
-  describe('passes', () => {
-    it(`should pass radix`, async () =>
+  void describe('passes', () => {
+    void it(`should pass radix`, async () =>
       testNoFail({ linter, files: [{ code: `parseInt('10');\n` }] }));
   });
 
-  describe('fails', () => {
-    it(`should fail no-console`, () =>
+  void describe('fails', () => {
+    void it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',

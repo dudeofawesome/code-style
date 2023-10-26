@@ -1,20 +1,20 @@
 import { describe, it } from 'node:test';
+import { initESLint } from '@code-style/utils/testing/eslint';
 import {
-  initESLint,
-  testNoFail,
   testRuleFail,
-} from '@code-style/utils/testing/eslint';
+  testNoFail,
+} from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
   extends: ['@dudeofawesome', '@dudeofawesome/react'],
 });
 
-describe('eslint-config-react', () => {
+void describe('eslint-config-react', () => {
   defaultTestSet(linter);
 
-  describe('passes', () => {
-    it(`should parse jsx`, async () =>
+  void describe('passes', () => {
+    void it(`should parse jsx`, async () =>
       testNoFail({
         linter,
         files: [
@@ -26,22 +26,22 @@ describe('eslint-config-react', () => {
       }));
   });
 
-  describe('fails', () => {
-    it(`should fail radix`, async () =>
+  void describe('fails', () => {
+    void it(`should fail radix`, async () =>
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n`, react: true }],
       }));
 
-    it(`should fail no-console`, () =>
+    void it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',
         files: [{ code: `console.log('foo');\n`, react: true }],
       }));
 
-    it(`should fail react/jsx-key`, () =>
+    void it(`should fail react/jsx-key`, () =>
       testRuleFail({
         linter,
         ruleId: 'react/jsx-key',

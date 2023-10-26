@@ -1,5 +1,6 @@
 import { describe, it } from 'node:test';
-import { initESLint, testNoFail } from '@code-style/utils/testing/eslint';
+import { initESLint } from '@code-style/utils/testing/eslint';
+import { testNoFail } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
@@ -10,7 +11,7 @@ void describe('eslint-config-cli base', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(`should pass radix`, async () =>
+    void it(`should pass radix`, () =>
       testNoFail({ linter, files: [{ code: `parseInt('10');\n` }] }));
 
     void it(`should pass no-console`, () =>

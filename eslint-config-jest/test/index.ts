@@ -1,20 +1,20 @@
 import { describe, it } from 'node:test';
+import { initESLint } from '@code-style/utils/testing/eslint';
 import {
-  initESLint,
-  testNoFail,
   testRuleFail,
-} from '@code-style/utils/testing/eslint';
+  testNoFail,
+} from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
   extends: ['@dudeofawesome', '@dudeofawesome/jest'],
 });
 
-describe('eslint-config-jest', () => {
+void describe('eslint-config-jest', () => {
   defaultTestSet(linter);
 
-  describe('passes', () => {
-    it(`should have jest globals in test file`, () =>
+  void describe('passes', () => {
+    void it(`should have jest globals in test file`, () =>
       testNoFail({
         linter,
         files: [
@@ -26,8 +26,8 @@ describe('eslint-config-jest', () => {
       }));
   });
 
-  describe('fails', () => {
-    it(`should not have jest globals in non-test file`, () =>
+  void describe('fails', () => {
+    void it(`should not have jest globals in non-test file`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-undef',

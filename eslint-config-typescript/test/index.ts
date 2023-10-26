@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test';
 import { join } from 'node:path';
+import { initESLint } from '@code-style/utils/testing/eslint';
 import {
-  initESLint,
   testNoFail,
   testRuleFail,
-} from '@code-style/utils/testing/eslint';
+} from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint(
