@@ -19,7 +19,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require tsm --test test/index.ts"
+    "test": "node --require tsm --test test/*.ts"
   },
   "dependencies": {
     "stylelint-order": "^6.0.3",

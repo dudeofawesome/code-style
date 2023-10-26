@@ -20,7 +20,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require tsm --test test/index.ts"
+    "test": "node --require tsm --test test/*.ts"
   },
   "dependencies": {
     "@dudeofawesome/stylelint-config": "^2.0.0-4",

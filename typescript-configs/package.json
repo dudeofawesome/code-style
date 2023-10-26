@@ -16,7 +16,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "roles/base.json",
   "scripts": {
-    "test": "node --require tsm --test test/index.ts"
+    "test": "node --require tsm --test test/*.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.5",

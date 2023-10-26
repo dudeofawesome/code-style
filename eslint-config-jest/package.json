@@ -19,7 +19,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require tsm --test test/index.ts"
+    "test": "node --require tsm --test test/*.ts"
   },
   "dependencies": {
     "eslint-plugin-jest": "^27.4.0"

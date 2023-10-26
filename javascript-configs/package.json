@@ -17,7 +17,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.json",
   "scripts": {
-    "test": "node --require tsm --test test/index.ts"
+    "test": "node --require tsm --test test/*.ts"
   },
   "dependencies": {
     "@dudeofawesome/typescript-configs": "^2.0.0-4",
