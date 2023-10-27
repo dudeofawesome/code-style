@@ -8,11 +8,11 @@ import {
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint(
-  { extends: ['@dudeofawesome', '@dudeofawesome/typescript'] },
+  { extends: ['@dudeofawesome', '@dudeofawesome/typescript/lenient.yaml'] },
   { cwd: join(__dirname, 'fixture') },
 );
 
-void describe('eslint-config-typescript strict', () => {
+void describe('eslint-config-typescript lenient', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
@@ -46,6 +46,17 @@ void describe('eslint-config-typescript strict', () => {
           },
         ],
       }));
+
+    void it(`should pass @typescript-eslint/strict-boolean-expressions object`, async () =>
+      testNoFail({
+        linter,
+        files: [
+          {
+            code: `const foo: object | null = Math.random() === 0 ? {} : null;\nif (foo) Number();\n`,
+            ts: true,
+          },
+        ],
+      }));
   });
 
   void describe('fails', () => {
@@ -63,18 +74,6 @@ void describe('eslint-config-typescript strict', () => {
         files: [
           {
             code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
-            ts: true,
-          },
-        ],
-      }));
-
-    void it(`should fail @typescript-eslint/strict-boolean-expressions object`, async () =>
-      testRuleFail({
-        linter,
-        ruleId: '@typescript-eslint/strict-boolean-expressions',
-        files: [
-          {
-            code: `const foo: object | null = Math.random() === 0 ? {} : null;\nif (foo) Number();\n`,
             ts: true,
           },
         ],
