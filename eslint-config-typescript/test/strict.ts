@@ -12,7 +12,7 @@ const linter = initESLint(
   { cwd: join(__dirname, 'fixture') },
 );
 
-void describe('eslint-config-typescript', () => {
+void describe('eslint-config-typescript strict', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {

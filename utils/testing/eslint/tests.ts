@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os';
 import { cwd } from 'node:process';
 import { after } from 'node:test';
 import { ESLint } from 'eslint';
-import { FilePathResult, FilePathOpts, filePath } from '.';
+import { FilePathResult, FilePathOpts, filePath, file_exists } from '.';
+import { randomUUID } from 'node:crypto';
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
@@ -81,7 +82,8 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
     });
     noLintMessage(res);
   } else {
-    const tmp_dir = join(tmpdir(), 'code-style-testing');
+    // TODO(3): this is all kind of brittle
+    const tmp_dir = join(tmpdir(), 'code-style-testing', randomUUID());
     const created_files: string[] = await Promise.all(
       _files
         .map((f) => ({
@@ -89,7 +91,7 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
           path: join(tmp_dir, f.path),
         }))
         .map((f) =>
-          mkdir(dirname(f.path))
+          mkdir(dirname(f.path), { recursive: true })
             .catch(() => {
               return;
             })
@@ -100,9 +102,14 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
         ),
     );
     await Promise.all([
-      copyFile(
-        join(cwd(), 'test', 'fixture', '.eslintrc.yaml'),
-        join(tmp_dir, '.eslintrc.yaml'),
+      file_exists(join(cwd(), 'test', 'fixture', '.eslintrc.yaml')).then(
+        (exists) =>
+          exists
+            ? copyFile(
+                join(cwd(), 'test', 'fixture', '.eslintrc.yaml'),
+                join(tmp_dir, '.eslintrc.yaml'),
+              )
+            : null,
       ),
       copyFile(
         join(cwd(), 'test', 'fixture', 'tsconfig.json'),

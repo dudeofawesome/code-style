@@ -1,3 +1,4 @@
+import { access } from 'node:fs/promises';
 import { ESLint, Linter } from 'eslint';
 
 export function initESLint(
@@ -24,4 +25,14 @@ export function filePath({
 }: FilePathOpts): FilePathResult {
   const ext = (ts ? 'ts' : 'js') + (react ? 'x' : '');
   return `${test ? 'test/' : ''}sample-${ext}.${ext}`;
+}
+
+/**
+ * @param path The path to check.
+ * @returns Whether or not the file exists.
+ */
+export function file_exists(path: string): Promise<boolean> {
+  return access(path)
+    .then(() => true)
+    .catch(() => false);
 }
