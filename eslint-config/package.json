@@ -18,7 +18,8 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "scripts": {
-    "test": "node --require tsm --test test/*.ts"
+    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
     "eslint": "^8.49.0",
