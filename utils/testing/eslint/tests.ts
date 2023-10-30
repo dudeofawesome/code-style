@@ -4,9 +4,9 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { cwd } from 'node:process';
 import { after } from 'node:test';
+import { randomUUID } from 'node:crypto';
 import { ESLint } from 'eslint';
 import { FilePathResult, FilePathOpts, filePath, file_exists } from '.';
-import { randomUUID } from 'node:crypto';
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
