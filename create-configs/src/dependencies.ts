@@ -145,9 +145,15 @@ export async function install_dependencies({
   })();
 
   if (prod_packages.length > 0) {
-    await exec(`${install_cmd_prod} ${prod_packages.join(' ')}`);
+    await exec(
+      `${install_cmd_prod} ${prod_packages
+        .map((p) => `${p}@latest`)
+        .join(' ')}`,
+    );
   }
   if (dev_packages.length > 0) {
-    await exec(`${install_cmd_dev} ${dev_packages.join(' ')}`);
+    await exec(
+      `${install_cmd_dev} ${dev_packages.map((p) => `${p}@latest`).join(' ')}`,
+    );
   }
 }
