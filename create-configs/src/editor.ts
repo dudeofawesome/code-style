@@ -11,7 +11,7 @@ export async function create_vscode_config(
 ) {
   await mkdir('.vscode/').catch(() => {});
 
-  await Promise.all([
+  await Promise.allSettled([
     Promise.resolve('.vscode/settings.json')
       .then((path) =>
         verify_missing({ path, remove: overwrite, reject: true }).then(
