@@ -15,6 +15,7 @@ import { interactive_setup } from './interactive.js';
 // TODO(4): add support for ruby
 // TODO(1): add deeper support for build systems
 // TODO(2): add deeper support for runtimes
+// TODO(2): create .gitignore file (.eslintcache, output_dir, etc)
 
 export async function main() {
   const options = await Yargs(hideBin(process.argv))

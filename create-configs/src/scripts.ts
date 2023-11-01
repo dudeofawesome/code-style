@@ -87,7 +87,7 @@ export function _generate_lint_script({
             'lint:js': `eslint . ${languages
               .filter((l) => ['js', 'ts'].includes(l))
               .map((l) => `--ext ${l}`)
-              .join(' ')}`,
+              .join(' ')} --cache`,
           };
         case 'stylelint':
           return {
