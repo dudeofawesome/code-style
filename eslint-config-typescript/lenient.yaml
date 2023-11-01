@@ -2,18 +2,26 @@ extends:
   - './base.yaml'
 
 rules:
-  # ensure only boolean types are used for conditions
+  # allow some non-boolean types conditionals
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
     - allowString: false
       allowNumber: false
       allowNullableObject: true
+      allowNullableBoolean: true
 
-  # ensure switches on union types handle all cases
+  # don't ensure switches on union types handle all cases
   '@typescript-eslint/switch-exhaustiveness-check': 'off'
 
-  # prevent unused vars
+  # allow unused vars
   '@typescript-eslint/no-unused-vars': 'off'
 
-  # ensure any constant numbers are properly named to increase readability
-  '@typescript-eslint/no-magic-numbers': 'off'
+  # allow `any`
+  '@typescript-eslint/no-explicit-any': 'off'
+  '@typescript-eslint/no-unsafe-return': 'off'
+  '@typescript-eslint/no-unsafe-assignment': 'off'
+  '@typescript-eslint/no-unsafe-member-access': 'off'
+  '@typescript-eslint/no-unsafe-argument': 'off'
+
+  # allow non-null assertions
+  '@typescript-eslint/no-non-null-assertion': 'off'

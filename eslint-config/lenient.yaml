@@ -20,9 +20,6 @@ rules:
   # ensure promise errors are caught
   promise/catch-or-return: 'off'
 
-  # ensure any constant numbers are properly named to increase readability
-  no-magic-numbers: 'off'
-
   # require dot notation when possible
   dot-notation: 'off'
 
