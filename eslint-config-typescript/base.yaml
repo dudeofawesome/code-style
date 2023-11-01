@@ -54,6 +54,10 @@ rules:
   # this rule doesn't work reliably
   '@typescript-eslint/consistent-generic-constructors': 'off'
 
+  # disable this rule until this issue is fixed
+  # https://github.com/typescript-eslint/typescript-eslint/issues/7502
+  '@typescript-eslint/no-base-to-string': 'off'
+
   # typescript checks imports for us
   'import/no-unresolved': 'off'
   'n/no-missing-import': 'off'
