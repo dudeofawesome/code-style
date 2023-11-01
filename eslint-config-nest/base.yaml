@@ -1,0 +1,9 @@
+extends:
+  - '@dudeofawesome/node'
+  - '@dudeofawesome/typescript'
+
+rules:
+  no-restricted-imports:
+    - 'error'
+    - patterns:
+        - '@nestjs/terminus/dist/*'

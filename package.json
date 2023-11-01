@@ -31,6 +31,7 @@
     "eslint-config-browser",
     "eslint-config-cli",
     "eslint-config-jest",
+    "eslint-config-nest",
     "eslint-config-node",
     "eslint-config-react",
     "eslint-config-typescript",
