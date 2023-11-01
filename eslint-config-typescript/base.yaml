@@ -15,16 +15,26 @@ rules:
     - args: 'none'
       destructuredArrayIgnorePattern: '^_'
 
+  # TODO(0): throws on code that should probably be allowed
+  # ```
+  # const foo: number | undefined = Math.random() === 0 ? 1 : undefined;
+  # if (foo?.toString().includes('a')) console.log('hi');
+  # ```
   # ensure only boolean types are used for conditions
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
     - allowString: false
       allowNumber: false
       allowNullableObject: false
+      allowNullableBoolean: true
 
   # ensure switches on union types handle all cases
   '@typescript-eslint/switch-exhaustiveness-check': 'error'
 
+  # disallow empty classes unless they're decorated
+  '@typescript-eslint/no-extraneous-class':
+    - 'error'
+    - allowWithDecorator: true
 
   # TODO: do we want this?
   # require enum values to be initialized in order to prevent value shifting
