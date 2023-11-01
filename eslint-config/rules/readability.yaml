@@ -2,17 +2,6 @@ rules:
   # use `else if` instead
   no-lonely-if: 'error'
 
-  # ensure any constant numbers are properly named to increase readability
-  no-magic-numbers:
-    - 'error'
-    - enforceConst: true
-      # TODO(0): consider adding 4, 24, 60, 100, 1000, 3600
-      # TODO(0): ensure sync with TS rule
-      ignore: [0, 1, 2]
-      ignoreArrayIndexes: true
-      ignoreDefaultValues: true
-      ignoreClassFieldInitialValues: true
-
   # don't allow floating decimals
   no-floating-decimal: 'error'
 

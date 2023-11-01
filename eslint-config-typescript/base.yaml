@@ -25,20 +25,6 @@ rules:
   # ensure switches on union types handle all cases
   '@typescript-eslint/switch-exhaustiveness-check': 'error'
 
-  # ensure any constant numbers are properly named to increase readability
-  '@typescript-eslint/no-magic-numbers':
-    - 'error'
-    - enforceConst: true
-      ignore: [0, 1, 2]
-      ignoreArrayIndexes: true
-      ignoreDefaultValues: true
-      ignoreClassFieldInitialValues: true
-
-      ignoreEnums: true
-      ignoreNumericLiteralTypes: true
-      ignoreReadonlyClassProperties: true
-      ignoreTypeIndexes: true
-  no-magic-numbers: 'off'
 
   # TODO: do we want this?
   # require enum values to be initialized in order to prevent value shifting
