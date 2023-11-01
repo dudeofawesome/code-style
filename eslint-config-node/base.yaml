@@ -1,6 +1,9 @@
 extends:
   - 'plugin:n/recommended-module'
 
+parserOptions:
+  ecmaVersion: 2022 # Version is inline with Node 16
+
 env:
   node: true
 
@@ -78,6 +81,6 @@ overrides:
       - '*.unit.*'
       - '*.e2e.*'
       # config files
-      - 'config.*'
+      - '*.config.*'
     rules:
       n/no-process-env: 'off'
