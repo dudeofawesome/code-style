@@ -29,3 +29,5 @@ overrides:
 
       # prevent error from dev deps in tests
       n/no-unpublished-import: 'off'
+
+      max-lines: 'off'
