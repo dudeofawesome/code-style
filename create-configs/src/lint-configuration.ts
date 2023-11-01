@@ -51,14 +51,18 @@ export function _generate_eslint_config(
       }
       break;
     case 'backend':
-      config.extends.push('@dudeofawesome/node');
+      if (technologies.includes('nestjs')) {
+        config.extends.push('@dudeofawesome/nest');
+      } else {
+        config.extends.push('@dudeofawesome/node');
+      }
       break;
     case 'cli':
       config.extends.push('@dudeofawesome/cli');
       break;
   }
 
-  if (languages.includes('ts')) {
+  if (languages.includes('ts') && !technologies.includes('nestjs')) {
     config.extends.push('@dudeofawesome/typescript');
   }
   if (technologies.includes('jest')) {
