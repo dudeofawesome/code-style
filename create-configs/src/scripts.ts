@@ -66,8 +66,9 @@ type LintScripts = Record<`lint:${string}`, string>;
 /** @private */
 export function _generate_lint_script({
   languages,
+  technologies,
   builder,
-}: Omit<AddNPMScriptsOptions, 'overwrite' | 'technologies' | 'runtime'>): {
+}: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime'>): {
   [key: `lint:${string}`]: string;
   lint: string;
 } {
@@ -84,10 +85,17 @@ export function _generate_lint_script({
         case 'eslint':
           return {
             ...scripts,
-            'lint:js': `eslint . ${languages
+            'lint:js': `eslint . --ext ${languages
               .filter((l) => ['js', 'ts'].includes(l))
-              .map((l) => `--ext ${l}`)
-              .join(' ')} --cache`,
+              .reduce<string[]>((extensions, ext) => {
+                return [
+                  ...extensions,
+                  ...(technologies.includes('react')
+                    ? [ext]
+                    : [ext, `${ext}x`]),
+                ];
+              }, [])
+              .join(',')} --cache`,
           };
         case 'stylelint':
           return {
