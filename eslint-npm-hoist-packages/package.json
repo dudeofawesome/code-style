@@ -14,6 +14,9 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.1.0",
     "eslint-config-prettier": "^9.0.0",
