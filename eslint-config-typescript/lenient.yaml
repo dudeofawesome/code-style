@@ -6,7 +6,8 @@ rules:
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
     - allowString: false
-      allowNumber: false
+      allowNumber: true
+      allowNullableNumber: true
       allowNullableObject: true
       allowNullableBoolean: true
 

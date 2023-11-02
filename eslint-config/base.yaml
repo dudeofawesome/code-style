@@ -3,6 +3,7 @@ extends:
   - 'plugin:prettier/recommended'
   - 'plugin:promise/recommended'
   - 'plugin:import/recommended'
+  - 'plugin:@eslint-community/eslint-comments/recommended'
 
   - './rules/bugs.yaml'
   - './rules/deprecated.yaml'

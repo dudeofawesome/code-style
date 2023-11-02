@@ -24,7 +24,8 @@ rules:
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
     - allowString: false
-      allowNumber: false
+      allowNumber: true
+      allowNullableNumber: true
       allowNullableObject: false
       allowNullableBoolean: true
 
@@ -58,6 +59,9 @@ rules:
   # https://github.com/typescript-eslint/typescript-eslint/issues/7502
   '@typescript-eslint/no-base-to-string': 'off'
 
+  # allow enum to primitive
+  '@typescript-eslint/no-unsafe-enum-comparison': 'off'
+
   # typescript checks imports for us
   'import/no-unresolved': 'off'
   'n/no-missing-import': 'off'
@@ -65,3 +69,8 @@ rules:
   # typescript handles these rules for us
   consistent-return: 'off'
   no-invalid-this: 'off'
+
+  # allow any value in template literal expression
+  '@typescript-eslint/restrict-template-expressions': 'off'
+
+  # TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types

@@ -8,21 +8,19 @@ rules:
   # use template literals instead of string concatenation
   prefer-template: 'off'
 
-  # don't use .apply()
+  # allow .apply()
   prefer-spread: 'off'
 
-  # Suggest using arrow functions as callbacks
-  prefer-arrow-callback: 'off'
-
-  # prevent synchronous loops (prefering to use `Promise.all`)
+  # allow synchronous loops
   no-await-in-loop: 'off'
 
-  # ensure promise errors are caught
+  # don't ensure promise errors are caught
   promise/catch-or-return: 'off'
 
-  # require dot notation when possible
+  # don't require dot notation
   dot-notation: 'off'
 
+  # allow files to be any length
   max-lines: 'off'
 
   # treat method params as const

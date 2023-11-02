@@ -30,4 +30,9 @@ overrides:
       # prevent error from dev deps in tests
       n/no-unpublished-import: 'off'
 
+      # allow test files of any length
       max-lines: 'off'
+
+      # don't require dot notation in tests as this can be useful for accessing
+      #   Typescript private properties & methods
+      dot-notation: 'off'

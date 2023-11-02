@@ -58,3 +58,8 @@ rules:
 
   # require that engines are specified in package.json
   json-files/require-engines: 'error'
+
+  # don't allow empty blocks
+  no-empty:
+    - 'error'
+    - 'allowEmptyCatch': true
