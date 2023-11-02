@@ -7,6 +7,7 @@ describe('scripts', () => {
       const output = _generate_lint_script({
         builder: 'esbuild',
         languages: ['ts'],
+        technologies: ['react'],
       });
       expect(output.lint).toEqual('concurrently "npm:lint:*"');
       expect(output['lint:js']).toMatch(/^eslint/u);
