@@ -9,7 +9,7 @@ describe('scripts', () => {
         languages: ['ts'],
         technologies: ['react'],
       });
-      expect(output.lint).toEqual('concurrently "npm:lint:*"');
+      expect(output.lint).toMatch(/concurrently.+"npm:lint:\*"/u);
       expect(output['lint:js']).toMatch(/^eslint/u);
     });
   });

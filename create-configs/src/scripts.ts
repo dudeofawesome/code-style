@@ -6,6 +6,8 @@ import { includes_js, verify_missing_script } from './utils.js';
 
 const exec = promisify(execCallback);
 
+const concurrently_opts = '--group --prefix none';
+
 export type AddNPMScriptsOptions = {
   languages: Language[];
   technologies: Technology[];
@@ -105,7 +107,7 @@ export function _generate_lint_script({
               .join(',')}}`,
           };
         case 'tsc':
-          return { ...scripts, 'lint:types': 'tsc --noEmit' };
+          return { ...scripts, 'lint:types': 'tsc --noEmit --pretty true' };
         default:
           throw new TypeError(`Unexpected linter type "${linter as string}"`);
       }
@@ -115,7 +117,7 @@ export function _generate_lint_script({
 
   return {
     ...steps,
-    lint: `concurrently "npm:lint:*"`,
+    lint: `concurrently ${concurrently_opts} "npm:lint:*"`,
   };
 }
 
@@ -173,7 +175,7 @@ export async function set_check_script({
     const command: string = ((runtime): string => {
       switch (runtime) {
         case 'nodejs':
-          return `npm pkg set 'scripts.check'='concurrently "npm:test" "npm:lint"'`;
+          return `npm pkg set 'scripts.check'='concurrently ${concurrently_opts} "npm:test" "npm:lint"'`;
         default:
           throw new Error(`Unsupported runtime "${runtime}"`);
       }
