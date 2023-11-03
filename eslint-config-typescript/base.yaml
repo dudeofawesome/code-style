@@ -73,4 +73,11 @@ rules:
   # allow any value in template literal expression
   '@typescript-eslint/restrict-template-expressions': 'off'
 
+  '@typescript-eslint/unbound-method':
+    - 'error'
+    - ignoreStatic: true
+
+  # Typescript will handle this for us
+  'promise/valid-params': 'off'
+
   # TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types
