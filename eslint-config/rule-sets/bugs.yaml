@@ -13,3 +13,6 @@ rules:
 
   # ensure thrown value extend `Error`
   no-throw-literal: 'error'
+
+  # ensure that comparisons have an opportunity to change value
+  no-constant-binary-expression: 'error'
