@@ -51,3 +51,5 @@ overrides:
 
       # simplify testing methods
       '@typescript-eslint/unbound-method': 'off'
+
+      '@typescript-eslint/no-throw-literal': 'off'
