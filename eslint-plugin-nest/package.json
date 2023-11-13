@@ -17,14 +17,14 @@
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "node $NODE_OPTS --require tsm --test test/*.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
-  "files": [
-    "dist/"
-  ],
   "devDependencies": {
     "@dudeofawesome/eslint-config": "^2.0.0-7",
     "@dudeofawesome/eslint-config-node": "^2.0.0-7",
