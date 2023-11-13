@@ -2,6 +2,6 @@
   "extends": [
     "./node.json",
     "../layers/commonjs.json",
-    "../layers/decorators.json"
+    "../layers/legacy-decorators.json"
   ]
 }

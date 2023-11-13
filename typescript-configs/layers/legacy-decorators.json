@@ -4,6 +4,6 @@
     // emit metadata about decorators
     "emitDecoratorMetadata": true,
     // enables pre-standardization decorators
-    "experimentalDecorators": true // TODO: what about the future?
+    "experimentalDecorators": true
   }
 }
