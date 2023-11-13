@@ -40,6 +40,7 @@
     "eslint-npm-hoist-packages-node",
     "eslint-npm-hoist-packages-react",
     "eslint-npm-hoist-packages-typescript",
+    "eslint-plugin-nest",
     "javascript-configs",
     "stylelint-config",
     "stylelint-config-scss",

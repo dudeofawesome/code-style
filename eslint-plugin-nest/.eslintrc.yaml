@@ -1,0 +1,12 @@
+root: true
+extends:
+  - '@dudeofawesome'
+  - '@dudeofawesome/cli'
+
+overrides:
+  # - files:
+  #     - 'bin/**'
+  - files:
+      - 'src/**'
+    extends:
+      - '@dudeofawesome/typescript'

@@ -1,0 +1,1 @@
+# @dudeofawesome/eslint-plugin-nest

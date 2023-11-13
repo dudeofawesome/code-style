@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/roles/node.json"
+  ],
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "outDir": "dist/"
+  },
+  "include": ["src/"],
+  "exclude": ["dist/"]
+}
