@@ -21,8 +21,8 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc",
-    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "build": "tsc --project tsconfig.build.json",
+    "test": "node $NODE_OPTS --require tsm src/**/*.spec.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "devDependencies": {
