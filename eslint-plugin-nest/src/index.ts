@@ -1,15 +1,11 @@
 import { ESLint } from 'eslint';
 
-import { disable_barreling } from './rules/disable-barreling';
-import { recommended } from './configs/recommended';
+import { rules } from './rules';
+import { configs } from './configs';
 
 const plugin: ESLint.Plugin = {
-  rules: {
-    'disable-barreling': disable_barreling,
-  },
-  configs: {
-    recommended,
-  },
+  rules,
+  configs,
 };
 
 export = plugin;
