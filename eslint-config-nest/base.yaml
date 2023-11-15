@@ -1,4 +1,5 @@
 extends:
+  - 'plugin:@dudeofawesome/nest/recommended'
   - '@dudeofawesome/node'
   - '@dudeofawesome/typescript'
 

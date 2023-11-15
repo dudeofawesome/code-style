@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@dudeofawesome/eslint-config-node": "2.0.0-7",
-    "@dudeofawesome/eslint-config-typescript": "2.0.0-7"
+    "@dudeofawesome/eslint-config-typescript": "2.0.0-7",
+    "@dudeofawesome/eslint-plugin-nest": "2.0.0-7"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
