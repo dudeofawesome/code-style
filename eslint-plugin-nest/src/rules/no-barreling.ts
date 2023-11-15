@@ -1,30 +1,42 @@
-import { Rule } from 'eslint';
-import { Program } from 'estree';
+import { ESLintUtils } from '@typescript-eslint/utils';
+import type { TSESTree } from '@typescript-eslint/types';
 
-export const no_barreling: Rule.RuleModule = {
+const createRule = ESLintUtils.RuleCreator(
+  (name) =>
+    `https://github.com/dudeofawesome/code-style/blob/main/eslint-plugin-nest/README.md${name}`,
+);
+
+export const no_barreling = createRule({
+  name: 'no-barreling',
+  defaultOptions: [],
   meta: {
     type: 'problem',
     hasSuggestions: true,
+    docs: {
+      description: `Barrel files should not exist as the Nest depency injection system can get confused by them.`,
+    },
+    messages: {
+      not_allowed: 'Barrel files are not allowed',
+      delete_export: 'Delete this export declaration',
+    },
+    schema: [],
   },
   create(context) {
     return {
-      Program: (node: Program) => {
+      Program: (node) => {
         if (
           node.body.find(
             (node) =>
-              node.type !== 'ExportAllDeclaration' &&
-              'exportKind' in node &&
+              node.type === 'ExportAllDeclaration' &&
               node.exportKind !== 'type',
-          ) == null
+          ) != null
         ) {
-          console.log(node);
-          debugger;
           context.report({
             node,
-            message: `Barrel files are not allowed`,
+            messageId: 'not_allowed',
             suggest: [
               {
-                desc: 'Delete this export declaration',
+                messageId: 'delete_export',
                 fix(fixer) {
                   return fixer.remove(node);
                 },
@@ -35,4 +47,4 @@ export const no_barreling: Rule.RuleModule = {
       },
     };
   },
-};
+});

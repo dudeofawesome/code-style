@@ -1,7 +1,6 @@
 root: true
 extends:
   - '@dudeofawesome'
-  - '@dudeofawesome/cli'
 
 overrides:
   # - files:

@@ -1,6 +1,6 @@
 import { Linter } from 'eslint';
-import plugin from '../index';
-import { recommended } from './recommended';
+import plugin from '../index.js';
+import { recommended } from './recommended.js';
 
 export const recommended_flat: Linter.FlatConfig = {
   plugins: { '@dudeofawesome/nest': plugin },
