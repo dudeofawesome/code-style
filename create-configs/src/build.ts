@@ -9,6 +9,7 @@ import {
 } from './lint-configuration.js';
 import { install_dependencies } from './dependencies.js';
 import { create_vscode_config } from './editor.js';
+import { create_gitignore } from './git.js';
 import {
   ProjectType,
   Language,
@@ -48,6 +49,8 @@ export async function build(
   await Promise.all(
     [
       create_vscode_config(project_type, languages, technologies, overwrite),
+
+      create_gitignore({ languages, technologies, project_type, output_dir }),
 
       languages.includes('css') || languages.includes('scss')
         ? await create_stylelint_config(languages, overwrite)
