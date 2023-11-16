@@ -95,6 +95,7 @@ export function _generate_lint_script({
                   ...(technologies.includes('react')
                     ? [ext]
                     : [ext, `${ext}x`]),
+                  'json',
                 ];
               }, [])
               .join(',')} --cache`,

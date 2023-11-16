@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsc",
     "prelint": "npm run build",
-    "lint": "eslint . --ext ts --ext js",
+    "lint": "eslint . --ext ts,js,json",
     "prepublishOnly": "npm run build",
     "start": "node bin/create-configs.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
