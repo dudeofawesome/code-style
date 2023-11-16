@@ -24,6 +24,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "lint": "eslint . --ext ts,js,json",
+    "prepublishOnly": "npm run build",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
