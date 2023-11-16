@@ -71,10 +71,10 @@ export function _generate_eslint_config(
 
   return stripIndent`
     # In order to update the this config, update:
-    ${_generate_dependency_list(config)
-      .map((p) => `#   ${p}`)
-      .join('\n')}
-    ${stringify(config)}
+${_generate_dependency_list(config)
+  .map((p) => `#   ${p}`)
+  .join('\n')}
+${stringify(config)}
   `;
 }
 
