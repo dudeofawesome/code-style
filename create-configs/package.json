@@ -29,6 +29,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
+    "@dudeofawesome/code-style": "^2.0.0-7",
     "@inquirer/prompts": "^3.2.0",
     "common-tags": "^1.8.2",
     "prettier": "^3.0.3",

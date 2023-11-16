@@ -1,7 +1,8 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import { access, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { format, resolveConfig, resolveConfigFile, Options } from 'prettier';
+import { format, Options } from 'prettier';
+import default_config from '@dudeofawesome/code-style/.prettierrc';
 import { Language } from './types.js';
 
 const exec = promisify(execCallback);
@@ -106,11 +107,10 @@ export async function prettify(
   path: string,
   content?: string,
 ): Promise<string> {
-  const config: Options = await resolveConfigFile(path).then((config_path) =>
-    config_path != null
-      ? resolveConfig(config_path).then((cfg) => cfg ?? ({} as Options))
-      : ({} as Options),
-  );
+  const config: Options = {
+    filepath: path,
+    ...(default_config as Options),
+  };
 
   if (content != null) {
     return await format(content, config);
