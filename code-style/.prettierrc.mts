@@ -1,10 +1,14 @@
 // https://prettier.io/docs/en/options.html
 
-const { execSync } = require('child_process');
-const deepmerge = require('deepmerge');
+import { execSync } from 'child_process';
+import deepmerge from 'deepmerge';
+// TODO(0): consider switching to `prettier-plugin-pkg` or `prettier-plugin-package`
+import PrettierPluginPackageJson from 'prettier-plugin-packagejson';
+import PrettierPluginRuby from '@prettier/plugin-ruby';
+import type { RubyOptions } from '@prettier/plugin-ruby';
+import type { Options } from 'prettier';
 
-/** @type {boolean} */
-const is_prettier_gem_installed = (() => {
+const is_prettier_gem_installed: boolean = (() => {
   try {
     return (
       execSync('gem list -i prettier_print').toString().trim() === 'true' &&
@@ -16,8 +20,7 @@ const is_prettier_gem_installed = (() => {
   }
 })();
 
-/** @type {Record<string, import('prettier').Options>} */
-const option_sets = {
+const option_sets: Record<string, Options | RubyOptions> = {
   general: {
     singleQuote: true,
     semi: true,
@@ -48,12 +51,12 @@ const option_sets = {
   },
 
   package_json: {
-    plugins: ['prettier-plugin-packagejson'],
+    plugins: [PrettierPluginPackageJson],
   },
 
   ruby: is_prettier_gem_installed
     ? {
-        plugins: ['@prettier/plugin-ruby'],
+        plugins: [PrettierPluginRuby],
 
         // rubyArrayLiteral: true,
         // rubyHashLabel: true,
@@ -65,8 +68,9 @@ const option_sets = {
     : {},
 };
 
-/** @type {import('prettier').Options} */
-module.exports = deepmerge.all([
+const config: Options = deepmerge.all([
   {},
   ...Object.entries(option_sets).map(([_, v]) => v),
 ]);
+
+export default config;

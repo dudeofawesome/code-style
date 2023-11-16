@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/roles/node.json",
+    "@dudeofawesome/typescript-configs/layers/esmodule.json",
+    "@dudeofawesome/typescript-configs/layers/library.json"
+  ],
+  "compilerOptions": {
+    "outDir": "./"
+  },
+  "files": [
+    ".prettierrc.mts",
+    "types/prettier__plugin-ruby.d.ts",
+    "types/prettier-plugin-packagejson.d.ts"
+  ]
+}

@@ -16,10 +16,29 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    "./.prettierrc": {
+      "types": "./.prettierrc.d.mts",
+      "default": "./.prettierrc.mjs"
+    }
+  },
   "bin": {
     "add-code-style": "scripts/add-code-style.sh"
   },
+  "files": [
+    ".prettierrc.mjs",
+    ".prettierrc.mjs.map",
+    ".prettierrc.d.mts",
+    ".prettierrc.d.mts.map",
+    "types/prettier__plugin-ruby.d.ts",
+    "types/prettier-plugin-packagejson.d.ts",
+    ".editorconfig",
+    "scripts/add-code-style.sh"
+  ],
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext ts,js,json",
+    "prepublishOnly": "npm run build",
     "test": "echo 'No tests'; exit 0"
   },
   "dependencies": {
@@ -27,6 +46,9 @@
     "deepmerge": "^4.3.1",
     "prettier": "^3.0.3",
     "prettier-plugin-packagejson": "^2.4.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   },
   "publishConfig": {
     "access": "public",
