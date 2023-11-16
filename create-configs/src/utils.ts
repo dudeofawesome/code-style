@@ -85,7 +85,7 @@ export async function verify_missing_script({
   overwrite = false,
   reject = false,
 }: VerifyMissingScriptOptions): Promise<boolean> {
-  if ((await exec(`npm pkg get '${json_path}'`)).stdout !== '{}') {
+  if ((await exec(`npm pkg get '${json_path}'`)).stdout.trim() !== '{}') {
     if (overwrite) {
       return true;
     } else {
