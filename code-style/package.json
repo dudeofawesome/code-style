@@ -26,14 +26,10 @@
     "add-code-style": "scripts/add-code-style.sh"
   },
   "files": [
-    "prettierrc.mjs",
-    "prettierrc.mjs.map",
-    "prettierrc.d.mts",
-    "prettierrc.d.mts.map",
-    "types/prettier__plugin-ruby.d.ts",
-    "types/prettier-plugin-packagejson.d.ts",
-    ".editorconfig",
-    "scripts/add-code-style.sh"
+    "/src/",
+    "/prettierrc.*",
+    "/.editorconfig",
+    "/scripts/add-code-style.sh"
   ],
   "scripts": {
     "build": "tsc",
