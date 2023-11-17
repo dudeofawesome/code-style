@@ -8,7 +8,8 @@ import type { Config } from 'prettier';
 const is_prettier_gem_installed: boolean = (() => {
   try {
     return (
-      // disable ruby for now
+      // TODO(0): re-enable ruby
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-binary-expression
       false &&
       execSync('gem list -i prettier_print').toString().trim() === 'true'
     );

@@ -7,6 +7,6 @@
   "compilerOptions": {
     "outDir": "./"
   },
-  "include": ["src/", "types/"],
-  "exclude": ["dist/"]
+  "include": ["src/"],
+  "exclude": ["./*.*"]
 }

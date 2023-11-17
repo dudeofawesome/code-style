@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --ext ts,js,json",
+    "lint": "eslint . --ext ts,mts,cts,js,json",
     "prepublishOnly": "npm run build",
     "test": "echo 'No tests'; exit 0"
   },
