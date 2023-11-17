@@ -17,7 +17,7 @@
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
   "exports": {
-    "./.prettierrc": {
+    "./prettierrc": {
       "types": "./prettierrc.d.mts",
       "default": "./prettierrc.mjs"
     }

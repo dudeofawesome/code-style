@@ -2,7 +2,7 @@ import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import { access, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { format, Options } from 'prettier';
-import default_config from '@dudeofawesome/code-style/.prettierrc';
+import default_config from '@dudeofawesome/code-style/prettierrc';
 import { Language } from './types.js';
 
 const exec = promisify(execCallback);
