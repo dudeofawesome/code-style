@@ -1,6 +1,5 @@
 # compiled output
-/.prettierrc.*
-!/.prettierrc.mts
+/prettierrc.*
 
 # caches
 *.tsbuildinfo

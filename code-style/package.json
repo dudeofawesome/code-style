@@ -18,18 +18,18 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "exports": {
     "./.prettierrc": {
-      "types": "./.prettierrc.d.mts",
-      "default": "./.prettierrc.mjs"
+      "types": "./prettierrc.d.mts",
+      "default": "./prettierrc.mjs"
     }
   },
   "bin": {
     "add-code-style": "scripts/add-code-style.sh"
   },
   "files": [
-    ".prettierrc.mjs",
-    ".prettierrc.mjs.map",
-    ".prettierrc.d.mts",
-    ".prettierrc.d.mts.map",
+    "prettierrc.mjs",
+    "prettierrc.mjs.map",
+    "prettierrc.d.mts",
+    "prettierrc.d.mts.map",
     "types/prettier__plugin-ruby.d.ts",
     "types/prettier-plugin-packagejson.d.ts",
     ".editorconfig",

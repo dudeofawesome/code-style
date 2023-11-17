@@ -2,25 +2,22 @@
 
 import { execSync } from 'child_process';
 import deepmerge from 'deepmerge';
-// TODO(0): consider switching to `prettier-plugin-pkg` or `prettier-plugin-package`
-import PrettierPluginPackageJson from 'prettier-plugin-packagejson';
-import PrettierPluginRuby from '@prettier/plugin-ruby';
-import type { RubyOptions } from '@prettier/plugin-ruby';
-import type { Options } from 'prettier';
+import type { RubyConfig } from '@prettier/plugin-ruby';
+import type { Config } from 'prettier';
 
 const is_prettier_gem_installed: boolean = (() => {
   try {
     return (
-      execSync('gem list -i prettier_print').toString().trim() === 'true' &&
       // disable ruby for now
-      false
+      false &&
+      execSync('gem list -i prettier_print').toString().trim() === 'true'
     );
   } catch {
     return false;
   }
 })();
 
-const option_sets: Record<string, Options | RubyOptions> = {
+const option_sets: Record<string, Config | RubyConfig> = {
   general: {
     singleQuote: true,
     semi: true,
@@ -51,24 +48,21 @@ const option_sets: Record<string, Options | RubyOptions> = {
   },
 
   package_json: {
-    plugins: [PrettierPluginPackageJson],
+    // TODO(0): consider switching to `prettier-plugin-pkg`
+    plugins: ['prettier-plugin-packagejson'],
   },
 
   ruby: is_prettier_gem_installed
     ? {
-        plugins: [PrettierPluginRuby],
+        plugins: ['@prettier/plugin-ruby'],
 
-        // rubyArrayLiteral: true,
-        // rubyHashLabel: true,
-        // rubyModifier: true,
         rubySingleQuote: true,
-        // rubyToProc: false,
         // rubyPlugins: ['plugin/single_quotes'],
       }
     : {},
 };
 
-const config: Options = deepmerge.all([
+const config = deepmerge.all<Config>([
   {},
   ...Object.entries(option_sets).map(([_, v]) => v),
 ]);
