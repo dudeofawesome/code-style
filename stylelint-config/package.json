@@ -32,7 +32,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "prettier": "^3.0.3"
+    "prettier": "^3.1.0"
   },
   "publishConfig": {
     "access": "public",
