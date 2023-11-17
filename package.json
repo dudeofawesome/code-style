@@ -50,7 +50,9 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "bump": "scripts/bump.ts",
+    "prelint": "npm run build",
     "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit",
+    "pretest": "npm run build",
     "test": "npm run test --workspaces",
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
