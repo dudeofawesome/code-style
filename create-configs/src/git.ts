@@ -1,6 +1,6 @@
 import { stripIndent, stripIndents } from 'common-tags';
 
-import { create_file, includes_js, prettify, verify_missing } from './utils.js';
+import { create_file, includes_js, verify_missing } from './utils.js';
 import { ProjectType, Language, Technology } from './types.js';
 
 export const gitignore_sets = {

@@ -1,11 +1,6 @@
 root: true
 extends:
   - '@dudeofawesome'
-
-overrides:
-  # - files:
-  #     - 'bin/**'
-  - files:
-      - 'src/**'
-    extends:
-      - '@dudeofawesome/typescript'
+  - '@dudeofawesome/node'
+  - '@dudeofawesome/jest'
+  - '@dudeofawesome/typescript'

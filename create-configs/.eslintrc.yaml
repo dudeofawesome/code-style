@@ -2,11 +2,8 @@ root: true
 extends:
   - '@dudeofawesome'
   - '@dudeofawesome/cli'
+  - '@dudeofawesome/typescript'
 
-overrides:
-  # - files:
-  #     - 'bin/**'
-  - files:
-      - 'src/**'
-    extends:
-      - '@dudeofawesome/typescript'
+ignorePatterns:
+  - '/bin/create-configs.js'
+  - '/jest.config.js'
