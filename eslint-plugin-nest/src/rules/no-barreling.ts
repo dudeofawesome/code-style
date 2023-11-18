@@ -1,5 +1,4 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
-import type { TSESTree } from '@typescript-eslint/types';
 
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
