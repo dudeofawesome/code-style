@@ -39,6 +39,9 @@
     "@dudeofawesome/eslint-npm-hoist-packages": "2.0.0-7",
     "prettier": "^3.1.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

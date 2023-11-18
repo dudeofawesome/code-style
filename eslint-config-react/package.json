@@ -36,6 +36,9 @@
     "@dudeofawesome/eslint-npm-hoist-packages-react": "2.0.0-7",
     "eslint": "^8.49.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

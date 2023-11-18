@@ -20,6 +20,9 @@
   "dependencies": {
     "eslint-plugin-jest": "^27.4.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

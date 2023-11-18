@@ -29,6 +29,9 @@
   "peerDependencies": {
     "typescript": "^5.0.0, <5.3.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

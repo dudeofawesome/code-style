@@ -36,6 +36,9 @@
     "eslint": "^8.49.0",
     "typescript": "^5.0.0, <5.3.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

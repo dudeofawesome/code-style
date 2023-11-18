@@ -24,6 +24,9 @@
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

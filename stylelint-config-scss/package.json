@@ -36,6 +36,9 @@
   "peerDependencies": {
     "sass-embedded": "^1.33.0"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
