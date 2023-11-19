@@ -2,6 +2,7 @@ extends:
   - 'eslint:recommended'
   - 'plugin:prettier/recommended'
   - 'plugin:promise/recommended'
+  # TODO(0): consider switching to `eslint-plugin-i`
   - 'plugin:import/recommended'
   - 'plugin:@eslint-community/eslint-comments/recommended'
 
