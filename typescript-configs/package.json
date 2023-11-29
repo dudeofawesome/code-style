@@ -19,6 +19,9 @@
     "test": "node $NODE_OPTS --require tsm --test test/*.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.5",
     "@types/node": "^20.6.3",
