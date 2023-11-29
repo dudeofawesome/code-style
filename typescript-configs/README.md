@@ -7,26 +7,46 @@ My set of tsc config files
 1. Install this config plugin as a dev dependency.
 
     ```sh
-    npm i -D @dudeofawesome/eslint-config-typescript
+    npm i -D @dudeofawesome/typescript-configs
     ```
 
-1. Pick the appropriate config to base yours on.
+1. Pick an appropriate role config to base your on.
+
+    For example, you could pick `@dudeofawesome/typescript-configs/roles/node.json`.
+
+1. Pick any appropriate layer configs to add to your config.
+
+    For example, you could pick `@dudeofawesome/typescript-configs/layers/esmodule.json`.
+
 1. Create your `tsconfig.json`.
 
     ```json
     {
-        "extends": "./node.json"
+        "extends": [
+            "@dudeofawesome/typescript-configs/roles/node.json",
+            "@dudeofawesome/typescript-configs/layers/esmodule.json"
+        ]
+    }
+    ```
+
+1. Set your `baseUrl` and `outDir` paths.
+
+    ```json
+    {
+        ...
+        "compilerOptions": {
+            "baseUrl": "src/",
+            "outDir": "dist/"
+        }
     }
     ```
 
 1. Set your `include` and `exclude` paths.
 
-    Here's an example of something that might work for you:
-
     ```json
     {
         ...
         "include": ["src/"],
-        "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+        "exclude": ["dist/"]
     }
     ```
