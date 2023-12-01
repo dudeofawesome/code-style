@@ -1,16 +1,17 @@
 rules:
-  # prevent `console` and `alert` calls from making it into prod
+  # Disallow `console` and `alert` calls.
+  # Neither of these methods should be used in production.
   no-console: 'error'
   no-alert: 'error'
 
-  # warn about prettier style issues
+  # Warn about prettier style issues.
   prettier/prettier: 'warn'
 
-  # disallow renaming import, export, and destructured assignments to the same name
+  # Disallow renaming `import`, `export`, and destructured assignments to the same name.
   no-useless-rename: 'error'
 
-  # require symbol to have a description
+  # Require `symbol`s to have a description.
   symbol-description: 'error'
 
-  # require switch's default case to be last
+  # Require `switch`'s `default` case to be last.
   default-case-last: 'error'

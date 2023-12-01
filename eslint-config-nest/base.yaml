@@ -4,6 +4,7 @@ extends:
   - '@dudeofawesome/typescript'
 
 rules:
+  # Disallow importing files from `@nestjs/terminus` since it includes a bunch of incorrect types.
   no-restricted-imports:
     - 'error'
     - patterns:

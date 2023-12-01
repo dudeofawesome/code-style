@@ -6,10 +6,10 @@ extends:
 parserOptions:
   project: true
 rules:
-  # allow specifying a type that could be inferred
+  # Allow specifying a type that could otherwise be inferred.
   '@typescript-eslint/no-inferrable-types': 'off'
 
-  # prevent unused vars
+  # Disallow unused variables.
   '@typescript-eslint/no-unused-vars':
     - 'warn'
     - args: 'none'
@@ -20,7 +20,7 @@ rules:
   # const foo: number | undefined = Math.random() === 0 ? 1 : undefined;
   # if (foo?.toString().includes('a')) console.log('hi');
   # ```
-  # ensure only boolean types are used for conditions
+  # Require only boolean types to be used for conditions.
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
     - allowString: false
@@ -29,55 +29,61 @@ rules:
       allowNullableObject: false
       allowNullableBoolean: true
 
-  # ensure switches on union types handle all cases
+  # Require switches on union types to handle all cases.
   '@typescript-eslint/switch-exhaustiveness-check': 'error'
 
-  # disallow empty classes unless they're decorated
+  # Disallow empty classes, unless they're decorated.
   '@typescript-eslint/no-extraneous-class':
     - 'error'
     - allowWithDecorator: true
 
   # TODO: do we want this?
-  # require enum values to be initialized in order to prevent value shifting
+  # Require `enum` values to be initialized in order to prevent value shifting.
+  # If an `enum`'s value isn't defined, Typescript will automatically pick a
+  #   numeric value for it based on its position in the enum list. If that
+  #   value is then used to save state into a store, and then the `enum`'s
+  #   list of values is updated, the value in the store may not correspond with
+  #   the intended enum value anymore.
   '@typescript-eslint/prefer-enum-initializers': 'error'
 
-  # allow use of both `type` and `interface`
+  # Allow use of both `type` and `interface`.
   '@typescript-eslint/consistent-type-definitions': 'off'
 
-  # ensure private members are marked readonly when possible
+  # Require `private` members to be marked `readonly` when possible.
   '@typescript-eslint/prefer-readonly': 'error'
 
-  # allow returning the correct type, even if it might be slightly confusing
+  # Allow returning the correct type, even if it might be slightly confusing.
   '@typescript-eslint/no-confusing-void-expression': 'off'
 
   '@typescript-eslint/no-empty-function': 'off'
 
-  # this rule doesn't work reliably
+  # Disable this rule since it doesn't work reliably.
   '@typescript-eslint/consistent-generic-constructors': 'off'
 
-  # disable this rule until this issue is fixed
+  # Disable this rule until this issue is fixed.
   # https://github.com/typescript-eslint/typescript-eslint/issues/7502
   '@typescript-eslint/no-base-to-string': 'off'
 
-  # allow enum to primitive
+  # Allow comparing `enum`s to appropriate primitive values.
   '@typescript-eslint/no-unsafe-enum-comparison': 'off'
 
-  # typescript checks imports for us
+  # Disable this rule since Typescript checks imports for us.
   'import/no-unresolved': 'off'
   'n/no-missing-import': 'off'
 
-  # typescript handles these rules for us
+  # Disable this rule since Typescript handles these rules for us.
   consistent-return: 'off'
   no-invalid-this: 'off'
 
-  # allow any value in template literal expression
+  # Allow any value in template literal expression.
   '@typescript-eslint/restrict-template-expressions': 'off'
 
+  # Require unbound methods to be called with their expected scope.
   '@typescript-eslint/unbound-method':
     - 'error'
     - ignoreStatic: true
 
-  # Typescript will handle this for us
+  # Disable this rule since Typescript will handle this for us.
   'promise/valid-params': 'off'
 
   # TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types

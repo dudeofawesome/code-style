@@ -9,17 +9,19 @@ settings:
     version: 'detect'
 
 rules:
-  # limit max element nesting to reduce component complexity
+  # Limit max element nesting to reduce component complexity.
+  # This simplifies components & enables better testing.
   react/jsx-max-depth:
     - 'error'
     - max: 5
 
-  # prefer ES6 classes
+  # Require class components to use ES6 classes rather than ES5 classes.
   react/prefer-es6-class: 'error'
 
-  # prefer functional components
+  # Require stateless components to be functional components.
   react/prefer-stateless-function: 'error'
 
   react/no-children-prop: 'off'
 
+  # Require iterated elements to have a `key`.
   react/jsx-key: 'error'

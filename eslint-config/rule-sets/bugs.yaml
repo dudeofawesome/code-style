@@ -1,18 +1,21 @@
 rules:
-  # don't compare vars to themselves
+  # Disallows meaningless comparisons to self.
   no-self-compare: 'error'
 
-  # don't use `this` when `this` is `undefined`
+  # Disallows using `this` when `this` is undefined.
   no-invalid-this: 'error'
 
-  # catch some race conditions
+  # Catches some race conditions, but can lead to false-positives.
   require-atomic-updates: ['warn', { allowProperties: true }]
 
-  # don't use `new` keyword when it shouldn't be used
+  # Disallows usage of `new` for certain globals functions.
   no-new-native-nonconstructor: 'error'
 
-  # ensure thrown value extend `Error`
+  # Disallows throwing literal values, preferring objects extending `Error` instead.
+  # Throwing `Errors` improves the traceability of exceptions.
   no-throw-literal: 'error'
 
-  # ensure that comparisons have an opportunity to change value
+  # Ensures that binary comparisons can possibly change value.
+  # If a binary expression comparison can't change value, then you're likely doing something you didn't intend.
+  # https://eslint.org/blog/2022/07/interesting-bugs-caught-by-no-constant-binary-expression/
   no-constant-binary-expression: 'error'

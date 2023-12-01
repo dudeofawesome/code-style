@@ -2,26 +2,26 @@ extends:
   - './base.yaml'
 
 rules:
-  # require symbol to have a description
+  # Allow symbols to not have a description.
   symbol-description: 'off'
 
-  # use template literals instead of string concatenation
+  # Allow string concatenation.
   prefer-template: 'off'
 
-  # allow .apply()
+  # Allow `.apply()`.
   prefer-spread: 'off'
 
-  # allow synchronous loops
+  # Allow synchronous loops.
   no-await-in-loop: 'off'
 
-  # don't ensure promise errors are caught
+  # Allow uncaught promise errors.
   promise/catch-or-return: 'off'
 
-  # don't require dot notation
+  # Allow non-dot notation.
   dot-notation: 'off'
 
-  # allow files to be any length
+  # Allow files to be any length.
   max-lines: 'off'
 
-  # treat method params as const
+  # Allow parameter reassigning.
   no-param-reassign: 'off'

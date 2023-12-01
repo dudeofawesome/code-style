@@ -2,8 +2,9 @@ extends:
   - '@dudeofawesome/node'
 
 rules:
-  # allow scripts to log simply
+  # Allow scripts to log with `console`.
+  # Since we're creating a CLI app, we're probably just trying to show output to the user.
   no-console: 'off'
 
-  # allow scripts to exit
+  # Allow scripts to exit.
   n/no-process-exit: 'off'

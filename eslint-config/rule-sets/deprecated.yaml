@@ -1,9 +1,9 @@
 rules:
-  # __iterator__ is deprecated
+  # `__iterator__` is deprecated.
   no-iterator: 'error'
 
-  # __proto__ is deprecated
+  # `__proto__` is deprecated.
   no-proto: 'error'
 
-  # don't allow var
+  # Disallows allow `var`, preferring `let` or `const` instead.
   no-var: 'error'

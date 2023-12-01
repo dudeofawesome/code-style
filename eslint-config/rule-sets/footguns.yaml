@@ -1,54 +1,52 @@
 rules:
   # TODO(0): look into where parseInt isn't base 10
-  # require `parseInt` to have a radix specified since some browsers don't default to base 10
+  # Require `parseInt` to have a radix specified since some browsers don't default to base 10.
   radix: 'error'
 
-  # require the use of `===` since `==` has some weird behavior
+  # Require the use of `===` since `==` has some weird behavior.
+  # TODO(0): explain
   eqeqeq: ['error', 'smart']
 
-  # TODO(1): ban barrels
-  # barrel files can lead to a number of hard to debug issues
-
-  # prefer binary, octal, and hexadecimal literals instead of parseInt('F', 16)
+  # Prefer binary, octal, and hexadecimal literals instead of `parseInt('F', 16)`.
   prefer-numeric-literals: 'error'
 
-  # ensure that functional array methods are chainable
+  # Ensure that functional array methods are chainable.
   array-callback-return: 'error'
 
-  # don't return in a constructor
+  # Disallow returning in a constructor.
   no-constructor-return: 'error'
 
-  # don't allow array constructors with multiple params
+  # Disallow array constructors with multiple params.
   no-array-constructor: 'error'
 
-  # don't use arguments.caller
+  # Disallow `arguments.caller`.
   no-caller: 'error'
 
-  # don't allow monkeypatching
+  # Disallow monkeypatching.
   no-extend-native: 'error'
 
   # TODO(2): are we sure we really want this? it's not _really_ necessary
-  # don't allow sequences
+  # Disallow sequences.
   no-sequences: ['error', { allowInParentheses: false }]
 
-  # don't allow the void keyword
+  # Disallow the `void` keyword.
   no-void:
     - 'error'
     - allowAsStatement: true
 
-  # ensure regexp uses certain flags
+  # Ensure regexp uses certain flags.
   require-unicode-regexp: 'error'
 
-  # prevent unintentional numeric literal values (eg: `071 === 51`)
+  # Prevent unintentional numeric literal values (eg: `071 === 51`).
   no-octal: 'error'
 
-  # prevent labels from sharing name with variable
+  # Prevent labels from sharing their name with variable.
   no-label-var: 'error'
 
-  # prevent having the same package in dependencies and devDependencies
+  # Prevent having the same package in dependencies and devDependencies.
   json-files/require-unique-dependency-names: 'error'
 
-  # require that specific ranges are specified in package.json dependencies
+  # Require that specific ranges are specified in `package.json` `dependencies`.
   json-files/restrict-ranges:
     - 'error'
     - versionHint: 'caret'
@@ -56,10 +54,10 @@ rules:
         - 'dependencies'
         - 'devDependencies'
 
-  # require that engines are specified in package.json
+  # Require that `engines` are specified in `package.json`.
   json-files/require-engines: 'error'
 
-  # don't allow empty blocks
+  # Disallow allow empty blocks.
   no-empty:
     - 'error'
     - 'allowEmptyCatch': true

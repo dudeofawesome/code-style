@@ -1,18 +1,19 @@
 rules:
-  # use `else if` instead
+  # Prefer `else if` instead of a lonely `if` inside of an `else`.
   no-lonely-if: 'error'
 
-  # don't allow floating decimals
+  # Disallow floating decimals.
   no-floating-decimal: 'error'
 
-  # require dot notation when possible
+  # Require dot notation when possible.
   dot-notation: 'error'
 
   # TODO: what should our max be? should we even have one?
+  # Disallow excessively large files which would be better to be broken up.
   max-lines: ['error', { max: 2000, skipBlankLines: true, skipComments: true }]
 
-  # treat method params as const
+  # Disallow reassigning method params, treating them as `const`.
   no-param-reassign: 'warn'
 
-  # reorder keys in package.json to improve readability & consistency across projects
+  # Require keys in package.json to be sorted, improving readability & consistency across projects.
   json-files/sort-package-json: 'warn'

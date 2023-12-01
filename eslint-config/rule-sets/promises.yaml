@@ -1,21 +1,21 @@
 rules:
-  # ensure promise errors are caught
+  # Require errors from promises are caught.
   promise/catch-or-return: ['error', { allowThen: true }]
 
-  # don't call resolve multiple times
+  # Disallow calling resolve multiple times.
   promise/no-multiple-resolved: 'error'
 
-  # allow nesting promises
+  # Allow nesting promises.
   promise/no-nesting: 'off'
 
-  # allow using promises inside of callbacks
+  # Allow using promises inside of callbacks.
   promise/no-promise-in-callback: 'off'
 
-  # ensure the proper number of arguments are passed to Promise functions
+  # Ensure the proper number of arguments are passed to `Promise` functions.
   promise/valid-params: 'error'
 
-  # require async functions to contain an await
+  # Require `async` functions to contain an `await`.
   require-await: 'error'
 
-  # prevent synchronous loops (prefering to use `Promise.all`)
+  # Prefer using `Promise.all` instead of synchronous loops.
   no-await-in-loop: 'error'

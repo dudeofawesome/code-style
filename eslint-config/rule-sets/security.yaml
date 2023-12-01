@@ -1,4 +1,4 @@
 rules:
-  # don't allow eval
+  # Disallow `eval`.
   no-eval: 'error'
   no-implied-eval: 'error'

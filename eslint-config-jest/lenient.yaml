@@ -10,9 +10,9 @@ overrides:
       - '*.unit.*'
       - '*.e2e.*'
     rules:
-      # use jest comparators instead of comparing booleans
+      # Allow boolean comparisons instead of the equivalent Jest method.
       jest/prefer-comparison-matcher: 'off'
       jest/prefer-equality-matcher: 'off'
 
-      # use expect(foo()).resolve instead of expect(await foo())
+      # Allow `expect(await foo())`.
       jest/prefer-expect-resolves: 'off'

@@ -14,42 +14,45 @@ overrides:
     # TODO(0): support tsconfig.test.json
 
     rules:
-      # prevent return statements in tests
+      # Disallow `return` statements in tests.
       jest/no-test-return-statement: 'error'
 
-      # use jest comparators instead of comparing booleans
+      # Prefer Jest comparators instead of boolean comparisons.
+      # This leads to better test failure messages.
       jest/prefer-comparison-matcher: 'error'
       jest/prefer-equality-matcher: 'error'
 
-      # use expect(foo()).resolve instead of expect(await foo())
+      # Prefer Jest's `expect(foo()).resolve` instead of `expect(await foo())`.
+      # This leads to better test failure messages.
       jest/prefer-expect-resolves: 'error'
 
-      # require hooks to be inside a describe
+      # Require Jest hooks to be inside a `describe`.
       jest/require-top-level-describe: 'error'
 
-      # prevent error from dev deps in tests
+      # Allow test to import unpublished files.
       n/no-unpublished-import: 'off'
 
-      # allow test files of any length
+      # Allow test files to be any length.
       max-lines: 'off'
 
-      # don't require dot notation in tests as this can be useful for accessing
-      #   Typescript private properties & methods
+      # Don't require dot notation in tests.
+      # This can be useful for accessing Typescript `private` properties & methods
       dot-notation: 'off'
       '@typescript-eslint/dot-notation': 'off'
 
-      # allow `any`
+      # Allow `any` in tests.
       '@typescript-eslint/no-explicit-any': 'off'
       '@typescript-eslint/no-unsafe-return': 'off'
       '@typescript-eslint/no-unsafe-assignment': 'off'
       '@typescript-eslint/no-unsafe-member-access': 'off'
       '@typescript-eslint/no-unsafe-argument': 'off'
 
-      # allow non-null assertions
+      # Allow non-null assertions in tests.
       '@typescript-eslint/no-non-null-assertion': 'off'
       '@typescript-eslint/no-non-null-asserted-optional-chain': 'off'
 
-      # simplify testing methods
+      # Simplify testing methods.
       '@typescript-eslint/unbound-method': 'off'
 
+      # Allow tests to throw literals.
       '@typescript-eslint/no-throw-literal': 'off'
