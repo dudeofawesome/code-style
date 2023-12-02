@@ -2,6 +2,8 @@
 
 My Jest eslint config
 
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@dudeofawesome/create-configs).**
+
 ## Usage
 
 1. Install this config plugin as a dev dependency.

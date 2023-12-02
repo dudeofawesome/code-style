@@ -1,5 +1,9 @@
 # @dudeofawesome/eslint-config
 
+A set of ESLint rules customized for code corectness.
+
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@dudeofawesome/create-configs).**
+
 You're probably looking to use this with one of our other configs:
 
 -   [`@dudeofawesome/node`](../eslint-config-node/README.md)
