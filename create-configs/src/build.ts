@@ -48,7 +48,21 @@ export async function build(
 
   await Promise.all(
     [
-      create_vscode_config(project_type, languages, technologies, overwrite),
+      includes_js(languages)
+        ? [
+            await install_dependencies({
+              project_type,
+              languages,
+              technologies,
+              runtime,
+              builder,
+            }),
+          ]
+        : null,
+
+      technologies.includes('vs-code')
+        ? create_vscode_config(project_type, languages, technologies, overwrite)
+        : null,
 
       create_gitignore({ languages, technologies, project_type, output_dir }),
 
@@ -84,26 +98,13 @@ export async function build(
               technologies,
               overwrite,
             ),
-            await install_dependencies({
-              project_type,
+            add_npm_scripts({
               languages,
               technologies,
               runtime,
               builder,
-            })
-              /**
-               * Make sure that we're not trying to modify package.json at the
-               * same time as NPM.
-               */
-              .then(async () =>
-                add_npm_scripts({
-                  languages,
-                  technologies,
-                  runtime,
-                  builder,
-                  overwrite,
-                }),
-              ),
+              overwrite,
+            }),
           ]
         : null,
     ]
