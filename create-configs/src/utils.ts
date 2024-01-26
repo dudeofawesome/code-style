@@ -19,7 +19,13 @@ export async function create_file(
     return;
   }
 
-  await writeFile(path, content, { mode: 0b110110100 });
+  await writeFile(path, ensure_trailing_newline(content), {
+    mode: 0b110110100,
+  });
+}
+
+export function ensure_trailing_newline(content: string): string {
+  return content.at(-1) === '\n' ? content : `${content}\n`;
 }
 
 /**
