@@ -44,22 +44,21 @@ export async function build(
   await Promise.all([
     create_editor_config(overwrite),
     create_prettier_config(overwrite),
+    includes_js(languages)
+      ? [
+          await install_dependencies({
+            project_type,
+            languages,
+            technologies,
+            runtime,
+            builder,
+          }),
+        ]
+      : null,
   ]);
 
   await Promise.all(
     [
-      includes_js(languages)
-        ? [
-            await install_dependencies({
-              project_type,
-              languages,
-              technologies,
-              runtime,
-              builder,
-            }),
-          ]
-        : null,
-
       technologies.includes('vs-code')
         ? create_vscode_config(project_type, languages, technologies, overwrite)
         : null,
