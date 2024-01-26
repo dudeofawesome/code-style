@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/javascript-configs",
-  "version": "2.0.0-10",
+  "version": "2.0.0-11",
   "description": "My Javascript configs",
   "keywords": [
     "javascript",
@@ -21,7 +21,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@dudeofawesome/typescript-configs": "^2.0.0-10",
+    "@dudeofawesome/typescript-configs": "^2.0.0-11",
     "typescript": "^5.2.2"
   },
   "devDependencies": {

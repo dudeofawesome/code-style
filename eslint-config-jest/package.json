@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-jest",
-  "version": "2.0.0-10",
+  "version": "2.0.0-11",
   "description": "My jest ESLint config",
   "keywords": [
     "style",
@@ -29,7 +29,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@dudeofawesome/eslint-npm-hoist-packages-jest": "2.0.0-10",
+    "@dudeofawesome/eslint-npm-hoist-packages-jest": "2.0.0-11",
     "eslint": "^8.49.0"
   },
   "engines": {
