@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-browser",
-  "version": "2.0.0-11",
+  "version": "2.0.0-12",
   "description": "My browser ESLint config",
   "keywords": [
     "style",
