@@ -4,7 +4,8 @@ import type { Config } from 'stylelint';
 import { stripIndent } from 'common-tags';
 
 import { create_file, prettify, verify_missing } from './utils.js';
-import { ProjectType, Language, Technology } from './types.js';
+import { Language } from './types.js';
+import { BuildOptions } from './build.js';
 
 /** @private */
 export function _transform_eslint_package_name(extend: string): string {
@@ -29,11 +30,15 @@ export function _generate_dependency_list(config: ESLint.ConfigData): string[] {
 }
 
 /** @private */
-export function _generate_eslint_config(
-  project_type: ProjectType,
-  languages: Language[],
-  technologies: Technology[],
-): string {
+export function _generate_eslint_config({
+  project_type,
+  languages,
+  technologies,
+  lenient,
+}: Pick<
+  BuildOptions,
+  'project_type' | 'languages' | 'technologies' | 'lenient'
+>): string {
   const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
     extends: ['@dudeofawesome'],
@@ -69,6 +74,22 @@ export function _generate_eslint_config(
     config.extends.push('@dudeofawesome/jest');
   }
 
+  if (lenient) {
+    for (const extended of config.extends) {
+      if (
+        [
+          '@dudeofawesome',
+          '@dudeofawesome/cli',
+          '@dudeofawesome/jest',
+          '@dudeofawesome/node',
+          '@dudeofawesome/typescript',
+        ].includes(extended)
+      ) {
+        config.extends.push(`${extended}/lenient.yaml`);
+      }
+    }
+  }
+
   return stripIndent`
     # In order to update the this config, update:
 ${_generate_dependency_list(config)
@@ -78,19 +99,28 @@ ${stringify(config)}
   `;
 }
 
-export async function create_eslint_config(
-  project_type: ProjectType,
-  languages: Language[],
-  technologies: Technology[],
-  overwrite: boolean = true,
-) {
+export async function create_eslint_config({
+  project_type,
+  languages,
+  technologies,
+  lenient,
+  overwrite = true,
+}: Pick<
+  BuildOptions,
+  'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
+>) {
   const path = '.eslintrc.yaml';
   if (await verify_missing({ path, remove: overwrite })) {
     return create_file(
       path,
       await prettify(
         path,
-        _generate_eslint_config(project_type, languages, technologies),
+        _generate_eslint_config({
+          project_type,
+          languages,
+          technologies,
+          lenient,
+        }),
       ),
     );
   }
@@ -112,10 +142,11 @@ export function _generate_stylelint_config(languages: Language[]): string {
   `;
 }
 
-export async function create_stylelint_config(
-  languages: Language[],
-  overwrite: boolean = true,
-) {
+export async function create_stylelint_config({
+  languages,
+  lenient,
+  overwrite = true,
+}: Pick<BuildOptions, 'languages' | 'lenient' | 'overwrite'>) {
   const path = '.stylelintrc.yaml';
   if (await verify_missing({ path, remove: overwrite })) {
     return create_file(

@@ -77,7 +77,10 @@ export async function main() {
           });
       },
       async (argv) => {
-        await build(argv as unknown as BuildOptions, options.overwrite);
+        await build({
+          ...(argv as unknown as BuildOptions),
+          overwrite: options.overwrite,
+        });
         process.exit(0);
       },
     )
@@ -85,7 +88,7 @@ export async function main() {
       'prompt',
       'Walk through a set of prompts to configure your new project',
       async (yargs) => {
-        await interactive_setup((await yargs.argv).overwrite);
+        await interactive_setup();
       },
       (argv) => {
         return;
@@ -96,5 +99,5 @@ export async function main() {
       'strip-dashed': true,
     }).argv;
 
-  if (options._.length === 0) await interactive_setup(options.overwrite);
+  if (options._.length === 0) await interactive_setup();
 }

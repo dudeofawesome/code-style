@@ -7,7 +7,12 @@ import {
 describe('lint-configuration', () => {
   describe(_generate_eslint_config.name, () => {
     it(`should parse multiline string to array`, () => {
-      const output = _generate_eslint_config('web-app', ['ts'], ['jest']);
+      const output = _generate_eslint_config({
+        project_type: 'web-app',
+        languages: ['ts'],
+        technologies: ['jest'],
+        lenient: false,
+      });
       expect(output).toMatch(/root: true/u);
       expect(output).toMatch(/^#/u);
     });

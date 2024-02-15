@@ -1,7 +1,4 @@
-import {
-  create_js_config,
-  create_ts_config,
-} from './language-configuration.js';
+import { create_ts_config } from './language-configuration.js';
 import { create_editor_config, create_prettier_config } from './formatting.js';
 import {
   create_eslint_config,
@@ -27,20 +24,21 @@ export interface BuildOptions {
   builder: Builder;
   input_dir?: string;
   output_dir?: string;
-  technologies?: Technology[];
+  technologies: Technology[];
+  lenient: boolean;
+  overwrite: boolean;
 }
-export async function build(
-  {
-    project_type,
-    languages,
-    runtime,
-    builder,
-    input_dir = 'src/',
-    output_dir = 'dist/',
-    technologies = [],
-  }: BuildOptions,
-  overwrite: boolean = false,
-) {
+export async function build({
+  project_type,
+  languages,
+  runtime,
+  builder,
+  input_dir = 'src/',
+  output_dir = 'dist/',
+  technologies = [],
+  lenient = false,
+  overwrite = false,
+}: BuildOptions) {
   await Promise.all([
     create_editor_config(overwrite),
     create_prettier_config(overwrite),
@@ -66,37 +64,29 @@ export async function build(
       create_gitignore({ languages, technologies, project_type, output_dir }),
 
       languages.includes('css') || languages.includes('scss')
-        ? await create_stylelint_config(languages, overwrite)
+        ? await create_stylelint_config({ languages, lenient, overwrite })
         : null,
 
-      languages.includes('ts')
-        ? await create_ts_config(
+      languages.includes('ts') || languages.includes('js')
+        ? await create_ts_config({
             project_type,
             technologies,
             input_dir,
             output_dir,
             overwrite,
-          )
-        : null,
-
-      languages.includes('js') && !languages.includes('ts')
-        ? await create_js_config(
-            project_type,
-            technologies,
-            input_dir,
-            output_dir,
-            overwrite,
-          )
+            lenient,
+          })
         : null,
 
       includes_js(languages)
         ? [
-            await create_eslint_config(
+            await create_eslint_config({
               project_type,
               languages,
               technologies,
+              lenient,
               overwrite,
-            ),
+            }),
             add_npm_scripts({
               languages,
               technologies,

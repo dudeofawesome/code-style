@@ -10,7 +10,7 @@ import {
 } from './types.js';
 import { includes_js } from './utils.js';
 
-export async function interactive_setup(overwrite: boolean = false) {
+export async function interactive_setup() {
   const project_type = await select<ProjectType>({
     message: 'Project type',
     choices: [
@@ -125,6 +125,16 @@ export async function interactive_setup(overwrite: boolean = false) {
     ],
   });
 
+  const lenient = !(await confirm({
+    message: 'Use strict configs & rulesets?',
+    default: true,
+  }));
+
+  const overwrite = await confirm({
+    message: 'Overwrite existing config files?',
+    default: true,
+  });
+
   let input_dir: string | undefined;
   let output_dir: string | undefined;
   if (builder !== 'none') {
@@ -147,16 +157,15 @@ export async function interactive_setup(overwrite: boolean = false) {
     throw new Error(`User cancelled file creation.`);
   }
 
-  await build(
-    {
-      project_type,
-      languages,
-      runtime,
-      builder,
-      input_dir,
-      output_dir,
-      technologies,
-    },
+  await build({
+    project_type,
+    languages,
+    runtime,
+    builder,
+    input_dir,
+    output_dir,
+    technologies,
+    lenient,
     overwrite,
-  );
+  });
 }
