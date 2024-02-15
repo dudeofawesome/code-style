@@ -9,6 +9,8 @@ import { BuildOptions } from './build.js';
 
 /** @private */
 export function _transform_eslint_package_name(extend: string): string {
+  if (extend.includes('eslint-config')) return extend;
+
   if (extend.startsWith('@')) {
     return extend
       .replace(/^(@[^/]+)\/(\S+)$/iu, '$1/eslint-config-$2')
@@ -41,7 +43,7 @@ export function _generate_eslint_config({
 >): string {
   const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
-    extends: ['@dudeofawesome'],
+    extends: ['@dudeofawesome/eslint-config'],
     parserOptions: {
       ecmaVersion: 2022,
     },
@@ -50,39 +52,39 @@ export function _generate_eslint_config({
   switch (project_type) {
     case 'web-app':
       if (technologies.includes('react')) {
-        config.extends.push('@dudeofawesome/react');
+        config.extends.push('@dudeofawesome/eslint-config-react');
       } else {
-        config.extends.push('@dudeofawesome/browser');
+        config.extends.push('@dudeofawesome/eslint-config-browser');
       }
       break;
     case 'backend':
       if (technologies.includes('nestjs')) {
-        config.extends.push('@dudeofawesome/nest');
+        config.extends.push('@dudeofawesome/eslint-config-nest');
       } else {
-        config.extends.push('@dudeofawesome/node');
+        config.extends.push('@dudeofawesome/eslint-config-node');
       }
       break;
     case 'cli':
-      config.extends.push('@dudeofawesome/cli');
+      config.extends.push('@dudeofawesome/eslint-config-cli');
       break;
   }
 
   if (languages.includes('ts') && !technologies.includes('nestjs')) {
-    config.extends.push('@dudeofawesome/typescript');
+    config.extends.push('@dudeofawesome/eslint-config-typescript');
   }
   if (technologies.includes('jest')) {
-    config.extends.push('@dudeofawesome/jest');
+    config.extends.push('@dudeofawesome/eslint-config-jest');
   }
 
   if (lenient) {
     for (const extended of config.extends) {
       if (
         [
-          '@dudeofawesome',
-          '@dudeofawesome/cli',
-          '@dudeofawesome/jest',
-          '@dudeofawesome/node',
-          '@dudeofawesome/typescript',
+          '@dudeofawesome/eslint-config',
+          '@dudeofawesome/eslint-config-cli',
+          '@dudeofawesome/eslint-config-jest',
+          '@dudeofawesome/eslint-config-node',
+          '@dudeofawesome/eslint-config-typescript',
         ].includes(extended)
       ) {
         config.extends.push(`${extended}/lenient.yaml`);
