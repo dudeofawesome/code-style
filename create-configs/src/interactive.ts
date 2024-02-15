@@ -93,6 +93,15 @@ export async function interactive_setup(overwrite: boolean = false) {
         disabled: !includes_js(languages) || project_type !== 'web-app',
       },
       {
+        name: 'React Native',
+        value: 'react-native',
+        /**
+         * The configurator doesn't yet have support for React Native, but you
+         * can still configure it manually
+         */
+        disabled: true,
+      },
+      {
         name: 'NestJS',
         value: 'nestjs',
         disabled: !includes_js(languages) || project_type !== 'backend',
