@@ -14,3 +14,7 @@ You're probably looking to use this with one of our other configs:
 -   [`@dudeofawesome/react`](../eslint-config-react/README.md)
 
 However, if you're trying to build a new config for a new environment (maybe some new frontend framework or something), you'll want to use this config as a layer in your project.
+
+TODO(1): Evaluate the following plugins:
+
+-   [ ] https://github.com/Rel1cx/eslint-react
