@@ -1,5 +1,4 @@
 {
-  "extends": "./browser.json",
   "compilerOptions": {
     // enable React JSX transpilation.
     "jsx": "react"

@@ -21,13 +21,12 @@ export function _generate_ts_config(
 
   switch (project_type) {
     case 'web-app':
+      config.extends.push(
+        '@dudeofawesome/typescript-configs/roles/browser.json',
+      );
       if (technologies.includes('react')) {
         config.extends.push(
-          '@dudeofawesome/typescript-configs/roles/react.json',
-        );
-      } else {
-        config.extends.push(
-          '@dudeofawesome/typescript-configs/roles/browser.json',
+          '@dudeofawesome/typescript-configs/layers/react.json',
         );
       }
       break;
