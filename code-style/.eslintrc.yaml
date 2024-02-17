@@ -4,9 +4,9 @@ extends:
   - '@dudeofawesome/node'
   - '@dudeofawesome/typescript'
 
-
 ignorePatterns:
   - '/prettierrc.*'
 
 rules:
   import/no-default-export: 'off'
+  n/no-sync: 'off'

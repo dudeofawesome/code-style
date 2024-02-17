@@ -27,10 +27,9 @@ export function singleLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
     lint_results[0]?.messages.length,
     1,
-    `Expected there to be one lint message, but there were ${lint_results[0]
-      ?.messages.length}:\n${lint_results[0]?.messages
-      .map((m) => `  "${m.message}"`)
-      .join('\n')}`,
+    `Expected there to be one lint message, but there were ${
+      lint_results[0]?.messages.length
+    }:\n${lint_results[0]?.messages.map((m) => `  "${m.message}"`).join('\n')}`,
   );
 }
 
