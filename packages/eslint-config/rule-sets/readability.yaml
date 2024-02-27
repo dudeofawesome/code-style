@@ -2,9 +2,6 @@ rules:
   # Prefer `else if` instead of a lonely `if` inside of an `else`.
   no-lonely-if: 'error'
 
-  # Disallow floating decimals.
-  no-floating-decimal: 'error'
-
   # Require dot notation when possible.
   dot-notation: 'error'
 
