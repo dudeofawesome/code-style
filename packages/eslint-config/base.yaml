@@ -15,7 +15,6 @@ extends:
   - './rule-sets/promises.yaml'
   - './rule-sets/readability.yaml'
   - './rule-sets/security.yaml'
-# TODO(0): ban bitwise
 
 plugins:
   - 'json-files'

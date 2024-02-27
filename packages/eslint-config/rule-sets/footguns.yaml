@@ -34,6 +34,9 @@ rules:
     - 'error'
     - allowAsStatement: true
 
+  # Disallow bitwise operators, which are usually typos for boolean operators
+  no-bitwise: 'error'
+
   # Ensure regexp uses certain flags.
   require-unicode-regexp: 'error'
 
