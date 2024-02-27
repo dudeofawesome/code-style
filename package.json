@@ -53,7 +53,7 @@
     "prelint": "npm run build",
     "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit",
     "pretest": "npm run build",
-    "test": "npm run test --workspaces",
+    "test": "npm run test --workspaces && echo 'All tests passed.'",
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
