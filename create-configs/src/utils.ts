@@ -1,6 +1,13 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
-import { access, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import {
+  access,
+  readFile,
+  readdir,
+  rm,
+  stat,
+  writeFile,
+} from 'node:fs/promises';
 import { format, Options } from 'prettier';
 import default_config from '@dudeofawesome/code-style/prettierrc';
 import { Language } from './types.js';
@@ -20,6 +27,7 @@ export async function create_file(
   }
 
   await writeFile(path, ensure_trailing_newline(content), {
+    // rw- rw- r--
     mode: 0b110110100,
   });
 }
@@ -32,15 +40,24 @@ export function ensure_trailing_newline(content: string): string {
  * @param path The path to check.
  * @returns Whether or not the file exists.
  */
-export function file_exists(path: string): Promise<boolean> {
-  return access(path)
-    .then(() => true)
-    .catch(() => false);
+export function file_exists(path: string | RegExp): Promise<string[] | false> {
+  if (typeof path === 'string') {
+    return access(path)
+      .then(() => [path])
+      .catch(() => false);
+  } else {
+    return readdir('.').then((entries) => {
+      console.log(`Trying ${entries} against ${path}`);
+      const matches = entries.filter((entry) => entry.match(path));
+      console.log(`Found match ${matches}`);
+      return matches.length > 0 ? matches : false;
+    });
+  }
 }
 
 export type VerifyMissingOptions = {
   /** The path of the file to possibly delete. */
-  path: string;
+  path: string | RegExp | (string | RegExp)[];
   /** Whether or not to delete the file should it exist. */
   remove?: boolean;
   /** Whether or not the promise should reject upon finding an existing file. */
@@ -54,22 +71,32 @@ export async function verify_missing({
   remove = false,
   reject = false,
 }: VerifyMissingOptions): Promise<boolean> {
-  if (await file_exists(path)) {
-    if (remove) {
-      await rm(path);
-      return true;
-    } else {
-      const message = `File "${path}" already exists.`;
-      if (reject) {
-        throw new Error(message);
+  const paths = Array.isArray(path) ? path : [path];
+  return Promise.all(
+    paths.map(async (path) => {
+      const existing_files = await file_exists(path);
+      if (existing_files !== false) {
+        if (remove) {
+          await Promise.all(
+            existing_files.map((existing_file) => rm(existing_file)),
+          );
+          return true;
+        } else {
+          const message = `File "${path}" already exists.`;
+          if (reject) {
+            throw new Error(message);
+          } else {
+            console.info(message);
+            return false;
+          }
+        }
       } else {
-        console.info(message);
-        return false;
+        return true;
       }
-    }
-  } else {
-    return true;
-  }
+    }),
+  )
+    .then(() => true)
+    .catch(() => false);
 }
 
 export type VerifyMissingScriptOptions = Omit<

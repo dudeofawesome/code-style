@@ -111,12 +111,17 @@ export async function create_eslint_config({
   BuildOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
 >) {
-  const path = '.eslintrc.yaml';
-  if (await verify_missing({ path, remove: overwrite })) {
+  const preferred = '.eslintrc.yaml';
+  if (
+    await verify_missing({
+      path: [preferred, /^\.?eslint(rc|\.config)\.([mc]?js|ya?ml|json)$/u],
+      remove: overwrite,
+    })
+  ) {
     return create_file(
-      path,
+      preferred,
       await prettify(
-        path,
+        preferred,
         _generate_eslint_config({
           project_type,
           languages,

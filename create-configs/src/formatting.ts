@@ -3,19 +3,23 @@ import { stripIndent } from 'common-tags';
 import { create_file, verify_missing } from './utils.js';
 
 export async function create_prettier_config(overwrite: boolean = false) {
-  const path = '.prettierrc.mjs';
-  if (await verify_missing({ path, remove: overwrite })) {
+  const preferred = '.prettierrc.mjs';
+  const paths = [
+    preferred,
+    /^\.?prettier(rc|\.config)?(\.(json[5c]?|ya?ml|toml|[mc]?js))?$/u,
+  ];
+  if (await verify_missing({ path: paths, remove: overwrite })) {
     await create_file(
-      path,
+      preferred,
       stripIndent`
-      /**
-       * https://prettier.io/docs/en/
-       * Prettier configuration file
-       * In order to update the this config, update @dudeofawesome/code-style
-       */
-      import config from '@dudeofawesome/code-style/prettierrc';
-      export default config;
-    `,
+        /**
+         * https://prettier.io/docs/en/
+         * Prettier configuration file
+         * In order to update the this config, update @dudeofawesome/code-style
+         */
+        import config from '@dudeofawesome/code-style/prettierrc';
+        export default config;
+      `,
     );
   }
 }
