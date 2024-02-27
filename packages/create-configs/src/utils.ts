@@ -47,9 +47,7 @@ export function file_exists(path: string | RegExp): Promise<string[] | false> {
       .catch(() => false);
   } else {
     return readdir('.').then((entries) => {
-      console.log(`Trying ${entries} against ${path}`);
       const matches = entries.filter((entry) => entry.match(path));
-      console.log(`Found match ${matches}`);
       return matches.length > 0 ? matches : false;
     });
   }
