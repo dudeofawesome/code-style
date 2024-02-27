@@ -4,7 +4,10 @@ import {
   create_eslint_config,
   create_stylelint_config,
 } from './lint-configuration.js';
-import { install_dependencies } from './dependencies.js';
+import {
+  install_dependencies,
+  uninstall_duplicate_dependencies,
+} from './dependencies.js';
 import { create_vscode_config } from './editor.js';
 import { create_gitignore } from './git.js';
 import {
@@ -39,6 +42,7 @@ export async function build({
   lenient = false,
   overwrite = false,
 }: BuildOptions) {
+  await uninstall_duplicate_dependencies({ runtime });
   await Promise.all([
     create_editor_config(overwrite),
     create_prettier_config(overwrite),

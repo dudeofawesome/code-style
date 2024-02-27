@@ -9,8 +9,27 @@ import {
   Builder,
   Runtime,
 } from './types.js';
+import { BuildOptions } from './build.js';
 
 const exec = promisify(execCallback);
+
+export async function uninstall_duplicate_dependencies({
+  runtime,
+}: Pick<BuildOptions, 'runtime'>): Promise<void> {
+  const packages = ['prettier', 'eslint'];
+
+  const uninstall_cmd = ((): string => {
+    switch (runtime) {
+      case 'bun':
+        return 'bun uninstall';
+      case 'nodejs':
+      default:
+        return 'npm uninstall';
+    }
+  })();
+
+  await exec(`${uninstall_cmd} ${packages.join(' ')}`);
+}
 
 export type InstallDependenciesOptions = {
   project_type: ProjectType;
@@ -111,9 +130,10 @@ export async function install_dependencies({
   }
 
   log(
-    `Installing ${(prod_packages.length > 0 ? prod_packages : ['nothing']).join(
-      ', ',
-    )} & ${dev_packages.join(', ')}`,
+    `Installing ${(prod_packages.length > 0
+      ? prod_packages
+      : ['no prod packages']
+    ).join(', ')} & ${dev_packages.join(', ')}`,
   );
 
   const install_cmd = ((): string => {
