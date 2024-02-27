@@ -114,7 +114,10 @@ export async function testNoFail({ linter, files }: TestNoFailOpts) {
         join(cwd(), 'test', 'fixture', 'tsconfig.json'),
         join(tmp_dir, 'tsconfig.json'),
       ),
-      symlink(join(cwd(), '..', 'node_modules'), join(tmp_dir, 'node_modules')),
+      symlink(
+        join(cwd(), '../..', 'node_modules'),
+        join(tmp_dir, 'node_modules'),
+      ),
     ]).catch(console.error);
     after(() => rm(tmp_dir, { force: true, recursive: true }));
 
