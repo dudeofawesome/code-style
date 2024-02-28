@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-nest",
-  "version": "2.0.0-16",
+  "version": "2.0.0-17",
   "description": "My nest ESLint config",
   "keywords": [
     "style",
@@ -22,9 +22,9 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@dudeofawesome/eslint-config-node": "2.0.0-16",
-    "@dudeofawesome/eslint-config-typescript": "2.0.0-16",
-    "@dudeofawesome/eslint-plugin-nest": "2.0.0-16"
+    "@dudeofawesome/eslint-config-node": "2.0.0-17",
+    "@dudeofawesome/eslint-config-typescript": "2.0.0-17",
+    "@dudeofawesome/eslint-plugin-nest": "2.0.0-17"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",

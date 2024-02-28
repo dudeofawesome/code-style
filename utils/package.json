@@ -1,6 +1,6 @@
 {
   "name": "@code-style/utils",
-  "version": "2.0.0-16",
+  "version": "2.0.0-17",
   "private": true,
   "scripts": {
     "test": "echo 'No tests'; exit 0"
