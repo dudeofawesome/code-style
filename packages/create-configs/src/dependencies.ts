@@ -69,19 +69,26 @@ export async function install_dependencies({
   const dev_packages: (string | undefined)[] = [
     '@dudeofawesome/code-style',
     '@dudeofawesome/eslint-config',
+    '@dudeofawesome/eslint-npm-hoist-packages',
   ];
 
   switch (project_type) {
     case 'web-app':
       if (technologies.includes('react')) {
-        dev_packages.push('@dudeofawesome/eslint-config-react');
+        dev_packages.push(
+          '@dudeofawesome/eslint-config-react',
+          '@dudeofawesome/eslint-npm-hoist-packages-react',
+        );
       } else {
         dev_packages.push('@dudeofawesome/eslint-config-browser');
       }
       break;
     case 'backend':
       if (languages.includes('ts')) dev_packages.push('@types/node');
-      dev_packages.push('@dudeofawesome/eslint-config-node');
+      dev_packages.push(
+        '@dudeofawesome/eslint-config-node',
+        '@dudeofawesome/eslint-npm-hoist-packages-node',
+      );
       break;
     case 'cli':
       if (languages.includes('ts')) dev_packages.push('@types/node');
@@ -95,6 +102,7 @@ export async function install_dependencies({
         dev_packages.push(
           'typescript',
           '@dudeofawesome/eslint-config-typescript',
+          '@dudeofawesome/eslint-npm-hoist-packages-typescript',
           '@dudeofawesome/typescript-configs',
         );
         break;
@@ -121,6 +129,7 @@ export async function install_dependencies({
           'jest',
           '@types/jest',
           '@dudeofawesome/eslint-config-jest',
+          '@dudeofawesome/eslint-npm-hoist-packages-jest',
         );
         break;
       case 'react':
