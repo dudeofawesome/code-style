@@ -8,10 +8,6 @@ rules:
   # Disallow AMD modules.
   import/no-amd: 'error'
 
-  # TODO(0): can we actually ban this? probably not
-  # Disallow commonjs modules.
-  import/no-commonjs: 'error'
-
   # Disallow mixing ESM with commonjs exports.
   import/no-import-module-exports: 'error'
 

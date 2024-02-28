@@ -1,0 +1,6 @@
+plugins:
+  - 'eslint-plugin-import'
+
+rules:
+  # Disallow commonjs modules.
+  import/no-commonjs: 'error'

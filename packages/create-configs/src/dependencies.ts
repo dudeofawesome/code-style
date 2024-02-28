@@ -129,6 +129,12 @@ export async function install_dependencies({
           dev_packages.push('@types/react');
         }
         break;
+      case 'esm':
+        dev_packages.push(
+          '@dudeofawesome/eslint-config-esmodule',
+          '@dudeofawesome/eslint-npm-hoist-packages-esmodule',
+        );
+        break;
       default:
     }
   }
