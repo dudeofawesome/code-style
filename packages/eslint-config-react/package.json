@@ -8,11 +8,11 @@
     "config",
     "eslint"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-react/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-react/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-react"
+    "directory": "/packages/eslint-config-react"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

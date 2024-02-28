@@ -7,11 +7,11 @@
     "jsconfig",
     "tsconfig"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/javascript-configs/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/javascript-configs/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/javascript-configs"
+    "directory": "/packages/javascript-configs"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

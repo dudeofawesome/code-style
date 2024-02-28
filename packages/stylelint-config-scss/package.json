@@ -10,11 +10,11 @@
     "lint",
     "config"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/stylelint-config-scss/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/stylelint-config-scss/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/stylelint-config-scss"
+    "directory": "/packages/stylelint-config-scss"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

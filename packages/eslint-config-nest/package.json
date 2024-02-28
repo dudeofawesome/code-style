@@ -8,11 +8,11 @@
     "config",
     "eslint"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-nest/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-nest/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-nest"
+    "directory": "/packages/eslint-config-nest"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

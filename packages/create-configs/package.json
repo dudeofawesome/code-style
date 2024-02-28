@@ -9,11 +9,11 @@
     "format",
     "setup"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/create-configs/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/create-configs/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/create-configs"
+    "directory": "/packages/create-configs"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

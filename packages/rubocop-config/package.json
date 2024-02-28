@@ -6,11 +6,11 @@
     "ruby",
     "rubocop"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/rubocop-config/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/rubocop-config/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/rubocop-config"
+    "directory": "/packages/rubocop-config"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

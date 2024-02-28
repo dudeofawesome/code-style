@@ -9,11 +9,11 @@
     "eslint",
     "jest"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-jest/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-jest/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-jest"
+    "directory": "/packages/eslint-config-jest"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

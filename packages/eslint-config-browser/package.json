@@ -8,11 +8,11 @@
     "config",
     "eslint"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/eslint-config-browser/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-browser/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/eslint-config-browser"
+    "directory": "/packages/eslint-config-browser"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",

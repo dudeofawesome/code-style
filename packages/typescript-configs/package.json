@@ -6,11 +6,11 @@
     "typescript",
     "tsconfig"
   ],
-  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/typescript-configs/README.md",
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/typescript-configs/README.md",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
-    "directory": "/typescript-configs"
+    "directory": "/packages/typescript-configs"
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
