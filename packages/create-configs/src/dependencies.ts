@@ -16,7 +16,27 @@ const exec = promisify(execCallback);
 export async function uninstall_duplicate_dependencies({
   runtime,
 }: Pick<BuildOptions, 'runtime'>): Promise<void> {
-  const packages = ['prettier', 'eslint'];
+  const packages = [
+    'prettier',
+    'prettier-plugin-packagejson',
+    'eslint',
+    'eslint-config-prettier',
+    'eslint-plugin-prettier',
+    'eslint-plugin-promise',
+    'eslint-plugin-import',
+    'eslint-plugin-json-files',
+    'eslint-plugin-i',
+    'eslint-plugin-jest',
+    'eslint-plugin-n',
+    'eslint-plugin-node',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
+    '@typescript-eslint/eslint-plugin',
+    '@typescript-eslint/parser',
+    'tslib',
+    'typescript',
+  ];
 
   const uninstall_cmd = ((): string => {
     switch (runtime) {
