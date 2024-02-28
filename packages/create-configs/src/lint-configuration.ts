@@ -154,11 +154,19 @@ export async function create_stylelint_config({
   lenient,
   overwrite = true,
 }: Pick<BuildOptions, 'languages' | 'lenient' | 'overwrite'>) {
-  const path = '.stylelintrc.yaml';
-  if (await verify_missing({ path, remove: overwrite })) {
+  const preferred = '.stylelintrc.yaml';
+  if (
+    await verify_missing({
+      path: [
+        preferred,
+        /^\.?stylelint(\.config|rc)(\.([cm]?js|json|ya?ml))?$/u,
+      ],
+      remove: overwrite,
+    })
+  ) {
     return create_file(
-      path,
-      await prettify(path, _generate_stylelint_config(languages)),
+      preferred,
+      await prettify(preferred, _generate_stylelint_config(languages)),
     );
   }
 }
