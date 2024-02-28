@@ -11,3 +11,5 @@
 - [ ] [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/pull/891)
 - [x] eslint-plugin-react
 - [ ] [eslint-plugin-react-hooks](https://github.com/facebook/react/issues/28313)
+- [x] @typescript-eslint/\*
+- [ ] [@eslint-community/eslint-plugin-eslint-comments](https://github.com/eslint-community/eslint-plugin-eslint-comments/issues/182)
