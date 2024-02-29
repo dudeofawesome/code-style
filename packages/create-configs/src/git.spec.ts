@@ -48,22 +48,38 @@ describe('git', () => {
     describe(gitignore_sets.caches.name, () => {
       it(`should add ts cache dir`, () => {
         expect(
-          gitignore_sets.caches({ languages: ['ts'], technologies: [] }),
+          gitignore_sets.caches({
+            languages: ['ts'],
+            technologies: [],
+            builder: 'tsc',
+          }),
         ).toContain('.tsbuildinfo');
       });
       it(`should add eslint cache dir`, () => {
         expect(
-          gitignore_sets.caches({ languages: ['js'], technologies: [] }),
+          gitignore_sets.caches({
+            languages: ['js'],
+            technologies: [],
+            builder: 'none',
+          }),
         ).toContain('.eslintcache');
       });
       it(`should add stylelint cache dir`, () => {
         expect(
-          gitignore_sets.caches({ languages: ['css'], technologies: [] }),
+          gitignore_sets.caches({
+            languages: ['css'],
+            technologies: [],
+            builder: 'none',
+          }),
         ).toContain('.stylelintcache');
       });
       it(`should add next cache dir`, () => {
         expect(
-          gitignore_sets.caches({ languages: ['ts'], technologies: ['react'] }),
+          gitignore_sets.caches({
+            languages: ['ts'],
+            technologies: ['react'],
+            builder: 'tsc',
+          }),
         ).toContain('.next/');
       });
     });
@@ -97,6 +113,7 @@ describe('git', () => {
         languages: [],
         project_type: 'backend',
         technologies: [],
+        builder: 'none',
       });
 
       expect(basic).toContain('.vscode');
@@ -108,6 +125,7 @@ describe('git', () => {
         languages: ['js'],
         project_type: 'backend',
         technologies: [],
+        builder: 'none',
       });
 
       expect(nodejs).toContain('.vscode');
@@ -122,6 +140,7 @@ describe('git', () => {
         languages: ['ts'],
         project_type: 'web-app',
         technologies: [],
+        builder: 'tsc',
       });
 
       expect(web).toContain('.vscode');
@@ -136,6 +155,7 @@ describe('git', () => {
         languages: ['ts'],
         project_type: 'web-app',
         technologies: ['react'],
+        builder: 'tsc',
       });
 
       expect(react).not.toMatch(/^\s+\S+$/gmu);

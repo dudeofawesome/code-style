@@ -65,7 +65,13 @@ export async function build({
         ? create_vscode_config(project_type, languages, technologies, overwrite)
         : null,
 
-      create_gitignore({ languages, technologies, project_type, output_dir }),
+      create_gitignore({
+        languages,
+        technologies,
+        project_type,
+        builder,
+        output_dir,
+      }),
 
       languages.includes('css') || languages.includes('scss')
         ? await create_stylelint_config({ languages, lenient, overwrite })

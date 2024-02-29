@@ -1,7 +1,7 @@
 import { stripIndent, stripIndents } from 'common-tags';
 
 import { create_file, includes_js, verify_missing } from './utils.js';
-import { ProjectType, Language, Technology } from './types.js';
+import { BuildOptions } from './build.js';
 
 export const gitignore_sets = {
   reports: ({ languages }: Pick<Options, 'languages'>) =>
@@ -46,8 +46,9 @@ export const gitignore_sets = {
     `.trim(),
   caches: ({
     languages,
+    builder,
     technologies,
-  }: Pick<Options, 'languages' | 'technologies'>) => stripIndents`
+  }: Pick<Options, 'languages' | 'technologies' | 'builder'>) => stripIndents`
     # caches
     ${[
       includes_js(languages) ? '.eslintcache' : null,
@@ -58,6 +59,7 @@ export const gitignore_sets = {
         ? '.stylelintcache'
         : null,
       technologies.includes('react') ? '.next/' : null,
+      builder === 'esbuild' ? '.esbuild' : null,
     ]
       .filter((l) => l != null)
       .join('\n')}
@@ -101,12 +103,11 @@ export const gitignore_sets = {
     `.trim(),
 };
 
-interface Options {
-  project_type: ProjectType;
-  languages: Language[];
-  technologies: Technology[];
-  output_dir?: string;
-}
+type Options = Pick<
+  BuildOptions,
+  'project_type' | 'languages' | 'technologies' | 'output_dir' | 'builder'
+>;
+
 /** @private */
 export function _generate_gitignore(options: Options): string {
   return [
