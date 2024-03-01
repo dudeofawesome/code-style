@@ -1,7 +1,11 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 
-import { SetupOptions, Builder, Language } from '../types.js';
+import {
+  CodeStyleSetupOptions as SetupOptions,
+  Builder,
+  Language,
+} from '@dudeofawesome/code-style/config-types';
 import { includes_js, verify_missing_script } from '../utils.js';
 
 const exec = promisify(execCallback);

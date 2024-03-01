@@ -1,13 +1,13 @@
 import { checkbox, select, input, confirm } from '@inquirer/prompts';
-
-import { build } from './build.js';
 import {
   ProjectType,
   Language,
   Technology,
   Builder,
   Runtime,
-} from './types.js';
+} from '@dudeofawesome/code-style/config-types';
+
+import { build } from './build.js';
 import { includes_js } from './utils.js';
 
 export async function interactive_setup() {

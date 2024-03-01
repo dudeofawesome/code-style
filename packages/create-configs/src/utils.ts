@@ -10,7 +10,7 @@ import {
 } from 'node:fs/promises';
 import { format, Options } from 'prettier';
 import default_config from '@dudeofawesome/code-style/prettierrc';
-import { Language } from './types.js';
+import { Language } from '@dudeofawesome/code-style/config-types';
 
 const exec = promisify(execCallback);
 

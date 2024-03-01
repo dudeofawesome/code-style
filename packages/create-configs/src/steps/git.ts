@@ -1,7 +1,7 @@
 import { stripIndent, stripIndents } from 'common-tags';
+import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
 
 import { create_file, includes_js, verify_missing } from '../utils.js';
-import { SetupOptions } from '../types.js';
 
 export const gitignore_sets = {
   reports: ({ languages }: Pick<Options, 'languages'>) =>

@@ -8,8 +8,8 @@ import {
   Technology,
   Builder,
   Runtime,
-  SetupOptions,
-} from '../types.js';
+  CodeStyleSetupOptions as SetupOptions,
+} from '@dudeofawesome/code-style/config-types';
 
 const exec = promisify(execCallback);
 

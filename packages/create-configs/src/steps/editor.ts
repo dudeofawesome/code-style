@@ -1,7 +1,12 @@
 import { mkdir } from 'node:fs/promises';
 import { stripIndent } from 'common-tags';
+import {
+  ProjectType,
+  Language,
+  Technology,
+} from '@dudeofawesome/code-style/config-types';
+
 import { create_file, prettify, verify_missing } from '../utils.js';
-import { ProjectType, Language, Technology } from '../types.js';
 
 export async function create_vscode_config(
   project_type: ProjectType,

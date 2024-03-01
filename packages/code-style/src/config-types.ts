@@ -11,7 +11,7 @@ export type Technology =
 export type Builder = 'tsc' | 'esbuild' | 'swc' | 'bun' | 'babel' | 'none';
 export type Runtime = 'nodejs' | 'bun';
 
-export interface SetupOptions {
+export interface CodeStyleSetupOptions {
   project_type: ProjectType;
   languages: Language[];
   runtime?: Runtime;

@@ -2,9 +2,12 @@ import { stringify } from 'yaml';
 import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
 import { stripIndent } from 'common-tags';
+import {
+  CodeStyleSetupOptions as SetupOptions,
+  Language,
+} from '@dudeofawesome/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
-import { SetupOptions, Language } from '../types.js';
 
 /** @private */
 export function _transform_eslint_package_name(extend: string): string {

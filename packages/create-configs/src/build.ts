@@ -1,3 +1,4 @@
+import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
 import { create_ts_config } from './steps/language-configuration.js';
 import {
   create_editor_config,
@@ -13,7 +14,6 @@ import {
 } from './steps/dependencies.js';
 import { create_vscode_config } from './steps/editor.js';
 import { create_gitignore } from './steps/git.js';
-import { SetupOptions } from './types.js';
 import { includes_js } from './utils.js';
 import { add_npm_scripts } from './steps/scripts.js';
 

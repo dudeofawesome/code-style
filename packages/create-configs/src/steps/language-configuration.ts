@@ -1,6 +1,7 @@
 import { stripIndent } from 'common-tags';
+import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
+
 import { create_file, prettify, verify_missing } from '../utils.js';
-import { SetupOptions } from '../types.js';
 
 /** @private */
 export function _generate_ts_config({

@@ -1,15 +1,15 @@
 import Yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import { Options } from 'yargs';
-
 import {
   ProjectType,
   Language,
   Technology,
   Builder,
   Runtime,
-  SetupOptions,
-} from './types.js';
+  CodeStyleSetupOptions as SetupOptions,
+} from '@dudeofawesome/code-style/config-types';
+
 import { build } from './build.js';
 import { interactive_setup } from './interactive.js';
 
