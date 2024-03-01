@@ -53,3 +53,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
         uses: 'dudeofawesome/actions/npm-publish@v1'
+
+      - name: 'Publish files to Github Releases 🚀'
+        uses: 'softprops/action-gh-release@v1'
+        with:
+          files: |
+            packages/code-style/codestylerc.schema.json
+          # prerelease:
