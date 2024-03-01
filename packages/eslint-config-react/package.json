@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-react",
-  "version": "2.0.0-18",
+  "version": "2.0.0-19",
   "description": "My react ESLint config",
   "keywords": [
     "style",
@@ -22,7 +22,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@dudeofawesome/eslint-config-browser": "^2.0.0-18",
+    "@dudeofawesome/eslint-config-browser": "^2.0.0-19",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0"
@@ -33,7 +33,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@dudeofawesome/eslint-npm-hoist-packages-react": "2.0.0-18",
+    "@dudeofawesome/eslint-npm-hoist-packages-react": "2.0.0-19",
     "eslint": "^8.49.0"
   },
   "engines": {
