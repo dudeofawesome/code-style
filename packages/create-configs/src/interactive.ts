@@ -5,12 +5,16 @@ import {
   Technology,
   Builder,
   Runtime,
+  CodeStyleSetupOptions,
 } from '@dudeofawesome/code-style/config-types';
 
 import { build } from './build.js';
 import { includes_js } from './utils.js';
+import { save_rc } from './rc-file.js';
 
-export async function interactive_setup() {
+export async function interactive_setup(
+  defaults: Partial<CodeStyleSetupOptions> = {},
+) {
   const project_type = await select<ProjectType>({
     message: 'Project type',
     choices: [
@@ -18,22 +22,36 @@ export async function interactive_setup() {
       { name: 'Backend', value: 'backend' },
       { name: 'CLI tool', value: 'cli' },
     ],
+    default: defaults.project_type,
   });
 
   const languages = await checkbox<Language>({
     message: `Languages (Only select languages you will write source-code in.)\n    `,
     instructions: `(Press <space> to select and <enter> to proceed)`,
     choices: [
-      { name: 'javascript', value: 'js' },
-      { name: 'typescript', value: 'ts', checked: true },
       {
-        name: 'ruby',
-        value: 'rb',
-        disabled: !['backend', 'cli'].includes(project_type),
+        name: 'javascript',
+        value: 'js',
+        checked: defaults.languages?.includes('js'),
       },
+      {
+        name: 'typescript',
+        value: 'ts',
+        checked: defaults.languages?.includes('ts') ?? true,
+      },
+      (() => {
+        const disabled = !['backend', 'cli'].includes(project_type);
+        return {
+          name: 'ruby',
+          value: 'rb',
+          checked: defaults.languages?.includes('rb') && !disabled,
+          disabled,
+        };
+      })(),
       {
         name: 'python',
         value: 'py',
+        checked: defaults.languages?.includes('py'),
         disabled: '(not yet supported)',
       },
     ],
@@ -46,6 +64,7 @@ export async function interactive_setup() {
           { name: 'nodejs', value: 'nodejs' },
           { name: 'bun', value: 'bun' },
         ],
+        default: defaults.runtime,
       })
     : undefined;
 
@@ -80,6 +99,7 @@ export async function interactive_setup() {
             disabled: languages.includes('ts') || runtime === 'bun',
           },
         ],
+        default: defaults.builder,
       })
     : 'none';
 
@@ -87,57 +107,86 @@ export async function interactive_setup() {
     message: `Tools (Select any tools / frameworks you will be using for this project.)\n    `,
     instructions: `(Press <space> to select and <enter> to proceed)`,
     choices: [
-      {
-        name: 'React',
-        value: 'react',
-        disabled: !includes_js(languages) || project_type !== 'web-app',
-      },
-      {
-        name: 'React Native',
-        value: 'react-native',
-        /**
-         * The configurator doesn't yet have support for React Native, but you
-         * can still configure it manually
-         */
-        disabled: true,
-      },
-      {
-        name: 'NestJS',
-        value: 'nestjs',
-        disabled: !includes_js(languages) || project_type !== 'backend',
-      },
-      {
-        name: 'Jest',
-        value: 'jest',
-        checked: includes_js(languages),
-        disabled: !includes_js(languages),
-      },
-      {
-        name: 'Visual Studio Code',
-        value: 'vs-code',
-        checked: true,
-      },
-      {
-        name: 'ES Modules',
-        value: 'esm',
-        checked: true,
-      },
+      (() => {
+        const disabled = !includes_js(languages) || project_type !== 'web-app';
+        return {
+          name: 'React',
+          value: 'react',
+          checked: defaults.technologies?.includes('react') && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled =
+          `The configurator doesn't yet have support for React Native, but you can still configure it manually` as
+            | string
+            | boolean;
+        return {
+          name: 'React Native',
+          value: 'react-native',
+          checked:
+            defaults.technologies?.includes('react-native') &&
+            !(disabled !== false),
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled = !includes_js(languages) || project_type !== 'backend';
+        return {
+          name: 'NestJS',
+          value: 'nestjs',
+          checked: defaults.technologies?.includes('nestjs') && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled = !includes_js(languages);
+        return {
+          name: 'Jest',
+          value: 'jest',
+          checked:
+            (defaults.technologies?.includes('jest') ??
+              includes_js(languages)) &&
+            !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled = false;
+        return {
+          name: 'Visual Studio Code',
+          value: 'vs-code',
+          checked:
+            (defaults.technologies?.includes('vs-code') ?? true) && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled = !includes_js(languages);
+        return {
+          name: 'ES Modules',
+          value: 'esm',
+          checked:
+            (defaults.technologies?.includes('esm') ?? true) && !disabled,
+          disabled,
+        };
+      })(),
     ],
   });
 
   const library = await confirm({
     message: 'Is this a library that other projects will consume?',
-    default: false,
+    default: defaults.library ?? false,
   });
 
   const lenient = !(await confirm({
     message: 'Use strict configs & rulesets?',
-    default: true,
+    default: !(defaults.lenient ?? false),
   }));
 
   const overwrite = await confirm({
     message: 'Overwrite existing config files?',
-    default: true,
+    default: defaults.overwrite ?? true,
   });
 
   let input_dir: string | undefined;
@@ -145,24 +194,15 @@ export async function interactive_setup() {
   if (builder !== 'none') {
     input_dir = await input({
       message: 'Input directory',
-      default: 'src/',
+      default: defaults.input_dir ?? 'src/',
     });
     output_dir = await input({
       message: 'Output directory',
-      default: 'dist/',
+      default: defaults.output_dir ?? 'dist/',
     });
   }
 
-  if (
-    !(await confirm({
-      message: 'Do all your choices look good?',
-      default: true,
-    }))
-  ) {
-    throw new Error(`User cancelled file creation.`);
-  }
-
-  await build({
+  const config: CodeStyleSetupOptions = {
     project_type,
     languages,
     runtime,
@@ -173,5 +213,20 @@ export async function interactive_setup() {
     library,
     lenient,
     overwrite,
-  });
+  };
+
+  if (
+    !(await confirm({
+      message: 'Do all your choices look good?',
+      default: true,
+    }))
+  ) {
+    console.info('Restarting config selection…');
+    await interactive_setup(config);
+    return;
+  }
+
+  await save_rc(config);
+
+  await build(config);
 }

@@ -12,6 +12,7 @@ import {
 
 import { build } from './build.js';
 import { interactive_setup } from './interactive.js';
+import { load_rc } from './rc-file.js';
 
 // TODO(4): add support for ruby
 // TODO(1): add deeper support for build systems
@@ -89,7 +90,7 @@ export async function main() {
       'prompt',
       'Walk through a set of prompts to configure your new project',
       async (yargs) => {
-        await interactive_setup();
+        await start_interactive_setup();
       },
       (argv) => {
         return;
@@ -100,5 +101,11 @@ export async function main() {
       'strip-dashed': true,
     }).argv;
 
-  if (options._.length === 0) await interactive_setup();
+  if (options._.length === 0) await start_interactive_setup();
+}
+
+async function start_interactive_setup() {
+  const config = await load_rc();
+
+  return interactive_setup(config);
 }
