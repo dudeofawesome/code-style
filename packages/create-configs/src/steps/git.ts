@@ -1,7 +1,7 @@
 import { stripIndent, stripIndents } from 'common-tags';
 
-import { create_file, includes_js, verify_missing } from './utils.js';
-import { BuildOptions } from './build.js';
+import { create_file, includes_js, verify_missing } from '../utils.js';
+import { SetupOptions } from '../types.js';
 
 export const gitignore_sets = {
   reports: ({ languages }: Pick<Options, 'languages'>) =>
@@ -104,7 +104,7 @@ export const gitignore_sets = {
 };
 
 type Options = Pick<
-  BuildOptions,
+  SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'output_dir' | 'builder'
 >;
 

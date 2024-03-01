@@ -3,9 +3,8 @@ import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
 import { stripIndent } from 'common-tags';
 
-import { create_file, prettify, verify_missing } from './utils.js';
-import { Language } from './types.js';
-import { BuildOptions } from './build.js';
+import { create_file, prettify, verify_missing } from '../utils.js';
+import { SetupOptions, Language } from '../types.js';
 
 /** @private */
 export function _transform_eslint_package_name(extend: string): string {
@@ -38,7 +37,7 @@ export function _generate_eslint_config({
   technologies,
   lenient,
 }: Pick<
-  BuildOptions,
+  SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient'
 >): string {
   const config: ESLint.ConfigData & { extends: string[] } = {
@@ -108,7 +107,7 @@ export async function create_eslint_config({
   lenient,
   overwrite = true,
 }: Pick<
-  BuildOptions,
+  SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
 >) {
   const preferred = '.eslintrc.yaml';
@@ -153,7 +152,7 @@ export async function create_stylelint_config({
   languages,
   lenient,
   overwrite = true,
-}: Pick<BuildOptions, 'languages' | 'lenient' | 'overwrite'>) {
+}: Pick<SetupOptions, 'languages' | 'lenient' | 'overwrite'>) {
   const preferred = '.stylelintrc.yaml';
   if (
     await verify_missing({

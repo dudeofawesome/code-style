@@ -8,14 +8,14 @@ import {
   Technology,
   Builder,
   Runtime,
-} from './types.js';
-import { BuildOptions } from './build.js';
+  SetupOptions,
+} from '../types.js';
 
 const exec = promisify(execCallback);
 
 export async function uninstall_duplicate_dependencies({
   runtime,
-}: Pick<BuildOptions, 'runtime'>): Promise<void> {
+}: Pick<SetupOptions, 'runtime'>): Promise<void> {
   const packages = [
     'prettier',
     'prettier-plugin-packagejson',

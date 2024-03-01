@@ -1,37 +1,22 @@
-import { create_ts_config } from './language-configuration.js';
-import { create_editor_config, create_prettier_config } from './formatting.js';
+import { create_ts_config } from './steps/language-configuration.js';
+import {
+  create_editor_config,
+  create_prettier_config,
+} from './steps/formatting.js';
 import {
   create_eslint_config,
   create_stylelint_config,
-} from './lint-configuration.js';
+} from './steps/lint-configuration.js';
 import {
   install_dependencies,
   uninstall_duplicate_dependencies,
-} from './dependencies.js';
-import { create_vscode_config } from './editor.js';
-import { create_gitignore } from './git.js';
-import {
-  ProjectType,
-  Language,
-  Technology,
-  Builder,
-  Runtime,
-} from './types.js';
+} from './steps/dependencies.js';
+import { create_vscode_config } from './steps/editor.js';
+import { create_gitignore } from './steps/git.js';
+import { SetupOptions } from './types.js';
 import { includes_js } from './utils.js';
-import { add_npm_scripts } from './scripts.js';
+import { add_npm_scripts } from './steps/scripts.js';
 
-export interface BuildOptions {
-  project_type: ProjectType;
-  languages: Language[];
-  runtime?: Runtime;
-  builder: Builder;
-  input_dir?: string;
-  output_dir?: string;
-  technologies: Technology[];
-  library: boolean;
-  lenient: boolean;
-  overwrite: boolean;
-}
 export async function build({
   project_type,
   languages,
@@ -43,7 +28,7 @@ export async function build({
   library = false,
   lenient = false,
   overwrite = false,
-}: BuildOptions) {
+}: SetupOptions) {
   await uninstall_duplicate_dependencies({ runtime });
   await Promise.all([
     create_editor_config(overwrite),

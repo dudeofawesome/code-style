@@ -8,8 +8,9 @@ import {
   Technology,
   Builder,
   Runtime,
+  SetupOptions,
 } from './types.js';
-import { build, BuildOptions } from './build.js';
+import { build } from './build.js';
 import { interactive_setup } from './interactive.js';
 
 // TODO(4): add support for ruby
@@ -78,7 +79,7 @@ export async function main() {
       },
       async (argv) => {
         await build({
-          ...(argv as unknown as BuildOptions),
+          ...(argv as unknown as SetupOptions),
           overwrite: options.overwrite,
         });
         process.exit(0);

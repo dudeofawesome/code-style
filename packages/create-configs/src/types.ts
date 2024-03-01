@@ -10,3 +10,16 @@ export type Technology =
   | 'commonjs';
 export type Builder = 'tsc' | 'esbuild' | 'swc' | 'bun' | 'babel' | 'none';
 export type Runtime = 'nodejs' | 'bun';
+
+export interface SetupOptions {
+  project_type: ProjectType;
+  languages: Language[];
+  runtime?: Runtime;
+  builder: Builder;
+  input_dir?: string;
+  output_dir?: string;
+  technologies: Technology[];
+  library: boolean;
+  lenient: boolean;
+  overwrite: boolean;
+}

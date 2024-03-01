@@ -1,6 +1,6 @@
 import { stripIndent } from 'common-tags';
-import { create_file, prettify, verify_missing } from './utils.js';
-import { BuildOptions } from './build.js';
+import { create_file, prettify, verify_missing } from '../utils.js';
+import { SetupOptions } from '../types.js';
 
 /** @private */
 export function _generate_ts_config({
@@ -73,7 +73,7 @@ export function _generate_ts_config({
 }
 
 export type CreateTSConfigOptions = Pick<
-  BuildOptions,
+  SetupOptions,
   | 'project_type'
   | 'technologies'
   | 'library'

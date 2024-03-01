@@ -1,20 +1,18 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 
-import { Builder, Language, Runtime, Technology } from './types.js';
-import { includes_js, verify_missing_script } from './utils.js';
+import { SetupOptions, Builder, Language } from '../types.js';
+import { includes_js, verify_missing_script } from '../utils.js';
 
 const exec = promisify(execCallback);
 
 const concurrently_opts = '--group --prefix none';
 
-export type AddNPMScriptsOptions = {
-  languages: Language[];
-  technologies: Technology[];
-  builder: Builder;
-  runtime?: Runtime;
-  overwrite?: boolean;
-};
+export type AddNPMScriptsOptions = Pick<
+  SetupOptions,
+  'languages' | 'technologies' | 'builder' | 'runtime' | 'overwrite'
+>;
+
 export async function add_npm_scripts(options: AddNPMScriptsOptions) {
   await exec(`npm install --save-dev concurrently`);
 
@@ -126,7 +124,7 @@ export async function set_lint_script(options: AddNPMScriptsOptions) {
   if (
     await verify_missing_script({
       json_path: 'scripts.lint',
-      overwrite: options.overwrite ?? false,
+      overwrite: options.overwrite,
     })
   ) {
     const scripts = _generate_lint_script(options);
@@ -148,7 +146,7 @@ export async function set_test_script(options: AddNPMScriptsOptions) {
   if (
     await verify_missing_script({
       json_path: 'scripts.test',
-      overwrite: options.overwrite ?? false,
+      overwrite: options.overwrite,
     })
   ) {
     const command: string = ((runtime): string => {

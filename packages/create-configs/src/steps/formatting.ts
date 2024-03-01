@@ -1,6 +1,6 @@
 import { stat, symlink } from 'node:fs/promises';
 import { stripIndent } from 'common-tags';
-import { create_file, verify_missing } from './utils.js';
+import { create_file, verify_missing } from '../utils.js';
 
 export async function create_prettier_config(overwrite: boolean = false) {
   const preferred = '.prettierrc.mjs';
