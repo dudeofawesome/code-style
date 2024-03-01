@@ -96,6 +96,10 @@ export async function install_dependencies({
       break;
   }
 
+  if (languages.includes('js') || languages.includes('ts')) {
+    dev_packages.push('@dudeofawesome/typescript-configs');
+  }
+
   for (const language of languages) {
     switch (language) {
       case 'ts':
@@ -103,7 +107,6 @@ export async function install_dependencies({
           'typescript',
           '@dudeofawesome/eslint-config-typescript',
           '@dudeofawesome/eslint-npm-hoist-packages-typescript',
-          '@dudeofawesome/typescript-configs',
         );
         break;
       case 'css':
