@@ -7,7 +7,7 @@ overrides:
       - '*.unit.*'
       - '*.e2e.*'
     extends:
-      - 'plugin:jest/recommended'
+      - 'plugin:eslint-plugin-jest/recommended'
     settings:
       jest:
         version: 'detect'

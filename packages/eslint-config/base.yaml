@@ -1,10 +1,10 @@
 extends:
   - 'eslint:recommended'
   - 'plugin:prettier/recommended'
-  - 'plugin:promise/recommended'
+  - 'plugin:eslint-plugin-promise/recommended'
   # TODO(0): consider switching to `eslint-plugin-i`
-  - 'plugin:import/recommended'
-  - 'plugin:@eslint-community/eslint-comments/recommended'
+  - 'plugin:eslint-plugin-import/recommended'
+  - 'plugin:@eslint-community/eslint-plugin-eslint-comments/recommended'
 
   - './rule-sets/bugs.yaml'
   - './rule-sets/deprecated.yaml'
@@ -17,7 +17,7 @@ extends:
   - './rule-sets/security.yaml'
 
 plugins:
-  - 'json-files'
+  - 'eslint-plugin-json-files'
 
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16

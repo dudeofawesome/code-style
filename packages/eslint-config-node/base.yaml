@@ -1,5 +1,5 @@
 extends:
-  - 'plugin:n/recommended-module'
+  - 'plugin:eslint-plugin-n/recommended-module'
 
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16

@@ -1,5 +1,5 @@
 extends:
-  - '@dudeofawesome/node'
+  - '@dudeofawesome/eslint-config-node'
 
 rules:
   # Allow scripts to log with `console`.

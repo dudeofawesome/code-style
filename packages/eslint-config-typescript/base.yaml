@@ -1,7 +1,7 @@
 extends:
-  - 'plugin:@typescript-eslint/strict-type-checked'
-  - 'plugin:@typescript-eslint/stylistic-type-checked'
-  - 'plugin:import/typescript'
+  - 'plugin:@typescript-eslint/eslint-plugin/strict-type-checked'
+  - 'plugin:@typescript-eslint/eslint-plugin/stylistic-type-checked'
+  - 'plugin:eslint-plugin-import/typescript'
 
 parserOptions:
   project: true

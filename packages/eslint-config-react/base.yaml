@@ -1,8 +1,8 @@
 extends:
-  - '@dudeofawesome/browser'
-  - 'plugin:react/recommended'
-  - 'plugin:react-hooks/recommended'
-  - 'plugin:jsx-a11y/recommended'
+  - '@dudeofawesome/eslint-config-browser'
+  - 'plugin:eslint-plugin-react/recommended'
+  - 'plugin:eslint-plugin-react-hooks/recommended'
+  - 'plugin:eslint-plugin-jsx-a11y/recommended'
 
 settings:
   react:
