@@ -1,11 +1,11 @@
 import { describe, it } from 'node:test';
+import { strictEqual } from 'node:assert';
 import { filePath, initESLint } from '@code-style/utils/testing/eslint';
 import {
   testNoFail,
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
-import { strictEqual } from 'node:assert';
 
 const linter = initESLint({
   extends: ['@dudeofawesome', '@dudeofawesome/esmodule'],
