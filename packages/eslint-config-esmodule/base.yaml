@@ -4,3 +4,6 @@ plugins:
 rules:
   # Disallow commonjs modules.
   import/no-commonjs: 'error'
+
+  # Turn off the `import` ban from `@dudeofawesome/eslint-config/rule-sets/imports.yaml`
+  no-restricted-syntax: 'off'

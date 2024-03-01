@@ -3,6 +3,7 @@ extends:
   - '@dudeofawesome'
   - '@dudeofawesome/cli'
   - '@dudeofawesome/typescript'
+  - '@dudeofawesome/esmodule'
 
 ignorePatterns:
   - '/bin/create-configs.js'

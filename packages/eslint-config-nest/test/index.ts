@@ -8,7 +8,13 @@ import {
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint(
-  { extends: ['@dudeofawesome', '@dudeofawesome/nest'] },
+  {
+    extends: [
+      '@dudeofawesome',
+      '@dudeofawesome/esmodule',
+      '@dudeofawesome/nest',
+    ],
+  },
   { cwd: join(__dirname, 'fixture') },
 );
 

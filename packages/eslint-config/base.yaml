@@ -23,5 +23,8 @@ parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
   sourceType: 'module'
 
+env:
+  commonjs: true
+
 ignorePatterns:
   - '**/dist/**'

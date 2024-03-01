@@ -37,3 +37,17 @@ rules:
 
   # Use `import/order` instead.
   sort-imports: 'off'
+
+  # disable ES Module import/export
+  no-restricted-syntax:
+    - 'error'
+    - selector: 'ImportDeclaration'
+      message: 'ES Module import not allowed'
+    - selector: 'ExportNamedDeclaration'
+      message: 'ES Module export not allowed'
+    - selector: 'ExportDefaultDeclaration'
+      message: 'ES Module export not allowed'
+    - selector: 'ExportAllDeclaration'
+      message: 'ES Module export not allowed'
+    - selector: 'TSExportAssignment'
+      message: 'ES Module export not allowed'

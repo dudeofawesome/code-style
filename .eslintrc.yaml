@@ -4,5 +4,6 @@ extends:
   - '@dudeofawesome/cli'
   - '@dudeofawesome/jest'
   - '@dudeofawesome/typescript'
+  - '@dudeofawesome/esmodule'
 ignorePatterns:
   - '**/test/*/**'
