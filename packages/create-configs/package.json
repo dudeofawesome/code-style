@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/create-configs",
-  "version": "2.0.0-17",
+  "version": "2.0.0-18",
   "description": "A script to create configuration files to conform to code style standards.",
   "keywords": [
     "style",
@@ -29,7 +29,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
-    "@dudeofawesome/code-style": "^2.0.0-17",
+    "@dudeofawesome/code-style": "^2.0.0-18",
     "@inquirer/prompts": "^3.2.0",
     "common-tags": "^1.8.2",
     "prettier": "^3.1.0",
@@ -37,10 +37,10 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@dudeofawesome/eslint-config": "^2.0.0-17",
-    "@dudeofawesome/eslint-config-cli": "^2.0.0-17",
-    "@dudeofawesome/eslint-config-typescript": "^2.0.0-17",
-    "@dudeofawesome/typescript-configs": "^2.0.0-17",
+    "@dudeofawesome/eslint-config": "^2.0.0-18",
+    "@dudeofawesome/eslint-config-cli": "^2.0.0-18",
+    "@dudeofawesome/eslint-config-typescript": "^2.0.0-18",
+    "@dudeofawesome/typescript-configs": "^2.0.0-18",
     "@types/common-tags": "^1.8.3",
     "@types/jest": "^29.5.6",
     "jest": "^29.7.0",
