@@ -34,8 +34,8 @@ void describe('eslint-config-nest', () => {
         ruleId: 'no-restricted-imports',
         files: [
           {
-            code: `import { isAxiosError } from '@nestjs/terminus/dist/utils';
-isAxiosError('foo');\n`,
+            code: `import { isAxiosError } from '@nestjs/terminus/dist/utils';\n
+(isAxiosError as (a: unknown) => void)({});\n`,
             ts: true,
           },
         ],

@@ -1,5 +1,5 @@
 import { copyFile, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
-import { strictEqual, ok } from 'node:assert';
+import { strictEqual, deepStrictEqual } from 'node:assert';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { cwd } from 'node:process';
@@ -50,11 +50,11 @@ export async function testRuleFail({
     const res = await linter.lintText(_files[0].code, {
       filePath: _files[0].path,
     });
-    ok(
+    deepStrictEqual(
       res
-        .map((r) => r.messages.map((m) => m.ruleId))
-        .flat()
-        .includes(ruleId),
+        .map((lint_result) => lint_result.messages.map((m) => m.ruleId))
+        .flat(),
+      [ruleId],
     );
   } else {
     // TODO: support multiple files using in-memory fs

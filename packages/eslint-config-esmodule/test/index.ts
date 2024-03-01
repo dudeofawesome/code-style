@@ -26,7 +26,7 @@ void describe('eslint-config-esmodule base', () => {
       testRuleFail({
         linter,
         ruleId: 'import/no-commonjs',
-        files: [{ code: `const foo = require('foo');\n` }],
+        files: [{ code: `const foo = require('foo');\n\nfoo();\n` }],
       }));
   });
 });
