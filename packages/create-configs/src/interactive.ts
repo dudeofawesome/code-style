@@ -125,6 +125,11 @@ export async function interactive_setup() {
     ],
   });
 
+  const library = await confirm({
+    message: 'Is this a library that other projects will consume?',
+    default: false,
+  });
+
   const lenient = !(await confirm({
     message: 'Use strict configs & rulesets?',
     default: true,
@@ -165,6 +170,7 @@ export async function interactive_setup() {
     input_dir,
     output_dir,
     technologies,
+    library,
     lenient,
     overwrite,
   });

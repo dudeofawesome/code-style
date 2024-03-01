@@ -28,6 +28,7 @@ export interface BuildOptions {
   input_dir?: string;
   output_dir?: string;
   technologies: Technology[];
+  library: boolean;
   lenient: boolean;
   overwrite: boolean;
 }
@@ -39,6 +40,7 @@ export async function build({
   input_dir = 'src/',
   output_dir = 'dist/',
   technologies = [],
+  library = false,
   lenient = false,
   overwrite = false,
 }: BuildOptions) {
@@ -81,6 +83,7 @@ export async function build({
         ? await create_ts_config({
             project_type,
             technologies,
+            library,
             input_dir,
             output_dir,
             overwrite,

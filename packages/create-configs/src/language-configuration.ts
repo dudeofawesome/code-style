@@ -6,13 +6,11 @@ import { BuildOptions } from './build.js';
 export function _generate_ts_config({
   project_type,
   technologies,
+  library,
   input_dir,
   output_dir,
   lenient,
-}: Pick<
-  BuildOptions,
-  'project_type' | 'technologies' | 'input_dir' | 'output_dir' | 'lenient'
->): string {
+}: Omit<CreateTSConfigOptions, 'overwrite'>): string {
   const config = {
     extends: [] as string[],
     compilerOptions: {
@@ -54,6 +52,12 @@ export function _generate_ts_config({
     );
   }
 
+  if (library) {
+    config.extends.push(
+      '@dudeofawesome/typescript-configs/layers/library.json',
+    );
+  }
+
   // TODO(2): add support for library.json tsconfig
 
   if (lenient) {
@@ -68,22 +72,25 @@ export function _generate_ts_config({
   `;
 }
 
-export async function create_ts_config({
-  project_type,
-  technologies,
-  input_dir,
-  output_dir,
-  overwrite = true,
-  lenient,
-}: Pick<
+export type CreateTSConfigOptions = Pick<
   BuildOptions,
   | 'project_type'
   | 'technologies'
+  | 'library'
   | 'input_dir'
   | 'output_dir'
   | 'overwrite'
   | 'lenient'
->) {
+>;
+export async function create_ts_config({
+  project_type,
+  technologies,
+  library,
+  input_dir,
+  output_dir,
+  overwrite = true,
+  lenient,
+}: CreateTSConfigOptions) {
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
   //   config.extends.push('@dudeofawesome/typescript-configs/layers/jest.json');
@@ -98,6 +105,7 @@ export async function create_ts_config({
         _generate_ts_config({
           project_type,
           technologies,
+          library,
           input_dir,
           output_dir,
           lenient,
