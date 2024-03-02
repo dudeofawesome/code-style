@@ -34,15 +34,13 @@ export async function build({
     create_editor_config(overwrite),
     create_prettier_config(overwrite),
     includes_js(languages)
-      ? [
-          await install_dependencies({
-            project_type,
-            languages,
-            technologies,
-            runtime,
-            builder,
-          }),
-        ]
+      ? install_dependencies({
+          project_type,
+          languages,
+          technologies,
+          runtime,
+          builder,
+        })
       : null,
   ]);
 
@@ -61,24 +59,21 @@ export async function build({
       }),
 
       languages.includes('css') || languages.includes('scss')
-        ? await create_stylelint_config({ languages, lenient, overwrite })
-        : null,
-
-      languages.includes('ts') || languages.includes('js')
-        ? await create_ts_config({
-            project_type,
-            technologies,
-            library,
-            input_dir,
-            output_dir,
-            overwrite,
-            lenient,
-          })
+        ? create_stylelint_config({ languages, lenient, overwrite })
         : null,
 
       includes_js(languages)
         ? [
-            await create_eslint_config({
+            create_ts_config({
+              project_type,
+              technologies,
+              library,
+              input_dir,
+              output_dir,
+              overwrite,
+              lenient,
+            }),
+            create_eslint_config({
               project_type,
               languages,
               technologies,
