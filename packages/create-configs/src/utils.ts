@@ -2,6 +2,7 @@ import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import {
   access,
+  readlink,
   readFile,
   readdir,
   rm,
@@ -44,7 +45,12 @@ export function file_exists(path: string | RegExp): Promise<string[] | false> {
   if (typeof path === 'string') {
     return access(path)
       .then(() => [path])
-      .catch(() => false);
+      .catch(() =>
+        // `access` doesn't work well for symlinks, so we need to handle them.
+        readlink(path)
+          .then(() => [path])
+          .catch(() => false),
+      );
   } else {
     return readdir('.').then((entries) => {
       const matches = entries.filter((entry) => entry.match(path));
