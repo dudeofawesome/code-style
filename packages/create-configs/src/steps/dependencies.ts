@@ -117,7 +117,7 @@ export async function install_dependencies({
       case 'scss':
         dev_packages.push(
           'stylelint',
-          'scss-embedded',
+          'sass-embedded',
           '@dudeofawesome/stylelint-config-scss',
         );
         break;
