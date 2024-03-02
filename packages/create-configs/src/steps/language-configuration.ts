@@ -1,7 +1,11 @@
+import { exec as execCallback } from 'node:child_process';
+import { promisify } from 'node:util';
 import { stripIndent } from 'common-tags';
 import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
+
+const exec = promisify(execCallback);
 
 /** @private */
 export function _generate_ts_config({
@@ -114,4 +118,8 @@ export async function create_ts_config({
       ),
     );
   }
+}
+
+export async function set_package_type(type: 'commonjs' | 'module') {
+  await exec(`npm pkg set type='${type}'`);
 }

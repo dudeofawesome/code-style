@@ -1,5 +1,8 @@
 import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
-import { create_ts_config } from './steps/language-configuration.js';
+import {
+  create_ts_config,
+  set_package_type,
+} from './steps/language-configuration.js';
 import {
   create_editor_config,
   create_prettier_config,
@@ -64,6 +67,9 @@ export async function build({
 
       includes_js(languages)
         ? [
+            set_package_type(
+              technologies.includes('esm') ? 'module' : 'commonjs',
+            ),
             create_ts_config({
               project_type,
               technologies,
