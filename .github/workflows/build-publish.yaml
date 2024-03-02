@@ -54,9 +54,13 @@ jobs:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
         uses: 'dudeofawesome/actions/npm-publish@v1'
 
+      - name: 'Get package version 🔖'
+        id: 'get-package-version'
+        run: 'echo "version=v$(npm pkg get version)" >> "$GITHUB_OUTPUT"'
       - name: 'Publish files to Github Releases 🚀'
         uses: 'softprops/action-gh-release@v1'
         with:
+          tag_name: '${{ steps.get-package-version.outputs.version }}'
+          prerelease: "${{ contains(steps.get-package-version.outputs.version, '-') }}"
           files: |
             packages/code-style/codestylerc.schema.json
-          # prerelease:
