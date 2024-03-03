@@ -1,4 +1,4 @@
-#!/usr/bin/env node --loader tsm
+#!/usr/bin/env -S node --loader tsm
 /* eslint-disable n/no-sync */
 
 import { execSync } from 'node:child_process';
