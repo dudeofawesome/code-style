@@ -17,6 +17,10 @@
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
+  "files": [
+    "/base.yaml",
+    "/lenient.yaml"
+  ],
   "scripts": {
     "test": "node $NODE_OPTS --require tsm --test test/*.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"

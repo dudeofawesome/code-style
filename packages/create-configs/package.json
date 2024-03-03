@@ -20,6 +20,10 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": "bin/create-configs.js",
+  "files": [
+    "/dist/",
+    "/bin/"
+  ],
   "scripts": {
     "build": "tsc",
     "prelint": "npm run build",

@@ -3,6 +3,7 @@ extends:
 
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
+  sourceType: commonjs
 
 env:
   node: true
@@ -13,6 +14,7 @@ globals:
   __dirname: 'readonly'
   __filename: 'readonly'
   require: 'readonly'
+  module: 'writable'
 
 rules:
   # Allow unspecified radix in `parseInt` since Node has a consistent radix.

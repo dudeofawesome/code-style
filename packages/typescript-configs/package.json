@@ -15,6 +15,10 @@
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "roles/base.json",
+  "files": [
+    "/roles/",
+    "/layers/"
+  ],
   "scripts": {
     "test": "node $NODE_OPTS --require tsm --test test/*.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
