@@ -79,6 +79,9 @@ export function _generate_eslint_config({
   if (technologies.includes('jest')) {
     config.extends.push('@dudeofawesome/eslint-config-jest');
   }
+  if (technologies.includes('esm')) {
+    config.extends.push('@dudeofawesome/eslint-config-esmodule');
+  }
 
   if (lenient) {
     for (const extended of config.extends) {
