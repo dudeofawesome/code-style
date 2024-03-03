@@ -147,7 +147,8 @@ export function _generate_stylelint_config(languages: Language[]): string {
     # In order to update the this config, update ${
       Array.isArray(config.extends) ? config.extends.join(', ') : config.extends
     }
-    ${stringify(config)}
+
+  ${stringify(config)}
   `;
 }
 
