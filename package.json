@@ -22,6 +22,7 @@
   "type": "module",
   "bin": {
     "bump": "scripts/bump.ts",
+    "concurrently-ws": "scripts/concurrently-ws.ts",
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "workspaces": [
@@ -29,12 +30,14 @@
     "utils"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "scripts/concurrently-ws.ts build && echo 'All builds succeeded.'",
     "bump": "scripts/bump.ts",
     "prelint": "npm run build",
-    "lint": "npm run lint --workspaces --if-present && eslint . && tsc --noEmit",
+    "lint": "scripts/concurrently-ws.ts lint 'npm:lint:*' && echo 'All lint passed.'",
+    "lint:js": "tsc --noEmit",
+    "lint:types": "eslint .",
     "pretest": "npm run build",
-    "test": "npm run test --workspaces && echo 'All tests passed.'",
+    "test": "scripts/concurrently-ws.ts test && echo 'All tests passed.'",
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
