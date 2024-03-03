@@ -30,12 +30,12 @@ export async function interactive_setup(
     instructions: `(Press <space> to select and <enter> to proceed)`,
     choices: [
       {
-        name: 'javascript',
+        name: 'Javascript',
         value: 'js',
         checked: defaults.languages?.includes('js'),
       },
       {
-        name: 'typescript',
+        name: 'Typescript',
         value: 'ts',
         checked: defaults.languages?.includes('ts') ?? true,
       },
