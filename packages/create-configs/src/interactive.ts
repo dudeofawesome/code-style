@@ -40,6 +40,24 @@ export async function interactive_setup(
         checked: defaults.languages?.includes('ts') ?? true,
       },
       (() => {
+        const disabled = !['web-app'].includes(project_type);
+        return {
+          name: 'CSS',
+          value: 'css',
+          checked: defaults.languages?.includes('css') && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
+        const disabled = !['web-app'].includes(project_type);
+        return {
+          name: 'SASS',
+          value: 'scss',
+          checked: defaults.languages?.includes('scss') && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
         const disabled = !['backend', 'cli'].includes(project_type);
         return {
           name: 'ruby',
