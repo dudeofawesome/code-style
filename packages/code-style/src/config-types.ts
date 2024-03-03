@@ -3,6 +3,7 @@ export type Language = 'ts' | 'js' | 'rb' | 'py' | 'css' | 'scss';
 export type Technology =
   | 'react'
   | 'react-native'
+  | 'nextjs'
   | 'nestjs'
   | 'jest'
   | 'vs-code'

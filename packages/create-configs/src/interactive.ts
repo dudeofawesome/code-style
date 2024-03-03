@@ -135,6 +135,15 @@ export async function interactive_setup(
         };
       })(),
       (() => {
+        const disabled = !includes_js(languages) || project_type !== 'web-app';
+        return {
+          name: 'Next.JS',
+          value: 'nextjs',
+          checked: defaults.technologies?.includes('nextjs') && !disabled,
+          disabled,
+        };
+      })(),
+      (() => {
         const disabled =
           `The configurator doesn't yet have support for React Native, but you can still configure it manually` as
             | string

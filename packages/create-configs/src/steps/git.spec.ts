@@ -77,7 +77,7 @@ describe('git', () => {
         expect(
           gitignore_sets.caches({
             languages: ['ts'],
-            technologies: ['react'],
+            technologies: ['nextjs'],
             builder: 'tsc',
           }),
         ).toContain('.next/');

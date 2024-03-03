@@ -74,7 +74,12 @@ export async function install_dependencies({
 
   switch (project_type) {
     case 'web-app':
-      if (technologies.includes('react')) {
+      if (technologies.includes('nextjs')) {
+        dev_packages.push(
+          '@dudeofawesome/eslint-config-nextjs',
+          '@dudeofawesome/eslint-npm-hoist-packages-nextjs',
+        );
+      } else if (technologies.includes('react')) {
         dev_packages.push(
           '@dudeofawesome/eslint-config-react',
           '@dudeofawesome/eslint-npm-hoist-packages-react',
@@ -136,9 +141,15 @@ export async function install_dependencies({
         );
         break;
       case 'react':
-        prod_packages.push('react');
+      case 'nextjs':
+        prod_packages.push('react', 'react-dom');
         if (languages.includes('ts')) {
           dev_packages.push('@types/react');
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        if (tech === 'nextjs') {
+          prod_packages.push('next');
         }
         break;
       case 'esm':

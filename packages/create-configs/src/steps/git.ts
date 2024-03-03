@@ -58,7 +58,7 @@ export const gitignore_sets = {
       languages.includes('css') || languages.includes('scss')
         ? '.stylelintcache'
         : null,
-      technologies.includes('react') ? '.next/' : null,
+      technologies.includes('nextjs') ? '.next/' : null,
       builder === 'esbuild' ? '.esbuild/' : null,
     ]
       .filter((l) => l != null)

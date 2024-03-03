@@ -53,7 +53,9 @@ export function _generate_eslint_config({
 
   switch (project_type) {
     case 'web-app':
-      if (technologies.includes('react')) {
+      if (technologies.includes('nextjs')) {
+        config.extends.push('@dudeofawesome/eslint-config-nextjs');
+      } else if (technologies.includes('react')) {
         config.extends.push('@dudeofawesome/eslint-config-react');
       } else {
         config.extends.push('@dudeofawesome/eslint-config-browser');

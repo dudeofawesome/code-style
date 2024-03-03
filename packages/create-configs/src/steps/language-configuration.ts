@@ -31,7 +31,11 @@ export function _generate_ts_config({
       config.extends.push(
         '@dudeofawesome/typescript-configs/roles/browser.json',
       );
-      if (technologies.includes('react')) {
+      if (technologies.includes('nextjs')) {
+        config.extends.push(
+          '@dudeofawesome/typescript-configs/layers/nextjs.json',
+        );
+      } else if (technologies.includes('react')) {
         config.extends.push(
           '@dudeofawesome/typescript-configs/layers/react.json',
         );

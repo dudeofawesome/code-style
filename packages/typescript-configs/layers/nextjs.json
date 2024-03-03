@@ -1,0 +1,11 @@
+{
+  "extends": ["./react.json"],
+  "compilerOptions": {
+    // use SWC
+    "noEmit": true,
+    // required for SWC
+    "isolatedModules": true,
+    // next.js implements its own optimized jsx transform
+    "jsx": "preserve"
+  }
+}

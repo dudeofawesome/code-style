@@ -1,0 +1,3 @@
+extends:
+  - '@dudeofawesome/eslint-config-react'
+  - 'plugin:@next/eslint-plugin-next/recommended'
