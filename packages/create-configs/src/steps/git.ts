@@ -59,7 +59,7 @@ export const gitignore_sets = {
         ? '.stylelintcache'
         : null,
       technologies.includes('react') ? '.next/' : null,
-      builder === 'esbuild' ? '.esbuild' : null,
+      builder === 'esbuild' ? '.esbuild/' : null,
     ]
       .filter((l) => l != null)
       .join('\n')}
