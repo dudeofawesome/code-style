@@ -1,5 +1,0 @@
-{
-  "extends": ["@dudeofawesome/javascript-configs/roles/react.json"],
-  "include": ["src/"],
-  "exclude": ["dist/"]
-}
