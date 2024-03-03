@@ -85,6 +85,18 @@ rules:
     - 'error'
     - ignoreTypeImport: true
 
+  # Require bin files to use a shebang
+  n/shebang:
+    - 'error'
+    - additionalExecutables:
+        - 'ts-node'
+        - 'tsm'
+        - 'tsx'
+        - '-S node'
+        - '-S ts-node'
+        - '-S tsm'
+        - '-S tsx'
+
 overrides:
   - files:
       # test files
