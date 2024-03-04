@@ -56,7 +56,7 @@ jobs:
 
       - name: 'Get package version 🔖'
         id: 'get-package-version'
-        run: 'echo "version=v$(npm pkg get version)" >> "$GITHUB_OUTPUT"'
+        run: 'echo "version=v$(npm pkg get version | jq --raw-output)" >> "$GITHUB_OUTPUT"'
       - name: 'Publish files to Github Releases 🚀'
         uses: 'softprops/action-gh-release@v1'
         with:
