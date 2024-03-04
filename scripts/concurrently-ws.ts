@@ -5,13 +5,19 @@ import { execSync } from 'node:child_process';
 import { concurrently, CloseEvent } from 'concurrently';
 
 const script = process.argv[2];
-const extra_commands = process.argv.slice(3);
+const skip_workspaces =
+  (process.argv[3] != null && ['--skip', '-s'].includes(process.argv[3])
+    ? process.argv[4]?.split(',').map((ws) => ws.replace(/\/?$/u, ''))
+    : null) ?? [];
+const extra_commands = process.argv.slice(skip_workspaces.length === 0 ? 3 : 5);
 
 const workspaces = (
   JSON.parse(execSync(`npm query .workspace`, { encoding: 'utf-8' })) as {
     location: string;
   }[]
-).map((p) => p.location);
+)
+  .map((p) => p.location)
+  .filter((ws) => !skip_workspaces.includes(ws));
 
 const res = concurrently(
   workspaces

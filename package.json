@@ -30,7 +30,7 @@
     "utils"
   ],
   "scripts": {
-    "build": "scripts/concurrently-ws.ts build && echo 'All builds succeeded.'",
+    "build": "scripts/build.sh",
     "bump": "scripts/bump.ts",
     "prelint": "npm run build",
     "lint": "scripts/concurrently-ws.ts lint 'npm:lint:*' && echo 'All lint passed.'",
