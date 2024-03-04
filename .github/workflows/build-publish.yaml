@@ -47,6 +47,8 @@ jobs:
     steps:
       - name: 'Setup node 🛎️'
         uses: 'dudeofawesome/actions/node-setup@v1'
+        with:
+          install-modules: false
 
       - name: 'Publish to NPM 🚀'
         env:
@@ -58,8 +60,6 @@ jobs:
         run: 'echo "version=v$(npm pkg get version | jq --raw-output)" >> "$GITHUB_OUTPUT"'
       - name: 'Build jsonschema 🏗️'
         run: 'npm run build:jsonschema --workspace packages/code-style'
-      - name: '🔊'
-        run: 'ls -lha packages/code-style/codestylerc.schema.json'
       - name: 'Publish files to Github Releases 🚀'
         uses: 'softprops/action-gh-release@v1'
         with:
