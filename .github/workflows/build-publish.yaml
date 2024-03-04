@@ -56,6 +56,8 @@ jobs:
       - name: 'Get package version 🔖'
         id: 'get-package-version'
         run: 'echo "version=v$(npm pkg get version | jq --raw-output)" >> "$GITHUB_OUTPUT"'
+      - name: 'Build jsonschema 🏗️'
+        run: 'npm run build:jsonschema --workspace packages/code-style'
       - name: '🔊'
         run: 'ls -lha packages/code-style/codestylerc.schema.json'
       - name: 'Publish files to Github Releases 🚀'
