@@ -7,3 +7,10 @@ extends:
   - '@dudeofawesome/esmodule'
 ignorePatterns:
   - '**/test/*/**'
+
+overrides:
+  - files:
+      - 'scripts/bump.ts'
+      - 'scripts/concurrently-ws.ts'
+    rules:
+      n/shebang: 'off'
