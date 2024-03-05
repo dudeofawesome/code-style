@@ -144,7 +144,7 @@ export async function install_dependencies({
       case 'nextjs':
         prod_packages.push('react', 'react-dom');
         if (languages.includes('ts')) {
-          dev_packages.push('@types/react');
+          dev_packages.push('@types/react', '@types/react-dom');
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
