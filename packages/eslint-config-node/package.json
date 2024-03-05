@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-config-node",
-  "version": "2.0.0-21",
+  "version": "2.0.0-22",
   "description": "My node ESLint config",
   "keywords": [
     "style",
@@ -34,7 +34,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@dudeofawesome/eslint-npm-hoist-packages-node": "2.0.0-21",
+    "@dudeofawesome/eslint-npm-hoist-packages-node": "2.0.0-22",
     "eslint": "^8.49.0"
   },
   "engines": {

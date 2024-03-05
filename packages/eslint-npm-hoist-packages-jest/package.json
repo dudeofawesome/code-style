@@ -1,6 +1,6 @@
 {
   "name": "@dudeofawesome/eslint-npm-hoist-packages-jest",
-  "version": "2.0.0-21",
+  "version": "2.0.0-22",
   "description": "Cause NPM to hoist eslint config dependencies",
   "keywords": [
     "eslint",
