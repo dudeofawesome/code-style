@@ -96,6 +96,8 @@ overrides:
       - '*.e2e.*'
       # config files
       - '*.config.*'
+      - '*.configuration.*'
       - 'config.*'
+      - 'configuration.*'
     rules:
       n/no-process-env: 'off'
