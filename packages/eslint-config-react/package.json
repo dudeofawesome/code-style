@@ -37,7 +37,9 @@
   },
   "peerDependencies": {
     "@dudeofawesome/eslint-npm-hoist-packages-react": "2.0.0-23",
-    "eslint": "^8.49.0"
+    "eslint": "^8.49.0",
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   },
   "engines": {
     "node": ">=18"
