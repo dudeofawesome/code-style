@@ -36,6 +36,7 @@ export async function uninstall_duplicate_dependencies({
     '@typescript-eslint/parser',
     'tslib',
     'typescript',
+    'ts-jest',
   ];
 
   const uninstall_cmd = ((): string => {
@@ -139,6 +140,7 @@ export async function install_dependencies({
           '@dudeofawesome/eslint-config-jest',
           '@dudeofawesome/eslint-npm-hoist-packages-jest',
         );
+        if (languages.includes('ts')) dev_packages.push('ts-jest');
         break;
       case 'react':
       case 'nextjs':
