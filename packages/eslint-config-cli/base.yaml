@@ -1,6 +1,3 @@
-extends:
-  - '@dudeofawesome/eslint-config-node'
-
 rules:
   # Allow scripts to log with `console`.
   # Since we're creating a CLI app, we're probably just trying to show output to the user.
