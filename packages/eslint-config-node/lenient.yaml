@@ -1,6 +1,3 @@
-extends:
-  - './base.yaml'
-
 rules:
   # enforces error handling in callbacks
   n/handle-callback-err: 'off'

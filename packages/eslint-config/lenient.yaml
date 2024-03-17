@@ -1,6 +1,3 @@
-extends:
-  - './base.yaml'
-
 rules:
   # Allow symbols to not have a description.
   symbol-description: 'off'
