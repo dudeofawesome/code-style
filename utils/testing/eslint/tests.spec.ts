@@ -1,0 +1,66 @@
+import { describe, it } from 'node:test';
+import { rejects } from 'node:assert';
+import { initESLint } from '@code-style/utils/testing/eslint';
+
+import { testRuleFail } from './tests';
+
+const linter = initESLint({
+  extends: [
+    '@dudeofawesome/eslint-config',
+    '@dudeofawesome/eslint-config-node',
+  ],
+});
+
+void describe('tests', () => {
+  void describe('testRuleFail', () => {
+    void it(`should pass when single rule fails`, async () => {
+      await testRuleFail({
+        linter,
+        ruleId: 'no-console',
+        files: [{ code: `console.log('');\n` }],
+      });
+    });
+
+    void it(`should pass when single rule fails multiple times`, async () => {
+      await testRuleFail({
+        linter,
+        ruleId: 'prettier/prettier',
+        files: [
+          {
+            code: `const { readFile } = require('fs/promises')\n\nreadFile('')\n`,
+          },
+        ],
+      });
+    });
+
+    void it(`should fail when no rule fails`, async () => {
+      await rejects(() =>
+        testRuleFail({
+          linter,
+          ruleId: 'no-console',
+          files: [{ code: `` }],
+        }),
+      );
+    });
+
+    void it(`should fail when wrong rule fails`, async () => {
+      await rejects(() =>
+        testRuleFail({
+          linter,
+          ruleId: 'prettier/prettier',
+          files: [{ code: `console.log('');\n` }],
+        }),
+      );
+    });
+
+    void it(`should fail when additional rule fails`, async () => {
+      await rejects(() =>
+        testRuleFail({
+          linter,
+          ruleId: 'no-console',
+          files: [{ code: `console.log('')` }],
+        }),
+      );
+    });
+  });
+});

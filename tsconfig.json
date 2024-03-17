@@ -4,7 +4,7 @@
     "@dudeofawesome/typescript-configs/layers/esmodule.json"
   ],
   "compilerOptions": { "noEmit": true, "outDir": "dist/" },
-  "include": ["packages/*/test/", "packages/utils/", "scripts/"],
+  "include": ["packages/*/test/", "utils/", "scripts/"],
   "exclude": [
     "**/dist/",
     "packages/typescript-configs/",

@@ -3,7 +3,8 @@
   "version": "2.0.0-23",
   "private": true,
   "scripts": {
-    "test": "echo 'No tests'; exit 0"
+    "test": "node $NODE_OPTS --require tsm --test ./*/*/*.spec.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
     "eslint": "^8.51.0",
