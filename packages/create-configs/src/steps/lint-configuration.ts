@@ -50,54 +50,53 @@ export function _generate_eslint_config({
       ecmaVersion: 2022,
     },
   };
+  if (lenient) config.extends.push('@dudeofawesome/eslint-config/lenient');
 
   switch (project_type) {
     case 'web-app':
-      if (technologies.includes('nextjs')) {
-        config.extends.push('@dudeofawesome/eslint-config-nextjs');
-      } else if (technologies.includes('react')) {
+      config.extends.push('@dudeofawesome/eslint-config-browser');
+
+      if (technologies.includes('react') || technologies.includes('nextjs'))
         config.extends.push('@dudeofawesome/eslint-config-react');
-      } else {
-        config.extends.push('@dudeofawesome/eslint-config-browser');
-      }
+      if (technologies.includes('nextjs'))
+        config.extends.push('@dudeofawesome/eslint-config-nextjs');
       break;
     case 'backend':
+      config.extends.push('@dudeofawesome/eslint-config-node');
+      if (lenient)
+        config.extends.push('@dudeofawesome/eslint-config-node/lenient');
+
       if (technologies.includes('nestjs')) {
         config.extends.push('@dudeofawesome/eslint-config-nest');
-      } else {
-        config.extends.push('@dudeofawesome/eslint-config-node');
+        if (lenient)
+          config.extends.push('@dudeofawesome/eslint-config-nest/lenient');
       }
       break;
     case 'cli':
+      config.extends.push('@dudeofawesome/eslint-config-node');
+      if (lenient)
+        config.extends.push('@dudeofawesome/eslint-config-node/lenient');
+
       config.extends.push('@dudeofawesome/eslint-config-cli');
+      if (lenient)
+        config.extends.push('@dudeofawesome/eslint-config-cli/lenient');
       break;
   }
 
-  if (languages.includes('ts') && !technologies.includes('nestjs')) {
+  if (languages.includes('ts')) {
     config.extends.push('@dudeofawesome/eslint-config-typescript');
-  }
-  if (technologies.includes('jest')) {
-    config.extends.push('@dudeofawesome/eslint-config-jest');
-  }
-  if (technologies.includes('esm')) {
-    config.extends.push('@dudeofawesome/eslint-config-esmodule');
+    if (lenient)
+      config.extends.push('@dudeofawesome/eslint-config-typescript/lenient');
   }
 
-  if (lenient) {
-    for (const extended of config.extends) {
-      if (
-        [
-          '@dudeofawesome/eslint-config',
-          '@dudeofawesome/eslint-config-cli',
-          '@dudeofawesome/eslint-config-jest',
-          '@dudeofawesome/eslint-config-node',
-          '@dudeofawesome/eslint-config-typescript',
-        ].includes(extended)
-      ) {
-        config.extends.push(`${extended}/lenient.yaml`);
-      }
-    }
+  if (technologies.includes('jest')) {
+    config.extends.push('@dudeofawesome/eslint-config-jest');
+    if (lenient)
+      config.extends.push('@dudeofawesome/eslint-config-jest/lenient');
   }
+
+  if (technologies.includes('esm'))
+    config.extends.push('@dudeofawesome/eslint-config-esmodule');
 
   return stripIndent`
     # In order to update the this config, update:
