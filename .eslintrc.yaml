@@ -1,10 +1,11 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/cli'
-  - '@dudeofawesome/jest'
-  - '@dudeofawesome/typescript'
-  - '@dudeofawesome/esmodule'
+  - '@dudeofawesome/eslint-config'
+  - '@dudeofawesome/eslint-config-node'
+  - '@dudeofawesome/eslint-config-cli'
+  - '@dudeofawesome/eslint-config-jest'
+  - '@dudeofawesome/eslint-config-typescript'
+  - '@dudeofawesome/eslint-config-esmodule'
 ignorePatterns:
   - '**/test/*/**'
 
