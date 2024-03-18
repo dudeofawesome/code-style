@@ -14,6 +14,12 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    ".": "./roles/base.json",
+    "./roles/*.json": "./roles/*.json",
+    "./layers/*.json": "./layers/*.json",
+    "./*.json": "./*.json"
+  },
   "main": "roles/base.json",
   "files": [
     "/roles/",

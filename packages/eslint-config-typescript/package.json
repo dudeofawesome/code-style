@@ -16,6 +16,12 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    ".": "./base.yaml",
+    "./base": "./base.yaml",
+    "./lenient": "./lenient.yaml",
+    "./*.yaml": "./*.yaml"
+  },
   "main": "base.yaml",
   "files": [
     "/base.yaml",

@@ -18,9 +18,9 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "exports": {
     ".": "./base.yaml",
-    "./*.yaml": "./*.yaml",
     "./base": "./base.yaml",
-    "./lenient": "./lenient.yaml"
+    "./lenient": "./lenient.yaml",
+    "./*.yaml": "./*.yaml"
   },
   "main": "base.yaml",
   "files": [
