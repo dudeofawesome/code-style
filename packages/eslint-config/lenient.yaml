@@ -40,5 +40,8 @@ rules:
   # Allow void promises
   promise/always-return: 'off'
 
+  # Allow throwing literals
+  no-throw-literal: 'off'
+
   # Allow unused vars
   no-unused-vars: 'off'
