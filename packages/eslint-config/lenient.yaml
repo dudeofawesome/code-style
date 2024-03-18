@@ -39,3 +39,6 @@ rules:
 
   # Allow void promises
   promise/always-return: 'off'
+
+  # Allow unused vars
+  no-unused-vars: 'off'

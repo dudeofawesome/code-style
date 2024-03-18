@@ -12,5 +12,10 @@ rules:
   # Disallow reassigning method params, treating them as `const`.
   no-param-reassign: 'warn'
 
+  no-unused-vars:
+    - 'warn'
+    - args: 'none'
+      destructuredArrayIgnorePattern: '^_'
+
   # Require keys in package.json to be sorted, improving readability & consistency across projects.
   json-files/sort-package-json: 'warn'
