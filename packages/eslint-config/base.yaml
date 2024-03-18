@@ -21,7 +21,6 @@ plugins:
 
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
-  sourceType: 'commonjs'
 
 env:
   commonjs: true

@@ -2,7 +2,7 @@ plugins:
   - 'eslint-plugin-import'
 
 parserOptions:
-  sourceType: module
+  sourceType: 'module'
 
 rules:
   # Disallow commonjs modules.
