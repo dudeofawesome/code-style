@@ -10,10 +10,15 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 const linter = initESLint(
   {
     extends: [
-      '@dudeofawesome',
-      '@dudeofawesome/esmodule',
-      '@dudeofawesome/typescript/lenient.yaml',
+      '@dudeofawesome/eslint-config',
+      '@dudeofawesome/eslint-config/lenient',
+      '@dudeofawesome/eslint-config-esmodule',
+      '@dudeofawesome/eslint-config-typescript',
+      '@dudeofawesome/eslint-config-typescript/lenient',
     ],
+    parserOptions: {
+      ecmaVersion: 2022,
+    },
   },
   { cwd: join(__dirname, 'fixture') },
 );

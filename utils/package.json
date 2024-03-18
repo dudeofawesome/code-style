@@ -3,7 +3,7 @@
   "version": "2.0.0-23",
   "private": true,
   "scripts": {
-    "test": "node $NODE_OPTS --require tsm --test ./*/*/*.spec.ts",
+    "test": "shopt -s globstar; node $NODE_OPTS --require tsm --test **/*.test.ts",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
@@ -12,8 +12,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "publishConfig": {
-    "access": "restricted"
   }
 }

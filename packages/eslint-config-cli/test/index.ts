@@ -4,7 +4,11 @@ import { testNoFail } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
-  extends: ['@dudeofawesome', '@dudeofawesome/cli'],
+  extends: [
+    '@dudeofawesome/eslint-config',
+    '@dudeofawesome/eslint-config-node',
+    '@dudeofawesome/eslint-config-cli',
+  ],
 });
 
 void describe('eslint-config-cli base', () => {

@@ -10,15 +10,17 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 const linter = initESLint(
   {
     extends: [
-      '@dudeofawesome',
-      '@dudeofawesome/esmodule',
-      '@dudeofawesome/nest',
+      '@dudeofawesome/eslint-config',
+      '@dudeofawesome/eslint-config-esmodule',
+      '@dudeofawesome/eslint-config-node',
+      '@dudeofawesome/eslint-config-typescript',
+      '@dudeofawesome/eslint-config-nest',
     ],
   },
   { cwd: join(__dirname, 'fixture') },
 );
 
-void describe('eslint-config-nest', () => {
+void describe('eslint-config-nest strict', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {

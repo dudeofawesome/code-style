@@ -8,9 +8,10 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 
 const linter = initESLint({
   extends: [
-    '@dudeofawesome',
-    '@dudeofawesome/esmodule',
-    '@dudeofawesome/react',
+    '@dudeofawesome/eslint-config',
+    '@dudeofawesome/eslint-config-esmodule',
+    '@dudeofawesome/eslint-config-browser',
+    '@dudeofawesome/eslint-config-react',
   ],
 });
 

@@ -10,6 +10,8 @@ const linter = initESLint({
   extends: [
     '@dudeofawesome/eslint-config',
     '@dudeofawesome/eslint-config-esmodule',
+    '@dudeofawesome/eslint-config-browser',
+    '@dudeofawesome/eslint-config-react',
     '@dudeofawesome/eslint-config-nextjs',
   ],
 });

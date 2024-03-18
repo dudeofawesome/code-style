@@ -45,9 +45,7 @@ void describe('eslint-config-typescript strict', () => {
         files: [
           { code: `import { a } from './utils';\n\na();\n`, ts: true },
           {
-            code: `export function a () {
-  return 1;
-}\n`,
+            code: `export function a () {\n  return 1;\n}\n`,
             path: 'utils.ts',
           },
         ],

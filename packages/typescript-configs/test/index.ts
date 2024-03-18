@@ -68,8 +68,9 @@ async function transpile_and_test({
 }: TranspileAndTestOpts): Promise<void> {
   const cwd = join(__dirname, dir);
   const out_dir = join(cwd, 'dist');
+  const tsc_path = require.resolve('typescript/bin/tsc');
   const out = await exec(
-    `tsc --project "${ts_config}" --outDir "${out_dir}" --incremental false --listEmittedFiles`,
+    `${tsc_path} --project "${ts_config}" --outDir "${out_dir}" --incremental false --listEmittedFiles`,
     {
       cwd,
       env: {

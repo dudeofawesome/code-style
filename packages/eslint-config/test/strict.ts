@@ -7,9 +7,9 @@ import {
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
-const linter = initESLint({ extends: ['@dudeofawesome'] });
+const linter = initESLint({ extends: ['@dudeofawesome/eslint-config'] });
 
-void describe('eslint-config', () => {
+void describe('eslint-config strict', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
@@ -17,6 +17,12 @@ void describe('eslint-config', () => {
       testNoFail({
         linter,
         files: [{ code: `const foo = require('foo');\n\nfoo();\n` }],
+      }));
+
+    void it(`should pass commonjs export`, () =>
+      testNoFail({
+        linter,
+        files: [{ code: `module.exports = { foo: 'foo' };\n` }],
       }));
   });
 
