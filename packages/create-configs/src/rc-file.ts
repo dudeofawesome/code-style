@@ -1,7 +1,7 @@
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { URL } from 'node:url';
 import { parse, stringify } from 'yaml';
-import type { CodeStyleSetupOptions } from '@dudeofawesome/code-style/config-types';
+import type { CodeStyleSetupOptions } from '@code-style/code-style/config-types';
 
 export const default_config_path = '.codestyleinitrc.yaml';
 

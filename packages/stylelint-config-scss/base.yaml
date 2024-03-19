@@ -1,5 +1,5 @@
 extends:
-  - '@dudeofawesome/stylelint-config/base.yaml'
+  - '@code-style/stylelint-config/base.yaml'
   - 'stylelint-config-standard-scss'
   - 'stylelint-config-sass-guidelines'
 rules:

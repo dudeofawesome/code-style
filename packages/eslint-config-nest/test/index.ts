@@ -10,11 +10,11 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 const linter = initESLint(
   {
     extends: [
-      '@dudeofawesome/eslint-config',
-      '@dudeofawesome/eslint-config-esmodule',
-      '@dudeofawesome/eslint-config-node',
-      '@dudeofawesome/eslint-config-typescript',
-      '@dudeofawesome/eslint-config-nest',
+      '@code-style/eslint-config',
+      '@code-style/eslint-config-esmodule',
+      '@code-style/eslint-config-node',
+      '@code-style/eslint-config-typescript',
+      '@code-style/eslint-config-nest',
     ],
   },
   { cwd: join(__dirname, 'fixture') },

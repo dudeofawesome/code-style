@@ -8,7 +8,7 @@ import {
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
-  extends: ['@dudeofawesome', '@dudeofawesome/esmodule'],
+  extends: ['@code-style', '@code-style/esmodule'],
 });
 
 void describe('eslint-config-esmodule base', () => {

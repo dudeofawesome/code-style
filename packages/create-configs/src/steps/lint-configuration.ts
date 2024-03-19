@@ -5,7 +5,7 @@ import { stripIndent } from 'common-tags';
 import {
   CodeStyleSetupOptions as SetupOptions,
   Language,
-} from '@dudeofawesome/code-style/config-types';
+} from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
 
@@ -45,58 +45,56 @@ export function _generate_eslint_config({
 >): string {
   const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
-    extends: ['@dudeofawesome/eslint-config'],
+    extends: ['@code-style/eslint-config'],
     parserOptions: {
       ecmaVersion: 2022,
     },
   };
-  if (lenient) config.extends.push('@dudeofawesome/eslint-config/lenient');
+  if (lenient) config.extends.push('@code-style/eslint-config/lenient');
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@dudeofawesome/eslint-config-browser');
+      config.extends.push('@code-style/eslint-config-browser');
 
       if (technologies.includes('react') || technologies.includes('nextjs'))
-        config.extends.push('@dudeofawesome/eslint-config-react');
+        config.extends.push('@code-style/eslint-config-react');
       if (technologies.includes('nextjs'))
-        config.extends.push('@dudeofawesome/eslint-config-nextjs');
+        config.extends.push('@code-style/eslint-config-nextjs');
       break;
     case 'backend':
-      config.extends.push('@dudeofawesome/eslint-config-node');
+      config.extends.push('@code-style/eslint-config-node');
       if (lenient)
-        config.extends.push('@dudeofawesome/eslint-config-node/lenient');
+        config.extends.push('@code-style/eslint-config-node/lenient');
 
       if (technologies.includes('nestjs')) {
-        config.extends.push('@dudeofawesome/eslint-config-nest');
+        config.extends.push('@code-style/eslint-config-nest');
         if (lenient)
-          config.extends.push('@dudeofawesome/eslint-config-nest/lenient');
+          config.extends.push('@code-style/eslint-config-nest/lenient');
       }
       break;
     case 'cli':
-      config.extends.push('@dudeofawesome/eslint-config-node');
+      config.extends.push('@code-style/eslint-config-node');
       if (lenient)
-        config.extends.push('@dudeofawesome/eslint-config-node/lenient');
+        config.extends.push('@code-style/eslint-config-node/lenient');
 
-      config.extends.push('@dudeofawesome/eslint-config-cli');
-      if (lenient)
-        config.extends.push('@dudeofawesome/eslint-config-cli/lenient');
+      config.extends.push('@code-style/eslint-config-cli');
+      if (lenient) config.extends.push('@code-style/eslint-config-cli/lenient');
       break;
   }
 
   if (languages.includes('ts')) {
-    config.extends.push('@dudeofawesome/eslint-config-typescript');
+    config.extends.push('@code-style/eslint-config-typescript');
     if (lenient)
-      config.extends.push('@dudeofawesome/eslint-config-typescript/lenient');
+      config.extends.push('@code-style/eslint-config-typescript/lenient');
   }
 
   if (technologies.includes('jest')) {
-    config.extends.push('@dudeofawesome/eslint-config-jest');
-    if (lenient)
-      config.extends.push('@dudeofawesome/eslint-config-jest/lenient');
+    config.extends.push('@code-style/eslint-config-jest');
+    if (lenient) config.extends.push('@code-style/eslint-config-jest/lenient');
   }
 
   if (technologies.includes('esm'))
-    config.extends.push('@dudeofawesome/eslint-config-esmodule');
+    config.extends.push('@code-style/eslint-config-esmodule');
 
   return stripIndent`
     # In order to update the this config, update:
@@ -141,10 +139,10 @@ export async function create_eslint_config({
 
 /** @private */
 export function _generate_stylelint_config(languages: Language[]): string {
-  const config: Config = { extends: ['@dudeofawesome/stylelint-config'] };
+  const config: Config = { extends: ['@code-style/stylelint-config'] };
 
   if (languages.includes('scss')) {
-    config.extends = ['@dudeofawesome/stylelint-config-scss'];
+    config.extends = ['@code-style/stylelint-config-scss'];
   }
 
   return stripIndent`

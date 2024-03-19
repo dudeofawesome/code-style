@@ -1,5 +1,5 @@
 import { stripIndent, stripIndents } from 'common-tags';
-import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
+import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 
 import { create_file, includes_js, verify_missing } from '../utils.js';
 

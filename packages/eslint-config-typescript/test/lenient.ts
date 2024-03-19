@@ -10,11 +10,11 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 const linter = initESLint(
   {
     extends: [
-      '@dudeofawesome/eslint-config',
-      '@dudeofawesome/eslint-config/lenient',
-      '@dudeofawesome/eslint-config-esmodule',
-      '@dudeofawesome/eslint-config-typescript',
-      '@dudeofawesome/eslint-config-typescript/lenient',
+      '@code-style/eslint-config',
+      '@code-style/eslint-config/lenient',
+      '@code-style/eslint-config-esmodule',
+      '@code-style/eslint-config-typescript',
+      '@code-style/eslint-config-typescript/lenient',
     ],
     parserOptions: {
       ecmaVersion: 2022,

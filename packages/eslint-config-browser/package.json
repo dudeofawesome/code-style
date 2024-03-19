@@ -1,5 +1,5 @@
 {
-  "name": "@dudeofawesome/eslint-config-browser",
+  "name": "@code-style/eslint-config-browser",
   "version": "2.0.0-23",
   "description": "My browser ESLint config",
   "keywords": [

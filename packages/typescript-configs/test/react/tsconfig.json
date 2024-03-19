@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@dudeofawesome/typescript-configs/roles/browser.json",
-    "@dudeofawesome/typescript-configs/layers/react.json"
+    "@code-style/typescript-configs/roles/browser.json",
+    "@code-style/typescript-configs/layers/react.json"
   ],
   "include": ["src/"],
   "exclude": ["dist/"]

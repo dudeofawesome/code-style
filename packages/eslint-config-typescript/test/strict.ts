@@ -9,11 +9,7 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 
 const linter = initESLint(
   {
-    extends: [
-      '@dudeofawesome',
-      '@dudeofawesome/esmodule',
-      '@dudeofawesome/typescript',
-    ],
+    extends: ['@code-style', '@code-style/esmodule', '@code-style/typescript'],
   },
   { cwd: join(__dirname, 'fixture') },
 );

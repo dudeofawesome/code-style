@@ -26,10 +26,10 @@ describe('lint-configuration', () => {
       expect(parsed.root).toBe(true);
       // ensure we include relevant configs
       expect(parsed.extends).toStrictEqual([
-        '@dudeofawesome/eslint-config',
-        '@dudeofawesome/eslint-config-browser',
-        '@dudeofawesome/eslint-config-typescript',
-        '@dudeofawesome/eslint-config-jest',
+        '@code-style/eslint-config',
+        '@code-style/eslint-config-browser',
+        '@code-style/eslint-config-typescript',
+        '@code-style/eslint-config-jest',
       ]);
     });
 
@@ -52,13 +52,13 @@ describe('lint-configuration', () => {
       expect(parsed.root).toBe(true);
       // ensure we include relevant configs
       expect(parsed.extends).toStrictEqual([
-        '@dudeofawesome/eslint-config',
-        '@dudeofawesome/eslint-config/lenient',
-        '@dudeofawesome/eslint-config-browser',
-        '@dudeofawesome/eslint-config-typescript',
-        '@dudeofawesome/eslint-config-typescript/lenient',
-        '@dudeofawesome/eslint-config-jest',
-        '@dudeofawesome/eslint-config-jest/lenient',
+        '@code-style/eslint-config',
+        '@code-style/eslint-config/lenient',
+        '@code-style/eslint-config-browser',
+        '@code-style/eslint-config-typescript',
+        '@code-style/eslint-config-typescript/lenient',
+        '@code-style/eslint-config-jest',
+        '@code-style/eslint-config-jest/lenient',
       ]);
     });
   });

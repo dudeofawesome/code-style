@@ -1,15 +1,15 @@
-# @dudeofawesome/eslint-config-jest
+# @code-style/eslint-config-jest
 
 My Jest eslint config
 
-**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@dudeofawesome/create-configs).**
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
 ## Usage
 
 1. Install this config plugin as a dev dependency.
 
     ```sh
-    npm i -D @dudeofawesome/eslint-config-jest
+    npm i -D @code-style/eslint-config-jest
     ```
 
 1. Add the plugin to your `eslintrc`.
@@ -18,6 +18,6 @@ My Jest eslint config
 
     ```yaml
     extends:
-        - '@dudeofawesome'
-        - '@dudeofawesome/jest'
+        - '@code-style'
+        - '@code-style/jest'
     ```

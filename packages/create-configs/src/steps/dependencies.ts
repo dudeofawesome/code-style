@@ -9,7 +9,7 @@ import {
   Builder,
   Runtime,
   CodeStyleSetupOptions as SetupOptions,
-} from '@dudeofawesome/code-style/config-types';
+} from '@code-style/code-style/config-types';
 
 const exec = promisify(execCallback);
 
@@ -68,42 +68,42 @@ export async function install_dependencies({
 }: InstallDependenciesOptions) {
   const prod_packages: (string | undefined)[] = [];
   const dev_packages: (string | undefined)[] = [
-    '@dudeofawesome/code-style',
-    '@dudeofawesome/eslint-config',
-    '@dudeofawesome/eslint-npm-hoist-packages',
+    '@code-style/code-style',
+    '@code-style/eslint-config',
+    '@code-style/eslint-npm-hoist-packages',
   ];
 
   switch (project_type) {
     case 'web-app':
       if (technologies.includes('nextjs')) {
         dev_packages.push(
-          '@dudeofawesome/eslint-config-nextjs',
-          '@dudeofawesome/eslint-npm-hoist-packages-nextjs',
+          '@code-style/eslint-config-nextjs',
+          '@code-style/eslint-npm-hoist-packages-nextjs',
         );
       } else if (technologies.includes('react')) {
         dev_packages.push(
-          '@dudeofawesome/eslint-config-react',
-          '@dudeofawesome/eslint-npm-hoist-packages-react',
+          '@code-style/eslint-config-react',
+          '@code-style/eslint-npm-hoist-packages-react',
         );
       } else {
-        dev_packages.push('@dudeofawesome/eslint-config-browser');
+        dev_packages.push('@code-style/eslint-config-browser');
       }
       break;
     case 'backend':
       if (languages.includes('ts')) dev_packages.push('@types/node');
       dev_packages.push(
-        '@dudeofawesome/eslint-config-node',
-        '@dudeofawesome/eslint-npm-hoist-packages-node',
+        '@code-style/eslint-config-node',
+        '@code-style/eslint-npm-hoist-packages-node',
       );
       break;
     case 'cli':
       if (languages.includes('ts')) dev_packages.push('@types/node');
-      dev_packages.push('@dudeofawesome/eslint-config-cli');
+      dev_packages.push('@code-style/eslint-config-cli');
       break;
   }
 
   if (languages.includes('js') || languages.includes('ts')) {
-    dev_packages.push('@dudeofawesome/typescript-configs');
+    dev_packages.push('@code-style/typescript-configs');
   }
 
   for (const language of languages) {
@@ -111,20 +111,20 @@ export async function install_dependencies({
       case 'ts':
         dev_packages.push(
           'typescript',
-          '@dudeofawesome/eslint-config-typescript',
-          '@dudeofawesome/eslint-npm-hoist-packages-typescript',
+          '@code-style/eslint-config-typescript',
+          '@code-style/eslint-npm-hoist-packages-typescript',
         );
         break;
       case 'css':
         if (!languages.includes('scss')) {
-          dev_packages.push('stylelint', '@dudeofawesome/stylelint-config');
+          dev_packages.push('stylelint', '@code-style/stylelint-config');
         }
         break;
       case 'scss':
         dev_packages.push(
           'stylelint',
           'sass-embedded',
-          '@dudeofawesome/stylelint-config-scss',
+          '@code-style/stylelint-config-scss',
         );
         break;
       default:
@@ -137,8 +137,8 @@ export async function install_dependencies({
         dev_packages.push(
           'jest',
           '@types/jest',
-          '@dudeofawesome/eslint-config-jest',
-          '@dudeofawesome/eslint-npm-hoist-packages-jest',
+          '@code-style/eslint-config-jest',
+          '@code-style/eslint-npm-hoist-packages-jest',
         );
         if (languages.includes('ts')) dev_packages.push('ts-jest');
         break;
@@ -156,8 +156,8 @@ export async function install_dependencies({
         break;
       case 'esm':
         dev_packages.push(
-          '@dudeofawesome/eslint-config-esmodule',
-          '@dudeofawesome/eslint-npm-hoist-packages-esmodule',
+          '@code-style/eslint-config-esmodule',
+          '@code-style/eslint-npm-hoist-packages-esmodule',
         );
         break;
       default:

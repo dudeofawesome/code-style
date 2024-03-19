@@ -1,1 +1,1 @@
-inherit_from: 'node_modules/@dudeofawesome/code-style/.rubocop.yml'
+inherit_from: 'node_modules/@code-style/code-style/.rubocop.yml'

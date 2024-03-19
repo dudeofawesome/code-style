@@ -4,7 +4,7 @@ import { testRuleFail } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
 const linter = initESLint({
-  extends: ['@dudeofawesome', '@dudeofawesome/browser'],
+  extends: ['@code-style', '@code-style/browser'],
 });
 
 void describe('eslint-config-browser', () => {

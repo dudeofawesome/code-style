@@ -8,7 +8,7 @@ import {
   Builder,
   Runtime,
   CodeStyleSetupOptions as SetupOptions,
-} from '@dudeofawesome/code-style/config-types';
+} from '@code-style/code-style/config-types';
 
 import { build } from './build.js';
 import { interactive_setup } from './interactive.js';

@@ -1,7 +1,7 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/esmodule'
-  - '@dudeofawesome/node'
-  - '@dudeofawesome/jest'
-  - '@dudeofawesome/typescript'
+  - '@code-style'
+  - '@code-style/esmodule'
+  - '@code-style/node'
+  - '@code-style/jest'
+  - '@code-style/typescript'

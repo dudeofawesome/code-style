@@ -1,5 +1,5 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/node'
-  - '@dudeofawesome/jest'
+  - '@code-style'
+  - '@code-style/node'
+  - '@code-style/jest'

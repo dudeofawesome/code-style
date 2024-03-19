@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@dudeofawesome/typescript-configs/roles/node.json",
-    "@dudeofawesome/typescript-configs/layers/jest.json"
+    "@code-style/typescript-configs/roles/node.json",
+    "@code-style/typescript-configs/layers/jest.json"
   ],
   "include": ["test/", "src/"],
   "exclude": ["dist/"]

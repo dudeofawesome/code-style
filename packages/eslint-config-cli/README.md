@@ -1,23 +1,23 @@
-# @dudeofawesome/eslint-config-cli
+# @code-style/eslint-config-cli
 
 My CLI project eslint config
 
-**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@dudeofawesome/create-configs).**
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
 ## Usage
 
 1. Install this config plugin as a dev dependency.
 
     ```sh
-    npm i -D @dudeofawesome/eslint-config-cli
+    npm i -D @code-style/eslint-config-cli
     ```
 
 1. Add the plugin to your `eslintrc`.
 
     ```yaml
     extends:
-        - '@dudeofawesome'
-        - '@dudeofawesome/cli'
+        - '@code-style'
+        - '@code-style/cli'
     ```
 
 1. You might also want to specify an `ecmaVersion`.

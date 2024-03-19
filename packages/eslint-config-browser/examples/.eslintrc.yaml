@@ -1,4 +1,4 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/browser'
+  - '@code-style'
+  - '@code-style/browser'

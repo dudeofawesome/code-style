@@ -1,9 +1,9 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/node'
-  - '@dudeofawesome/esmodule'
-  - '@dudeofawesome/typescript'
+  - '@code-style'
+  - '@code-style/node'
+  - '@code-style/esmodule'
+  - '@code-style/typescript'
 
 ignorePatterns:
   - '/prettierrc.*'

@@ -1,4 +1,4 @@
-# @dudeofawesome/create-configs
+# @code-style/create-configs
 
 A script to create configuration files to conform to code style standards.
 
@@ -7,7 +7,7 @@ A script to create configuration files to conform to code style standards.
 1. Create your config files.
 
     ```
-    $ npm init @dudeofawesome/configs
+    $ npm init @code-style/configs
     ```
 
 1. Answer the prompted questions.
@@ -18,12 +18,12 @@ A script to create configuration files to conform to code style standards.
 
     We provide some other eslint configs for different environments:
 
-    - [`@dudeofawesome/browser`](../eslint-config-browser/README.md)
-    - [`@dudeofawesome/cli`](../eslint-config-cli/README.md)
-    - [`@dudeofawesome/jest`](../eslint-config-jest/README.md)
-    - [`@dudeofawesome/node`](../eslint-config-node/README.md)
-    - [`@dudeofawesome/react`](../eslint-config-react/README.md)
-    - [`@dudeofawesome/typescript`](../eslint-config-typescript/README.md)
+    - [`@code-style/browser`](../eslint-config-browser/README.md)
+    - [`@code-style/cli`](../eslint-config-cli/README.md)
+    - [`@code-style/jest`](../eslint-config-jest/README.md)
+    - [`@code-style/node`](../eslint-config-node/README.md)
+    - [`@code-style/react`](../eslint-config-react/README.md)
+    - [`@code-style/typescript`](../eslint-config-typescript/README.md)
 
 ### Consider adding some editor settings
 

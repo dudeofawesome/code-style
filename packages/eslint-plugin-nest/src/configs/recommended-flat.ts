@@ -3,6 +3,6 @@ import plugin from '../index.js';
 import { recommended } from './recommended.js';
 
 export const recommended_flat: Linter.FlatConfig = {
-  plugins: { '@dudeofawesome/nest': plugin },
+  plugins: { '@code-style/nest': plugin },
   rules: recommended.rules as Linter.FlatConfig['rules'],
 };

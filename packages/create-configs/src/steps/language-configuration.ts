@@ -1,7 +1,7 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import { stripIndent } from 'common-tags';
-import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
+import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
 
@@ -28,55 +28,41 @@ export function _generate_ts_config({
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push(
-        '@dudeofawesome/typescript-configs/roles/browser.json',
-      );
+      config.extends.push('@code-style/typescript-configs/roles/browser.json');
       if (technologies.includes('nextjs')) {
         config.extends.push(
-          '@dudeofawesome/typescript-configs/layers/nextjs.json',
+          '@code-style/typescript-configs/layers/nextjs.json',
         );
       } else if (technologies.includes('react')) {
-        config.extends.push(
-          '@dudeofawesome/typescript-configs/layers/react.json',
-        );
+        config.extends.push('@code-style/typescript-configs/layers/react.json');
       }
       break;
     case 'backend':
     case 'cli':
       if (technologies.includes('nestjs')) {
-        config.extends.push(
-          '@dudeofawesome/typescript-configs/roles/nest.json',
-        );
+        config.extends.push('@code-style/typescript-configs/roles/nest.json');
       } else {
-        config.extends.push(
-          '@dudeofawesome/typescript-configs/roles/node.json',
-        );
+        config.extends.push('@code-style/typescript-configs/roles/node.json');
       }
       break;
   }
 
   if (technologies.includes('esm')) {
-    config.extends.push(
-      '@dudeofawesome/typescript-configs/layers/esmodule.json',
-    );
+    config.extends.push('@code-style/typescript-configs/layers/esmodule.json');
   }
 
   if (library) {
-    config.extends.push(
-      '@dudeofawesome/typescript-configs/layers/library.json',
-    );
+    config.extends.push('@code-style/typescript-configs/layers/library.json');
   }
 
   // TODO(2): add support for library.json tsconfig
 
   if (lenient) {
-    config.extends.push(
-      '@dudeofawesome/typescript-configs/layers/lenient.json',
-    );
+    config.extends.push('@code-style/typescript-configs/layers/lenient.json');
   }
 
   return stripIndent`
-    // In order to update the this config, update @dudeofawesome/typescript-configs
+    // In order to update the this config, update @code-style/typescript-configs
     ${JSON.stringify(config, null, 2)}
   `;
 }
@@ -102,7 +88,7 @@ export async function create_ts_config({
 }: CreateTSConfigOptions) {
   // TODO(2): create a separate tsconfig for tests
   // if (technologies.includes('jest')) {
-  //   config.extends.push('@dudeofawesome/typescript-configs/layers/jest.json');
+  //   config.extends.push('@code-style/typescript-configs/layers/jest.json');
   // }
 
   const path = 'tsconfig.json';

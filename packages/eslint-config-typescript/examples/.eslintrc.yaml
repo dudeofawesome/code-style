@@ -1,4 +1,4 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/typescript'
+  - '@code-style'
+  - '@code-style/typescript'

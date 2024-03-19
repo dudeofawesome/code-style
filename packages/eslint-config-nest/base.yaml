@@ -1,5 +1,5 @@
 extends:
-  - 'plugin:@dudeofawesome/eslint-plugin-nest/recommended'
+  - 'plugin:@code-style/eslint-plugin-nest/recommended'
 
 rules:
   # Disallow importing files from `@nestjs/terminus` since it includes a bunch of incorrect types.

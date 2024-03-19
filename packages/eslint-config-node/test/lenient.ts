@@ -8,9 +8,9 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 
 const linter = initESLint({
   extends: [
-    '@dudeofawesome/eslint-config',
-    '@dudeofawesome/eslint-config-node',
-    '@dudeofawesome/eslint-config-node/lenient',
+    '@code-style/eslint-config',
+    '@code-style/eslint-config-node',
+    '@code-style/eslint-config-node/lenient',
   ],
 });
 

@@ -1,4 +1,4 @@
 root: true
 extends:
-  - '@dudeofawesome/eslint-config'
-  - '@dudeofawesome/eslint-config-nextjs'
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-nextjs'

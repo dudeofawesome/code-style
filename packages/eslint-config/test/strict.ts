@@ -7,7 +7,7 @@ import {
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 
-const linter = initESLint({ extends: ['@dudeofawesome/eslint-config'] });
+const linter = initESLint({ extends: ['@code-style/eslint-config'] });
 
 void describe('eslint-config strict', () => {
   defaultTestSet(linter);

@@ -5,10 +5,7 @@ import { initESLint } from '@code-style/utils/testing/eslint';
 import { testRuleFail } from './tests';
 
 const linter = initESLint({
-  extends: [
-    '@dudeofawesome/eslint-config',
-    '@dudeofawesome/eslint-config-node',
-  ],
+  extends: ['@code-style/eslint-config', '@code-style/eslint-config-node'],
 });
 
 void describe('tests', () => {

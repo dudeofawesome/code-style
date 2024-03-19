@@ -15,9 +15,9 @@ export async function create_prettier_config(overwrite: boolean = false) {
         /**
          * https://prettier.io/docs/en/
          * Prettier configuration file
-         * In order to update the this config, update @dudeofawesome/code-style
+         * In order to update the this config, update @code-style/code-style
          */
-        import config from '@dudeofawesome/code-style/prettierrc';
+        import config from '@code-style/code-style/prettierrc';
         export default config;
       `,
     );
@@ -28,10 +28,7 @@ export async function create_editor_config(overwrite: boolean = false) {
   const path = '.editorconfig';
   if (await verify_missing({ path, remove: overwrite })) {
     if (!(await stat(path).catch(() => ({ isFile: () => false }))).isFile()) {
-      await symlink(
-        'node_modules/@dudeofawesome/code-style/.editorconfig',
-        path,
-      );
+      await symlink('node_modules/@code-style/code-style/.editorconfig', path);
     }
   }
 }

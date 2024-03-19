@@ -1,5 +1,5 @@
 {
-  "name": "@dudeofawesome/stylelint-config",
+  "name": "@code-style/stylelint-config",
   "version": "2.0.0-23",
   "description": "My stylelint configs",
   "keywords": [

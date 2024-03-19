@@ -1,10 +1,10 @@
 root: true
 extends:
-  - '@dudeofawesome/eslint-config'
-  - '@dudeofawesome/eslint-config-node'
-  - '@dudeofawesome/eslint-config-cli'
-  - '@dudeofawesome/eslint-config-typescript'
-  - '@dudeofawesome/eslint-config-esmodule'
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-node'
+  - '@code-style/eslint-config-cli'
+  - '@code-style/eslint-config-typescript'
+  - '@code-style/eslint-config-esmodule'
 
 ignorePatterns:
   - '/bin/create-configs.js'

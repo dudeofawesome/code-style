@@ -1,4 +1,4 @@
-import { CodeStyleSetupOptions as SetupOptions } from '@dudeofawesome/code-style/config-types';
+import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 import {
   create_ts_config,
   set_package_type,

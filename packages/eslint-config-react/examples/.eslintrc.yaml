@@ -1,4 +1,4 @@
 root: true
 extends:
-  - '@dudeofawesome'
-  - '@dudeofawesome/react'
+  - '@code-style'
+  - '@code-style/react'

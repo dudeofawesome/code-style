@@ -10,8 +10,8 @@ import {
   writeFile,
 } from 'node:fs/promises';
 import { format, Options } from 'prettier';
-import default_config from '@dudeofawesome/code-style/prettierrc';
-import { Language } from '@dudeofawesome/code-style/config-types';
+import default_config from '@code-style/code-style/prettierrc';
+import { Language } from '@code-style/code-style/config-types';
 
 const exec = promisify(execCallback);
 

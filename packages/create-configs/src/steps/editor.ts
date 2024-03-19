@@ -4,7 +4,7 @@ import {
   ProjectType,
   Language,
   Technology,
-} from '@dudeofawesome/code-style/config-types';
+} from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
 
