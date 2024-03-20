@@ -1,6 +1,6 @@
 {
   "name": "@code-style/stylelint-config-scss",
-  "version": "2.0.0-24",
+  "version": "2.0.0-25",
   "description": "My stylelint configs",
   "keywords": [
     "stylelint",
@@ -27,7 +27,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/stylelint-config": "^2.0.0-24",
+    "@code-style/stylelint-config": "^2.0.0-25",
     "stylelint-config-sass-guidelines": "^10.0.0",
     "stylelint-config-standard-scss": "^11.0.0"
   },
