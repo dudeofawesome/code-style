@@ -24,3 +24,6 @@ rules:
 
   # Allow non-null assertions.
   '@typescript-eslint/no-non-null-assertion': 'off'
+
+  # Allow for loops
+  '@typescript-eslint/prefer-for-of': 'off'
