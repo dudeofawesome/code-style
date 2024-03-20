@@ -23,10 +23,12 @@ rules:
   # Require only boolean types to be used for conditions.
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
-    - allowString: false
-      allowNumber: true
-      allowNullableNumber: true
-      allowNullableObject: false
+    - allowAny: false
+      allowString: false
+      allowNullableString: false
+      allowNumber: false
+      allowNullableNumber: false
+      allowNullableObject: true
       allowNullableBoolean: true
 
   # Require switches on union types to handle all cases.

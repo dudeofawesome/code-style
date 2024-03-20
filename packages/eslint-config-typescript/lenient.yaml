@@ -2,9 +2,11 @@ rules:
   # Allow some non-boolean type conditionals.
   '@typescript-eslint/strict-boolean-expressions':
     - 'error'
-    - allowString: false
-      allowNumber: true
-      allowNullableNumber: true
+    - allowAny: true
+      allowString: false
+      allowNullableString: false
+      allowNumber: false
+      allowNullableNumber: false
       allowNullableObject: true
       allowNullableBoolean: true
 
