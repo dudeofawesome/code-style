@@ -1,0 +1,4 @@
+root: true
+extends:
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-nextjs'

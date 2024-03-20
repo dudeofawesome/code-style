@@ -1,0 +1,6 @@
+extends:
+  - 'plugin:@next/eslint-plugin-next/recommended'
+
+rules:
+  # NextJS requires page components to be default exports
+  import/no-default-export: 'off'

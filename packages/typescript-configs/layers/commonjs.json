@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    //=== MODULES ===//
+    /**
+     * `CommonJS` will transpile your code to CommonJS for better compatability.
+     * You might be interested in using the `esmodule.json` config.
+     */
+    "module": "CommonJS",
+    /**
+     * `Node10` supports only `require`, forcing transpilation of `import`s.
+     * `bundler` should not be used.
+     */
+    "moduleResolution": "Node10"
+  }
+}

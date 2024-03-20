@@ -1,0 +1,46 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "[ruby]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "files.associations": {
+    "**/typescript-configs/**/*.json": "jsonc",
+    "**/javascript-configs/**/*.json": "jsonc"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "typescript-configs/**/*.json",
+        "!typescript-configs/package.json"
+      ],
+      "url": "https://json.schemastore.org/tsconfig"
+    },
+    {
+      "fileMatch": [
+        "javascript-configs/**/*.json",
+        "!javascript-configs/package.json"
+      ],
+      "url": "https://json.schemastore.org/jsconfig"
+    }
+  ],
+  "material-icon-theme.files.associations": {
+    "eslint-config*/*.yaml": "eslint",
+    "styleint-config/*.yaml": "stylelint",
+    "typescript-configs/**/*.json": "tsconfig",
+    "javascript-configs/**/*.json": "jsconfig"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"],
+    "https://json.schemastore.org/stylelintrc.json": ["stylelint-config/*.yaml"]
+  },
+  "cSpell.words": ["esmodule"]
+}

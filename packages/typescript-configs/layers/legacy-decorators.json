@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    //=== DECORATORS ===//
+    // emit metadata about decorators
+    "emitDecoratorMetadata": true,
+    // enables pre-standardization decorators
+    "experimentalDecorators": true
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": ".",
+    },
+    { "path": "packages/code-style" },
+    { "path": "packages/create-configs" },
+    { "path": "packages/eslint-config" },
+    { "path": "packages/eslint-config-browser" },
+    { "path": "packages/eslint-config-cli" },
+    { "path": "packages/eslint-config-esmodule" },
+    { "path": "packages/eslint-config-jest" },
+    { "path": "packages/eslint-config-library" },
+    { "path": "packages/eslint-config-nest" },
+    { "path": "packages/eslint-config-nextjs" },
+    { "path": "packages/eslint-config-node" },
+    { "path": "packages/eslint-config-react" },
+    { "path": "packages/eslint-config-typescript" },
+    { "path": "packages/eslint-npm-hoist-packages" },
+    { "path": "packages/eslint-npm-hoist-packages-esmodule" },
+    { "path": "packages/eslint-npm-hoist-packages-jest" },
+    { "path": "packages/eslint-npm-hoist-packages-nextjs" },
+    { "path": "packages/eslint-npm-hoist-packages-node" },
+    { "path": "packages/eslint-npm-hoist-packages-react" },
+    { "path": "packages/eslint-npm-hoist-packages-typescript" },
+    { "path": "packages/eslint-plugin-nest" },
+    { "path": "packages/jest-configs" },
+    { "path": "packages/rubocop-config" },
+    { "path": "packages/stylelint-config" },
+    { "path": "packages/stylelint-config-scss" },
+    { "path": "packages/typescript-configs" },
+    { "path": "utils" },
+  ],
+  "settings": {
+    "typescript.tsdk": "./node_modules/typescript/lib",
+
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "typescript.format.enable": false,
+    "javascript.format.enable": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    "[ruby]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+
+    "files.associations": {
+      "**/typescript-configs/**/*.json": "jsonc",
+      "**/javascript-configs/**/*.json": "jsonc",
+    },
+    "json.schemas": [
+      {
+        "fileMatch": [
+          "typescript-configs/**/*.json",
+          "!typescript-configs/package.json",
+        ],
+        "url": "https://json.schemastore.org/tsconfig",
+      },
+      {
+        "fileMatch": [
+          "javascript-configs/**/*.json",
+          "!javascript-configs/package.json",
+        ],
+        "url": "https://json.schemastore.org/jsconfig",
+      },
+    ],
+    "material-icon-theme.files.associations": {
+      "eslint-config*/*.yaml": "eslint",
+      "styleint-config/*.yaml": "stylelint",
+      "typescript-configs/**/*.json": "tsconfig",
+      "javascript-configs/**/*.json": "jsconfig",
+    },
+    "yaml.schemas": {
+      "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"],
+      "https://json.schemastore.org/stylelintrc.json": [
+        "stylelint-config/*.yaml",
+      ],
+    },
+
+    "nodejs-testing.extensions": [
+      {
+        "extensions": ["mjs", "cjs", "js"],
+        "parameters": [],
+      },
+      {
+        "extensions": ["mts", "cts", "ts"],
+        "parameters": ["--require", "tsm"],
+      },
+    ],
+    "jest.disabledWorkspaceFolders": [
+      "root",
+      "code-style",
+      "eslint-config",
+      "eslint-config-browser",
+      "eslint-config-cli",
+      "eslint-config-esmodule",
+      "eslint-config-jest",
+      "eslint-config-library",
+      "eslint-config-nest",
+      "eslint-config-nextjs",
+      "eslint-config-node",
+      "eslint-config-react",
+      "eslint-config-typescript",
+      "eslint-npm-hoist-packages",
+      "eslint-npm-hoist-packages-esmodule",
+      "eslint-npm-hoist-packages-jest",
+      "eslint-npm-hoist-packages-nextjs",
+      "eslint-npm-hoist-packages-node",
+      "eslint-npm-hoist-packages-react",
+      "eslint-npm-hoist-packages-typescript",
+      "rubocop-config",
+      "stylelint-config",
+      "stylelint-config-scss",
+      "typescript-configs",
+      "utils",
+    ],
+
+    "cSpell.words": ["esmodule"],
+  },
+  "extensions": {
+    "recommendations": [
+      "editorconfig.editorconfig",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ghmcadams.lintlens",
+    ],
+  },
+}

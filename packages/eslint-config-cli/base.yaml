@@ -1,0 +1,7 @@
+rules:
+  # Allow scripts to log with `console`.
+  # Since we're creating a CLI app, we're probably just trying to show output to the user.
+  no-console: 'off'
+
+  # Allow scripts to exit.
+  n/no-process-exit: 'off'

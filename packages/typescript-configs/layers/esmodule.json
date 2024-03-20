@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    //=== MODULES ===//
+    /**
+     * `NodeNext` integrates with node's esm support. Depending upon
+     * package.json's `type` setting, will either use CommonJS or ESM.
+     */
+    "module": "NodeNext",
+    // `NodeNext` supports both `import` & `require`.
+    "moduleResolution": "NodeNext",
+    // Detect whether or not to treat project as esm.
+    "moduleDetection": "auto"
+  }
+}

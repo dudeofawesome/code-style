@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    // enable React JSX transpilation.
+    "jsx": "react"
+  }
+}

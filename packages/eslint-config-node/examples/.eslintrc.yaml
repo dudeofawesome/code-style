@@ -1,0 +1,4 @@
+root: true
+extends:
+  - '@code-style'
+  - '@code-style/node'

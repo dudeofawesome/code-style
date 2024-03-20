@@ -1,0 +1,7 @@
+# compiled output
+/prettierrc.*
+/config-types.*
+*.schema.json
+
+# caches
+*.tsbuildinfo

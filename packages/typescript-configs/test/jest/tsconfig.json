@@ -1,0 +1,5 @@
+{
+  "extends": ["@code-style/typescript-configs/roles/node"],
+  "include": ["src/"],
+  "exclude": ["dist/", "test/"]
+}

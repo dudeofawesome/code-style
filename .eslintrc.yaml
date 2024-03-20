@@ -1,0 +1,17 @@
+root: true
+extends:
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-node'
+  - '@code-style/eslint-config-cli'
+  - '@code-style/eslint-config-jest'
+  - '@code-style/eslint-config-typescript'
+  - '@code-style/eslint-config-esmodule'
+ignorePatterns:
+  - '**/test/*/**'
+
+overrides:
+  - files:
+      - 'scripts/bump.ts'
+      - 'scripts/concurrently-ws.ts'
+    rules:
+      n/shebang: 'off'

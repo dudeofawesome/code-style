@@ -1,0 +1,11 @@
+root: true
+extends:
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-node'
+  - '@code-style/eslint-config-cli'
+  - '@code-style/eslint-config-typescript'
+  - '@code-style/eslint-config-esmodule'
+
+ignorePatterns:
+  - '/bin/create-configs.js'
+  - '/jest.config.js'
