@@ -1,8 +1,8 @@
 {
   "extends": [
-    "@code-style/typescript-configs/roles/node.json",
-    "@code-style/typescript-configs/layers/esmodule.json",
-    "@code-style/typescript-configs/layers/jest.json"
+    "@code-style/typescript-configs/roles/node",
+    "@code-style/typescript-configs/layers/esmodule",
+    "@code-style/typescript-configs/layers/jest"
   ],
   "files": ["index.ts"]
 }

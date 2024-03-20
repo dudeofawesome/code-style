@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@code-style/typescript-configs/roles/node.json",
-    "@code-style/typescript-configs/layers/esmodule.json"
+    "@code-style/typescript-configs/roles/node",
+    "@code-style/typescript-configs/layers/esmodule"
   ],
   "compilerOptions": {
     "baseUrl": "src/",
