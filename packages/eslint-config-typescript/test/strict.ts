@@ -9,7 +9,11 @@ import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-se
 
 const linter = initESLint(
   {
-    extends: ['@code-style', '@code-style/esmodule', '@code-style/typescript'],
+    extends: [
+      '@code-style/eslint-config',
+      '@code-style/eslint-config-esmodule',
+      '@code-style/eslint-config-typescript',
+    ],
   },
   { cwd: join(__dirname, 'fixture') },
 );
@@ -62,19 +66,19 @@ void describe('eslint-config-typescript strict', () => {
         ruleId: '@typescript-eslint/strict-boolean-expressions',
         files: [
           {
-            code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+            code: `let foo = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
             ts: true,
           },
         ],
       }));
 
-    void it(`should fail @typescript-eslint/strict-boolean-expressions object`, async () =>
+    void it(`should fail @typescript-eslint/strict-boolean-expressions unknown`, async () =>
       testRuleFail({
         linter,
         ruleId: '@typescript-eslint/strict-boolean-expressions',
         files: [
           {
-            code: `const foo: object | null = Math.random() === 0 ? {} : null;\nif (foo) Number();\n`,
+            code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
             ts: true,
           },
         ],

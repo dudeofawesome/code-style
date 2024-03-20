@@ -84,7 +84,7 @@ void describe('eslint-config-typescript lenient', () => {
         ruleId: '@typescript-eslint/strict-boolean-expressions',
         files: [
           {
-            code: `let foo: unknown = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+            code: `let foo = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
             ts: true,
           },
         ],
