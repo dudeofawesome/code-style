@@ -105,7 +105,12 @@ export async function main() {
 }
 
 async function start_interactive_setup() {
-  const config = await load_rc();
+  const config = await load_rc({ throw_no_config: true })
+    .then((config) => {
+      console.log(`Using codestyleinitrc file to set defaults.`);
+      return config;
+    })
+    .catch(() => ({}));
 
   return interactive_setup(config);
 }

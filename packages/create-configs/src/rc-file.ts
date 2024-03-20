@@ -20,7 +20,7 @@ export async function load_rc({
     return readFile(config_path)
       .then((buf) => buf.toString())
       .then<Partial<CodeStyleSetupOptions>>(
-        (str) => parse(str) as Partial<CodeStyleSetupOptions>,
+        (str) => (parse(str) ?? {}) as Partial<CodeStyleSetupOptions>,
       )
       .catch((err) => {
         if (throw_no_config) throw err;
