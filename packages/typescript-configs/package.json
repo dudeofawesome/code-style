@@ -16,6 +16,8 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "exports": {
     ".": "./roles/base.json",
+    "./roles/*": "./roles/*.json",
+    "./layers/*": "./layers/*.json",
     "./roles/*.json": "./roles/*.json",
     "./layers/*.json": "./layers/*.json",
     "./*.json": "./*.json"
