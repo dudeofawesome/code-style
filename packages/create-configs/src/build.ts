@@ -67,9 +67,7 @@ export async function build({
 
       includes_js(languages)
         ? [
-            set_package_type(
-              technologies.includes('esm') ? 'module' : 'commonjs',
-            ),
+            set_package_type({ technologies, library }),
             create_ts_config({
               project_type,
               technologies,

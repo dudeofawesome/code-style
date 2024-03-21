@@ -110,6 +110,11 @@ export async function create_ts_config({
   }
 }
 
-export async function set_package_type(type: 'commonjs' | 'module') {
+export async function set_package_type({
+  technologies,
+  library,
+}: Pick<SetupOptions, 'technologies' | 'library'>) {
+  const type: 'commonjs' | 'module' =
+    technologies.includes('esm') && !library ? 'module' : 'commonjs';
   await exec(`npm pkg set type='${type}'`);
 }
