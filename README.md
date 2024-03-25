@@ -2,7 +2,7 @@
 
 ## Usage
 
-See [create-configs](/create-configs/README.md) for usage information.
+See [create-configs](/packages/create-configs/README.md) for usage information.
 
 ## Contributing
 
