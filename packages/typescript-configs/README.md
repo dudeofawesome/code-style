@@ -2,9 +2,9 @@
 
 My set of tsc config files
 
-**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
-
 ## Usage
+
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
 1. Install this config plugin as a dev dependency.
 

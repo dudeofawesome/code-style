@@ -2,9 +2,9 @@
 
 My browser eslint config
 
-**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
-
 ## Usage
+
+**The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
 1. Install this config plugin as a dev dependency.
 
@@ -12,17 +12,12 @@ My browser eslint config
     npm i -D @code-style/eslint-config-browser
     ```
 
-1. Add the plugin to your `eslintrc`.
+1. Add the plugin to your ESLint config.
 
-    ```yaml
-    extends:
-        - '@code-style'
-        - '@code-style/browser'
+    ```diff
+     extends:
+         - '@code-style/eslint-config'
+    +    - '@code-style/eslint-config-browser'
     ```
 
-1. You might also want to specify an `ecmaVersion`.
-
-    ```yaml
-    parserOptions:
-        ecmaVersion: 2022
-    ```
+    You'll also likely want to have some of my other ESLint configs for your environment.

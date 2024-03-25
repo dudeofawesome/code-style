@@ -16,15 +16,6 @@ A script to create configuration files to conform to code style standards.
 
     ESLint in particular has a bunch of settings that will vary based on the type of project you're working on.
 
-    We provide some other eslint configs for different environments:
-
-    - [`@code-style/eslint-config-browser`](../eslint-config-browser/README.md)
-    - [`@code-style/eslint-config-cli`](../eslint-config-cli/README.md)
-    - [`@code-style/eslint-config-jest`](../eslint-config-jest/README.md)
-    - [`@code-style/eslint-config-node`](../eslint-config-node/README.md)
-    - [`@code-style/eslint-config-react`](../eslint-config-react/README.md)
-    - [`@code-style/eslint-config-typescript`](../eslint-config-typescript/README.md)
-
 ### Consider adding some editor settings
 
 -   VS Code
