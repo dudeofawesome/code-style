@@ -1,4 +1,5 @@
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
+import json5 from 'json5';
 import { stripIndent } from 'common-tags';
 import {
   ProjectType,
@@ -7,6 +8,19 @@ import {
 } from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
+
+export interface LaunchJson {
+  configurations?: LaunchConfiguration[];
+}
+
+export interface LaunchConfiguration {
+  type: string;
+  request: string;
+  name: string;
+  skipFiles?: string[];
+  restart?: boolean;
+  continueOnAttach?: boolean;
+}
 
 export async function create_vscode_config(
   project_type: ProjectType,
@@ -19,9 +33,7 @@ export async function create_vscode_config(
   await Promise.allSettled([
     Promise.resolve('.vscode/settings.json')
       .then((path) =>
-        verify_missing({ path, remove: overwrite, reject: true }).then(
-          () => path,
-        ),
+        verify_missing({ path, remove: false, reject: true }).then(() => path),
       )
       .then(async (path) =>
         create_file(
@@ -29,6 +41,13 @@ export async function create_vscode_config(
           await prettify(
             path,
             JSON.stringify({
+              // bring in existing settings
+              ...(await readFile(path)
+                .catch(() => '{}')
+                .then((buf) => buf.toString())
+                .then((str) => json5.parse<Record<string, unknown>>(str))
+                .catch(() => ({}) as Record<string, unknown>)),
+
               ...{
                 'editor.formatOnSave': true,
                 'editor.formatOnType': true,
@@ -53,6 +72,7 @@ export async function create_vscode_config(
                 : {}),
             }),
           ),
+          overwrite,
         ),
       ),
 
@@ -102,21 +122,33 @@ export async function create_vscode_config(
 
     Promise.resolve('.vscode/launch.json')
       .then((path) =>
-        verify_missing({ path, remove: overwrite, reject: true }).then(
-          () => path,
-        ),
+        verify_missing({ path, remove: false, reject: true }).then(() => path),
       )
-      .then(async (path) =>
-        create_file(
+      .then(async (path) => {
+        // bring in existing settings
+        const existing = await readFile(path)
+          .catch(() => '{}')
+          .then((buf) => buf.toString())
+          .then((str) => json5.parse<LaunchJson>(str))
+          .catch(() => ({}) as LaunchJson);
+
+        function is_attach(cfg: LaunchConfiguration): boolean {
+          return cfg.name === 'Attach';
+        }
+
+        return create_file(
           path,
           await prettify(
             path,
             stripIndent`
               // https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations
               ${JSON.stringify({
+                ...existing,
                 configurations: [
+                  ...(existing.configurations ?? []),
                   ...((languages.includes('js') || languages.includes('ts')) &&
-                  ['backend', 'cli'].includes(project_type)
+                  ['backend', 'cli'].includes(project_type) &&
+                  !existing.configurations?.some(is_attach)
                     ? [
                         {
                           type: 'node',
@@ -129,10 +161,11 @@ export async function create_vscode_config(
                       ]
                     : []),
                 ],
-              })}
+              } as LaunchJson)}
             `,
           ),
-        ),
-      ),
+          overwrite,
+        );
+      }),
   ]);
 }
