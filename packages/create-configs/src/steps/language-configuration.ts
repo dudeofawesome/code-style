@@ -28,37 +28,35 @@ export function _generate_ts_config({
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@code-style/typescript-configs/roles/browser.json');
+      config.extends.push('@code-style/typescript-configs/roles/browser');
       if (technologies.includes('nextjs')) {
-        config.extends.push(
-          '@code-style/typescript-configs/layers/nextjs.json',
-        );
+        config.extends.push('@code-style/typescript-configs/layers/nextjs');
       } else if (technologies.includes('react')) {
-        config.extends.push('@code-style/typescript-configs/layers/react.json');
+        config.extends.push('@code-style/typescript-configs/layers/react');
       }
       break;
     case 'backend':
     case 'cli':
       if (technologies.includes('nestjs')) {
-        config.extends.push('@code-style/typescript-configs/roles/nest.json');
+        config.extends.push('@code-style/typescript-configs/roles/nest');
       } else {
-        config.extends.push('@code-style/typescript-configs/roles/node.json');
+        config.extends.push('@code-style/typescript-configs/roles/node');
       }
       break;
   }
 
   if (technologies.includes('esm')) {
-    config.extends.push('@code-style/typescript-configs/layers/esmodule.json');
+    config.extends.push('@code-style/typescript-configs/layers/esmodule');
   }
 
   if (library) {
-    config.extends.push('@code-style/typescript-configs/layers/library.json');
+    config.extends.push('@code-style/typescript-configs/layers/library');
   }
 
   // TODO(2): add support for library.json tsconfig
 
   if (lenient) {
-    config.extends.push('@code-style/typescript-configs/layers/lenient.json');
+    config.extends.push('@code-style/typescript-configs/layers/lenient');
   }
 
   return stripIndent`
