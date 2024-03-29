@@ -1,5 +1,6 @@
 import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 import {
+  create_jest_config,
   create_ts_config,
   set_package_type,
 } from './steps/language-configuration.js';
@@ -92,6 +93,14 @@ export async function build({
               overwrite,
             }),
           ]
+        : null,
+
+      includes_js(languages) && technologies.includes('jest')
+        ? create_jest_config({
+            languages,
+            technologies,
+            overwrite,
+          })
         : null,
     ]
       .filter(Boolean)

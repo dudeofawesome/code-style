@@ -116,3 +116,41 @@ export async function set_package_type({
     technologies.includes('esm') && !library ? 'module' : 'commonjs';
   await exec(`npm pkg set type='${type}'`);
 }
+
+/** @private */
+export function _generate_jest_config({
+  technologies,
+}: Omit<CreateJestConfigOptions, 'overwrite'>): string {
+  return stripIndent`
+    import { config } from '@code-style/jest-configs/ts-${technologies.includes('esm') ? 'esm' : 'cjs'}';
+
+    // eslint-disable-next-line import/no-default-export
+    export default config;
+  `;
+}
+
+export type CreateJestConfigOptions = Pick<
+  SetupOptions,
+  'languages' | 'technologies' | 'overwrite'
+>;
+export async function create_jest_config({
+  languages,
+  technologies,
+  overwrite,
+}: CreateJestConfigOptions) {
+  if (languages.includes('ts')) {
+    const path = 'jest.config.mjs';
+    if (await verify_missing({ path, remove: overwrite })) {
+      await create_file(
+        path,
+        await prettify(
+          path,
+          _generate_jest_config({
+            languages,
+            technologies,
+          }),
+        ),
+      );
+    }
+  }
+}
