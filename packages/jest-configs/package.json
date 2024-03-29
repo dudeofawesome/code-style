@@ -32,9 +32,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext ts,js,json",
-    "prepublishOnly": "npm run build",
-    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
-    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "ts-jest": "^29.1.2"
