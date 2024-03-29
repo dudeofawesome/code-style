@@ -139,10 +139,12 @@ export async function create_eslint_config({
 
 /** @private */
 export function _generate_stylelint_config(languages: Language[]): string {
-  const config: Config = { extends: ['@code-style/stylelint-config'] };
+  const config: Config & { extends: string[] } = {
+    extends: ['@code-style/stylelint-config'],
+  };
 
   if (languages.includes('scss')) {
-    config.extends = ['@code-style/stylelint-config-scss'];
+    config.extends.push('@code-style/stylelint-config-scss');
   }
 
   return stripIndent`

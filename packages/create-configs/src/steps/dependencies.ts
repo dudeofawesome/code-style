@@ -117,16 +117,12 @@ export async function install_dependencies({
         break;
       case 'css':
         if (!languages.includes('scss')) {
-          dev_packages.push(
-            'stylelint@latest',
-            '@code-style/stylelint-config@latest',
-          );
+          dev_packages.push('@code-style/stylelint-config@latest');
         }
         break;
       case 'scss':
         dev_packages.push(
-          'stylelint@latest',
-          'sass-embedded@latest',
+          'sass-embedded',
           '@code-style/stylelint-config-scss@latest',
         );
         break;

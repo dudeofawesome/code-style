@@ -26,12 +26,12 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
+    "stylelint": "^16.3.1",
     "stylelint-order": "^6.0.3",
     "stylelint-prettier": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.8.4",
-    "stylelint": "^15.10.3",
     "tsm": "^2.3.0"
   },
   "peerDependencies": {

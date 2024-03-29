@@ -3,7 +3,12 @@ import { testNoFail } from '@code-style/utils/testing/stylelint';
 import { defaultTestSet } from '@code-style/utils/testing/stylelint/default-test-sets';
 
 void describe('styleint-config-scss', () => {
-  const config = { extends: '@code-style/stylelint-config-scss' };
+  const config = {
+    extends: [
+      '@code-style/stylelint-config',
+      '@code-style/stylelint-config-scss',
+    ],
+  };
 
   defaultTestSet(config);
 
