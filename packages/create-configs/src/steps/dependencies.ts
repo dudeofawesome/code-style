@@ -116,13 +116,12 @@ export async function install_dependencies({
         );
         break;
       case 'css':
-        if (!languages.includes('scss')) {
-          dev_packages.push('@code-style/stylelint-config@latest');
-        }
+        dev_packages.push('@code-style/stylelint-config@latest');
         break;
       case 'scss':
         dev_packages.push(
           'sass-embedded',
+          '@code-style/stylelint-config@latest',
           '@code-style/stylelint-config-scss@latest',
         );
         break;
@@ -152,6 +151,9 @@ export async function install_dependencies({
         if (tech === 'nextjs') {
           prod_packages.push('next');
         }
+        break;
+      case 'nestjs':
+        dev_packages.push('@code-style/eslint-config-nest@latest');
         break;
       case 'esm':
         dev_packages.push(
