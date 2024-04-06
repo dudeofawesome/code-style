@@ -113,7 +113,9 @@ export async function set_package_type({
   library,
 }: Pick<SetupOptions, 'technologies' | 'library'>) {
   const type: 'commonjs' | 'module' =
-    technologies.includes('esm') && !library ? 'module' : 'commonjs';
+    technologies.includes('esm') && !library && !technologies.includes('nestjs')
+      ? 'module'
+      : 'commonjs';
   await exec(`npm pkg set type='${type}'`);
 }
 
