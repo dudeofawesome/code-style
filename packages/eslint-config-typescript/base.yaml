@@ -88,4 +88,7 @@ rules:
   # Disable this rule since Typescript will handle this for us.
   'promise/valid-params': 'off'
 
+  # Allow function overload signatures.
+  '@typescript-eslint/unified-signatures': 'off'
+
   # TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types
