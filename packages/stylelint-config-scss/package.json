@@ -27,12 +27,12 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "stylelint-config-sass-guidelines": "^10.0.0",
-    "stylelint-config-standard-scss": "^11.0.0"
+    "stylelint": "^16.3.1",
+    "stylelint-config-sass-guidelines": "^11.1.0",
+    "stylelint-config-standard-scss": "^13.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.4",
-    "stylelint": "^15.10.3",
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
