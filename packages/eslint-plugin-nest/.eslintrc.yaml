@@ -5,3 +5,5 @@ extends:
   - '@code-style/node'
   - '@code-style/jest'
   - '@code-style/typescript'
+ignorePatterns:
+  - '/jest.config.mjs'
