@@ -4,5 +4,5 @@ import { recommended } from './recommended.js';
 
 export const recommended_flat: Linter.FlatConfig = {
   plugins: { '@code-style/nest': plugin },
-  rules: recommended.rules as Linter.FlatConfig['rules'],
+  rules: recommended.rules,
 };
