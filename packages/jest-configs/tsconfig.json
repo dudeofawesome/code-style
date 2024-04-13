@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "@code-style/typescript-configs/roles/base",
+    "@code-style/typescript-configs/layers/esmodule",
+    "@code-style/typescript-configs/layers/library"
+  ],
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "outDir": "dist/"
+  },
+  "include": ["src/"],
+  "exclude": ["dist/"]
+}

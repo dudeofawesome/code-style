@@ -1,0 +1,35 @@
+{
+  "extends": ["../layers/commonjs.json", "../layers/strict.json"],
+  "compilerOptions": {
+    //=== MODULES ===//
+    // fixes some issues around importing commonjs from esm
+    "esModuleInterop": true,
+    // synthesize default imports
+    "allowSyntheticDefaultImports": true,
+
+    //=== INPUT ===//
+    // type-check .d.ts files
+    "skipLibCheck": false,
+    // allow interop with JS files in project
+    "allowJs": true,
+    // type-check JS
+    "checkJs": true,
+    "incremental": true,
+    // eliminates inconsistencies with case-sensitive filesystems
+    "forceConsistentCasingInFileNames": true,
+    // enable importing json
+    "resolveJsonModule": true,
+    // defines environment
+    "lib": ["ES2022"],
+
+    //=== OUTPUT ===//
+    // emit .d.ts files
+    "declaration": true,
+    // transpiles TS to es2022
+    "target": "es2022",
+    // emit sourcemaps
+    "sourceMap": true,
+    // use tslib helper functions instead of in-lining them
+    "importHelpers": true
+  }
+}

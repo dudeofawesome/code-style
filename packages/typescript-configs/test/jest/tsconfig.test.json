@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@code-style/typescript-configs/roles/node.json",
+    "@code-style/typescript-configs/layers/jest.json"
+  ],
+  "include": ["test/", "src/"],
+  "exclude": ["dist/"]
+}

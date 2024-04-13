@@ -1,0 +1,64 @@
+{
+  "name": "@code-style/create-configs",
+  "version": "2.0.0-26",
+  "description": "A script to create configuration files to conform to code style standards.",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "format",
+    "setup"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/create-configs/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/create-configs"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": "bin/create-configs.js",
+  "files": [
+    "/dist/",
+    "/bin/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prelint": "npm run build",
+    "lint": "eslint . --ext ts,js,json",
+    "prepublishOnly": "npm run build",
+    "start": "node bin/create-configs.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "dependencies": {
+    "@code-style/code-style": "^2.0.0-26",
+    "@inquirer/prompts": "^3.2.0",
+    "common-tags": "^1.8.2",
+    "json5": "^2.2.3",
+    "prettier": "^3.1.0",
+    "yaml": "^2.3.2",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@code-style/eslint-config": "^2.0.0-26",
+    "@code-style/eslint-config-cli": "^2.0.0-26",
+    "@code-style/eslint-config-typescript": "^2.0.0-26",
+    "@code-style/jest-configs": "^2.0.0-26",
+    "@code-style/typescript-configs": "^2.0.0-26",
+    "@types/common-tags": "^1.8.3",
+    "@types/jest": "^29.5.6",
+    "jest": "^29.7.0",
+    "stylelint": "^16.3.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

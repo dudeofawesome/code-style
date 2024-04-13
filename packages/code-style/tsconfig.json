@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@code-style/typescript-configs/roles/node",
+    "@code-style/typescript-configs/layers/esmodule",
+    "@code-style/typescript-configs/layers/library"
+  ],
+  "compilerOptions": {
+    "outDir": "./"
+  },
+  "include": ["src/"],
+  "exclude": ["./*.*"]
+}

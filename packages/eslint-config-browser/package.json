@@ -1,0 +1,45 @@
+{
+  "name": "@code-style/eslint-config-browser",
+  "version": "2.0.0-26",
+  "description": "My browser ESLint config",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-browser/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/eslint-config-browser"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    ".": "./base.yaml",
+    "./base": "./base.yaml",
+    "./*.yaml": "./*.yaml"
+  },
+  "main": "base.yaml",
+  "files": [
+    "/base.yaml"
+  ],
+  "scripts": {
+    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+  },
+  "devDependencies": {
+    "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.49.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

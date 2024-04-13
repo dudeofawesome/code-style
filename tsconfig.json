@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "@code-style/typescript-configs/roles/node",
+    "@code-style/typescript-configs/layers/esmodule"
+  ],
+  "compilerOptions": { "noEmit": true, "outDir": "dist/" },
+  "include": ["packages/*/test/", "utils/", "scripts/"],
+  "exclude": [
+    "**/dist/",
+    "packages/typescript-configs/",
+    "packages/javascript-configs/"
+  ]
+}

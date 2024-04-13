@@ -1,0 +1,48 @@
+{
+  "name": "@code-style/stylelint-config",
+  "version": "2.0.0-26",
+  "description": "My stylelint configs",
+  "keywords": [
+    "stylelint",
+    "style",
+    "css",
+    "lint",
+    "config"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/stylelint-config/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/stylelint-config"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "main": "base.yaml",
+  "files": [
+    "/base.yaml"
+  ],
+  "scripts": {
+    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+  },
+  "dependencies": {
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-prettier": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.4",
+    "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

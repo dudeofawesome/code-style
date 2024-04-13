@@ -1,0 +1,1 @@
+TODO: add rule to prevent usage of `.npmignore`, preferring `package.json`'s `files` attribute instead. https://web.archive.org/web/20230330090244/https://medium.com/@jdxcode/for-the-love-of-god-dont-use-npmignore-f93c08909d8d

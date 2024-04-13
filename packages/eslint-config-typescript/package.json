@@ -1,0 +1,56 @@
+{
+  "name": "@code-style/eslint-config-typescript",
+  "version": "2.0.0-26",
+  "description": "My Typescript ESLint config",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-typescript/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/eslint-config-typescript"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    ".": "./base.yaml",
+    "./base": "./base.yaml",
+    "./lenient": "./lenient.yaml",
+    "./*.yaml": "./*.yaml"
+  },
+  "main": "base.yaml",
+  "files": [
+    "/base.yaml",
+    "/lenient.yaml"
+  ],
+  "scripts": {
+    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint-plugin-import": "^2.29.1"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.44.2",
+    "@types/node": "^20.6.3",
+    "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@code-style/eslint-npm-hoist-packages-typescript": "2.0.0-26",
+    "eslint": "^8.49.0",
+    "typescript": ">=5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@code-style/eslint-npm-hoist-packages-typescript",
+  "version": "2.0.0-26",
+  "description": "Cause NPM to hoist eslint config dependencies",
+  "keywords": [
+    "eslint",
+    "hack"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-npm-hoist-packages/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/eslint-npm-hoist-packages"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint-plugin-import": "^2.28.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "overrides": {
+    "eslint-plugin-import": {
+      "tsconfig-paths": "^4.2.0"
+    }
+  }
+}

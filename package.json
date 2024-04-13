@@ -1,35 +1,57 @@
 {
   "name": "code-style-monorepo",
-  "description": "My code style configs",
-  "version": "1.3.0",
+  "version": "2.0.0-26",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dudeofawesome/code-style.git"
-  },
-  "bugs": {
-    "url": "https://github.com/dudeofawesome/code-style/issues"
-  },
-  "homepage": "https://github.com/dudeofawesome/code-style#readme",
-  "author": "Louis Orleans <louis@orleans.io>",
-  "license": "MIT",
+  "description": "My code style configs",
   "keywords": [
     "style",
     "lint",
     "config",
     "format"
   ],
+  "homepage": "https://github.com/dudeofawesome/code-style#readme",
+  "bugs": {
+    "url": "https://github.com/dudeofawesome/code-style/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "type": "module",
+  "bin": {
+    "bump": "scripts/bump.ts",
+    "concurrently-ws": "scripts/concurrently-ws.ts",
+    "upgrade-packages": "scripts/upgrade-packages.sh"
+  },
   "workspaces": [
-    "code-style",
-    "eslint-config",
-    "eslint-config-jest",
-    "eslint-config-node",
-    "eslint-config-typescript"
+    "packages/*",
+    "utils"
   ],
   "scripts": {
-    "bump": "scripts/bump.sh"
+    "build": "scripts/build.sh",
+    "bump": "scripts/bump.ts",
+    "prelint": "npm run build",
+    "lint": "scripts/concurrently-ws.ts lint 'npm:lint:*' && echo 'All lint passed.'",
+    "lint:js": "tsc --noEmit",
+    "lint:types": "eslint .",
+    "pretest": "npm run build",
+    "test": "scripts/concurrently-ws.ts test && echo 'All tests passed.'",
+    "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
-    "@dudeofawesome/code-style": "^1.0.0"
+    "@types/eslint": "^8.44.2",
+    "@types/node": "^20.8.4",
+    "tsm": "^2.3.0",
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "eslint-plugin-import": {
+      "tsconfig-paths": "^4.2.0"
+    }
   }
 }

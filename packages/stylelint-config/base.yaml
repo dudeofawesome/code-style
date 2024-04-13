@@ -1,0 +1,25 @@
+extends:
+  - 'stylelint-config-standard'
+  - 'stylelint-prettier/recommended'
+plugins:
+  - 'stylelint-order'
+rules:
+  at-rule-no-unknown: true
+  color-named: null
+  selector-class-pattern: null
+  selector-no-qualifying-type: null
+  selector-no-vendor-prefix: null
+  property-no-vendor-prefix: null
+  value-no-vendor-prefix: null
+  max-nesting-depth: 2
+  order/order:
+    - 'dollar-variables'
+    - 'custom-properties'
+    - 'declarations'
+    - 'rules'
+    - type: 'at-rule'
+      name: 'include'
+      parameter: 'media'
+    - type: 'at-rule'
+      name: 'include'
+      parameter: 'print'

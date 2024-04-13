@@ -1,0 +1,62 @@
+{
+  "name": "@code-style/jest-configs",
+  "version": "2.0.0-26",
+  "description": "My Jest configs",
+  "keywords": [
+    "jest",
+    "typescript"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/jest-configs/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/jest-configs"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "default": "./dist/ts-cjs.js",
+      "types": "./dist/ts-cjs.d.ts"
+    },
+    "./*": {
+      "default": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    }
+  },
+  "main": "dist/ts-cjs.js",
+  "files": [
+    "/dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext ts,js,json",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "ts-jest": "^29.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.6.3",
+    "tsm": "^2.3.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "jest": ">=29",
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

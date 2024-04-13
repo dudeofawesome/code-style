@@ -1,0 +1,36 @@
+{
+  "name": "@code-style/rubocop-configs",
+  "version": "2.0.0-26",
+  "description": "My Rubocop configs",
+  "keywords": [
+    "ruby",
+    "rubocop"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/rubocop-config/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/rubocop-config"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "main": "base.yaml",
+  "files": [
+    "/base.yaml"
+  ],
+  "scripts": {
+    "test": "echo 'No tests'; exit 0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.6.3",
+    "tsm": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

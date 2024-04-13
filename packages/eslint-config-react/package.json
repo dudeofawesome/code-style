@@ -1,0 +1,56 @@
+{
+  "name": "@code-style/eslint-config-react",
+  "version": "2.0.0-26",
+  "description": "My react ESLint config",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "eslint"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/eslint-config-react/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/eslint-config-react"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    ".": "./base.yaml",
+    "./base": "./base.yaml",
+    "./*.yaml": "./*.yaml"
+  },
+  "main": "base.yaml",
+  "files": [
+    "/base.yaml"
+  ],
+  "scripts": {
+    "test": "node $NODE_OPTS --require tsm --test test/*.ts",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+  },
+  "dependencies": {
+    "@code-style/eslint-config-browser": "^2.0.0-26",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.23",
+    "react": "^18.2.0",
+    "tsm": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@code-style/eslint-npm-hoist-packages-react": "2.0.0-26",
+    "eslint": "^8.49.0",
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "name": "@code-style/code-style",
+  "version": "2.0.0-26",
+  "description": "My code style configs",
+  "keywords": [
+    "style",
+    "lint",
+    "config",
+    "format"
+  ],
+  "homepage": "https://github.com/dudeofawesome/code-style/blob/main/packages/code-style/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dudeofawesome/code-style.git",
+    "directory": "/packages/code-style"
+  },
+  "license": "MIT",
+  "author": "Louis Orleans <louis@orleans.io>",
+  "exports": {
+    "./prettierrc": {
+      "types": "./prettierrc.d.mts",
+      "default": "./prettierrc.mjs"
+    },
+    "./config-types": {
+      "types": "./config-types.d.ts"
+    }
+  },
+  "bin": {
+    "add-code-style": "scripts/add-code-style.sh"
+  },
+  "files": [
+    "/src/",
+    "/prettierrc.*",
+    "/config-types.*",
+    "/.editorconfig",
+    "*.schema.json",
+    "/scripts/add-code-style.sh"
+  ],
+  "scripts": {
+    "build": "concurrently --group --prefix none \"npm:build:*\"",
+    "build:jsonschema": "typescript-json-schema src/config-types.ts CodeStyleSetupOptions > codestylerc.schema.json",
+    "build:ts": "tsc",
+    "lint": "eslint . --ext ts,mts,cts,js,json",
+    "prepublishOnly": "npm run build",
+    "test": "echo 'No tests'; exit 0"
+  },
+  "dependencies": {
+    "@prettier/plugin-ruby": "^4.0.2",
+    "deepmerge": "^4.3.1",
+    "prettier": "^3.1.0",
+    "prettier-plugin-packagejson": "^2.4.6"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.2.2",
+    "typescript-json-schema": "^0.63.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

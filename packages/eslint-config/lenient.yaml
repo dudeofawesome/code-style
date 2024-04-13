@@ -1,0 +1,47 @@
+rules:
+  # Allow symbols to not have a description.
+  symbol-description: 'off'
+
+  # Allow string concatenation.
+  prefer-template: 'off'
+
+  # Allow `.apply()`.
+  prefer-spread: 'off'
+
+  # Allow synchronous loops.
+  no-await-in-loop: 'off'
+
+  # Allow uncaught promise errors.
+  promise/catch-or-return: 'off'
+
+  # Allow non-dot notation.
+  dot-notation: 'off'
+
+  # Allow files to be any length.
+  max-lines: 'off'
+
+  # Allow parameter reassigning.
+  no-param-reassign: 'off'
+
+  # Allow any import formatting
+  import/order: 'off'
+  import/newline-after-import: 'off'
+
+  # Allow node globals
+  n/prefer-global/buffer: 'off'
+  n/prefer-global/text-decoder: 'off'
+  n/prefer-global/text-encoder: 'off'
+  n/prefer-global/url-search-params: 'off'
+  n/prefer-global/url: 'off'
+
+  # Allow reading from process.env from any file
+  n/no-process-env: 'off'
+
+  # Allow void promises
+  promise/always-return: 'off'
+
+  # Allow throwing literals
+  no-throw-literal: 'off'
+
+  # Allow unused vars
+  no-unused-vars: 'off'
