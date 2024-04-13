@@ -46,21 +46,24 @@ rules:
   # Prevent labels from sharing their name with variable.
   no-label-var: 'error'
 
-  # Prevent having the same package in dependencies and devDependencies.
-  json-files/require-unique-dependency-names: 'error'
-
-  # Require that specific ranges are specified in `package.json` `dependencies`.
-  json-files/restrict-ranges:
-    - 'error'
-    - versionHint: 'caret'
-      dependencyTypes:
-        - 'dependencies'
-        - 'devDependencies'
-
-  # Require that `engines` are specified in `package.json`.
-  json-files/require-engines: 'error'
-
   # Disallow allow empty blocks.
   no-empty:
     - 'error'
     - 'allowEmptyCatch': true
+
+overrides:
+  - files: '*.json'
+    rules:
+      # Prevent having the same package in dependencies and devDependencies.
+      json-files/require-unique-dependency-names: 'error'
+
+      # Require that specific ranges are specified in `package.json` `dependencies`.
+      json-files/restrict-ranges:
+        - 'error'
+        - versionHint: 'caret'
+          dependencyTypes:
+            - 'dependencies'
+            - 'devDependencies'
+
+      # Require that `engines` are specified in `package.json`.
+      json-files/require-engines: 'error'

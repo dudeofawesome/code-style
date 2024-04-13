@@ -17,5 +17,8 @@ rules:
     - args: 'none'
       destructuredArrayIgnorePattern: '^_'
 
-  # Require keys in package.json to be sorted, improving readability & consistency across projects.
-  json-files/sort-package-json: 'warn'
+overrides:
+  - files: '*.json'
+    rules:
+      # Require keys in package.json to be sorted, improving readability & consistency across projects.
+      json-files/sort-package-json: 'warn'

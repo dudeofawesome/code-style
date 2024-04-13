@@ -24,6 +24,28 @@ void describe('eslint-config strict', () => {
         linter,
         files: [{ code: `module.exports = { foo: 'foo' };\n` }],
       }));
+
+    void it(`should pass json-files rules`, () =>
+      testNoFail({
+        linter,
+        files: [
+          {
+            path: 'package.json',
+            code: `{
+  "name": "foo",
+  "version": "0.0.1",
+  "description": "Foo bar baz",
+  "dependencies": {
+    "tsm": "^2.3.0"
+  },
+  "engines": {
+    "node": "^20"
+  }
+}
+`,
+          },
+        ],
+      }));
   });
 
   void describe('fails', () => {
@@ -66,6 +88,49 @@ void describe('eslint-config strict', () => {
         linter,
         ruleId: 'no-restricted-syntax',
         files: [{ code: `export const foo = 'foo';\n` }],
+      }));
+
+    void it(`should fail json-files/require-engines`, () =>
+      testRuleFail({
+        linter,
+        ruleId: 'json-files/require-engines',
+        files: [
+          {
+            path: 'package.json',
+            code: `{
+  "name": "foo",
+  "version": "0.0.1",
+  "description": "Foo bar baz",
+  "dependencies": {
+    "tsm": "^2.3.0"
+  }
+}
+`,
+          },
+        ],
+      }));
+
+    void it(`should fail json-files/require-engines`, () =>
+      testRuleFail({
+        linter,
+        ruleId: 'json-files/sort-package-json',
+        files: [
+          {
+            path: 'package.json',
+            code: `{
+  "name": "foo",
+  "description": "Foo bar baz",
+  "version": "0.0.1",
+  "dependencies": {
+    "tsm": "^2.3.0"
+  },
+  "engines": {
+    "node": "^20"
+  }
+}
+`,
+          },
+        ],
       }));
   });
 });
