@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-nextjs",
-  "version": "2.0.0-25",
+  "version": "2.0.0-26",
   "description": "My NextJS ESLint config",
   "keywords": [
     "style",
@@ -30,7 +30,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/eslint-config-react": "^2.0.0-25",
+    "@code-style/eslint-config-react": "^2.0.0-26",
     "@next/eslint-plugin-next": "^14.1.1"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@code-style/eslint-npm-hoist-packages-react": "2.0.0-25",
+    "@code-style/eslint-npm-hoist-packages-react": "2.0.0-26",
     "eslint": "^8.49.0",
     "next": "*"
   },
