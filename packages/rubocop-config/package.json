@@ -1,6 +1,6 @@
 {
   "name": "@code-style/rubocop-configs",
-  "version": "2.0.0-26",
+  "version": "2.0.0-27",
   "description": "My Rubocop configs",
   "keywords": [
     "ruby",
