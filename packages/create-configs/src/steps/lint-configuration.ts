@@ -68,8 +68,6 @@ export function _generate_eslint_config({
 
       if (technologies.includes('nestjs')) {
         config.extends.push('@code-style/eslint-config-nest');
-        if (lenient)
-          config.extends.push('@code-style/eslint-config-nest/lenient');
       }
       break;
     case 'cli':
