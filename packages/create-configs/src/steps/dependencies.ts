@@ -135,6 +135,7 @@ export async function install_dependencies({
         dev_packages.push(
           'jest',
           '@types/jest',
+          '@code-style/jest-configs',
           '@code-style/eslint-config-jest@latest',
           '@code-style/eslint-npm-hoist-packages-jest@latest',
         );
