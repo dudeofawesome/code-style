@@ -91,15 +91,14 @@ export function _generate_lint_script({
             ...scripts,
             'lint:js': `eslint . --ext ${languages
               .filter((l) => ['js', 'ts'].includes(l))
-              .reduce<string[]>((extensions, ext) => {
-                return [
+              .reduce<string[]>(
+                (extensions, ext) => [
+                  ext,
+                  ...(technologies.includes('react') ? [`${ext}x`] : []),
                   ...extensions,
-                  ...(technologies.includes('react')
-                    ? [ext]
-                    : [ext, `${ext}x`]),
-                  'json',
-                ];
-              }, [])
+                ],
+                ['json'],
+              )
               .join(',')} --cache`,
           };
         case 'stylelint':
