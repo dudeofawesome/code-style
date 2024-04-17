@@ -10,7 +10,7 @@ import { includes_js, verify_missing_script } from '../utils.js';
 
 const exec = promisify(execCallback);
 
-const concurrently_opts = '--group --prefix none';
+const concurrently_opts = '--raw --group';
 
 export type AddNPMScriptsOptions = Pick<
   SetupOptions,
