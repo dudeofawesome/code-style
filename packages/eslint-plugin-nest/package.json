@@ -28,7 +28,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "dependencies": {
-    "@typescript-eslint/typescript-estree": "^6.11.0",
+    "@typescript-eslint/typescript-estree": "^7.0.0",
     "@typescript-eslint/utils": "^6.11.0"
   },
   "devDependencies": {
