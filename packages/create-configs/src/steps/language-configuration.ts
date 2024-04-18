@@ -142,7 +142,12 @@ export async function create_jest_config({
 }: CreateJestConfigOptions) {
   if (languages.includes('ts')) {
     const path = 'jest.config.mjs';
-    if (await verify_missing({ path, remove: overwrite })) {
+    if (
+      await verify_missing({
+        path: [path, /^jest\.config\.(js|ts|mjs|cjs|json)$/u],
+        remove: overwrite,
+      })
+    ) {
       await create_file(
         path,
         await prettify(
