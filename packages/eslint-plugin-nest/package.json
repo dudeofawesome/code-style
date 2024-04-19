@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@typescript-eslint/typescript-estree": "^6.11.0",
-    "@typescript-eslint/utils": "^6.11.0"
+    "@typescript-eslint/utils": "^7.0.0"
   },
   "devDependencies": {
     "@code-style/eslint-config": "^2.0.0-27",
