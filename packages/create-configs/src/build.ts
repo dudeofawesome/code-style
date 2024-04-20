@@ -68,7 +68,7 @@ export async function build({
 
       includes_js(languages)
         ? [
-            set_package_type({ technologies, library }),
+            set_package_type({ technologies, library, overwrite }),
             create_ts_config({
               project_type,
               technologies,

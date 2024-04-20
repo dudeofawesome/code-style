@@ -111,12 +111,19 @@ export async function create_ts_config({
 export async function set_package_type({
   technologies,
   library,
-}: Pick<SetupOptions, 'technologies' | 'library'>) {
-  const type: 'commonjs' | 'module' =
-    technologies.includes('esm') && !library && !technologies.includes('nestjs')
-      ? 'module'
-      : 'commonjs';
-  await exec(`npm pkg set type='${type}'`);
+  overwrite = true,
+}: Pick<SetupOptions, 'technologies' | 'library' | 'overwrite'>) {
+  if (overwrite || (await exec(`npm pkg get type`)).stdout === '{}') {
+    const type: 'commonjs' | 'module' =
+      technologies.includes('esm') &&
+      !library &&
+      !technologies.includes('nestjs')
+        ? 'module'
+        : 'commonjs';
+    await exec(`npm pkg set type='${type}'`);
+  } else {
+    throw new Error(`package.json already has a type specified.`);
+  }
 }
 
 /** @private */
