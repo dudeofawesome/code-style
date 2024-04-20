@@ -53,6 +53,14 @@ export async function create_vscode_config(
                 'editor.formatOnType': true,
                 'editor.formatOnPaste': true,
                 'editor.defaultFormatter': 'esbenp.prettier-vscode',
+                'eslint.validate': [
+                  'typescript',
+                  'javascript',
+                  'typescriptreact',
+                  'javascriptreact',
+                  'json',
+                  'jsonc',
+                ],
               },
 
               ...(languages.includes('js') || languages.includes('ts')
