@@ -48,6 +48,7 @@
     "@code-style/eslint-config-typescript": "^2.0.0-27",
     "@code-style/jest-configs": "^2.0.0-27",
     "@code-style/typescript-configs": "^2.0.0-27",
+    "@json-types/tsconfig": "^0.5.0",
     "@types/common-tags": "^1.8.3",
     "@types/jest": "^29.5.6",
     "jest": "^29.7.0",

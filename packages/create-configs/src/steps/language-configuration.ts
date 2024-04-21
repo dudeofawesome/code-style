@@ -1,9 +1,19 @@
 import { exec as execCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import { stripIndent } from 'common-tags';
+import {
+  ExcludeDefinition,
+  IncludeDefinition,
+  TSConfig as TSConfigFull,
+} from '@json-types/tsconfig';
 import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
+
+export type TSConfig = Omit<TSConfigFull, 'extends'> & {
+  extends: string[];
+} & IncludeDefinition &
+  ExcludeDefinition;
 
 const exec = promisify(execCallback);
 
@@ -16,8 +26,8 @@ export function _generate_ts_config({
   output_dir,
   lenient,
 }: Omit<CreateTSConfigOptions, 'overwrite'>): string {
-  const config = {
-    extends: [] as string[],
+  const config: TSConfig = {
+    extends: [],
     compilerOptions: {
       baseUrl: './',
       outDir: output_dir,
