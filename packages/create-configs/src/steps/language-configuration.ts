@@ -18,7 +18,7 @@ export type TSConfig = Omit<TSConfigFull, 'extends'> & {
 const exec = promisify(execCallback);
 
 /** @private */
-export function _generate_ts_config({
+export function _generate_base_ts_config({
   project_type,
   technologies,
   library,
@@ -29,10 +29,10 @@ export function _generate_ts_config({
   const config: TSConfig = {
     extends: [],
     compilerOptions: {
-      baseUrl: './',
+      baseUrl: input_dir,
       outDir: output_dir,
     },
-    include: [input_dir],
+    include: ['./'],
     exclude: [output_dir],
   };
 
@@ -75,15 +75,36 @@ export function _generate_ts_config({
   `;
 }
 
-export type CreateTSConfigOptions = Pick<
-  SetupOptions,
-  | 'project_type'
-  | 'technologies'
-  | 'library'
-  | 'input_dir'
-  | 'output_dir'
-  | 'overwrite'
-  | 'lenient'
+/** @private */
+export function _generate_build_ts_config({
+  input_dir,
+}: Pick<CreateTSConfigOptions, 'input_dir'>): string {
+  const config: TSConfig = {
+    extends: ['./tsconfig.json'],
+    compilerOptions: {
+      baseUrl: './',
+    },
+    include: [input_dir],
+    exclude: ['**/*.spec.ts'],
+  };
+
+  return stripIndent`
+    // In order to update the this config, update @code-style/typescript-configs
+    ${JSON.stringify(config, null, 2)}
+  `;
+}
+
+export type CreateTSConfigOptions = Required<
+  Pick<
+    SetupOptions,
+    | 'project_type'
+    | 'technologies'
+    | 'library'
+    | 'input_dir'
+    | 'output_dir'
+    | 'overwrite'
+    | 'lenient'
+  >
 >;
 export async function create_ts_config({
   project_type,
@@ -94,27 +115,39 @@ export async function create_ts_config({
   overwrite = true,
   lenient,
 }: CreateTSConfigOptions) {
-  // TODO(2): create a separate tsconfig for tests
-  // if (technologies.includes('jest')) {
-  //   config.extends.push('@code-style/typescript-configs/layers/jest.json');
-  // }
-
-  const path = 'tsconfig.json';
-  if (await verify_missing({ path, remove: overwrite })) {
-    await create_file(
-      path,
-      await prettify(
-        path,
-        _generate_ts_config({
-          project_type,
-          technologies,
-          library,
-          input_dir,
-          output_dir,
-          lenient,
-        }),
+  const base = 'tsconfig.json';
+  const build = 'tsconfig.build.json';
+  if (
+    await verify_missing({
+      path: [/tsconfig(\..+)?\.json/u],
+      remove: overwrite,
+    })
+  ) {
+    await Promise.all([
+      create_file(
+        base,
+        await prettify(
+          base,
+          _generate_base_ts_config({
+            project_type,
+            technologies,
+            library,
+            input_dir,
+            output_dir,
+            lenient,
+          }),
+        ),
       ),
-    );
+      create_file(
+        build,
+        await prettify(
+          build,
+          _generate_build_ts_config({
+            input_dir,
+          }),
+        ),
+      ),
+    ]);
   }
 }
 
