@@ -22,7 +22,6 @@
     "test": "echo 'No tests'; exit 0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.5",
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
   },

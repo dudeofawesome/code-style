@@ -26,7 +26,7 @@
     { "path": "packages/eslint-npm-hoist-packages-typescript" },
     { "path": "packages/eslint-plugin-nest" },
     { "path": "packages/jest-configs" },
-    { "path": "packages/rubocop-config" },
+    { "path": "packages/rubocop-configs" },
     { "path": "packages/stylelint-config" },
     { "path": "packages/stylelint-config-scss" },
     { "path": "packages/typescript-configs" },
