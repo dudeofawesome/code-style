@@ -5,6 +5,7 @@
     "config:best-practices",
     "group:linters",
     "group:typescript-eslintMonorepo",
-    "helpers:disableTypesNodeMajor"
+    "helpers:disableTypesNodeMajor",
+    ":preserveSemverRanges"
   ]
 }
