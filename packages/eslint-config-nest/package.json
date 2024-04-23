@@ -35,7 +35,7 @@
     "@code-style/eslint-plugin-nest": "2.0.0-27"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.2",
+    "@types/eslint": "8.56.9",
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
   },

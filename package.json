@@ -41,7 +41,7 @@
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.2",
+    "@types/eslint": "8.56.9",
     "@types/node": "^20.8.4",
     "tsm": "^2.3.0",
     "yargs": "^17.7.2"
