@@ -97,3 +97,6 @@ overrides:
       '@typescript-eslint/unified-signatures': 'off'
 
       # TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types
+
+      # Allow const requires
+      '@typescript-eslint/no-var-requires': 'off'
