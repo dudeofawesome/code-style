@@ -1,0 +1,35 @@
+# `shopt` workarounds
+
+## Options
+
+1. `minimatch-cli`
+
+    Create a CLI for `minimatch` (probably as a separate package to get it out there quick, and as a PR, to not have to maintain it long term).
+    Then use the CLI to generate our lists of files in a sub-shell (eg: `node --test $(minimatch '**/*.spec.ts')`).
+
+1. script files
+
+    Break out NPM scripts into script files located within each repo, likely in a `/scripts` dir.
+
+1. scripts package
+
+    Extract all of the NPM scripts `code-style` adds into a package and call them from NPM.
+
+1. `script-shell` shopt
+
+    Make NPM launch bash with the `shopts` already set.
+    Bash supports the `-O` option to specify `shopts` at launch, but NPM doesn't parse the string set in `script-shell`, it merely executes it as a command, so that doesn't actually work.
+    There are ways to work around this, such as creating an NPM package with a binary that does this.
+
+## Pros & Cons
+
+| method               | pro                                    | con                                              |
+| -------------------- | -------------------------------------- | ------------------------------------------------ |
+| `minimatch-cli`      | simple~ish                             | another package to maintain                      |
+|                      |                                        | command would look a little weird                |
+| script files         | simple                                 | clutters repo                                    |
+|                      | better readability                     | harder to tell what's going on in `package.json` |
+|                      | can drop the `.npmrc`'s `script-shell` |                                                  |
+| scripts package      | single source of truth for scripts     | individual repos can't tweak commands            |
+| `script-shell` shopt | readable `package.json`                | unsure of feasibility                            |
+|                      | could be relatively clean              |                                                  |
