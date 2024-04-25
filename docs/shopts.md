@@ -2,7 +2,7 @@
 
 ## Options
 
-1. `minimatch-cli`
+1. `minimatch-cli` or `find` / `fd`
 
     Create a CLI for `minimatch` (probably as a separate package to get it out there quick, and as a PR, to not have to maintain it long term).
     Then use the CLI to generate our lists of files in a sub-shell (eg: `node --test $(minimatch '**/*.spec.ts')`).
@@ -23,13 +23,13 @@
 
 ## Pros & Cons
 
-| method               | pro                                    | con                                              |
-| -------------------- | -------------------------------------- | ------------------------------------------------ |
-| `minimatch-cli`      | simple~ish                             | another package to maintain                      |
-|                      |                                        | command would look a little weird                |
-| script files         | simple                                 | clutters repo                                    |
-|                      | better readability                     | harder to tell what's going on in `package.json` |
-|                      | can drop the `.npmrc`'s `script-shell` |                                                  |
-| scripts package      | single source of truth for scripts     | individual repos can't tweak commands            |
-| `script-shell` shopt | readable `package.json`                | unsure of feasibility                            |
-|                      | could be relatively clean              |                                                  |
+| method               | pro                                | con                                              |
+| -------------------- | ---------------------------------- | ------------------------------------------------ |
+| `minimatch-cli`      | simple~ish                         | another package to maintain                      |
+|                      | supports all shells                | command would look a little weird                |
+| script files         | simple implementation              | clutters repo                                    |
+|                      | better readability in script       | harder to tell what's going on in `package.json` |
+|                      | can drop `.npmrc`'s `script-shell` |                                                  |
+| scripts package      | single source of truth for scripts | individual repos can't tweak commands            |
+| `script-shell` shopt | readable `package.json`            | unsure of feasibility                            |
+|                      | could be relatively clean          |                                                  |
