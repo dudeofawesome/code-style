@@ -8,7 +8,13 @@ import {
 } from '@json-types/tsconfig';
 import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 
-import { create_file, prettify, verify_missing } from '../utils.js';
+import {
+  ConfigFile,
+  Dependencies,
+  create_file,
+  prettify,
+  verify_missing,
+} from '../utils.js';
 
 export type TSConfig = Omit<TSConfigFull, 'extends'> & {
   extends: string[];
@@ -25,7 +31,8 @@ export function _generate_base_ts_config({
   input_dir,
   output_dir,
   lenient,
-}: Omit<CreateTSConfigOptions, 'overwrite'>): string {
+}: Omit<CreateTSConfigOptions, 'overwrite'>): ConfigFile {
+  const deps = new Dependencies();
   const config: TSConfig = {
     extends: [],
     compilerOptions: {
@@ -38,47 +45,70 @@ export function _generate_base_ts_config({
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@code-style/typescript-configs/roles/browser');
+      config.extends.push(
+        `${deps.d.depend('@code-style/typescript-configs')}/roles/browser`,
+      );
       if (technologies.includes('nextjs')) {
-        config.extends.push('@code-style/typescript-configs/layers/nextjs');
+        deps.d.add(['@types/react', '@types/react-dom']);
+        config.extends.push(
+          `${deps.d.depend('@code-style/typescript-configs')}/layers/nextjs`,
+        );
       } else if (technologies.includes('react')) {
-        config.extends.push('@code-style/typescript-configs/layers/react');
+        deps.d.add(['@types/react', '@types/react-dom']);
+        config.extends.push(
+          `${deps.d.depend('@code-style/typescript-configs')}/layers/react`,
+        );
       }
       break;
     case 'backend':
     case 'cli':
       if (technologies.includes('nestjs')) {
-        config.extends.push('@code-style/typescript-configs/roles/nest');
+        config.extends.push(
+          `${deps.d.depend('@code-style/typescript-configs')}/roles/nest`,
+        );
       } else {
-        config.extends.push('@code-style/typescript-configs/roles/node');
+        deps.d.depend('@types/node');
+        config.extends.push(
+          `${deps.d.depend('@code-style/typescript-configs')}/roles/node`,
+        );
       }
       break;
   }
 
   if (technologies.includes('esm')) {
-    config.extends.push('@code-style/typescript-configs/layers/esmodule');
+    config.extends.push(
+      `${deps.d.depend('@code-style/typescript-configs')}/layers/esmodule`,
+    );
   }
 
   if (library) {
-    config.extends.push('@code-style/typescript-configs/layers/library');
+    config.extends.push(
+      `${deps.d.depend('@code-style/typescript-configs')}/layers/library`,
+    );
   }
 
   // TODO(2): add support for library.json tsconfig
 
   if (lenient) {
-    config.extends.push('@code-style/typescript-configs/layers/lenient');
+    config.extends.push(
+      `${deps.d.depend('@code-style/typescript-configs')}/layers/lenient`,
+    );
   }
 
-  return stripIndent`
+  return {
+    content: stripIndent`
     // In order to update the this config, update @code-style/typescript-configs
     ${JSON.stringify(config, null, 2)}
-  `;
+  `,
+    dependencies: deps,
+  };
 }
 
 /** @private */
 export function _generate_build_ts_config({
   input_dir,
-}: Pick<CreateTSConfigOptions, 'input_dir'>): string {
+}: Pick<CreateTSConfigOptions, 'input_dir'>): ConfigFile {
+  const deps = new Dependencies();
   const config: TSConfig = {
     extends: ['./tsconfig.json'],
     compilerOptions: {
@@ -88,10 +118,12 @@ export function _generate_build_ts_config({
     exclude: ['**/*.spec.ts'],
   };
 
-  return stripIndent`
-    // In order to update the this config, update @code-style/typescript-configs
+  return {
+    content: stripIndent`
     ${JSON.stringify(config, null, 2)}
-  `;
+  `,
+    dependencies: deps,
+  };
 }
 
 export type CreateTSConfigOptions = Required<
@@ -114,7 +146,7 @@ export async function create_ts_config({
   output_dir,
   overwrite = true,
   lenient,
-}: CreateTSConfigOptions) {
+}: CreateTSConfigOptions): Promise<Dependencies | undefined> {
   const base = 'tsconfig.json';
   const build = 'tsconfig.build.json';
   if (
@@ -123,30 +155,27 @@ export async function create_ts_config({
       remove: overwrite,
     })
   ) {
+    const base_config = _generate_base_ts_config({
+      project_type,
+      technologies,
+      library,
+      input_dir,
+      output_dir,
+      lenient,
+    });
+    const build_config = _generate_build_ts_config({
+      input_dir,
+    });
+
     await Promise.all([
-      create_file(
-        base,
-        await prettify(
-          base,
-          _generate_base_ts_config({
-            project_type,
-            technologies,
-            library,
-            input_dir,
-            output_dir,
-            lenient,
-          }),
-        ),
-      ),
-      create_file(
-        build,
-        await prettify(
-          build,
-          _generate_build_ts_config({
-            input_dir,
-          }),
-        ),
-      ),
+      create_file(base, await prettify(base, base_config.content)),
+      create_file(build, await prettify(build, build_config.content)),
+    ]);
+
+    return new Dependencies([
+      base_config.dependencies,
+      build_config.dependencies,
+      new Dependencies([], ['typescript']),
     ]);
   }
 }
@@ -172,13 +201,17 @@ export async function set_package_type({
 /** @private */
 export function _generate_jest_config({
   technologies,
-}: Omit<CreateJestConfigOptions, 'overwrite'>): string {
-  return stripIndent`
-    import { config } from '@code-style/jest-configs/ts-${technologies.includes('esm') ? 'esm' : 'cjs'}';
+}: Omit<CreateJestConfigOptions, 'overwrite'>): ConfigFile {
+  const deps = new Dependencies();
+  return {
+    content: stripIndent`
+      import { config } from '${deps.d.depend('@code-style/jest-configs')}/ts-${technologies.includes('esm') ? 'esm' : 'cjs'}';
 
-    // eslint-disable-next-line import/no-default-export
-    export default config;
-  `;
+      // eslint-disable-next-line import/no-default-export
+      export default config;
+    `,
+    dependencies: deps,
+  };
 }
 
 export type CreateJestConfigOptions = Pick<
@@ -189,7 +222,8 @@ export async function create_jest_config({
   languages,
   technologies,
   overwrite,
-}: CreateJestConfigOptions) {
+}: CreateJestConfigOptions): Promise<Dependencies> {
+  const deps = new Dependencies([], ['jest']);
   if (languages.includes('ts')) {
     const path = 'jest.config.mjs';
     if (
@@ -198,16 +232,15 @@ export async function create_jest_config({
         remove: overwrite,
       })
     ) {
-      await create_file(
-        path,
-        await prettify(
-          path,
-          _generate_jest_config({
-            languages,
-            technologies,
-          }),
-        ),
-      );
+      const config = _generate_jest_config({
+        languages,
+        technologies,
+      });
+
+      await create_file(path, await prettify(path, config.content));
+      deps.add(config.dependencies);
     }
   }
+
+  return deps;
 }

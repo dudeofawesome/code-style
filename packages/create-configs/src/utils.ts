@@ -12,6 +12,7 @@ import {
 import { format, Options } from 'prettier';
 import default_config from '@code-style/code-style/prettierrc';
 import { Language } from '@code-style/code-style/config-types';
+import assert from 'node:assert';
 
 const exec = promisify(execCallback);
 
@@ -161,4 +162,73 @@ export async function prettify(
 
 export function includes_js(languages: Language[]): boolean {
   return languages.includes('js') || languages.includes('ts');
+}
+
+export interface ConfigFile {
+  content: string;
+  dependencies: Dependencies;
+}
+
+export class DependencySet extends Set<string> {
+  depend(dependency: string, command: string = dependency): string {
+    assert(
+      dependency.match(/^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u) !=
+        null,
+      `Must be a valid package name.`,
+    );
+    this.add(dependency);
+    return command;
+  }
+
+  add(dependencies: string | DependencySet | Set<string> | string[]): this {
+    if (dependencies instanceof Set || Array.isArray(dependencies)) {
+      for (const dependency of dependencies) super.add(dependency);
+      return this;
+    } else {
+      return super.add(dependencies);
+    }
+  }
+}
+
+export class Dependencies {
+  public readonly production = new DependencySet();
+  public readonly development = new DependencySet();
+
+  constructor();
+  constructor(deps: Dependencies[]);
+  constructor(prod: string[] | Set<string>, dev: string[] | Set<string>);
+  constructor(
+    a: string[] | Set<string> | Dependencies[] = [],
+    b: string[] | Set<string> | undefined = Array.isArray(a) &&
+    a[0] instanceof Dependencies
+      ? undefined
+      : [],
+  ) {
+    if (is_dependencies_array(a)) {
+      for (const dep of a) {
+        this.production.add(dep.production);
+        this.development.add(dep.development);
+      }
+    } else {
+      this.production.add(a);
+      this.development.add(b ?? []);
+    }
+  }
+
+  get p() {
+    return this.production;
+  }
+  get d() {
+    return this.development;
+  }
+
+  add(deps: Dependencies): this {
+    this.production.add(deps.production);
+    this.development.add(deps.development);
+    return this;
+  }
+}
+
+export function is_dependencies_array(arr: unknown): arr is Dependencies[] {
+  return Array.isArray(arr) && arr[0] instanceof Dependencies;
 }

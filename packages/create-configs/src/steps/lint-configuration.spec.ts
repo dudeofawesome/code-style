@@ -15,22 +15,26 @@ describe('lint-configuration', () => {
         lenient: false,
       });
       // ensure output is valid YAML
-      expect(() => parse(output) as unknown).not.toThrow();
+      expect(() => parse(output.content) as unknown).not.toThrow();
       const parsed: { root: boolean; extends: string[] } = parse(
-        output,
+        output.content,
       ) as typeof parsed;
 
       // ensure we have a leading comment
-      expect(output).toMatch(/^#/u);
+      expect(output.content).toMatch(/^#/u);
       // ensure config is set to root
       expect(parsed.root).toBe(true);
       // ensure we include relevant configs
-      expect(parsed.extends).toStrictEqual([
+      const dependencies = [
         '@code-style/eslint-config',
         '@code-style/eslint-config-browser',
         '@code-style/eslint-config-typescript',
         '@code-style/eslint-config-jest',
-      ]);
+      ];
+      expect(parsed.extends).toStrictEqual(dependencies);
+      expect(output.dependencies.development.values()).toStrictEqual(
+        new Set(dependencies).values(),
+      );
     });
 
     it(`should generate valid lenient config`, () => {
@@ -41,13 +45,13 @@ describe('lint-configuration', () => {
         lenient: true,
       });
       // ensure output is valid YAML
-      expect(() => parse(output) as unknown).not.toThrow();
+      expect(() => parse(output.content) as unknown).not.toThrow();
       const parsed: { root: boolean; extends: string[] } = parse(
-        output,
+        output.content,
       ) as typeof parsed;
 
       // ensure we have a leading comment
-      expect(output).toMatch(/^#/u);
+      expect(output.content).toMatch(/^#/u);
       // ensure config is set to root
       expect(parsed.root).toBe(true);
       // ensure we include relevant configs
@@ -60,6 +64,14 @@ describe('lint-configuration', () => {
         '@code-style/eslint-config-jest',
         '@code-style/eslint-config-jest/lenient',
       ]);
+      expect(output.dependencies.development.values()).toStrictEqual(
+        new Set([
+          '@code-style/eslint-config',
+          '@code-style/eslint-config-browser',
+          '@code-style/eslint-config-typescript',
+          '@code-style/eslint-config-jest',
+        ]).values(),
+      );
     });
   });
 

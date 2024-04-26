@@ -18,7 +18,7 @@ import {
 } from './steps/dependencies.js';
 import { create_vscode_config } from './steps/editor.js';
 import { create_gitignore } from './steps/git.js';
-import { includes_js } from './utils.js';
+import { Dependencies, includes_js } from './utils.js';
 import { add_npm_scripts } from './steps/scripts.js';
 
 export async function build({
@@ -33,19 +33,13 @@ export async function build({
   lenient = false,
   overwrite = false,
 }: SetupOptions) {
+  const deps = new Dependencies();
+
   await uninstall_duplicate_dependencies({ runtime });
+
   await Promise.all([
-    create_editor_config(overwrite),
-    create_prettier_config(overwrite),
-    includes_js(languages)
-      ? install_dependencies({
-          project_type,
-          languages,
-          technologies,
-          runtime,
-          builder,
-        })
-      : null,
+    create_editor_config(overwrite).then(merge_deps(deps)),
+    create_prettier_config(overwrite).then(merge_deps(deps)),
   ]);
 
   await Promise.all(
@@ -63,7 +57,9 @@ export async function build({
       }),
 
       languages.includes('css') || languages.includes('scss')
-        ? create_stylelint_config({ languages, lenient, overwrite })
+        ? create_stylelint_config({ languages, lenient, overwrite }).then(
+            merge_deps(deps),
+          )
         : null,
 
       includes_js(languages)
@@ -77,21 +73,21 @@ export async function build({
               output_dir,
               overwrite,
               lenient,
-            }),
+            }).then(merge_deps(deps)),
             create_eslint_config({
               project_type,
               languages,
               technologies,
               lenient,
               overwrite,
-            }),
+            }).then(merge_deps(deps)),
             add_npm_scripts({
               languages,
               technologies,
               runtime,
               builder,
               overwrite,
-            }),
+            }).then(merge_deps(deps)),
           ]
         : null,
 
@@ -100,10 +96,24 @@ export async function build({
             languages,
             technologies,
             overwrite,
-          })
+          }).then(merge_deps(deps))
         : null,
     ]
       .filter(Boolean)
       .flat(),
   );
+
+  await install_dependencies({ dependencies: deps, runtime });
+}
+
+function merge_deps(
+  parent: Dependencies,
+): (child: Dependencies | undefined) => Dependencies {
+  return (child) => {
+    if (child != null) {
+      parent.add(child);
+    }
+
+    return parent;
+  };
 }

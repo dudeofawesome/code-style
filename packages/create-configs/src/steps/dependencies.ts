@@ -10,6 +10,7 @@ import {
   Runtime,
   CodeStyleSetupOptions as SetupOptions,
 } from '@code-style/code-style/config-types';
+import { Dependencies } from 'utils.js';
 
 const exec = promisify(execCallback);
 
@@ -52,141 +53,24 @@ export async function uninstall_duplicate_dependencies({
   await exec(`${uninstall_cmd} ${packages.join(' ')}`);
 }
 
-export type InstallDependenciesOptions = {
-  project_type: ProjectType;
-  languages: Language[];
-  technologies: Technology[];
-  builder: Builder;
-  runtime?: Runtime;
+export type InstallDependenciesOptions = Pick<SetupOptions, 'runtime'> & {
+  dependencies: Dependencies;
 };
 export async function install_dependencies({
-  project_type,
-  languages,
-  technologies,
-  builder,
   runtime,
+  dependencies,
 }: InstallDependenciesOptions) {
-  const prod_packages: (string | undefined)[] = [];
-  const dev_packages: (string | undefined)[] = [
-    '@code-style/code-style@latest',
-    '@code-style/eslint-config@latest',
-    '@code-style/eslint-npm-hoist-packages@latest',
-  ];
-
-  switch (project_type) {
-    case 'web-app':
-      if (technologies.includes('nextjs')) {
-        dev_packages.push(
-          '@code-style/eslint-config-nextjs@latest',
-          '@code-style/eslint-npm-hoist-packages-nextjs@latest',
-        );
-      } else if (technologies.includes('react')) {
-        dev_packages.push(
-          '@code-style/eslint-config-react@latest',
-          '@code-style/eslint-npm-hoist-packages-react@latest',
-        );
-      } else {
-        dev_packages.push('@code-style/eslint-config-browser@latest');
-      }
-      break;
-    case 'backend':
-      if (languages.includes('ts')) dev_packages.push('@types/node');
-      dev_packages.push(
-        '@code-style/eslint-config-node@latest',
-        '@code-style/eslint-npm-hoist-packages-node@latest',
-      );
-      break;
-    case 'cli':
-      if (languages.includes('ts')) dev_packages.push('@types/node');
-      dev_packages.push('@code-style/eslint-config-cli@latest');
-      break;
-  }
-
-  if (languages.includes('js') || languages.includes('ts')) {
-    dev_packages.push('@code-style/typescript-configs@latest');
-  }
-
-  for (const language of languages) {
-    switch (language) {
-      case 'ts':
-        dev_packages.push(
-          'typescript',
-          '@code-style/eslint-config-typescript@latest',
-          '@code-style/eslint-npm-hoist-packages-typescript@latest',
-        );
-        break;
-      case 'css':
-        dev_packages.push('@code-style/stylelint-config@latest');
-        break;
-      case 'scss':
-        dev_packages.push(
-          'sass-embedded',
-          '@code-style/stylelint-config@latest',
-          '@code-style/stylelint-config-scss@latest',
-        );
-        break;
-      default:
-    }
-  }
-
-  for (const tech of technologies) {
-    switch (tech) {
-      case 'jest':
-        dev_packages.push(
-          'jest',
-          '@types/jest',
-          '@code-style/jest-configs',
-          '@code-style/eslint-config-jest@latest',
-          '@code-style/eslint-npm-hoist-packages-jest@latest',
-        );
-        if (languages.includes('ts')) dev_packages.push('ts-jest@latest');
-        break;
-      case 'react':
-      case 'nextjs':
-        prod_packages.push('react', 'react-dom');
-        if (languages.includes('ts')) {
-          dev_packages.push('@types/react', '@types/react-dom');
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (tech === 'nextjs') {
-          prod_packages.push('next');
-        }
-        break;
-      case 'nestjs':
-        dev_packages.push('@code-style/eslint-config-nest@latest');
-        break;
-      case 'esm':
-        dev_packages.push(
-          '@code-style/eslint-config-esmodule@latest',
-          '@code-style/eslint-npm-hoist-packages-esmodule@latest',
-        );
-        break;
-      default:
-    }
-  }
-
-  switch (builder) {
-    case 'babel':
-      dev_packages.push('babel@latest');
-      break;
-    case 'esbuild':
-      dev_packages.push('esbuild@latest');
-      break;
-    case 'swc':
-      dev_packages.push('@swc/cli@latest', '@swc/core@latest');
-      break;
-    case 'tsc': // we already added typescript
-    case 'bun': // bun is not installed via npm
-    case 'none': // this one is pretty obvious
-    default:
+  // add hoist dependencies
+  for (const dep of dependencies.development) {
+    const hoist = NpmHoistHackMap.get(dep);
+    if (hoist != null) dependencies.development.add(hoist);
   }
 
   log(
-    `Installing ${(prod_packages.length > 0
-      ? prod_packages
+    `Installing ${(dependencies.production.size > 0
+      ? Array.from(dependencies.production)
       : ['no prod packages']
-    ).join(', ')} & ${dev_packages.join(', ')}`,
+    ).join(', ')} & ${Array.from(dependencies.development).join(', ')}`,
   );
 
   const install_cmd = ((): string => {
@@ -217,10 +101,38 @@ export async function install_dependencies({
     }
   })();
 
-  if (prod_packages.length > 0) {
-    await exec(`${install_cmd_prod} ${prod_packages.join(' ')}`);
+  if (dependencies.production.size > 0) {
+    await exec(`${install_cmd_prod} ${Array.from(dependencies.p).join(' ')}`);
   }
-  if (dev_packages.length > 0) {
-    await exec(`${install_cmd_dev} ${dev_packages.join(' ')}`);
+  if (dependencies.development.size > 0) {
+    await exec(`${install_cmd_dev} ${Array.from(dependencies.d).join(' ')}`);
   }
 }
+
+const NpmHoistHackMap: ReadonlyMap<string, string> = new Map<string, string>([
+  ['@code-style/eslint-config', '@code-style/eslint-npm-hoist-packages'],
+  [
+    '@code-style/eslint-config-esmodule',
+    '@code-style/eslint-npm-hoist-packages-esmodule',
+  ],
+  [
+    '@code-style/eslint-config-jest',
+    '@code-style/eslint-npm-hoist-packages-jest',
+  ],
+  [
+    '@code-style/eslint-config-nextjs',
+    '@code-style/eslint-npm-hoist-packages-nextjs',
+  ],
+  [
+    '@code-style/eslint-config-node',
+    '@code-style/eslint-npm-hoist-packages-node',
+  ],
+  [
+    '@code-style/eslint-config-react',
+    '@code-style/eslint-npm-hoist-packages-react',
+  ],
+  [
+    '@code-style/eslint-config-typescript',
+    '@code-style/eslint-npm-hoist-packages-typescript',
+  ],
+]);

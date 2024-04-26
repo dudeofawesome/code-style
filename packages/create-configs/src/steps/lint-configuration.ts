@@ -1,13 +1,18 @@
 import { stringify } from 'yaml';
 import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
-import { stripIndent } from 'common-tags';
 import {
   CodeStyleSetupOptions as SetupOptions,
   Language,
 } from '@code-style/code-style/config-types';
 
-import { create_file, prettify, verify_missing } from '../utils.js';
+import {
+  ConfigFile,
+  Dependencies,
+  create_file,
+  prettify,
+  verify_missing,
+} from '../utils.js';
 
 /** @private */
 export function _transform_eslint_package_name(extend: string): string {
@@ -42,65 +47,88 @@ export function _generate_eslint_config({
 }: Pick<
   SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient'
->): string {
+>): ConfigFile {
+  const deps = new Dependencies();
   const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
-    extends: ['@code-style/eslint-config'],
+    extends: [deps.d.depend('@code-style/eslint-config')],
     parserOptions: {
       ecmaVersion: 2022,
     },
   };
-  if (lenient) config.extends.push('@code-style/eslint-config/lenient');
+  if (lenient)
+    config.extends.push(
+      `${deps.d.depend('@code-style/eslint-config')}/lenient`,
+    );
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push('@code-style/eslint-config-browser');
+      config.extends.push(deps.d.depend('@code-style/eslint-config-browser'));
 
-      if (technologies.includes('react') || technologies.includes('nextjs'))
-        config.extends.push('@code-style/eslint-config-react');
-      if (technologies.includes('nextjs'))
-        config.extends.push('@code-style/eslint-config-nextjs');
+      if (technologies.includes('react') || technologies.includes('nextjs')) {
+        deps.p.add(['react', 'react-dom']);
+        config.extends.push(deps.d.depend('@code-style/eslint-config-react'));
+      }
+      if (technologies.includes('nextjs')) {
+        deps.p.add(['react', 'react-dom']);
+        config.extends.push(deps.d.depend('@code-style/eslint-config-nextjs'));
+      }
       break;
     case 'backend':
-      config.extends.push('@code-style/eslint-config-node');
+      config.extends.push(deps.d.depend('@code-style/eslint-config-node'));
       if (lenient)
-        config.extends.push('@code-style/eslint-config-node/lenient');
+        config.extends.push(
+          `${deps.d.depend('@code-style/eslint-config-node')}/lenient`,
+        );
 
       if (technologies.includes('nestjs')) {
-        config.extends.push('@code-style/eslint-config-nest');
+        config.extends.push(deps.d.depend('@code-style/eslint-config-nest'));
       }
       break;
     case 'cli':
-      config.extends.push('@code-style/eslint-config-node');
+      config.extends.push(deps.d.depend('@code-style/eslint-config-node'));
       if (lenient)
-        config.extends.push('@code-style/eslint-config-node/lenient');
+        config.extends.push(
+          `${deps.d.depend('@code-style/eslint-config-node')}/lenient`,
+        );
 
-      config.extends.push('@code-style/eslint-config-cli');
-      if (lenient) config.extends.push('@code-style/eslint-config-cli/lenient');
+      config.extends.push(deps.d.depend('@code-style/eslint-config-cli'));
+      if (lenient)
+        config.extends.push(
+          `${deps.d.depend('@code-style/eslint-config-cli')}/lenient`,
+        );
       break;
   }
 
   if (languages.includes('ts')) {
-    config.extends.push('@code-style/eslint-config-typescript');
+    config.extends.push(deps.d.depend('@code-style/eslint-config-typescript'));
     if (lenient)
-      config.extends.push('@code-style/eslint-config-typescript/lenient');
+      config.extends.push(
+        `${deps.d.depend('@code-style/eslint-config-typescript')}/lenient`,
+      );
   }
 
   if (technologies.includes('jest')) {
-    config.extends.push('@code-style/eslint-config-jest');
-    if (lenient) config.extends.push('@code-style/eslint-config-jest/lenient');
+    config.extends.push(deps.d.depend('@code-style/eslint-config-jest'));
+    if (lenient)
+      config.extends.push(
+        `${deps.d.depend('@code-style/eslint-config-jest')}/lenient`,
+      );
   }
 
   if (technologies.includes('esm'))
-    config.extends.push('@code-style/eslint-config-esmodule');
+    config.extends.push(deps.d.depend('@code-style/eslint-config-esmodule'));
 
-  return stripIndent`
-    # In order to update the this config, update:
-${_generate_dependency_list(config)
-  .map((p) => `#   ${p}`)
-  .join('\n')}
-${stringify(config)}
-  `;
+  return {
+    content: [
+      `# In order to update the this config, update:`,
+      _generate_dependency_list(config)
+        .map((p) => `#   ${p}`)
+        .join('\n'),
+      stringify(config),
+    ].join('\n'),
+    dependencies: deps,
+  };
 }
 
 export async function create_eslint_config({
@@ -112,7 +140,7 @@ export async function create_eslint_config({
 }: Pick<
   SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
->) {
+>): Promise<ConfigFile['dependencies'] | undefined> {
   const preferred = '.eslintrc.yaml';
   if (
     await verify_missing({
@@ -120,45 +148,46 @@ export async function create_eslint_config({
       remove: overwrite,
     })
   ) {
-    return create_file(
-      preferred,
-      await prettify(
-        preferred,
-        _generate_eslint_config({
-          project_type,
-          languages,
-          technologies,
-          lenient,
-        }),
-      ),
-    );
+    const config = _generate_eslint_config({
+      project_type,
+      languages,
+      technologies,
+      lenient,
+    });
+
+    await create_file(preferred, await prettify(preferred, config.content));
+
+    return config.dependencies;
   }
 }
 
 /** @private */
-export function _generate_stylelint_config(languages: Language[]): string {
-  const config: Config & { extends: string[] } = {
-    extends: ['@code-style/stylelint-config'],
+export function _generate_stylelint_config(languages: Language[]): ConfigFile {
+  const deps = new Dependencies();
+  const config: Omit<Config, 'extends'> & { extends: string[] } = {
+    extends: [deps.d.depend('@code-style/stylelint-config')],
   };
 
   if (languages.includes('scss')) {
-    config.extends.push('@code-style/stylelint-config-scss');
+    config.extends.push(deps.d.depend('@code-style/stylelint-config-scss'));
   }
 
-  return stripIndent`
-    # In order to update the this config, update ${
-      Array.isArray(config.extends) ? config.extends.join(', ') : config.extends
-    }
-
-  ${stringify(config)}
-  `;
+  return {
+    content: [
+      `# In order to update the this config, update ${config.extends.join(', ')}`,
+      stringify(config),
+    ].join('\n'),
+    dependencies: deps,
+  };
 }
 
 export async function create_stylelint_config({
   languages,
   lenient,
   overwrite = true,
-}: Pick<SetupOptions, 'languages' | 'lenient' | 'overwrite'>) {
+}: Pick<SetupOptions, 'languages' | 'lenient' | 'overwrite'>): Promise<
+  ConfigFile['dependencies'] | undefined
+> {
   const preferred = '.stylelintrc.yaml';
   if (
     await verify_missing({
@@ -169,9 +198,9 @@ export async function create_stylelint_config({
       remove: overwrite,
     })
   ) {
-    return create_file(
-      preferred,
-      await prettify(preferred, _generate_stylelint_config(languages)),
-    );
+    const config = _generate_stylelint_config(languages);
+
+    await create_file(preferred, await prettify(preferred, config.content));
+    return config.dependencies;
   }
 }
