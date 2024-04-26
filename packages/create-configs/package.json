@@ -30,7 +30,8 @@
     "lint": "eslint . --ext ts,js,json",
     "prepublishOnly": "npm run build",
     "start": "node bin/create-configs.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTIONS\" npx jest",
+    "test:debug": "NODE_OPTIONS=\"--inspect-brk\" npm run test -- --runInBand"
   },
   "dependencies": {
     "@code-style/code-style": "^2.0.0-27",

@@ -10,9 +10,12 @@ const exec = promisify(execCallback);
 void describe('typescript-configs', () => {
   void describe('jest', () =>
     Promise.all([
-      transpile_and_test({ dir: 'jest', code_fragment: 'function foo()' }),
       transpile_and_test({
-        dir: 'jest',
+        dir: 'fixtures/jest',
+        code_fragment: 'function foo()',
+      }),
+      transpile_and_test({
+        dir: 'fixtures/jest',
         ts_config: 'tsconfig.test.json',
         output_files: [
           'index.js',
@@ -29,7 +32,7 @@ void describe('typescript-configs', () => {
 
   void describe('library', () =>
     transpile_and_test({
-      dir: 'library',
+      dir: 'fixtures/library',
       output_files: [
         'index.js',
         'index.js.map',
@@ -41,13 +44,13 @@ void describe('typescript-configs', () => {
 
   void describe('node', () =>
     transpile_and_test({
-      dir: 'node',
+      dir: 'fixtures/node',
       code_fragment: 'process.env.PATH',
     }));
 
   void describe('react', () =>
     transpile_and_test({
-      dir: 'react',
+      dir: 'fixtures/react',
       code_fragment: 'window.location.href',
     }));
 });

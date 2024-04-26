@@ -3,7 +3,7 @@
   "version": "2.0.0-27",
   "private": true,
   "scripts": {
-    "test": "shopt -s globstar; node $NODE_OPTS --require tsm --test **/*.test.ts",
+    "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
