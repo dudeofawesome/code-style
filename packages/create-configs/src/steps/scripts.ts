@@ -161,6 +161,8 @@ export async function set_lint_script(
   }
 }
 
+type TestScripts = { test: string; 'test:debug': string };
+
 export async function set_test_script(
   options: AddNPMScriptsOptions,
 ): Promise<Dependencies | undefined> {
@@ -172,36 +174,50 @@ export async function set_test_script(
   ) {
     const deps = new Dependencies();
 
-    const script: string = (({ runtime, technologies, languages }): string => {
-      if (technologies.includes('jest')) return deps.d.depend('jest');
-      else if (runtime === 'nodejs') {
+    const script: TestScripts = (({
+      runtime,
+      technologies,
+      languages,
+    }): TestScripts => {
+      if (technologies.includes('jest')) {
+        return {
+          test: `NODE_OPTIONS="--experimental-vm-modules $NODE_OPTIONS" npx ${deps.d.depend('jest')}`,
+          'test:debug': `NODE_OPTIONS='--inspect-brk' npm run test -- --runInBand`,
+        };
+      } else if (runtime === 'nodejs') {
         // We must be using the node test runner then
         if (languages.includes('ts')) {
-          return [
-            [
-              `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
-              `--test $(${deps.d.depend('glob')}`,
-              ...['**/node_modules/**', '**/dist/**'].map(
-                (ig) => `--ignore '${ig}'`,
-              ),
-              ...[
-                // Based on the default test file patterns:
-                //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
-                `'**/*[.-_]test.?(c|m)[jt]s'`,
-                `'**/test?(-*).?(c|m)[jt]s'`,
-                `'**/test/**/*.?(c|m)[jt]s'`,
-              ],
-            ].join(' '),
-          ].join('; ');
+          return {
+            test: [
+              [
+                `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
+                `--test $(${deps.d.depend('glob')}`,
+                ...['**/node_modules/**', '**/dist/**'].map(
+                  (ig) => `--ignore '${ig}'`,
+                ),
+                ...[
+                  // Based on the default test file patterns:
+                  //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
+                  `'**/*[.-_]test.?(c|m)[jt]s'`,
+                  `'**/test?(-*).?(c|m)[jt]s'`,
+                  `'**/test/**/*.?(c|m)[jt]s'`,
+                ],
+              ].join(' '),
+            ].join('; '),
+            'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
+          };
         } else {
-          return 'node $NODE_OPTS --test';
+          return {
+            test: 'node $NODE_OPTS --test',
+            'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
+          };
         }
       } else {
         throw new Error(`Unsupported testing environment`);
       }
     })(options);
 
-    await write_scripts({ test: script });
+    await write_scripts(script);
 
     return deps;
   }
