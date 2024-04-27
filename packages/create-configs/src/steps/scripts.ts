@@ -1,10 +1,12 @@
 import Package from '@npmcli/package-json';
 
+import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 import {
-  CodeStyleSetupOptions as SetupOptions,
-  Builder,
-} from '@code-style/code-style/config-types';
-import { Dependencies, includes_js, verify_missing_script } from '../utils.js';
+  Dependencies,
+  includes_js,
+  prettify,
+  verify_missing_script,
+} from '../utils.js';
 
 const concurrently_opts = '--raw --group';
 
@@ -17,16 +19,19 @@ export async function add_npm_scripts(
   options: AddNPMScriptsOptions,
 ): Promise<Dependencies | undefined> {
   // These can't be run simultaneously because they all modify package.json
-  return new Dependencies([
-    // TODO(2): add npm script for build, prepublishOnly
+  const deps = new Dependencies([
     (await set_build_script(options)) ?? new Dependencies(),
     (await set_lint_script(options)) ?? new Dependencies(),
     (await set_test_script(options)) ?? new Dependencies(),
     (await set_check_script(options)) ?? new Dependencies(),
   ]);
-  // TODO: format package.json
+
+  await prettify('package.json');
+
+  return deps;
 }
 
+// TODO(2): add npm script for build, prepublishOnly
 export async function set_build_script({
   languages,
   technologies,
