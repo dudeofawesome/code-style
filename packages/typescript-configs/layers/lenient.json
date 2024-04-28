@@ -5,7 +5,6 @@
     // allow assumption that array indices aren't null
     "noUncheckedIndexedAccess": false,
 
-    // TODO: do we actually want to turn these off?
     "noImplicitAny": false,
     "strictPropertyInitialization": false,
     "useUnknownInCatchVariables": false

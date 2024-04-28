@@ -4,7 +4,6 @@ rules:
   radix: 'error'
 
   # Require the use of `===` since `==` has some weird behavior.
-  # TODO(0): explain
   eqeqeq: ['error', 'smart']
 
   # Prefer binary, octal, and hexadecimal literals instead of `parseInt('F', 16)`.
