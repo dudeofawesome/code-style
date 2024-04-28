@@ -21,28 +21,33 @@ However, if you're trying to build a new config for a new environment (maybe som
 
 -   TODO(0): Fix intermittent `tsc` errors related to invalid types from `@types/glob` / `minimatch`.
 
-    A temporary workaround to this issue follows:
+    Some temporary workarounds to this issue follow:
 
-    1. Regenerate your package lock
+    1. npm trickery
 
-        `$ rm -rf package-lock.json node_modules; npm i`
+        1. Regenerate your package lock
 
-    1. Add the following overrides to your `package.json`
+            `$ rm -rf package-lock.json node_modules; npm i`
 
-        ```json
-        "overrides": {
-            "minimatch": "^9",
-            "@types/glob": "^8"
-        }
-        ```
+        1. Add the following overrides to your `package.json`
 
-    1. Update your lock file
+            ```json
+            "overrides": {
+                "minimatch": "^9",
+                "@types/glob": "^8"
+            }
+            ```
 
-        `$ npm i`
+        1. Update your lock file
 
-    1. Remove the overrides we added earlier
-    1. Update your lock file again
+            `$ npm i`
 
-        `$ npm i`
+        1. Remove the overrides we added earlier
+        1. Update your lock file again
 
-    1. Observe that `node_modules/@types/glob` and `node_modules/minimatch` have been removed from your package lock.
+            `$ npm i`
+
+        1. Observe that `node_modules/@types/glob` and `node_modules/minimatch` have been removed from your package lock.
+
+    1. Typescript type hack
+        1. Add an empty `types` array to your `tsconfig`
