@@ -34,3 +34,6 @@ overrides:
 
       # Allow for loops
       '@typescript-eslint/prefer-for-of': 'off'
+
+      # Allow floating promises
+      '@typescript-eslint/no-floating-promises': 'off'
