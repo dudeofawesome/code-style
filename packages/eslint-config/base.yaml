@@ -16,6 +16,8 @@ extends:
   - './rule-sets/readability.yaml'
   - './rule-sets/security.yaml'
 
+  - './overrides/index.yaml'
+
 parserOptions:
   ecmaVersion: 2022 # Version is inline with Node 16
 
@@ -24,11 +26,3 @@ env:
 
 ignorePatterns:
   - '**/dist/**'
-
-overrides:
-  - files: '*.json'
-    plugins:
-      - 'eslint-plugin-json-files'
-    rules:
-      # eslint-plugin-prettier breaks JSON linting (https://github.com/prettier/eslint-plugin-prettier/issues/570)
-      prettier/prettier: 'off'

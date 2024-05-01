@@ -1,0 +1,12 @@
+overrides:
+  - files: '*.json'
+    extends: './json.yaml'
+
+  - files:
+      - '**/test/**'
+      - '**/__test__/**'
+      - '*.test.*'
+      - '*.spec.*'
+      - '*.unit.*'
+      - '*.e2e.*'
+    extends: './testing.yaml'
