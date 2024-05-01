@@ -29,15 +29,27 @@ const res = concurrently(
   { group: true, raw: true },
 );
 
-await res.result.catch((err: CloseEvent[]) => {
-  console.error('The following commands failed:');
-  console.error(
-    err
-      .filter((ev) => ev.exitCode !== 0)
-      .map((ev) => `"${ev.command.command}"`)
-      .join(', '),
-  );
+await res.result.catch((err: unknown) => {
+  if (is_close_event_array(err)) {
+    console.error('The following commands failed:');
+    console.error(
+      err
+        .filter((ev) => ev.exitCode !== 0)
+        .map((ev) => `"${ev.command.command}"`)
+        .join(', '),
+    );
+  }
   process.exit(1);
 });
+
+function is_close_event_array(arr: unknown): arr is CloseEvent[] {
+  return Array.isArray(arr) && is_close_event(arr[0]);
+}
+
+function is_close_event(ev: unknown): ev is CloseEvent {
+  return (
+    ev != null && typeof ev === 'object' && 'command' in ev && 'exitCode' in ev
+  );
+}
 
 /* eslint-enable n/no-sync */

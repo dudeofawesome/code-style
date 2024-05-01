@@ -148,7 +148,7 @@ export async function setup_tmp_dir(
         join(cwd(), '../..', 'node_modules'),
         join(tmp_dir, 'node_modules'),
       ),
-    ]).catch(console.error);
+    ]).catch((err: unknown) => console.error(err));
   });
   ctx.after(() => rm(tmp_dir, { force: true, recursive: true }));
 

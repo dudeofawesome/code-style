@@ -22,7 +22,7 @@ export async function load_rc({
       .then<Partial<CodeStyleSetupOptions>>(
         (str) => (parse(str) ?? {}) as Partial<CodeStyleSetupOptions>,
       )
-      .catch((err) => {
+      .catch((err: unknown) => {
         if (throw_no_config) throw err;
         else return {};
       });
