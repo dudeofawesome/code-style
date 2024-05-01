@@ -13,19 +13,24 @@ void describe('eslint-config strict', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(`should pass commonjs import`, () =>
+    void it(
+      `should pass commonjs import`,
       testNoFail({
         linter,
         files: [{ code: `const foo = require('foo');\n\nfoo();\n` }],
-      }));
+      }),
+    );
 
-    void it(`should pass commonjs export`, () =>
+    void it(
+      `should pass commonjs export`,
       testNoFail({
         linter,
         files: [{ code: `module.exports = { foo: 'foo' };\n` }],
-      }));
+      }),
+    );
 
-    void it(`should pass json-files rules`, () =>
+    void it(
+      `should pass json-files rules`,
       testNoFail({
         linter,
         files: [
@@ -45,16 +50,19 @@ void describe('eslint-config strict', () => {
 `,
           },
         ],
-      }));
+      }),
+    );
   });
 
   void describe('fails', () => {
-    void it(`should fail radix`, async () =>
+    void it(
+      `should fail radix`,
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n` }],
-      }));
+      }),
+    );
 
     void it(`should not parse typescript`, () =>
       linter
@@ -76,21 +84,26 @@ void describe('eslint-config strict', () => {
       strictEqual(res[0]?.messages[0]?.ruleId, 'no-console');
     });
 
-    void it(`should fail es module import`, () =>
+    void it(
+      `should fail es module import`,
       testRuleFail({
         linter,
         ruleId: 'no-restricted-syntax',
         files: [{ code: `import { foo } from 'console';\n\nfoo();\n` }],
-      }));
+      }),
+    );
 
-    void it(`should fail es module export`, () =>
+    void it(
+      `should fail es module export`,
       testRuleFail({
         linter,
         ruleId: 'no-restricted-syntax',
         files: [{ code: `export const foo = 'foo';\n` }],
-      }));
+      }),
+    );
 
-    void it(`should fail json-files/require-engines`, () =>
+    void it(
+      `should fail json-files/require-engines`,
       testRuleFail({
         linter,
         ruleId: 'json-files/require-engines',
@@ -108,9 +121,11 @@ void describe('eslint-config strict', () => {
 `,
           },
         ],
-      }));
+      }),
+    );
 
-    void it(`should fail json-files/require-engines`, () =>
+    void it(
+      `should fail json-files/require-engines`,
       testRuleFail({
         linter,
         ruleId: 'json-files/sort-package-json',
@@ -131,6 +146,7 @@ void describe('eslint-config strict', () => {
 `,
           },
         ],
-      }));
+      }),
+    );
   });
 });

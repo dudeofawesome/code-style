@@ -10,16 +10,18 @@ const linter = initESLint({
 
 void describe('tests', () => {
   void describe('testRuleFail', () => {
-    void it(`should pass when single rule fails`, async () => {
-      await testRuleFail({
+    void it(
+      `should pass when single rule fails`,
+      testRuleFail({
         linter,
         ruleId: 'no-console',
         files: [{ code: `console.log('');\n` }],
-      });
-    });
+      }),
+    );
 
-    void it(`should pass when single rule fails multiple times`, async () => {
-      await testRuleFail({
+    void it(
+      `should pass when single rule fails multiple times`,
+      testRuleFail({
         linter,
         ruleId: 'prettier/prettier',
         files: [
@@ -27,36 +29,42 @@ void describe('tests', () => {
             code: `const { readFile } = require('fs/promises')\n\nreadFile('')\n`,
           },
         ],
-      });
-    });
+      }),
+    );
 
-    void it(`should fail when no rule fails`, async () => {
-      await rejects(() =>
-        testRuleFail({
-          linter,
-          ruleId: 'no-console',
-          files: [{ code: `` }],
-        }),
+    void it(`should fail when no rule fails`, async (ctx, a) => {
+      await rejects(
+        Promise.resolve(
+          testRuleFail({
+            linter,
+            ruleId: 'no-console',
+            files: [{ code: `` }],
+          })(ctx, a),
+        ),
       );
     });
 
-    void it(`should fail when wrong rule fails`, async () => {
-      await rejects(() =>
-        testRuleFail({
-          linter,
-          ruleId: 'prettier/prettier',
-          files: [{ code: `console.log('');\n` }],
-        }),
+    void it(`should fail when wrong rule fails`, async (ctx, a) => {
+      await rejects(
+        Promise.resolve(
+          testRuleFail({
+            linter,
+            ruleId: 'prettier/prettier',
+            files: [{ code: `console.log('');\n` }],
+          })(ctx, a),
+        ),
       );
     });
 
-    void it(`should fail when additional rule fails`, async () => {
-      await rejects(() =>
-        testRuleFail({
-          linter,
-          ruleId: 'no-console',
-          files: [{ code: `console.log('')` }],
-        }),
+    void it(`should fail when additional rule fails`, async (ctx, a) => {
+      await rejects(
+        Promise.resolve(
+          testRuleFail({
+            linter,
+            ruleId: 'no-console',
+            files: [{ code: `console.log('')` }],
+          })(ctx, a),
+        ),
       );
     });
   });

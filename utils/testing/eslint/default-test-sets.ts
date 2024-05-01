@@ -4,7 +4,8 @@ import { testNoFail, testRuleFail } from './tests';
 
 export function defaultTestSet(linter: ESLint) {
   void describe('[standard tests] passes', () => {
-    void it(`should parse javascript`, () =>
+    void it(
+      `should parse javascript`,
       testNoFail({
         linter,
         files: [
@@ -16,9 +17,11 @@ export function defaultTestSet(linter: ESLint) {
 `,
           },
         ],
-      }));
+      }),
+    );
 
-    void it(`should allow nested ternaries`, () =>
+    void it(
+      `should allow nested ternaries`,
       testNoFail({
         linter,
         files: [
@@ -26,21 +29,26 @@ export function defaultTestSet(linter: ESLint) {
             code: `(() => (Number === true ? 'a' : Boolean === true ? 'b' : 'c'))();\n`,
           },
         ],
-      }));
+      }),
+    );
   });
   void describe('[standard tests] fails', () => {
-    void it(`should fail eqeqeq`, () =>
+    void it(
+      `should fail eqeqeq`,
       testRuleFail({
         linter,
         ruleId: 'eqeqeq',
         files: [{ code: `if (Number == true) Number();\n` }],
-      }));
+      }),
+    );
 
-    void it(`should warn on prettier`, () =>
+    void it(
+      `should warn on prettier`,
       testRuleFail({
         linter,
         ruleId: 'prettier/prettier',
         files: [{ code: `Number( '5')` }],
-      }));
+      }),
+    );
   });
 }

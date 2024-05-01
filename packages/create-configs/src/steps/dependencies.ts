@@ -2,14 +2,7 @@ import { log } from 'node:console';
 import { promisify } from 'node:util';
 import { exec as execCallback } from 'node:child_process';
 
-import {
-  ProjectType,
-  Language,
-  Technology,
-  Builder,
-  Runtime,
-  CodeStyleSetupOptions as SetupOptions,
-} from '@code-style/code-style/config-types';
+import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
 import { Dependencies } from 'utils.js';
 
 const exec = promisify(execCallback);

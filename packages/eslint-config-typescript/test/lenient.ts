@@ -27,7 +27,8 @@ void describe('eslint-config-typescript lenient', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(`should parse typescript`, () =>
+    void it(
+      `should parse typescript`,
       testNoFail({
         linter,
         files: [
@@ -36,15 +37,19 @@ void describe('eslint-config-typescript lenient', () => {
             ts: true,
           },
         ],
-      }));
+      }),
+    );
 
-    void it(`should not give eslint error on use before define`, () =>
+    void it(
+      `should not give eslint error on use before define`,
       testNoFail({
         linter,
         files: [{ code: `Number(a);\nconst a = 10;\n`, ts: true }],
-      }));
+      }),
+    );
 
-    void it(`should import`, () =>
+    void it(
+      `should import`,
       testNoFail({
         linter,
         files: [
@@ -56,9 +61,11 @@ void describe('eslint-config-typescript lenient', () => {
             path: 'utils.ts',
           },
         ],
-      }));
+      }),
+    );
 
-    void it(`should pass @typescript-eslint/strict-boolean-expressions object`, async () =>
+    void it(
+      `should pass @typescript-eslint/strict-boolean-expressions object`,
       testNoFail({
         linter,
         files: [
@@ -67,18 +74,22 @@ void describe('eslint-config-typescript lenient', () => {
             ts: true,
           },
         ],
-      }));
+      }),
+    );
   });
 
   void describe('fails', () => {
-    void it(`should fail radix`, async () =>
+    void it(
+      `should fail radix`,
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n`, ts: true }],
-      }));
+      }),
+    );
 
-    void it(`should fail @typescript-eslint/strict-boolean-expressions string`, async () =>
+    void it(
+      `should fail @typescript-eslint/strict-boolean-expressions string`,
       testRuleFail({
         linter,
         ruleId: '@typescript-eslint/strict-boolean-expressions',
@@ -88,6 +99,7 @@ void describe('eslint-config-typescript lenient', () => {
             ts: true,
           },
         ],
-      }));
+      }),
+    );
   });
 });

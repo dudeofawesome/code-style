@@ -37,9 +37,10 @@
     "eslint-plugin-import": "^2.29.1"
   },
   "devDependencies": {
+    "@types/common-tags": "^1.8.4",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
-    "proper-tags": "^2.0.2",
+    "common-tags": "^1.8.2",
     "tsm": "^2.3.0"
   },
   "peerDependencies": {

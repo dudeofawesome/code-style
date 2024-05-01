@@ -9,10 +9,10 @@ import {
   stat,
   writeFile,
 } from 'node:fs/promises';
+import assert from 'node:assert';
 import { format, Options } from 'prettier';
 import default_config from '@code-style/code-style/prettierrc';
 import { Language } from '@code-style/code-style/config-types';
-import assert from 'node:assert';
 
 const exec = promisify(execCallback);
 

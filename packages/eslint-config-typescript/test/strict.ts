@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { deepStrictEqual } from 'node:assert';
 import { join } from 'node:path';
-import { codeBlock } from 'proper-tags';
+import { codeBlock } from 'common-tags';
 import type { ESLint } from 'eslint';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import {
@@ -21,8 +21,6 @@ const linter = initESLint(
   { cwd: join(__dirname, 'fixture') },
 );
 
-export interface A {}
-
 void describe('lint rules strict', async () => {
   const calculated = (await linter.calculateConfigForFile(
     'src/index.ts',
@@ -40,15 +38,15 @@ void describe('lint rules strict', async () => {
     | 'settings'
   >;
 
-  it(`should have rules from eslint-config-typescript`, () => {
+  void it(`should have rules from eslint-config-typescript`, () => {
     deepStrictEqual(calculated.rules?.['@typescript-eslint/no-namespace'], [
       'error',
     ]);
   });
-  it(`should have rules from eslint-config-esmodule`, () => {
+  void it(`should have rules from eslint-config-esmodule`, () => {
     deepStrictEqual(calculated.rules?.['import/no-commonjs'], ['error']);
   });
-  it(`should have rules from eslint-config`, () => {
+  void it(`should have rules from eslint-config`, () => {
     deepStrictEqual(calculated.rules?.['no-constructor-return'], ['error']);
   });
 });

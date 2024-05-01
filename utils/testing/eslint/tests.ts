@@ -3,10 +3,13 @@ import { ok, strictEqual, deepStrictEqual } from 'node:assert';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { cwd } from 'node:process';
-import { TestContext, TestFn, it } from 'node:test';
+import { /* TestFn, TestContext, */ it } from 'node:test';
 import { randomUUID } from 'node:crypto';
 import { ESLint } from 'eslint';
 import { FilePathResult, FilePathOpts, filePath } from '.';
+
+type TestFn = Exclude<Parameters<typeof it>[0], undefined>;
+type TestContext = Parameters<TestFn>[0];
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
