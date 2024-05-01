@@ -32,39 +32,33 @@ void describe('tests', () => {
       }),
     );
 
-    void it(`should fail when no rule fails`, async (ctx, a) => {
+    void it(`should fail when no rule fails`, async (ctx, cb) => {
       await rejects(
-        Promise.resolve(
-          testRuleFail({
-            linter,
-            ruleId: 'no-console',
-            files: [{ code: `` }],
-          })(ctx, a),
-        ),
+        testRuleFail({
+          linter,
+          ruleId: 'no-console',
+          files: [{ code: `` }],
+        })(ctx, cb)!,
       );
     });
 
-    void it(`should fail when wrong rule fails`, async (ctx, a) => {
+    void it(`should fail when wrong rule fails`, async (ctx, cb) => {
       await rejects(
-        Promise.resolve(
-          testRuleFail({
-            linter,
-            ruleId: 'prettier/prettier',
-            files: [{ code: `console.log('');\n` }],
-          })(ctx, a),
-        ),
+        testRuleFail({
+          linter,
+          ruleId: 'prettier/prettier',
+          files: [{ code: `console.log('');\n` }],
+        })(ctx, cb)!,
       );
     });
 
-    void it(`should fail when additional rule fails`, async (ctx, a) => {
+    void it(`should fail when additional rule fails`, async (ctx, cb) => {
       await rejects(
-        Promise.resolve(
-          testRuleFail({
-            linter,
-            ruleId: 'no-console',
-            files: [{ code: `console.log('')` }],
-          })(ctx, a),
-        ),
+        testRuleFail({
+          linter,
+          ruleId: 'no-console',
+          files: [{ code: `console.log('')` }],
+        })(ctx, cb)!,
       );
     });
   });

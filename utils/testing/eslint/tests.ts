@@ -55,6 +55,13 @@ export function specificLintMessage(
   );
 }
 
+function map_files(files: TestNoFailOpts['files']) {
+  return files.map((file) => ({
+    code: file.code.endsWith('\n') ? file.code : `${file.code}\n`,
+    path: file.path ?? filePath(file),
+  }));
+}
+
 interface TestRuleFailOpts extends TestNoFailOpts {
   ruleId: string;
 }
@@ -64,20 +71,15 @@ export function testRuleFail({
   files,
 }: TestRuleFailOpts): TestFn {
   return async (ctx) => {
-    const _files = files.map((file) => ({
-      code: file.code,
-      path: file.path ?? filePath(file),
-    }));
+    const _files = map_files(files);
 
     if (_files.length === 1 && _files[0] != null) {
       const res = await linter.lintText(_files[0].code, {
         filePath: _files[0].path,
       });
-      const rules = res
-        .map((lint_result) => lint_result.messages.map((m) => m.ruleId))
-        .flat();
-      ok(rules.length > 0, `No lint failures detected.`);
-      deepStrictEqual(rules, new Array(rules.length).fill(ruleId));
+      await it(`${ctx.name} and have lint failures`, () => {
+        specificLintMessage(res, ruleId);
+      });
     } else {
       const created_files = await setup_tmp_dir(ctx, _files);
 
@@ -97,10 +99,7 @@ interface TestNoFailOpts {
 }
 export function testNoFail({ linter, files }: TestNoFailOpts): TestFn {
   return async (ctx) => {
-    const _files = files.map((file) => ({
-      code: file.code,
-      path: file.path ?? filePath(file),
-    }));
+    const _files = map_files(files);
 
     if (_files.length === 1 && _files[0] != null) {
       const res = await linter.lintText(_files[0].code, {
@@ -145,7 +144,7 @@ export async function setup_tmp_dir(
   ctx.before(async () => {
     await Promise.all([
       symlink(
-        join(cwd(), '../..', 'node_modules'),
+        join(cwd(), '..', '..', 'node_modules'),
         join(tmp_dir, 'node_modules'),
       ),
     ]).catch((err: unknown) => console.error(err));
