@@ -7,7 +7,9 @@
   "include": ["packages/*/test/", "utils/", "scripts/"],
   "exclude": [
     "**/dist/",
+    "packages/eslint-plugin-typescript/",
     "packages/typescript-configs/",
-    "packages/javascript-configs/"
+    "packages/javascript-configs/",
+    "utils/"
   ]
 }

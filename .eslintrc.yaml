@@ -8,6 +8,12 @@ extends:
   - '@code-style/eslint-config-esmodule'
 ignorePatterns:
   - '**/test/*/**'
+  - 'packages/code-style'
+  - 'packages/create-configs'
+  - 'packages/eslint-config-typescript'
+  - 'packages/eslint-plugin-nest'
+  - 'packages/jest-configs'
+  - 'utils'
 
 overrides:
   - files:

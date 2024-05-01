@@ -1,0 +1,17 @@
+root: true
+extends:
+  - '@code-style/eslint-config'
+  - '@code-style/eslint-config-node'
+  - '@code-style/eslint-config-esmodule'
+  - '@code-style/eslint-config-typescript'
+
+overrides:
+  - files:
+      - '**/test/**'
+      - '**/testing/**'
+      - '**/__test__/**'
+      - '*.test.*'
+      - '*.spec.*'
+      - '*.unit.*'
+      - '*.e2e.*'
+    extends: '@code-style/eslint-config/overrides/testing.yaml'

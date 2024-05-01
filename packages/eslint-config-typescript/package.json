@@ -28,6 +28,9 @@
     "/lenient.yaml"
   ],
   "scripts": {
+    "lint": "concurrently --raw --group \"npm:lint:*\"",
+    "lint:js": "eslint . --ext ts,mts,cts,js,json",
+    "lint:types": "tsc --noEmit --pretty",
     "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
