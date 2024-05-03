@@ -23,7 +23,7 @@ describe('utils', () => {
       it('should add dependency with command to set', () => {
         const dependencies = new DependencySet();
         expect(dependencies.has('foo')).toBe(false);
-        expect(dependencies.depend('foo', 'foo-cli')).toBe('foo-cli');
+        expect(dependencies.depend('foo', { cmd: 'foo-cli' })).toBe('foo-cli');
         expect(dependencies.has('foo')).toBe(true);
       });
 

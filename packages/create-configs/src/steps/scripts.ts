@@ -108,7 +108,7 @@ export function _generate_lint_script({
         case 'eslint':
           return {
             ...scripts,
-            'lint:js': `${deps.d.depend('@code-style/eslint-config', 'eslint')} . --ext ${languages
+            'lint:js': `${deps.d.depend('@code-style/eslint-config', { cmd: 'eslint', v: 'latest' })} . --ext ${languages
               .filter((l) => ['js', 'ts'].includes(l))
               .reduce<string[]>(
                 (extensions, ext) => [
@@ -124,7 +124,10 @@ export function _generate_lint_script({
           return {
             ...scripts,
             'lint:css': [
-              deps.d.depend('@code-style/stylelint-config', 'stylelint'),
+              deps.d.depend('@code-style/stylelint-config', {
+                cmd: 'stylelint',
+                v: 'latest',
+              }),
               `'**/*.{${languages
                 .filter((l) => ['css', 'scss'].includes(l))
                 .join(',')}}'`,
@@ -133,7 +136,7 @@ export function _generate_lint_script({
         case 'tsc':
           return {
             ...scripts,
-            'lint:types': `${deps.d.depend('typescript', 'tsc')} --noEmit --pretty`,
+            'lint:types': `${deps.d.depend('typescript', { cmd: 'tsc' })} --noEmit --pretty`,
           };
         default:
           throw new TypeError(`Unexpected linter type "${linter as string}"`);

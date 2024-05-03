@@ -43,17 +43,17 @@ export function _generate_base_ts_config({
   switch (project_type) {
     case 'web-app':
       config.extends.push(
-        `${deps.d.depend('@code-style/typescript-configs')}/roles/browser`,
+        `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/browser`,
       );
       if (technologies.includes('nextjs')) {
         deps.d.add(['@types/react', '@types/react-dom']);
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs')}/layers/nextjs`,
+          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/nextjs`,
         );
       } else if (technologies.includes('react')) {
         deps.d.add(['@types/react', '@types/react-dom']);
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs')}/layers/react`,
+          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/react`,
         );
       }
       break;
@@ -61,12 +61,12 @@ export function _generate_base_ts_config({
     case 'cli':
       if (technologies.includes('nestjs')) {
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs')}/roles/nest`,
+          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/nest`,
         );
       } else {
         deps.d.depend('@types/node');
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs')}/roles/node`,
+          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/node`,
         );
       }
       break;
@@ -74,13 +74,13 @@ export function _generate_base_ts_config({
 
   if (technologies.includes('esm')) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs')}/layers/esmodule`,
+      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/esmodule`,
     );
   }
 
   if (library) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs')}/layers/library`,
+      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/library`,
     );
   }
 
@@ -88,7 +88,7 @@ export function _generate_base_ts_config({
 
   if (lenient) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs')}/layers/lenient`,
+      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/lenient`,
     );
   }
 
@@ -207,7 +207,7 @@ export function _generate_jest_config({
   })(languages.includes('ts'), technologies.includes('esm'));
   return {
     content: stripIndent`
-      import { config } from '${deps.d.depend('@code-style/jest-configs')}/${config}';
+      import { config } from '${deps.d.depend('@code-style/jest-configs', { v: 'latest' })}/${config}';
 
       // eslint-disable-next-line import/no-default-export
       export default config;

@@ -169,14 +169,21 @@ export interface ConfigFile {
   dependencies: Dependencies;
 }
 
+export type DependOptions = {
+  cmd?: string;
+  v?: string;
+};
 export class DependencySet extends Set<string> {
-  depend(dependency: string, command: string = dependency): string {
+  depend(
+    dependency: string,
+    { cmd: command = dependency, v: version }: DependOptions = {},
+  ): string {
     assert(
       dependency.match(/^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u) !=
         null,
       `Must be a valid package name.`,
     );
-    this.add(dependency);
+    this.add(`${dependency}${version != null ? `@${version}` : ''}`);
     return command;
   }
 

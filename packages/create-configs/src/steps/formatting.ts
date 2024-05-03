@@ -26,7 +26,7 @@ export async function create_prettier_config(
          * Prettier configuration file
          * In order to update the this config, update @code-style/code-style
          */
-        import config from '${deps.d.depend('@code-style/code-style')}/prettierrc';
+        import config from '${deps.d.depend('@code-style/code-style', { v: 'latest' })}/prettierrc';
         export default config;
       `,
     );
@@ -45,7 +45,7 @@ export async function create_editor_config(
       await symlink(
         join(
           'node_modules',
-          deps.d.depend('@code-style/code-style'),
+          deps.d.depend('@code-style/code-style', { v: 'latest' }),
           '.editorconfig',
         ),
         path,
