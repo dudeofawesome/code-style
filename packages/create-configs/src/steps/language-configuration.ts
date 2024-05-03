@@ -200,12 +200,17 @@ export async function set_package_type({
 
 /** @private */
 export function _generate_jest_config({
+  languages,
   technologies,
 }: Omit<CreateJestConfigOptions, 'overwrite'>): ConfigFile {
   const deps = new Dependencies();
+  const config: string = ((ts: boolean, esm: boolean) => {
+    if (ts) return `ts-${esm ? 'esm' : 'cjs'}`;
+    else return 'js';
+  })(languages.includes('ts'), technologies.includes('esm'));
   return {
     content: stripIndent`
-      import { config } from '${deps.d.depend('@code-style/jest-configs')}/ts-${technologies.includes('esm') ? 'esm' : 'cjs'}';
+      import { config } from '${deps.d.depend('@code-style/jest-configs')}/${config}';
 
       // eslint-disable-next-line import/no-default-export
       export default config;
@@ -223,23 +228,21 @@ export async function create_jest_config({
   technologies,
   overwrite,
 }: CreateJestConfigOptions): Promise<Dependencies> {
-  const deps = new Dependencies([], ['jest']);
-  if (languages.includes('ts')) {
-    const path = 'jest.config.mjs';
-    if (
-      await verify_missing({
-        path: [path, /^jest\.config\.(js|ts|mjs|cjs|json)$/u],
-        remove: overwrite,
-      })
-    ) {
-      const config = _generate_jest_config({
-        languages,
-        technologies,
-      });
+  const deps = new Dependencies();
+  const path = 'jest.config.mjs';
+  if (
+    await verify_missing({
+      path: [path, /^jest\.config\.(js|ts|mjs|cjs|json)$/u],
+      remove: overwrite,
+    })
+  ) {
+    const config = _generate_jest_config({
+      languages,
+      technologies,
+    });
 
-      await create_file(path, await prettify(path, config.content));
-      deps.add(config.dependencies);
-    }
+    await create_file(path, await prettify(path, config.content));
+    deps.add(config.dependencies);
   }
 
   return deps;
