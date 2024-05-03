@@ -18,23 +18,19 @@ void describe('eslint-config-node lenient', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(
-      `should pass n/no-sync`,
+    void it(`should pass n/no-sync`, () =>
       testNoFail({
         linter,
         files: [{ code: `const { readFileSync } = require('fs');` }],
-      }),
-    );
+      }));
   });
 
   void describe('fails', () => {
-    void it(
-      `should fail no-console`,
+    void it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',
         files: [{ code: `console.log('foo');\n` }],
-      }),
-    );
+      }));
   });
 });

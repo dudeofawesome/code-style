@@ -7,6 +7,7 @@ extends:
   - '@code-style/eslint-config-typescript'
   - '@code-style/eslint-config-esmodule'
 ignorePatterns:
+  - '.prettierrc.mjs'
   - '**/test/*/**'
   - 'packages/code-style'
   - 'packages/create-configs'

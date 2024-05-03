@@ -14,8 +14,7 @@ void describe('eslint-config-jest', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(
-      `should have jest globals in test file`,
+    void it(`should have jest globals in test file`, () =>
       testNoFail({
         linter,
         files: [
@@ -24,18 +23,15 @@ void describe('eslint-config-jest', () => {
             test: true,
           },
         ],
-      }),
-    );
+      }));
   });
 
   void describe('fails', () => {
-    void it(
-      `should not have jest globals in non-test file`,
+    void it(`should not have jest globals in non-test file`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-undef',
         files: [{ code: `describe('test', () => {});\n` }],
-      }),
-    );
+      }));
   });
 });

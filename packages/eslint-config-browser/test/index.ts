@@ -13,22 +13,18 @@ void describe('eslint-config-browser', () => {
   void describe('passes', () => {});
 
   void describe('fails', () => {
-    void it(
-      `should fail no-console`,
+    void it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',
         files: [{ code: `console.log('foo');\n` }],
-      }),
-    );
+      }));
 
-    void it(
-      `should fail radix`,
+    void it(`should fail radix`, () =>
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n` }],
-      }),
-    );
+      }));
   });
 });

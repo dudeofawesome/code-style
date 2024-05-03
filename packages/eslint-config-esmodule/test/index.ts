@@ -15,24 +15,20 @@ void describe('eslint-config-esmodule base', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(
-      `should pass esmodule import`,
+    void it(`should pass esmodule import`, () =>
       testNoFail({
         linter,
         files: [{ code: `import { foo } from 'console';\n\nfoo();\n` }],
-      }),
-    );
+      }));
   });
 
   void describe('fails', () => {
-    void it(
-      `should fail commonjs`,
+    void it(`should fail commonjs`, () =>
       testRuleFail({
         linter,
         ruleId: 'import/no-commonjs',
         files: [{ code: `const foo = require('foo');\n\nfoo();\n` }],
-      }),
-    );
+      }));
 
     void it(`should only log single duplicate-import error`, async () =>
       linter

@@ -55,8 +55,7 @@ void describe('eslint-config-typescript strict', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(
-      `should parse typescript`,
+    void it(`should parse typescript`, () =>
       testNoFail({
         linter,
         files: [
@@ -65,11 +64,9 @@ void describe('eslint-config-typescript strict', () => {
             ts: true,
           },
         ],
-      }),
-    );
+      }));
 
-    void it(
-      `should not give eslint error on use before define`,
+    void it(`should not give eslint error on use before define`, () =>
       testNoFail({
         linter,
         files: [
@@ -81,11 +78,9 @@ void describe('eslint-config-typescript strict', () => {
             ts: true,
           },
         ],
-      }),
-    );
+      }));
 
-    void it(
-      `should import`,
+    void it(`should import`, () =>
       testNoFail({
         linter,
         files: [
@@ -110,28 +105,24 @@ void describe('eslint-config-typescript strict', () => {
               {
                 "extends": "@code-style/typescript-configs/roles/node",
                 "compilerOptions": { "outDir": "dist/" },
-                "files": ["sample-ts.ts", "sample-js.js"]
+                "includes": ["./"]
               }
             `,
             path: 'tsconfig.json',
           },
         ],
-      }),
-    );
+      }));
   });
 
   void describe('fails', () => {
-    void it(
-      `should fail radix`,
+    void it(`should fail radix`, () =>
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n`, ts: true }],
-      }),
-    );
+      }));
 
-    void it(
-      `should fail @typescript-eslint/strict-boolean-expressions string`,
+    void it(`should fail @typescript-eslint/strict-boolean-expressions string`, () =>
       testRuleFail({
         linter,
         ruleId: '@typescript-eslint/strict-boolean-expressions',
@@ -141,11 +132,9 @@ void describe('eslint-config-typescript strict', () => {
             ts: true,
           },
         ],
-      }),
-    );
+      }));
 
-    void it(
-      `should fail @typescript-eslint/strict-boolean-expressions unknown`,
+    void it(`should fail @typescript-eslint/strict-boolean-expressions unknown`, () =>
       testRuleFail({
         linter,
         ruleId: '@typescript-eslint/strict-boolean-expressions',
@@ -159,7 +148,6 @@ void describe('eslint-config-typescript strict', () => {
             ts: true,
           },
         ],
-      }),
-    );
+      }));
   });
 });

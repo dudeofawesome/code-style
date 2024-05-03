@@ -20,8 +20,7 @@ void describe('eslint-config-nextjs', () => {
   defaultTestSet(linter);
 
   void describe('passes', () => {
-    void it(
-      `should parse jsx`,
+    void it(`should parse jsx`, () =>
       testNoFail({
         linter,
         files: [
@@ -30,31 +29,25 @@ void describe('eslint-config-nextjs', () => {
             react: true,
           },
         ],
-      }),
-    );
+      }));
   });
 
   void describe('fails', () => {
-    void it(
-      `should fail radix`,
+    void it(`should fail radix`, () =>
       testRuleFail({
         linter,
         ruleId: 'radix',
         files: [{ code: `parseInt('10');\n`, react: true }],
-      }),
-    );
+      }));
 
-    void it(
-      `should fail no-console`,
+    void it(`should fail no-console`, () =>
       testRuleFail({
         linter,
         ruleId: 'no-console',
         files: [{ code: `console.log('foo');\n`, react: true }],
-      }),
-    );
+      }));
 
-    void it(
-      `should fail react/jsx-key`,
+    void it(`should fail react/jsx-key`, () =>
       testRuleFail({
         linter,
         ruleId: 'react/jsx-key',
@@ -68,7 +61,6 @@ export const Bar = (props) => props.list.map((l) => <Foo text={l}></Foo>);
             react: true,
           },
         ],
-      }),
-    );
+      }));
   });
 });
