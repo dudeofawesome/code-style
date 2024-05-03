@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-cli",
-  "version": "2.0.0-27",
+  "version": "2.0.0-28",
   "description": "My CLI ESLint config",
   "keywords": [
     "style",
@@ -30,7 +30,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/eslint-config-node": "^2.0.0-27"
+    "@code-style/eslint-config-node": "^2.0.0-28"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",

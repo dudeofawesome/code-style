@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-npm-hoist-packages-typescript",
-  "version": "2.0.0-27",
+  "version": "2.0.0-28",
   "description": "Cause NPM to hoist eslint config dependencies",
   "keywords": [
     "eslint",
