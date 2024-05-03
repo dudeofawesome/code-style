@@ -17,15 +17,14 @@ const reporter_sets: Record<'default' | 'github' | 'gitlab', Reporter[]> = {
   gitlab: [reporters.default, reporters.gitlab],
 };
 
-const environment: keyof typeof reporter_sets =
-  ((): keyof typeof reporter_sets => {
-    /* eslint-disable n/no-process-env */
-    if (process.env.GITHUB_ACTIONS !== 'true') return 'github';
-    else if (process.env.GITLAB_CI !== 'true') return 'gitlab';
-    else return 'default';
-    /* eslint-enable n/no-process-env */
-  })();
+const reporter: Reporter[] = ((): Reporter[] => {
+  /* eslint-disable n/no-process-env */
+  if (process.env.GITHUB_ACTIONS !== 'true') return reporter_sets.github;
+  else if (process.env.GITLAB_CI !== 'true') return reporter_sets.gitlab;
+  else return reporter_sets.default;
+  /* eslint-enable n/no-process-env */
+})();
 
 export const config: Config = {
-  reporters: reporter_sets[environment],
+  reporters: reporter,
 };
