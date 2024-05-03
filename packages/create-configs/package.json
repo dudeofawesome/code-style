@@ -1,6 +1,6 @@
 {
   "name": "@code-style/create-configs",
-  "version": "2.0.0-28",
+  "version": "2.0.0-29",
   "description": "A script to create configuration files to conform to code style standards.",
   "keywords": [
     "style",
@@ -34,7 +34,7 @@
     "test:debug": "NODE_OPTIONS=\"--inspect-brk\" npm run test -- --runInBand"
   },
   "dependencies": {
-    "@code-style/code-style": "^2.0.0-28",
+    "@code-style/code-style": "^2.0.0-29",
     "@inquirer/prompts": "^5.0.0",
     "@npmcli/package-json": "^5.1.0",
     "chalk": "^5.3.0",
@@ -45,11 +45,11 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@code-style/eslint-config": "^2.0.0-28",
-    "@code-style/eslint-config-cli": "^2.0.0-28",
-    "@code-style/eslint-config-typescript": "^2.0.0-28",
-    "@code-style/jest-configs": "^2.0.0-28",
-    "@code-style/typescript-configs": "^2.0.0-28",
+    "@code-style/eslint-config": "^2.0.0-29",
+    "@code-style/eslint-config-cli": "^2.0.0-29",
+    "@code-style/eslint-config-typescript": "^2.0.0-29",
+    "@code-style/jest-configs": "^2.0.0-29",
+    "@code-style/typescript-configs": "^2.0.0-29",
     "@json-types/tsconfig": "^0.5.0",
     "@types/common-tags": "^1.8.3",
     "@types/npmcli__package-json": "^4.0.4",

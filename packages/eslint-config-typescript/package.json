@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-typescript",
-  "version": "2.0.0-28",
+  "version": "2.0.0-29",
   "description": "My Typescript ESLint config",
   "keywords": [
     "style",
@@ -47,7 +47,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@code-style/eslint-npm-hoist-packages-typescript": "2.0.0-28",
+    "@code-style/eslint-npm-hoist-packages-typescript": "2.0.0-29",
     "eslint": "^8.49.0",
     "typescript": ">=5.0.0"
   },

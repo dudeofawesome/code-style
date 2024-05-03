@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-esmodule",
-  "version": "2.0.0-28",
+  "version": "2.0.0-29",
   "description": "My ES Module ESLint config",
   "keywords": [
     "style",
@@ -39,7 +39,7 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@code-style/eslint-npm-hoist-packages-esmodule": "2.0.0-28",
+    "@code-style/eslint-npm-hoist-packages-esmodule": "2.0.0-29",
     "eslint": "^8.49.0"
   },
   "engines": {
