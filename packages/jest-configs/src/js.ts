@@ -1,8 +1,8 @@
-import { Config } from 'jest';
-import { coverage } from './layers/coverage';
+import type { Config } from 'jest';
+import { config as base } from './base';
 
 const config: Config = {
-  ...coverage,
+  ...base,
 };
 
 export default config;

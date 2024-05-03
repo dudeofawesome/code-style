@@ -2,7 +2,7 @@ import { Config } from 'jest';
 
 const ext = String.raw`[cm]?[jt]sx?`;
 
-export const coverage: Config = {
+export const config: Config = {
   collectCoverage: true,
   coverageDirectory: './coverage',
   coveragePathIgnorePatterns: [

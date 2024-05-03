@@ -1,9 +1,9 @@
 import type { JestConfigWithTsJest } from 'ts-jest';
-import { coverage } from './layers/coverage';
+import { config as base } from './base';
 
 const config: JestConfigWithTsJest = {
+  ...base,
   preset: 'ts-jest/presets/default',
-  ...coverage,
 };
 
 export default config;
