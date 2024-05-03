@@ -1,12 +1,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import json5 from 'json5';
 import { stripIndent } from 'common-tags';
-import {
-  ProjectType,
-  Language,
-  Technology,
-  CodeStyleSetupOptions,
-} from '@code-style/code-style/config-types';
+import { CodeStyleSetupOptions } from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
 
