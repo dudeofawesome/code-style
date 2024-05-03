@@ -35,6 +35,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "jest-junit": "^16.0.0",
     "ts-jest": "^29.1.2"
   },
   "devDependencies": {
