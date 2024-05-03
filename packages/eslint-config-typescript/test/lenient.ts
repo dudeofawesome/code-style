@@ -6,6 +6,7 @@ import {
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import { codeBlock } from 'common-tags';
 
 const linter = initESLint(
   {
@@ -32,7 +33,7 @@ void describe('eslint-config-typescript lenient', () => {
         linter,
         files: [
           {
-            code: `((a: string): string[] => a.split(''))()\n`,
+            code: `((a: string): string[] => a.split(''))()`,
             ts: true,
           },
         ],
@@ -41,19 +42,46 @@ void describe('eslint-config-typescript lenient', () => {
     void it(`should not give eslint error on use before define`, () =>
       testNoFail({
         linter,
-        files: [{ code: `Number(a);\nconst a = 10;\n`, ts: true }],
+        files: [
+          {
+            code: codeBlock`
+              Number(a);
+              const a = 10;
+            `,
+            ts: true,
+          },
+        ],
       }));
 
     void it(`should import`, () =>
       testNoFail({
         linter,
         files: [
-          { code: `import { a } from './utils';\n\na();\n`, ts: true },
           {
-            code: `export function a () {
-  return 1;
-}\n`,
+            code: codeBlock`
+              import { a } from './utils';
+
+              a();
+            `,
+            ts: true,
+          },
+          {
+            code: codeBlock`
+              export function a () {
+                return 1;
+              }
+            `,
             path: 'utils.ts',
+          },
+          {
+            code: codeBlock`
+              {
+                "extends": "@code-style/typescript-configs/roles/node",
+                "compilerOptions": { "outDir": "dist/" },
+                "includes": ["./"]
+              }
+            `,
+            path: 'tsconfig.json',
           },
         ],
       }));
@@ -63,7 +91,10 @@ void describe('eslint-config-typescript lenient', () => {
         linter,
         files: [
           {
-            code: `const foo: object | null = Math.random() === 0 ? {} : null;\nif (foo) Number();\n`,
+            code: codeBlock`
+              const foo: object | null = Math.random() === 0 ? {} : null;
+              if (foo) Number();
+            `,
             ts: true,
           },
         ],
@@ -75,7 +106,7 @@ void describe('eslint-config-typescript lenient', () => {
       testRuleFail({
         linter,
         ruleId: 'radix',
-        files: [{ code: `parseInt('10');\n`, ts: true }],
+        files: [{ code: `parseInt('10');`, ts: true }],
       }));
 
     void it(`should fail @typescript-eslint/strict-boolean-expressions string`, () =>
@@ -84,7 +115,11 @@ void describe('eslint-config-typescript lenient', () => {
         ruleId: '@typescript-eslint/strict-boolean-expressions',
         files: [
           {
-            code: `let foo = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+            code: codeBlock`
+              let foo = 'foo';
+              foo = 'bar';
+              if (foo) Number();
+            `,
             ts: true,
           },
         ],

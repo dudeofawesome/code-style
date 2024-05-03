@@ -60,7 +60,7 @@ void describe('eslint-config-typescript strict', () => {
         linter,
         files: [
           {
-            code: `((a: string): string[] => a.split(''))()\n`,
+            code: `((a: string): string[] => a.split(''))()`,
             ts: true,
           },
         ],
@@ -119,7 +119,7 @@ void describe('eslint-config-typescript strict', () => {
       testRuleFail({
         linter,
         ruleId: 'radix',
-        files: [{ code: `parseInt('10');\n`, ts: true }],
+        files: [{ code: `parseInt('10');`, ts: true }],
       }));
 
     void it(`should fail @typescript-eslint/strict-boolean-expressions string`, () =>
@@ -128,7 +128,11 @@ void describe('eslint-config-typescript strict', () => {
         ruleId: '@typescript-eslint/strict-boolean-expressions',
         files: [
           {
-            code: `let foo = 'foo';\nfoo = 'bar';\nif (foo) Number();\n`,
+            code: codeBlock`
+              let foo = 'foo';
+              foo = 'bar';
+              if (foo) Number();
+            `,
             ts: true,
           },
         ],
