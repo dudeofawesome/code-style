@@ -19,8 +19,8 @@ const reporter_sets: Record<'default' | 'github' | 'gitlab', Reporter[]> = {
 
 const reporter: Reporter[] = ((): Reporter[] => {
   /* eslint-disable n/no-process-env */
-  if (process.env.GITHUB_ACTIONS !== 'true') return reporter_sets.github;
-  else if (process.env.GITLAB_CI !== 'true') return reporter_sets.gitlab;
+  if (process.env.GITHUB_ACTIONS === 'true') return reporter_sets.github;
+  else if (process.env.GITLAB_CI === 'true') return reporter_sets.gitlab;
   else return reporter_sets.default;
   /* eslint-enable n/no-process-env */
 })();
