@@ -1,7 +1,7 @@
 import { log } from 'node:console';
 
 import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
-import { Dependencies, exec } from 'utils.js';
+import { Dependencies, exec } from '../utils.js';
 
 export async function uninstall_duplicate_dependencies({
   runtime,
