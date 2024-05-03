@@ -33,7 +33,7 @@ describe('lint-configuration', () => {
       ];
       expect(parsed.extends).toStrictEqual(dependencies);
       expect(output.dependencies.development.values()).toStrictEqual(
-        new Set(dependencies).values(),
+        new Set(dependencies.map((d) => `${d}@latest`)).values(),
       );
     });
 
@@ -66,10 +66,10 @@ describe('lint-configuration', () => {
       ]);
       expect(output.dependencies.development.values()).toStrictEqual(
         new Set([
-          '@code-style/eslint-config',
-          '@code-style/eslint-config-browser',
-          '@code-style/eslint-config-typescript',
-          '@code-style/eslint-config-jest',
+          '@code-style/eslint-config@latest',
+          '@code-style/eslint-config-browser@latest',
+          '@code-style/eslint-config-typescript@latest',
+          '@code-style/eslint-config-jest@latest',
         ]).values(),
       );
     });
