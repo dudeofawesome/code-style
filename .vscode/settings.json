@@ -16,6 +16,11 @@
     "jsonc"
   ],
 
+  "files.exclude": {
+    "**/dist/": true,
+    "**/coverage/": true
+  },
+
   "[ruby]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

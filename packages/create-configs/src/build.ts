@@ -45,7 +45,13 @@ export async function build({
   await Promise.all(
     [
       technologies.includes('vs-code')
-        ? create_vscode_config(project_type, languages, technologies, overwrite)
+        ? create_vscode_config({
+            project_type,
+            languages,
+            technologies,
+            output_dir,
+            overwrite,
+          })
         : null,
 
       create_gitignore({

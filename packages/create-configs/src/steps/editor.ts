@@ -5,6 +5,7 @@ import {
   ProjectType,
   Language,
   Technology,
+  CodeStyleSetupOptions,
 } from '@code-style/code-style/config-types';
 
 import { create_file, prettify, verify_missing } from '../utils.js';
@@ -22,12 +23,18 @@ export interface LaunchConfiguration {
   continueOnAttach?: boolean;
 }
 
-export async function create_vscode_config(
-  project_type: ProjectType,
-  languages: Language[],
-  technologies: Technology[],
-  overwrite: boolean = false,
-) {
+export type CreateVSCodeConfigOptions = Pick<
+  CodeStyleSetupOptions,
+  'project_type' | 'languages' | 'technologies' | 'output_dir' | 'overwrite'
+>;
+
+export async function create_vscode_config({
+  project_type,
+  languages,
+  technologies,
+  output_dir,
+  overwrite = false,
+}: CreateVSCodeConfigOptions) {
   await mkdir('.vscode/').catch(() => {});
 
   await Promise.allSettled([
@@ -61,6 +68,11 @@ export async function create_vscode_config(
                   'json',
                   'jsonc',
                 ],
+
+                'files.exclude': {
+                  [`**/${output_dir}/`]: true,
+                  '**/coverage/': true,
+                },
               },
 
               ...(languages.includes('js') || languages.includes('ts')
