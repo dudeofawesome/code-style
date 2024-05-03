@@ -1,11 +1,7 @@
 import { log } from 'node:console';
-import { promisify } from 'node:util';
-import { exec as execCallback } from 'node:child_process';
 
 import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
-import { Dependencies } from 'utils.js';
-
-const exec = promisify(execCallback);
+import { Dependencies, exec } from 'utils.js';
 
 export async function uninstall_duplicate_dependencies({
   runtime,

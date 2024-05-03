@@ -14,7 +14,7 @@ import { format, Options } from 'prettier';
 import default_config from '@code-style/code-style/prettierrc';
 import { Language } from '@code-style/code-style/config-types';
 
-const exec = promisify(execCallback);
+export const exec = promisify(execCallback);
 
 export async function create_file(
   path: string,

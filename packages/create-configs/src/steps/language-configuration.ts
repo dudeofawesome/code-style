@@ -1,5 +1,3 @@
-import { exec as execCallback } from 'node:child_process';
-import { promisify } from 'node:util';
 import { stripIndent } from 'common-tags';
 import {
   ExcludeDefinition,
@@ -14,14 +12,13 @@ import {
   create_file,
   prettify,
   verify_missing,
+  exec,
 } from '../utils.js';
 
 export type TSConfig = Omit<TSConfigFull, 'extends'> & {
   extends: string[];
 } & IncludeDefinition &
   ExcludeDefinition;
-
-const exec = promisify(execCallback);
 
 /** @private */
 export function _generate_base_ts_config({
