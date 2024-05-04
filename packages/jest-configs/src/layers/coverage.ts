@@ -4,6 +4,7 @@ const ext = String.raw`[cm]?[jt]sx?`;
 
 export const config: Config = {
   collectCoverage: true,
+  collectCoverageFrom: ['**/*.?(c|m)(t|j)s?(x)'],
   coverageDirectory: './coverage',
   coveragePathIgnorePatterns: [
     // dependencies
