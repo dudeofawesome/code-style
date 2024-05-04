@@ -65,7 +65,9 @@ export async function create_vscode_config({
                 ],
 
                 'files.exclude': {
-                  [`**/${output_dir}/`]: true,
+                  ...(output_dir != null
+                    ? { [`**/${output_dir.replace(/\/$/u, '')}/`]: true }
+                    : {}),
                   '**/coverage/': true,
                 },
               },
