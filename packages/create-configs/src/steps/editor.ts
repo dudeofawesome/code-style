@@ -68,6 +68,9 @@ export async function create_vscode_config({
                   ...(output_dir != null
                     ? { [`**/${output_dir.replace(/\/$/u, '')}/`]: true }
                     : {}),
+                  ...(technologies.includes('nextjs')
+                    ? { '.next/': true }
+                    : {}),
                   '**/coverage/': true,
                 },
               },
