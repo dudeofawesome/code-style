@@ -30,8 +30,6 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/eslint-config-node": "2.0.0-30",
-    "@code-style/eslint-config-typescript": "2.0.0-30",
     "@code-style/eslint-plugin-nest": "2.0.0-30"
   },
   "devDependencies": {

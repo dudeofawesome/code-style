@@ -29,9 +29,6 @@
     "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
-  "dependencies": {
-    "@code-style/eslint-config-node": "^2.0.0-30"
-  },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",

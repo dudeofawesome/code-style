@@ -30,7 +30,6 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/eslint-config-react": "^2.0.0-30",
     "@next/eslint-plugin-next": "^14.1.1"
   },
   "devDependencies": {
