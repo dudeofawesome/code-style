@@ -32,7 +32,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "eslint-plugin-n": "^16.1.0"
+    "eslint-plugin-n": "^17.4.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.44.2",
