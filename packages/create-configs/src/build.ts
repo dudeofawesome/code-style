@@ -92,6 +92,7 @@ export async function build({
               technologies,
               runtime,
               builder,
+              library,
               overwrite,
             }).then(merge_deps(deps)),
           ]

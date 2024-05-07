@@ -111,7 +111,7 @@ export type VerifyMissingScriptOptions = Omit<
   /** The path of the file to possibly delete. */
   path?: string;
   /** The path to key in the JSON file. */
-  json_path: string;
+  json_paths: string | string[];
   /** Whether or not to allow overwriting the key. */
   overwrite: boolean;
 };
@@ -120,25 +120,33 @@ export type VerifyMissingScriptOptions = Omit<
  */
 export async function verify_missing_script({
   path,
-  json_path,
+  json_paths: _json_paths,
   overwrite = false,
   reject = false,
 }: VerifyMissingScriptOptions): Promise<boolean> {
-  if ((await exec(`npm pkg get '${json_path}'`)).stdout.trim() !== '{}') {
-    if (overwrite) {
-      return true;
-    } else {
-      const message = `Path "${json_path}" already exists.`;
-      if (reject) {
-        throw new Error(message);
-      } else {
-        console.info(message);
-        return false;
-      }
-    }
-  } else {
-    return true;
-  }
+  const json_paths = Array.isArray(_json_paths) ? _json_paths : [_json_paths];
+
+  return (
+    await Promise.all(
+      json_paths.map(async (json_path) => {
+        if ((await exec(`npm pkg get '${json_path}'`)).stdout.trim() !== '{}') {
+          if (overwrite) {
+            return true;
+          } else {
+            const message = `Path "${json_path}" already exists.`;
+            if (reject) {
+              throw new Error(message);
+            } else {
+              console.info(message);
+              return false;
+            }
+          }
+        } else {
+          return true;
+        }
+      }),
+    )
+  ).every((v) => v);
 }
 
 export async function prettify(

@@ -12,72 +12,92 @@ const concurrently_opts = '--raw --group';
 
 export type AddNPMScriptsOptions = Pick<
   SetupOptions,
-  'languages' | 'technologies' | 'builder' | 'runtime' | 'overwrite'
+  'languages' | 'technologies' | 'builder' | 'runtime' | 'overwrite' | 'library'
 >;
 
 export async function add_npm_scripts(
   options: AddNPMScriptsOptions,
 ): Promise<Dependencies | undefined> {
-  // These can't be run simultaneously because they all modify package.json
-  const deps = new Dependencies([
-    (await set_build_script(options)) ?? new Dependencies(),
-    (await set_lint_script(options)) ?? new Dependencies(),
-    (await set_test_script(options)) ?? new Dependencies(),
-    (await set_check_script(options)) ?? new Dependencies(),
-  ]);
+  const out: { scripts: Record<string, string>; dependencies: Dependencies }[] =
+    [
+      _generate_build_script(options),
+      _generate_lint_script(options),
+      _generate_test_script(options),
+      _generate_check_script(options),
+    ];
+  const scripts = out.reduce<Record<string, string>>(
+    (all_scripts, curr) => ({ ...all_scripts, ...curr.scripts }),
+    {},
+  );
+  const dependencies = out.reduce<Dependencies>(
+    (deps, curr) => deps.add(curr.dependencies),
+    new Dependencies(),
+  );
 
+  await verify_missing_script({
+    json_paths: Object.keys(scripts).map((script) => `scripts.${script}`),
+    overwrite: options.overwrite,
+  });
+  await write_scripts(scripts);
   await prettify('package.json');
 
-  return deps;
+  return dependencies;
 }
 
+type BuildScripts = { build?: string; prepublishOnly?: string };
 // TODO(2): add npm script for build, prepublishOnly
-export async function set_build_script({
+export function _generate_build_script({
   languages,
   technologies,
   builder,
+  library,
   overwrite = false,
-}: AddNPMScriptsOptions): Promise<Dependencies | undefined> {
-  if (await verify_missing_script({ json_path: 'scripts.build', overwrite })) {
-    const deps = new Dependencies();
+}: AddNPMScriptsOptions): {
+  scripts: BuildScripts;
+  dependencies: Dependencies;
+} {
+  const deps = new Dependencies();
 
-    if (technologies.includes('nestjs')) {
-      await write_scripts({ build: 'nest build' });
-    } else if (technologies.includes('nextjs')) {
-      if (languages.includes('scss')) deps.d.depend('sass-embedded');
-      await write_scripts({ build: `${deps.p.depend('next')} build` });
-    } else {
-      // const build_step: Set<Exclude<Builder, 'bun' | 'none'> | 'scss'> =
-      //   new Set();
-      // switch (builder) {
-      //   case 'babel':
-      //   case 'esbuild':
-      //   case 'swc':
-      //   case 'tsc':
-      //     build_step.add(builder);
-      //     break;
-      //   default:
-      // }
-      // if (languages.includes('scss')) {
-      //   deps.d.depend('sass-embedded');
-      //   build_step.add('scss');
-      // }
-      // if (languages.includes('ts')) {
-      //   deps.d.depend('typescript');
-      // }
-      // if (build_step.has('esbuild')) {
-      //   if (languages.includes('scss')) {
-      //     //
-      //   } else {
-      //     //
-      //   }
-      // }
-      // const script = '';
-      // await write_scripts({ build: script });
-    }
+  const scripts: BuildScripts = {};
 
-    return deps;
+  if (technologies.includes('nestjs')) {
+    scripts.build = 'nest build';
+  } else if (technologies.includes('nextjs')) {
+    if (languages.includes('scss')) deps.d.depend('sass-embedded');
+    scripts.build = `${deps.p.depend('next')} build`;
+  } else {
+    // const build_step: Set<Exclude<Builder, 'bun' | 'none'> | 'scss'> =
+    //   new Set();
+    // switch (builder) {
+    //   case 'babel':
+    //   case 'esbuild':
+    //   case 'swc':
+    //   case 'tsc':
+    //     build_step.add(builder);
+    //     break;
+    //   default:
+    // }
+    // if (languages.includes('scss')) {
+    //   deps.d.depend('sass-embedded');
+    //   build_step.add('scss');
+    // }
+    // if (languages.includes('ts')) {
+    //   deps.d.depend('typescript');
+    // }
+    // if (build_step.has('esbuild')) {
+    //   if (languages.includes('scss')) {
+    //     //
+    //   } else {
+    //     //
+    //   }
+    // }
+    // const script = '';
+    // await write_scripts({ build: script });
   }
+
+  if (library) scripts.prepublishOnly = `npm run build`;
+
+  return { scripts, dependencies: deps };
 }
 
 type LintScripts = Record<`lint:${string}`, string>;
@@ -87,7 +107,7 @@ export function _generate_lint_script({
   languages,
   technologies,
   builder,
-}: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime'>): {
+}: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime' | 'library'>): {
   scripts: {
     [key: `lint:${string}`]: string;
     lint: string;
@@ -154,103 +174,79 @@ export function _generate_lint_script({
   };
 }
 
-export async function set_lint_script(
-  options: AddNPMScriptsOptions,
-): Promise<Dependencies | undefined> {
-  if (
-    await verify_missing_script({
-      json_path: 'scripts.lint',
-      overwrite: options.overwrite,
-    })
-  ) {
-    const config = _generate_lint_script(options);
-    await write_scripts(config.scripts);
-    return config.dependencies;
-  }
-}
-
 type TestScripts = { test: string; 'test:debug': string };
 
-export async function set_test_script(
-  options: AddNPMScriptsOptions,
-): Promise<Dependencies | undefined> {
-  if (
-    await verify_missing_script({
-      json_path: 'scripts.test',
-      overwrite: options.overwrite,
-    })
-  ) {
-    const deps = new Dependencies();
+/** @private */
+export function _generate_test_script({
+  languages,
+  technologies,
+  builder,
+  runtime,
+}: Omit<AddNPMScriptsOptions, 'overwrite'>): {
+  scripts: TestScripts;
+  dependencies: Dependencies;
+} {
+  const deps = new Dependencies();
 
-    const script: TestScripts = (({
-      runtime,
-      technologies,
-      languages,
-    }): TestScripts => {
-      if (technologies.includes('jest')) {
+  const scripts: TestScripts = ((): TestScripts => {
+    if (technologies.includes('jest')) {
+      return {
+        test: `NODE_OPTIONS="--experimental-vm-modules $NODE_OPTIONS" npx ${deps.d.depend('jest')}`,
+        'test:debug': `NODE_OPTIONS='--inspect-brk' npm run test -- --runInBand`,
+      };
+    } else if (runtime === 'nodejs') {
+      // We must be using the node test runner then
+      if (languages.includes('ts')) {
         return {
-          test: `NODE_OPTIONS="--experimental-vm-modules $NODE_OPTIONS" npx ${deps.d.depend('jest')}`,
-          'test:debug': `NODE_OPTIONS='--inspect-brk' npm run test -- --runInBand`,
+          test: [
+            [
+              `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
+              `--test $(${deps.d.depend('glob')}`,
+              ...['**/node_modules/**', '**/dist/**'].map(
+                (ig) => `--ignore '${ig}'`,
+              ),
+              ...[
+                // Based on the default test file patterns:
+                //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
+                `'**/*[.-_]test.?(c|m)[jt]s'`,
+                `'**/test?(-*).?(c|m)[jt]s'`,
+                `'**/test/**/*.?(c|m)[jt]s'`,
+              ],
+            ].join(' '),
+          ].join('; '),
+          'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
         };
-      } else if (runtime === 'nodejs') {
-        // We must be using the node test runner then
-        if (languages.includes('ts')) {
-          return {
-            test: [
-              [
-                `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
-                `--test $(${deps.d.depend('glob')}`,
-                ...['**/node_modules/**', '**/dist/**'].map(
-                  (ig) => `--ignore '${ig}'`,
-                ),
-                ...[
-                  // Based on the default test file patterns:
-                  //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
-                  `'**/*[.-_]test.?(c|m)[jt]s'`,
-                  `'**/test?(-*).?(c|m)[jt]s'`,
-                  `'**/test/**/*.?(c|m)[jt]s'`,
-                ],
-              ].join(' '),
-            ].join('; '),
-            'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
-          };
-        } else {
-          return {
-            test: 'node $NODE_OPTS --test',
-            'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
-          };
-        }
       } else {
-        throw new Error(`Unsupported testing environment`);
+        return {
+          test: 'node $NODE_OPTS --test',
+          'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
+        };
       }
-    })(options);
+    } else {
+      throw new Error(`Unsupported testing environment`);
+    }
+  })();
 
-    await write_scripts(script);
-
-    return deps;
-  }
+  return {
+    scripts,
+    dependencies: deps,
+  };
 }
 
-export async function set_check_script({
+export function _generate_check_script({
   runtime,
-  overwrite = false,
-}: Pick<AddNPMScriptsOptions, 'runtime' | 'overwrite'>): Promise<
-  Dependencies | undefined
-> {
-  if (
-    await verify_missing_script({
-      json_path: 'scripts.check',
-      overwrite: overwrite,
-    })
-  ) {
-    const deps = new Dependencies();
+}: Pick<AddNPMScriptsOptions, 'runtime'>): {
+  scripts: { check: string };
+  dependencies: Dependencies;
+} {
+  const deps = new Dependencies();
 
-    await write_scripts({
+  return {
+    scripts: {
       check: `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:test" "npm:lint"`,
-    });
-
-    return deps;
-  }
+    },
+    dependencies: deps,
+  };
 }
 
 async function write_scripts(scripts: Record<string, string>) {

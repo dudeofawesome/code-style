@@ -77,6 +77,7 @@ describe('scripts', () => {
 });
 
 function test_no_shell_globs(scripts: string[]) {
+  // eslint-disable-next-line jest/require-top-level-describe
   it(`shouldn't allow the shell to expand globs`, () => {
     for (const script of scripts) {
       // https://regex101.com/r/e67boW/
