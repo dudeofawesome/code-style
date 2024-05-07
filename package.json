@@ -49,10 +49,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "overrides": {
-    "eslint-plugin-import": {
-      "tsconfig-paths": "^4.2.0"
-    }
   }
 }
