@@ -37,7 +37,7 @@ export function _generate_base_ts_config({
       outDir: output_dir,
     },
     include: ['./'],
-    exclude: [output_dir],
+    exclude: [output_dir, 'coverage/'],
   };
 
   switch (project_type) {
