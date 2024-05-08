@@ -1,3 +1,7 @@
 {
-  "extends": "./base.json"
+  "extends": "./base.json",
+  "compilerOptions": {
+    // load NodeJS global types
+    "types": ["node"]
+  }
 }

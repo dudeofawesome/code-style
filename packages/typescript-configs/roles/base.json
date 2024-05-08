@@ -21,6 +21,8 @@
     "resolveJsonModule": true,
     // defines environment
     "lib": ["ES2022"],
+    // prevent implicitly loading global types
+    "types": [],
 
     //=== OUTPUT ===//
     // emit .d.ts files
