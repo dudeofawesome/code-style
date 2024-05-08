@@ -12,7 +12,13 @@ const concurrently_opts = '--raw --group';
 
 export type AddNPMScriptsOptions = Pick<
   SetupOptions,
-  'languages' | 'technologies' | 'builder' | 'runtime' | 'overwrite' | 'library'
+  | 'languages'
+  | 'technologies'
+  | 'builder'
+  | 'runtime'
+  | 'overwrite'
+  | 'library'
+  | 'output_dir'
 >;
 
 export async function add_npm_scripts(
@@ -181,6 +187,7 @@ export function _generate_test_script({
   languages,
   technologies,
   builder,
+  output_dir,
   runtime,
 }: Omit<AddNPMScriptsOptions, 'overwrite'>): {
   scripts: TestScripts;
@@ -202,7 +209,7 @@ export function _generate_test_script({
             [
               `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
               `--test $(${deps.d.depend('glob')}`,
-              ...['**/node_modules/**', '**/dist/**'].map(
+              ...['**/node_modules/**', `**/${output_dir}/**`].map(
                 (ig) => `--ignore '${ig}'`,
               ),
               ...[
