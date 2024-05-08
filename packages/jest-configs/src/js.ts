@@ -1,8 +1,6 @@
 import type { Config } from 'jest';
-import { config as base } from './base';
+import { config as base } from './base.js';
 
-const config: Config = {
+export const config: Config = {
   ...base,
 };
-
-export default config;

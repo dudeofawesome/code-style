@@ -102,6 +102,7 @@ export async function build({
         ? create_jest_config({
             languages,
             technologies,
+            builder,
             overwrite,
           }).then(merge_deps(deps))
         : null,

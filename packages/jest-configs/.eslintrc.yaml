@@ -4,6 +4,3 @@ extends:
   - '@code-style/eslint-config-node'
   - '@code-style/eslint-config-typescript'
   - '@code-style/eslint-config-esmodule'
-
-rules:
-  import/no-default-export: 'off'

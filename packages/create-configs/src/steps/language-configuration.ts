@@ -198,12 +198,22 @@ export async function set_package_type({
 /** @private */
 export function _generate_jest_config({
   languages,
+  builder,
   technologies,
 }: Omit<CreateJestConfigOptions, 'overwrite'>): ConfigFile {
   const deps = new Dependencies();
   const config: string = ((ts: boolean, esm: boolean) => {
-    if (ts) return `ts-${esm ? 'esm' : 'cjs'}`;
-    else return 'js';
+    if (ts) {
+      const map: Record<typeof builder, string> = {
+        esbuild: 'esbuild',
+        swc: 'swc',
+        tsc: 'tsc',
+        babel: 'tsc',
+        bun: 'tsc',
+        none: 'tsc',
+      };
+      return `ts/${map[builder]}/${esm ? 'esm' : 'cjs'}`;
+    } else return 'js';
   })(languages.includes('ts'), technologies.includes('esm'));
   return {
     content: stripIndent`
@@ -218,11 +228,12 @@ export function _generate_jest_config({
 
 export type CreateJestConfigOptions = Pick<
   SetupOptions,
-  'languages' | 'technologies' | 'overwrite'
+  'languages' | 'builder' | 'technologies' | 'overwrite'
 >;
 export async function create_jest_config({
   languages,
   technologies,
+  builder,
   overwrite,
 }: CreateJestConfigOptions): Promise<Dependencies> {
   const deps = new Dependencies();
@@ -236,6 +247,7 @@ export async function create_jest_config({
     const config = _generate_jest_config({
       languages,
       technologies,
+      builder,
     });
 
     await create_file(path, await prettify(path, config.content));
