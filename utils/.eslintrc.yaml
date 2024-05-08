@@ -14,4 +14,4 @@ overrides:
       - '*.spec.*'
       - '*.unit.*'
       - '*.e2e.*'
-    extends: '@code-style/eslint-config/overrides/testing.yaml'
+    extends: '@code-style/eslint-config/overrides/testing'
