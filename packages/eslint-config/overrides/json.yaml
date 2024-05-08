@@ -1,6 +1,0 @@
-plugins:
-  - 'eslint-plugin-json-files'
-
-rules:
-  # eslint-plugin-prettier breaks JSON linting (https://github.com/prettier/eslint-plugin-prettier/issues/570)
-  prettier/prettier: 'off'

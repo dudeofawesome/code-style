@@ -16,31 +16,33 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "type": "commonjs",
   "exports": {
-    ".": "./base.yaml",
-    "./base": "./base.yaml",
-    "./lenient": "./lenient.yaml",
-    "./*.yaml": "./*.yaml"
+    ".": "./dist/base.js",
+    "./*": "./dist/*.js"
   },
-  "main": "base.yaml",
+  "main": "./dist/base.js",
   "files": [
-    "/base.yaml",
-    "/lenient.yaml"
+    "/dist/"
   ],
   "scripts": {
+    "build": "concurrently --raw --group 'npm:build:*'",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node18 --format=cjs",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
+    "@rushstack/eslint-patch": "^1.10.2",
     "eslint-plugin-n": "^17.4.0"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.2",
+    "@types/eslint": "^8.56.10",
     "@types/node": "^20.6.3",
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@code-style/eslint-npm-hoist-packages-node": "2.0.0-30",
     "eslint": "^8.49.0"
   },
   "engines": {

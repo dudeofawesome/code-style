@@ -16,25 +16,28 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "type": "commonjs",
   "exports": {
-    ".": "./base.yaml",
-    "./base": "./base.yaml",
-    "./lenient": "./lenient.yaml",
-    "./*.yaml": "./*.yaml"
+    ".": "./dist/base.js",
+    "./*": "./dist/*.js"
   },
-  "main": "base.yaml",
+  "main": "dist/base.js",
   "files": [
-    "/base.yaml",
-    "/lenient.yaml"
+    "/dist"
   ],
   "scripts": {
+    "build": "concurrently --raw --group 'npm:build:*'",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node18 --format=cjs",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "lint": "concurrently --raw --group \"npm:lint:*\"",
     "lint:js": "eslint . --ext ts,mts,cts,js,json",
     "lint:types": "tsc --noEmit --pretty",
+    "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
+    "@rushstack/eslint-patch": "^1.10.2",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "eslint-plugin-import": "^2.29.1"
@@ -47,7 +50,6 @@
     "tsm": "^2.3.0"
   },
   "peerDependencies": {
-    "@code-style/eslint-npm-hoist-packages-typescript": "2.0.0-30",
     "eslint": "^8.49.0",
     "typescript": ">=5.0.0"
   },
