@@ -99,6 +99,11 @@ const config: ESLint.ConfigData = {
 
     // Check that all imports are part of our package in production.
     'n/no-unpublished-import': ['error', { ignoreTypeImport: true }],
+
+    'n/no-unsupported-features/node-builtins': [
+      'error',
+      { ignores: ['test', 'test.describe', 'test.it'] },
+    ],
   },
 
   overrides: [
