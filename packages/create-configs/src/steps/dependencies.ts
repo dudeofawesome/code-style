@@ -49,12 +49,6 @@ export async function install_dependencies({
   runtime,
   dependencies,
 }: InstallDependenciesOptions) {
-  // add hoist dependencies
-  for (const dep of dependencies.development) {
-    const hoist = NpmHoistHackMap.get(dep);
-    if (hoist != null) dependencies.development.add(hoist);
-  }
-
   log(
     `Installing ${(dependencies.production.size > 0
       ? Array.from(dependencies.production)
@@ -97,31 +91,3 @@ export async function install_dependencies({
     await exec(`${install_cmd_dev} ${Array.from(dependencies.d).join(' ')}`);
   }
 }
-
-const NpmHoistHackMap: ReadonlyMap<string, string> = new Map<string, string>([
-  ['@code-style/eslint-config', '@code-style/eslint-npm-hoist-packages'],
-  [
-    '@code-style/eslint-config-esmodule',
-    '@code-style/eslint-npm-hoist-packages-esmodule',
-  ],
-  [
-    '@code-style/eslint-config-jest',
-    '@code-style/eslint-npm-hoist-packages-jest',
-  ],
-  [
-    '@code-style/eslint-config-nextjs',
-    '@code-style/eslint-npm-hoist-packages-nextjs',
-  ],
-  [
-    '@code-style/eslint-config-node',
-    '@code-style/eslint-npm-hoist-packages-node',
-  ],
-  [
-    '@code-style/eslint-config-react',
-    '@code-style/eslint-npm-hoist-packages-react',
-  ],
-  [
-    '@code-style/eslint-config-typescript',
-    '@code-style/eslint-npm-hoist-packages-typescript',
-  ],
-]);
