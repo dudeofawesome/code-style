@@ -1,3 +1,4 @@
+// In order to update the this config, update @code-style/typescript-configs
 {
   "extends": [
     "@code-style/typescript-configs/roles/node",
@@ -7,6 +8,6 @@
     "baseUrl": "src/",
     "outDir": "dist/"
   },
-  "include": ["src/"],
-  "exclude": ["dist/"]
+  "include": ["./"],
+  "exclude": ["dist/", "coverage/"]
 }

@@ -219,7 +219,6 @@ export function _generate_jest_config({
     content: stripIndent`
       import { config } from '${deps.d.depend('@code-style/jest-configs', { v: 'latest' })}/${config}';
 
-      // eslint-disable-next-line import/no-default-export
       export default config;
     `,
     dependencies: deps,
