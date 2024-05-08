@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     // enable React JSX transpilation.
-    "jsx": "react"
+    "jsx": "react",
+    // load React global types
+    "types": ["react"]
   }
 }
