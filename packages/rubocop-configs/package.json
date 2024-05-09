@@ -16,7 +16,7 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "main": "base.yaml",
   "files": [
-    "/base.yaml"
+    "./base.yaml"
   ],
   "scripts": {
     "test": "echo 'No tests'; exit 0"

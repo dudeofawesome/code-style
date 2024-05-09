@@ -29,12 +29,12 @@
     "add-code-style": "scripts/add-code-style.sh"
   },
   "files": [
-    "/src/",
-    "/prettierrc.*",
-    "/config-types.*",
-    "/.editorconfig",
+    "./src/",
+    "./prettierrc.*",
+    "./config-types.*",
+    "./.editorconfig",
     "*.schema.json",
-    "/scripts/add-code-style.sh"
+    "./scripts/add-code-style.sh"
   ],
   "scripts": {
     "build": "concurrently --group --prefix none \"npm:build:*\"",

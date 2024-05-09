@@ -24,8 +24,8 @@
   },
   "main": "roles/base.json",
   "files": [
-    "/roles/",
-    "/layers/"
+    "./roles/",
+    "./layers/"
   ],
   "scripts": {
     "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",

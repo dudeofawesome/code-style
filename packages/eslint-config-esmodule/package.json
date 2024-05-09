@@ -24,7 +24,7 @@
   },
   "main": "dist/base.js",
   "files": [
-    "/dist"
+    "./dist/"
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
