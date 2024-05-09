@@ -13,6 +13,7 @@ import {
   prettify,
   verify_missing,
   exec,
+  version as v,
 } from '../utils.js';
 
 export type TSConfig = Omit<TSConfigFull, 'extends'> & {
@@ -43,17 +44,17 @@ export function _generate_base_ts_config({
   switch (project_type) {
     case 'web-app':
       config.extends.push(
-        `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/browser`,
+        `${deps.d.depend('@code-style/typescript-configs', { v })}/roles/browser`,
       );
       if (technologies.includes('nextjs')) {
         deps.d.add(['@types/react', '@types/react-dom']);
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/nextjs`,
+          `${deps.d.depend('@code-style/typescript-configs', { v })}/layers/nextjs`,
         );
       } else if (technologies.includes('react')) {
         deps.d.add(['@types/react', '@types/react-dom']);
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/react`,
+          `${deps.d.depend('@code-style/typescript-configs', { v })}/layers/react`,
         );
       }
       break;
@@ -61,12 +62,12 @@ export function _generate_base_ts_config({
     case 'cli':
       if (technologies.includes('nestjs')) {
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/nest`,
+          `${deps.d.depend('@code-style/typescript-configs', { v })}/roles/nest`,
         );
       } else {
         deps.d.depend('@types/node');
         config.extends.push(
-          `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/roles/node`,
+          `${deps.d.depend('@code-style/typescript-configs', { v })}/roles/node`,
         );
       }
       break;
@@ -74,13 +75,13 @@ export function _generate_base_ts_config({
 
   if (technologies.includes('esm')) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/esmodule`,
+      `${deps.d.depend('@code-style/typescript-configs', { v })}/layers/esmodule`,
     );
   }
 
   if (library) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/library`,
+      `${deps.d.depend('@code-style/typescript-configs', { v })}/layers/library`,
     );
   }
 
@@ -88,7 +89,7 @@ export function _generate_base_ts_config({
 
   if (lenient) {
     config.extends.push(
-      `${deps.d.depend('@code-style/typescript-configs', { v: 'latest' })}/layers/lenient`,
+      `${deps.d.depend('@code-style/typescript-configs', { v })}/layers/lenient`,
     );
   }
 
@@ -217,7 +218,7 @@ export function _generate_jest_config({
   })(languages.includes('ts'), technologies.includes('esm'));
   return {
     content: stripIndent`
-      import { config } from '${deps.d.depend('@code-style/jest-configs', { v: 'latest' })}/${config}';
+      import { config } from '${deps.d.depend('@code-style/jest-configs', { v })}/${config}';
 
       export default config;
     `,

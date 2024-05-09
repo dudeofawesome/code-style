@@ -12,6 +12,7 @@ import {
   create_file,
   prettify,
   verify_missing,
+  version as v,
 } from '../utils.js';
 
 /** @private */
@@ -51,92 +52,90 @@ export function _generate_eslint_config({
   const deps = new Dependencies();
   const config: ESLint.ConfigData & { extends: string[] } = {
     root: true,
-    extends: [deps.d.depend('@code-style/eslint-config', { v: 'latest' })],
+    extends: [deps.d.depend('@code-style/eslint-config', { v })],
     parserOptions: {
       ecmaVersion: 2022,
     },
   };
   if (lenient)
     config.extends.push(
-      `${deps.d.depend('@code-style/eslint-config', { v: 'latest' })}/lenient`,
+      `${deps.d.depend('@code-style/eslint-config', { v })}/lenient`,
     );
 
   switch (project_type) {
     case 'web-app':
       config.extends.push(
-        deps.d.depend('@code-style/eslint-config-browser', { v: 'latest' }),
+        deps.d.depend('@code-style/eslint-config-browser', { v }),
       );
 
       if (technologies.includes('react') || technologies.includes('nextjs')) {
         deps.p.add(['react', 'react-dom']);
         config.extends.push(
-          deps.d.depend('@code-style/eslint-config-react', { v: 'latest' }),
+          deps.d.depend('@code-style/eslint-config-react', { v }),
         );
       }
       if (technologies.includes('nextjs')) {
         deps.p.add(['react', 'react-dom']);
         config.extends.push(
-          deps.d.depend('@code-style/eslint-config-nextjs', { v: 'latest' }),
+          deps.d.depend('@code-style/eslint-config-nextjs', { v }),
         );
       }
       break;
     case 'backend':
       config.extends.push(
-        deps.d.depend('@code-style/eslint-config-node', { v: 'latest' }),
+        deps.d.depend('@code-style/eslint-config-node', { v }),
       );
       if (lenient)
         config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-node', { v: 'latest' })}/lenient`,
+          `${deps.d.depend('@code-style/eslint-config-node', { v })}/lenient`,
         );
 
       if (technologies.includes('nestjs')) {
         config.extends.push(
-          deps.d.depend('@code-style/eslint-config-nest', { v: 'latest' }),
+          deps.d.depend('@code-style/eslint-config-nest', { v }),
         );
       }
       break;
     case 'cli':
       config.extends.push(
-        deps.d.depend('@code-style/eslint-config-node', { v: 'latest' }),
+        deps.d.depend('@code-style/eslint-config-node', { v }),
       );
       if (lenient)
         config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-node', { v: 'latest' })}/lenient`,
+          `${deps.d.depend('@code-style/eslint-config-node', { v })}/lenient`,
         );
 
       config.extends.push(
-        deps.d.depend('@code-style/eslint-config-cli', { v: 'latest' }),
+        deps.d.depend('@code-style/eslint-config-cli', { v }),
       );
       if (lenient)
         config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-cli', { v: 'latest' })}/lenient`,
+          `${deps.d.depend('@code-style/eslint-config-cli', { v })}/lenient`,
         );
       break;
   }
 
   if (languages.includes('ts')) {
     config.extends.push(
-      deps.d.depend('@code-style/eslint-config-typescript', { v: 'latest' }),
+      deps.d.depend('@code-style/eslint-config-typescript', { v }),
     );
     if (lenient)
       config.extends.push(
-        `${deps.d.depend('@code-style/eslint-config-typescript', { v: 'latest' })}/lenient`,
+        `${deps.d.depend('@code-style/eslint-config-typescript', { v })}/lenient`,
       );
   }
 
   if (technologies.includes('jest')) {
-    config.extends.push(
-      deps.d.depend('@code-style/eslint-config-jest', { v: 'latest' }),
-    );
+    config.extends.push(deps.d.depend('@code-style/eslint-config-jest', { v }));
     if (lenient)
       config.extends.push(
-        `${deps.d.depend('@code-style/eslint-config-jest', { v: 'latest' })}/lenient`,
+        `${deps.d.depend('@code-style/eslint-config-jest', { v })}/lenient`,
       );
   }
 
   if (technologies.includes('esm'))
     config.extends.push(
-      deps.d.depend('@code-style/eslint-config-esmodule', { v: 'latest' }),
+      deps.d.depend('@code-style/eslint-config-esmodule', { v }),
     );
 
   return {
@@ -185,12 +184,12 @@ export async function create_eslint_config({
 export function _generate_stylelint_config(languages: Language[]): ConfigFile {
   const deps = new Dependencies();
   const config: Omit<Config, 'extends'> & { extends: string[] } = {
-    extends: [deps.d.depend('@code-style/stylelint-config', { v: 'latest' })],
+    extends: [deps.d.depend('@code-style/stylelint-config', { v })],
   };
 
   if (languages.includes('scss')) {
     config.extends.push(
-      deps.d.depend('@code-style/stylelint-config-scss', { v: 'latest' }),
+      deps.d.depend('@code-style/stylelint-config-scss', { v }),
     );
   }
 

@@ -6,6 +6,7 @@ import {
   Dependencies,
   create_file,
   verify_missing,
+  version as v,
 } from '../utils.js';
 
 export async function create_prettier_config(
@@ -26,7 +27,7 @@ export async function create_prettier_config(
          * Prettier configuration file
          * In order to update the this config, update @code-style/code-style
          */
-        import config from '${deps.d.depend('@code-style/code-style', { v: 'latest' })}/prettierrc';
+        import config from '${deps.d.depend('@code-style/code-style', { v })}/prettierrc';
         export default config;
       `,
     );
@@ -45,7 +46,7 @@ export async function create_editor_config(
       await symlink(
         join(
           'node_modules',
-          deps.d.depend('@code-style/code-style', { v: 'latest' }),
+          deps.d.depend('@code-style/code-style', { v }),
           '.editorconfig',
         ),
         path,

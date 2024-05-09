@@ -6,6 +6,7 @@ import {
   includes_js,
   prettify,
   verify_missing_script,
+  version as v,
 } from '../utils.js';
 
 const concurrently_opts = '--raw --group';
@@ -134,7 +135,7 @@ export function _generate_lint_script({
         case 'eslint':
           return {
             ...scripts,
-            'lint:js': `${deps.d.depend('@code-style/eslint-config', { cmd: 'eslint', v: 'latest' })} . --ext ${languages
+            'lint:js': `${deps.d.depend('@code-style/eslint-config', { cmd: 'eslint', v })} . --ext ${languages
               .filter((l) => ['js', 'ts'].includes(l))
               .reduce<string[]>(
                 (extensions, ext) => [
@@ -152,7 +153,7 @@ export function _generate_lint_script({
             'lint:css': [
               deps.d.depend('@code-style/stylelint-config', {
                 cmd: 'stylelint',
-                v: 'latest',
+                v,
               }),
               `'**/*.{${languages
                 .filter((l) => ['css', 'scss'].includes(l))

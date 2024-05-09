@@ -9,7 +9,9 @@ import {
   stat,
   writeFile,
 } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
 import assert from 'node:assert';
+import { cwd } from 'node:process';
 import { format, Options } from 'prettier';
 import default_config from '@code-style/code-style/prettierrc';
 import { Language } from '@code-style/code-style/config-types';
@@ -246,4 +248,44 @@ export class Dependencies {
 
 export function is_dependencies_array(arr: unknown): arr is Dependencies[] {
   return Array.isArray(arr) && arr[0] instanceof Dependencies;
+}
+
+export async function find_nearest_package(
+  start: string = cwd(),
+): Promise<string> {
+  let base = start;
+
+  // eslint-disable-next-line no-await-in-loop
+  while (!(await path_exists(join(base, 'package.json')))) {
+    const parent = dirname(base);
+
+    if (base === parent) throw new Error();
+    else base = parent;
+  }
+
+  console.log(`FOUND PATH ${base}`);
+
+  return join(base, 'package.json');
+}
+
+export const version: string = await readFile(
+  await find_nearest_package(import.meta.dirname),
+  'utf-8',
+)
+  .then((str) => JSON.parse(str) as unknown)
+  .then((pkg) =>
+    pkg != null &&
+    typeof pkg === 'object' &&
+    'version' in pkg &&
+    pkg.version != null
+      ? (pkg.version as string)
+      : 'latest',
+  )
+  .catch(() => 'latest');
+
+export function path_exists(path: string): Promise<boolean> {
+  return stat(path).then(
+    () => true,
+    () => false,
+  );
 }
