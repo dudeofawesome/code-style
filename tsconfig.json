@@ -7,9 +7,18 @@
   "include": ["packages/*/test/", "utils/", "scripts/"],
   "exclude": [
     "**/dist/",
-    "packages/eslint-plugin-typescript/",
+    "packages/code-style/",
+    "packages/create-configs/",
+    "packages/eslint-config-esmodule/",
+    "packages/eslint-config-jest/",
+    "packages/eslint-config-nextjs/",
+    "packages/eslint-config-node/",
+    "packages/eslint-config-react/",
+    "packages/eslint-config-typescript/",
+    "packages/eslint-config/",
+    "packages/eslint-plugin-nest/",
+    "packages/jest-configs/",
     "packages/typescript-configs/",
-    "packages/javascript-configs/",
     "utils/"
   ]
 }
