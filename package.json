@@ -34,8 +34,8 @@
     "bump": "scripts/bump.ts",
     "prelint": "npm run build",
     "lint": "scripts/concurrently-ws.ts lint 'npm:lint:*' && echo 'All lint passed.'",
-    "lint:js": "tsc --noEmit",
-    "lint:types": "eslint .",
+    "lint:js": "eslint . --ext ts,js,json",
+    "lint:types": "tsc --noEmit --pretty",
     "pretest": "npm run build",
     "test": "scripts/concurrently-ws.ts test && echo 'All tests passed.'",
     "upgrade-packages": "scripts/upgrade-packages.sh"
