@@ -263,8 +263,6 @@ export async function find_nearest_package(
     else base = parent;
   }
 
-  console.log(`FOUND PATH ${base}`);
-
   return join(base, 'package.json');
 }
 
