@@ -34,11 +34,11 @@ export function _generate_base_ts_config({
   const config: TSConfig = {
     extends: [],
     compilerOptions: {
-      baseUrl: input_dir,
-      outDir: output_dir,
+      baseUrl: `${input_dir}/`,
+      outDir: `${output_dir}/`,
     },
     include: ['./'],
-    exclude: [output_dir, 'coverage/'],
+    exclude: [`${output_dir}/`, 'coverage/'],
   };
 
   switch (project_type) {
@@ -112,7 +112,7 @@ export function _generate_build_ts_config({
     compilerOptions: {
       baseUrl: './',
     },
-    include: [input_dir],
+    include: [`${input_dir}/`],
     exclude: ['**/*.spec.ts', '**/*.test.ts'],
   };
 

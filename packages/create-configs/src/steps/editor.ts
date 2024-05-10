@@ -73,7 +73,7 @@ export async function create_vscode_config({
 
                 'files.exclude': {
                   ...(output_dir != null
-                    ? { [`**/${output_dir.replace(/\/$/u, '')}/`]: true }
+                    ? { [`**/${output_dir}/`]: true }
                     : {}),
                   ...(technologies.includes('nextjs')
                     ? { '.next/': true }

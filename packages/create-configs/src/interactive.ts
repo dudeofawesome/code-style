@@ -1,5 +1,6 @@
+import { isAbsolute, normalize } from 'node:path';
 import { checkbox, select, input, confirm } from '@inquirer/prompts';
-import {
+import type {
   ProjectType,
   Language,
   Technology,
@@ -7,10 +8,10 @@ import {
   Runtime,
   CodeStyleSetupOptions,
 } from '@code-style/code-style/config-types';
-import { Promisable } from 'type-fest';
+import type { Promisable } from 'type-fest';
 
 import { build } from './build.js';
-import { includes_js } from './utils.js';
+import { includes_js, path_exists } from './utils.js';
 import { save_rc } from './rc-file.js';
 
 export async function interactive_setup(
@@ -260,19 +261,23 @@ export async function interactive_setup(
         input({
           message: 'Input directory',
           default: defaults.input_dir ?? 'src/',
+          validate: (path) =>
+            validate_path(normalize_path(path), { relative: true }),
         }),
       defaults.input_dir,
       use_defaults,
-    );
+    ).then(normalize_path);
     output_dir = await question_default(
       () =>
         input({
           message: 'Output directory',
           default: defaults.output_dir ?? 'dist/',
+          validate: (path) =>
+            validate_path(normalize_path(path), { relative: true }),
         }),
       defaults.output_dir,
       use_defaults,
-    );
+    ).then(normalize_path);
   }
 
   const overwrite = await question_default(
@@ -321,4 +326,41 @@ export async function question_default<T>(
   use_default: boolean = false,
 ): Promise<T> {
   return use_default ? default_answer ?? question() : question();
+}
+
+export async function validate_path(
+  path: string,
+  {
+    exists = false,
+    absolute = false,
+    relative = false,
+  }: {
+    exists?: boolean;
+    absolute?: boolean;
+    relative?: boolean;
+  } = {},
+): Promise<string | boolean> {
+  if (path.length < 1) {
+    return `Must not be empty.`;
+  }
+
+  if (absolute && !isAbsolute(path)) {
+    return `Must be an absolute path.`;
+  }
+
+  if (relative && isAbsolute(path)) {
+    return `Must be a relative path.`;
+  }
+
+  if (exists && !(await path_exists(path))) {
+    return `Path does not exist.`;
+  }
+
+  return true;
+}
+
+export function normalize_path(path: string): string {
+  return normalize(path)
+    .trim()
+    .replace(/[/\\]$/u, '');
 }

@@ -111,7 +111,7 @@ type Options = Pick<
 /** @private */
 export function _generate_gitignore(options: Options): string {
   return [
-    gitignore_sets.compiled([options.output_dir]),
+    gitignore_sets.compiled([`/${options.output_dir}/`]),
     gitignore_sets.dependencies(options),
     gitignore_sets.logs(options),
     gitignore_sets.reports(options),

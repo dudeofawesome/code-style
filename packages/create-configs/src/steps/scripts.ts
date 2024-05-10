@@ -148,7 +148,7 @@ export function _generate_build_script({
       case 'swc':
         deps.d.depend('@swc/core');
         scripts['build:js'] =
-          `${deps.d.depend('@swc/cli', { cmd: 'swc' })} ./${input_dir} --ignore '${test_file_glob}' --out-dir ${output_dir}`;
+          `${deps.d.depend('@swc/cli', { cmd: 'swc' })} ./${input_dir}/ --ignore '${test_file_glob}' --out-dir ${output_dir}`;
         break;
       case 'tsc':
         scripts['build:js'] =
