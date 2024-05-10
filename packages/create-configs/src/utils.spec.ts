@@ -1,4 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
+import '@code-style/utils/testing/assert/matchers';
 import { Dependencies, DependencySet, is_dependencies_array } from './utils.js';
 
 describe('utils', () => {
@@ -31,7 +32,7 @@ describe('utils', () => {
         const dependencies = new DependencySet();
         expect(() => dependencies.depend('foo')).not.toThrow();
         expect(() => dependencies.depend('foo')).not.toThrow();
-        expect(Array.from(dependencies.values())).toStrictEqual(['foo']);
+        expect(dependencies).toEqual(new Set(['foo']));
       });
 
       it('should validate package names', () => {
@@ -53,8 +54,8 @@ describe('utils', () => {
         expect(deps.development).toBe(deps.d);
         expect(deps.production).not.toBe(deps.d);
 
-        expect(Array.from(deps.production.values())).toStrictEqual([]);
-        expect(Array.from(deps.development.values())).toStrictEqual([]);
+        expect(deps.production).toEqual(new Set());
+        expect(deps.development).toEqual(new Set());
       });
 
       it(`should handle a Dependencies list`, () => {
@@ -63,27 +64,15 @@ describe('utils', () => {
           new Dependencies(['baz'], ['qux']),
         ]);
 
-        expect(Array.from(deps.production.values())).toStrictEqual([
-          'foo',
-          'baz',
-        ]);
-        expect(Array.from(deps.development.values())).toStrictEqual([
-          'bar',
-          'qux',
-        ]);
+        expect(deps.production).toEqual(new Set(['foo', 'baz']));
+        expect(deps.development).toEqual(new Set(['bar', 'qux']));
       });
 
       it(`should handle string lists`, () => {
         const deps = new Dependencies(['foo', 'baz'], ['bar', 'qux']);
 
-        expect(Array.from(deps.production.values())).toStrictEqual([
-          'foo',
-          'baz',
-        ]);
-        expect(Array.from(deps.development.values())).toStrictEqual([
-          'bar',
-          'qux',
-        ]);
+        expect(deps.production).toEqual(new Set(['foo', 'baz']));
+        expect(deps.development).toEqual(new Set(['bar', 'qux']));
       });
     });
   });
