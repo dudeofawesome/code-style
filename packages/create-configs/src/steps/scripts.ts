@@ -176,7 +176,7 @@ export function _generate_lint_script({
   languages,
   technologies,
   builder,
-}: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime' | 'library'>): {
+}: Pick<AddNPMScriptsOptions, 'languages' | 'technologies' | 'builder'>): {
   scripts: LintScripts;
   dependencies: Dependencies;
 } {
@@ -248,7 +248,10 @@ export function _generate_test_script({
   builder,
   output_dir,
   runtime,
-}: Omit<AddNPMScriptsOptions, 'overwrite'>): {
+}: Pick<
+  AddNPMScriptsOptions,
+  'languages' | 'technologies' | 'builder' | 'output_dir' | 'runtime'
+>): {
   scripts: TestScripts;
   dependencies: Dependencies;
 } {
