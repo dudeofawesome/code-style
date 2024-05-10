@@ -113,7 +113,7 @@ export function _generate_build_ts_config({
       baseUrl: './',
     },
     include: [input_dir],
-    exclude: ['**/*.spec.ts'],
+    exclude: ['**/*.spec.ts', '**/*.test.ts'],
   };
 
   return {
