@@ -1,6 +1,10 @@
 import Package from '@npmcli/package-json';
+import chalk from 'chalk';
 
-import { CodeStyleSetupOptions as SetupOptions } from '@code-style/code-style/config-types';
+import {
+  CodeStyleSetupOptions as SetupOptions,
+  Builder,
+} from '@code-style/code-style/config-types';
 import {
   Dependencies,
   includes_js,
@@ -11,6 +15,8 @@ import {
 
 const concurrently_opts = '--raw --group';
 
+const test_file_glob = '**/*.@(spec|test).*';
+
 export type AddNPMScriptsOptions = Pick<
   SetupOptions,
   | 'languages'
@@ -19,6 +25,7 @@ export type AddNPMScriptsOptions = Pick<
   | 'runtime'
   | 'overwrite'
   | 'library'
+  | 'input_dir'
   | 'output_dir'
 >;
 
@@ -51,13 +58,18 @@ export async function add_npm_scripts(
   return dependencies;
 }
 
-type BuildScripts = { build?: string; prepublishOnly?: string };
-// TODO(2): add npm script for build, prepublishOnly
+type BuildScripts = {
+  [key: `build:${string}`]: string;
+  build?: string;
+  prepublishOnly?: string;
+};
 export function _generate_build_script({
   languages,
   technologies,
   builder,
   library,
+  input_dir,
+  output_dir,
   overwrite = false,
 }: AddNPMScriptsOptions): {
   scripts: BuildScripts;
@@ -73,24 +85,24 @@ export function _generate_build_script({
     if (languages.includes('scss')) deps.d.depend('sass-embedded');
     scripts.build = `${deps.p.depend('next')} build`;
   } else {
-    // const build_step: Set<Exclude<Builder, 'bun' | 'none'> | 'scss'> =
-    //   new Set();
-    // switch (builder) {
-    //   case 'babel':
-    //   case 'esbuild':
-    //   case 'swc':
-    //   case 'tsc':
-    //     build_step.add(builder);
-    //     break;
-    //   default:
-    // }
-    // if (languages.includes('scss')) {
-    //   deps.d.depend('sass-embedded');
-    //   build_step.add('scss');
-    // }
-    // if (languages.includes('ts')) {
-    //   deps.d.depend('typescript');
-    // }
+    const build_step: Set<Exclude<Builder, 'bun' | 'none'> | 'scss'> =
+      new Set();
+    switch (builder) {
+      case 'babel':
+      case 'esbuild':
+      case 'swc':
+      case 'tsc':
+        build_step.add(builder);
+        break;
+      default:
+    }
+    if (languages.includes('scss')) {
+      deps.d.depend('sass-embedded');
+      build_step.add('scss');
+    }
+    if (languages.includes('ts')) {
+      deps.d.depend('typescript');
+    }
     // if (build_step.has('esbuild')) {
     //   if (languages.includes('scss')) {
     //     //
@@ -98,8 +110,41 @@ export function _generate_build_script({
     //     //
     //   }
     // }
-    // const script = '';
-    // await write_scripts({ build: script });
+
+    scripts.build = `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:build:*"`;
+
+    if (library) {
+      // build types
+      switch (builder) {
+        case 'esbuild':
+        case 'swc':
+          scripts['build:types'] =
+            `${deps.d.depend('typescript', { cmd: 'tsc' })} --project tsconfig.build.json --emitDeclarationOnly`;
+          break;
+        default:
+      }
+    }
+
+    // build JS
+    switch (builder) {
+      case 'esbuild':
+        scripts['build:js'] =
+          `${deps.d.depend('esbuild')} --tsconfig=tsconfig.build.json $(${deps.d.depend('glob')} '${input_dir}/**/*.?(c|m)[jt]s' --ignore '${test_file_glob}') --outdir=${output_dir} --sourcemap=inline --platform=node --target=node18 --format=${technologies.includes('esm') ? 'esm' : 'cjs'}`;
+        break;
+      case 'swc':
+        deps.d.depend('@swc/core');
+        scripts['build:js'] =
+          `${deps.d.depend('@swc/cli', { cmd: 'swc' })} ./${input_dir} --ignore '${test_file_glob}' --out-dir ${output_dir}`;
+        break;
+      case 'tsc':
+        scripts['build:js'] =
+          `${deps.d.depend('typescript', { cmd: 'tsc' })} --project tsconfig.build.json`;
+        break;
+      default:
+        console.warn(
+          chalk.yellow`Build scripts using "${builder}" are not at this time`,
+        );
+    }
   }
 
   if (library) scripts.prepublishOnly = `npm run build`;
@@ -107,7 +152,10 @@ export function _generate_build_script({
   return { scripts, dependencies: deps };
 }
 
-type LintScripts = Record<`lint:${string}`, string>;
+type LintScripts = {
+  [key: `lint:${string}`]: string;
+  lint: string;
+};
 
 /** @private */
 export function _generate_lint_script({
@@ -115,10 +163,7 @@ export function _generate_lint_script({
   technologies,
   builder,
 }: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime' | 'library'>): {
-  scripts: {
-    [key: `lint:${string}`]: string;
-    lint: string;
-  };
+  scripts: LintScripts;
   dependencies: Dependencies;
 } {
   const deps = new Dependencies();
