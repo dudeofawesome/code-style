@@ -3,7 +3,12 @@ import json5 from 'json5';
 import { stripIndent } from 'common-tags';
 import { CodeStyleSetupOptions } from '@code-style/code-style/config-types';
 
-import { create_file, prettify, verify_missing } from '../utils.js';
+import {
+  Dependencies,
+  create_file,
+  prettify,
+  verify_missing,
+} from '../utils.js';
 
 export interface LaunchJson {
   configurations?: LaunchConfiguration[];
@@ -29,7 +34,9 @@ export async function create_vscode_config({
   technologies,
   output_dir,
   overwrite = false,
-}: CreateVSCodeConfigOptions) {
+}: CreateVSCodeConfigOptions): Promise<Dependencies | undefined> {
+  const deps = new Dependencies();
+
   await mkdir('.vscode/').catch(() => {});
 
   await Promise.allSettled([
@@ -80,7 +87,23 @@ export async function create_vscode_config({
                     'typescript.format.enable': false,
                     'javascript.format.enable': false,
 
-                    'typescript.tsdk': './node_modules/typescript/lib',
+                    'typescript.tsdk': `./node_modules/${deps.d.depend('typescript')}/lib`,
+
+                    ...(languages.includes('ts') &&
+                    technologies.includes('jest')
+                      ? {}
+                      : {
+                          'nodejs-testing.extensions': [
+                            {
+                              extensions: ['mjs', 'cjs', 'js'],
+                              parameters: [],
+                            },
+                            {
+                              extensions: ['mts', 'cts', 'ts'],
+                              parameters: [`--import=${deps.d.depend('tsx')}`],
+                            },
+                          ],
+                        }),
                   }
                 : {}),
               ...(languages.includes('rb')
@@ -188,4 +211,6 @@ export async function create_vscode_config({
         );
       }),
   ]);
+
+  return deps;
 }

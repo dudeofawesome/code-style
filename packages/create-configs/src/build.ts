@@ -57,7 +57,9 @@ export async function build({
 
   await Promise.all(
     [
-      technologies.includes('vs-code') ? create_vscode_config(options) : null,
+      technologies.includes('vs-code')
+        ? create_vscode_config(options).then(merge_deps(deps))
+        : null,
 
       create_gitignore(options),
 
