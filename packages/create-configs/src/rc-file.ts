@@ -1,7 +1,11 @@
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { URL } from 'node:url';
 import { parse, stringify } from 'yaml';
-import type { CodeStyleSetupOptions } from '@code-style/code-style/config-types';
+import type {
+  CodeStyleSetupOptions,
+  CodeStyleRCFile,
+} from '@code-style/code-style/config-types';
+import { version } from './utils.js';
 
 export const default_config_path = '.codestyleinitrc.yaml';
 
@@ -12,15 +16,15 @@ export interface LoadRCOptions {
 export async function load_rc({
   config_path = default_config_path,
   throw_no_config = false,
-}: LoadRCOptions = {}): Promise<Partial<CodeStyleSetupOptions>> {
+}: LoadRCOptions = {}): Promise<Partial<CodeStyleRCFile>> {
   const found = await access(config_path)
     .then(() => true)
     .catch(() => false);
   if (found) {
     return readFile(config_path)
       .then((buf) => buf.toString())
-      .then<Partial<CodeStyleSetupOptions>>(
-        (str) => (parse(str) ?? {}) as Partial<CodeStyleSetupOptions>,
+      .then<Partial<CodeStyleRCFile>>(
+        (str) => (parse(str) ?? {}) as Partial<CodeStyleRCFile>,
       )
       .catch((err: unknown) => {
         if (throw_no_config) throw err;
@@ -50,7 +54,7 @@ export async function save_rc(
     .then<string>((pkg) => pkg.version as string);
 
   const header = `# yaml-language-server: $schema=https://github.com/dudeofawesome/code-style/releases/download/v${package_version}/codestylerc.schema.json`;
-  const contents = `${header}\n\n${stringify(config)}`;
+  const contents = `${header}\n\n${stringify({ version, ...config })}`;
 
   await writeFile(config_path, contents);
 }

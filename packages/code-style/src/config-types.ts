@@ -34,3 +34,8 @@ export interface CodeStyleSetupOptions {
   /** Whether or not to overwrite files. */
   overwrite: boolean;
 }
+
+export interface CodeStyleRCFile extends CodeStyleSetupOptions {
+  /** The version of code-style that generated the rc file */
+  version: string;
+}
