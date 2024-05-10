@@ -33,9 +33,22 @@ export async function build({
   lenient = false,
   overwrite = false,
 }: SetupOptions) {
+  const options: SetupOptions = {
+    project_type,
+    languages,
+    runtime,
+    builder,
+    input_dir,
+    output_dir,
+    technologies,
+    library,
+    lenient,
+    overwrite,
+  };
+
   const deps = new Dependencies();
 
-  await uninstall_duplicate_dependencies({ runtime });
+  await uninstall_duplicate_dependencies(options);
 
   await Promise.all([
     create_editor_config(overwrite).then(merge_deps(deps)),
@@ -44,67 +57,25 @@ export async function build({
 
   await Promise.all(
     [
-      technologies.includes('vs-code')
-        ? create_vscode_config({
-            project_type,
-            languages,
-            technologies,
-            output_dir,
-            overwrite,
-          })
-        : null,
+      technologies.includes('vs-code') ? create_vscode_config(options) : null,
 
-      create_gitignore({
-        languages,
-        technologies,
-        project_type,
-        builder,
-        output_dir,
-      }),
+      create_gitignore(options),
 
       languages.includes('css') || languages.includes('scss')
-        ? create_stylelint_config({ languages, lenient, overwrite }).then(
-            merge_deps(deps),
-          )
+        ? create_stylelint_config(options).then(merge_deps(deps))
         : null,
 
       includes_js(languages)
         ? [
-            set_package_type({ technologies, library, overwrite }),
-            create_ts_config({
-              project_type,
-              technologies,
-              library,
-              input_dir,
-              output_dir,
-              overwrite,
-              lenient,
-            }).then(merge_deps(deps)),
-            create_eslint_config({
-              project_type,
-              languages,
-              technologies,
-              lenient,
-              overwrite,
-            }).then(merge_deps(deps)),
-            add_npm_scripts({
-              languages,
-              technologies,
-              runtime,
-              builder,
-              library,
-              overwrite,
-            }).then(merge_deps(deps)),
+            set_package_type(options),
+            create_ts_config(options).then(merge_deps(deps)),
+            create_eslint_config(options).then(merge_deps(deps)),
+            add_npm_scripts(options).then(merge_deps(deps)),
           ]
         : null,
 
       includes_js(languages) && technologies.includes('jest')
-        ? create_jest_config({
-            languages,
-            technologies,
-            builder,
-            overwrite,
-          }).then(merge_deps(deps))
+        ? create_jest_config(options).then(merge_deps(deps))
         : null,
     ]
       .filter(Boolean)
