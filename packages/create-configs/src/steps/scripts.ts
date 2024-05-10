@@ -199,8 +199,8 @@ export function _generate_test_script({
   const scripts: TestScripts = ((): TestScripts => {
     if (technologies.includes('jest')) {
       return {
-        test: `NODE_OPTIONS="--experimental-vm-modules $NODE_OPTIONS" npx ${deps.d.depend('jest')}`,
-        'test:debug': `NODE_OPTIONS='--inspect-brk' npm run test -- --runInBand`,
+        test: `NODE_OPTIONS="--experimental-vm-modules $NODE_OPTS" ${deps.d.depend('jest')}`,
+        'test:debug': `NODE_OPTS='--inspect-brk' npm run test -- --runInBand`,
       };
     } else if (runtime === 'nodejs') {
       // We must be using the node test runner then

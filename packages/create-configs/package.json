@@ -34,8 +34,8 @@
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
     "start": "node bin/create-configs.js",
-    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTIONS\" npx jest",
-    "test:debug": "NODE_OPTIONS='--inspect-brk' npm run test -- --runInBand"
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTS\" jest",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
     "@inquirer/prompts": "^5.0.0",
