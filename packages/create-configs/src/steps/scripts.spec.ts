@@ -5,7 +5,6 @@ describe('scripts', () => {
   describe(_generate_lint_script.name, () => {
     describe(`ts lint scripts`, () => {
       const output = _generate_lint_script({
-        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['ts'],
         technologies: ['react'],
@@ -25,7 +24,6 @@ describe('scripts', () => {
 
     describe(`ts & js lint scripts`, () => {
       const output = _generate_lint_script({
-        project_type: 'backend',
         builder: 'esbuild',
         languages: ['ts', 'js'],
         technologies: [],
@@ -45,7 +43,6 @@ describe('scripts', () => {
 
     describe(`css lint scripts`, () => {
       const output = _generate_lint_script({
-        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['css'],
         technologies: [],
@@ -62,7 +59,6 @@ describe('scripts', () => {
 
     describe(`css & scss lint scripts`, () => {
       const output = _generate_lint_script({
-        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['css', 'scss'],
         technologies: [],
