@@ -36,7 +36,7 @@ void describe('eslint-config strict', () => {
   "version": "0.0.1",
   "description": "Foo bar baz",
   "dependencies": {
-    "tsm": "^2.3.0"
+    "tsx": "^4.9.4"
   },
   "engines": {
     "node": "^20"
@@ -102,7 +102,7 @@ void describe('eslint-config strict', () => {
   "version": "0.0.1",
   "description": "Foo bar baz",
   "dependencies": {
-    "tsm": "^2.3.0"
+    "tsx": "^4.9.4"
   }
 }
 `,
@@ -122,7 +122,7 @@ void describe('eslint-config strict', () => {
   "description": "Foo bar baz",
   "version": "0.0.1",
   "dependencies": {
-    "tsm": "^2.3.0"
+    "tsx": "^4.9.4"
   },
   "engines": {
     "node": "^20"

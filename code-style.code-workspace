@@ -92,7 +92,7 @@
       },
       {
         "extensions": ["mts", "cts", "ts"],
-        "parameters": ["--require", "tsm"],
+        "parameters": ["--import=tsx"],
       },
     ],
     "jest.disabledWorkspaceFolders": [

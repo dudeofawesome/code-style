@@ -23,7 +23,7 @@
     "./base.yaml"
   ],
   "scripts": {
-    "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
+    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.8.4",
-    "tsm": "^2.3.0"
+    "tsx": "^4.9.4"
   },
   "peerDependencies": {
     "sass-embedded": "^1.33.0"

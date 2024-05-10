@@ -33,7 +33,7 @@
     "lint:js": "eslint . --ext ts,mts,cts,js,json",
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
-    "test": "node $NODE_OPTS --require tsm --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
+    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
     "common-tags": "^1.8.2",
-    "tsm": "^2.3.0"
+    "tsx": "^4.9.4"
   },
   "peerDependencies": {
     "eslint": "^8.49.0",

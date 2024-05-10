@@ -266,7 +266,7 @@ export function _generate_test_script({
         return {
           test: [
             [
-              `node $NODE_OPTS --require ${deps.d.depend('tsm')}`,
+              `node $NODE_OPTS --import=${deps.d.depend('tsx')}`,
               `--test $(${deps.d.depend('glob')}`,
               ...['**/node_modules/**', `**/${output_dir}/**`].map(
                 (ig) => `--ignore '${ig}'`,
