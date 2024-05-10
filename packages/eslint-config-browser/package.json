@@ -29,6 +29,9 @@
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
+  "devDependencies": {
+    "tsx": "^4.9.4"
+  },
   "peerDependencies": {
     "eslint": "^8.49.0"
   },
@@ -38,8 +41,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "devDependencies": {
-    "tsx": "^4.9.4"
   }
 }

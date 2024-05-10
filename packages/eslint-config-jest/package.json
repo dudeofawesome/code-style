@@ -39,6 +39,9 @@
     "@rushstack/eslint-patch": "^1.10.2",
     "eslint-plugin-jest": "^27.4.0"
   },
+  "devDependencies": {
+    "tsx": "^4.9.4"
+  },
   "peerDependencies": {
     "eslint": "^8.49.0",
     "jest": "*"
@@ -49,8 +52,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "devDependencies": {
-    "tsx": "^4.9.4"
   }
 }
