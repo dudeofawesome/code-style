@@ -1,10 +1,11 @@
 import { describe, it, expect } from '@jest/globals';
-import { _generate_lint_script } from './scripts.js';
+import { _generate_build_script, _generate_lint_script } from './scripts.js';
 
 describe('scripts', () => {
   describe(_generate_lint_script.name, () => {
     describe(`ts lint scripts`, () => {
       const output = _generate_lint_script({
+        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['ts'],
         technologies: ['react'],
@@ -24,6 +25,7 @@ describe('scripts', () => {
 
     describe(`ts & js lint scripts`, () => {
       const output = _generate_lint_script({
+        project_type: 'backend',
         builder: 'esbuild',
         languages: ['ts', 'js'],
         technologies: [],
@@ -43,6 +45,7 @@ describe('scripts', () => {
 
     describe(`css lint scripts`, () => {
       const output = _generate_lint_script({
+        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['css'],
         technologies: [],
@@ -59,6 +62,7 @@ describe('scripts', () => {
 
     describe(`css & scss lint scripts`, () => {
       const output = _generate_lint_script({
+        project_type: 'web-app',
         builder: 'esbuild',
         languages: ['css', 'scss'],
         technologies: [],
@@ -69,6 +73,28 @@ describe('scripts', () => {
         expect(output.scripts['lint:css']).toMatch(/^stylelint /u);
         expect(output.scripts['lint:css']).toMatch(/[^s]css/u);
         expect(output.scripts['lint:css']).toMatch(/scss/u);
+      });
+
+      test_no_shell_globs(Object.values(output.scripts));
+    });
+  });
+
+  describe(_generate_build_script.name, () => {
+    describe(`ts lint scripts`, () => {
+      const output = _generate_build_script({
+        project_type: 'web-app',
+        builder: 'esbuild',
+        languages: ['ts'],
+        technologies: ['react'],
+        library: false,
+        input_dir: 'src/',
+        output_dir: 'dist/',
+      });
+
+      it(`should create build scripts`, () => {
+        expect(output.scripts.build).toMatch(/concurrently.+"npm:build:\*"/u);
+        expect(output.scripts['build:js']).toMatch(/^esbuild /u);
+        expect(output.scripts['build:js']).not.toMatch(/\n/u);
       });
 
       test_no_shell_globs(Object.values(output.scripts));

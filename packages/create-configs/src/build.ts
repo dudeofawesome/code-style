@@ -33,7 +33,7 @@ export async function build({
   lenient = false,
   overwrite = false,
 }: SetupOptions) {
-  const options: SetupOptions = {
+  const options: Required<SetupOptions> = {
     project_type,
     languages,
     runtime,

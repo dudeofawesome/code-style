@@ -1,5 +1,6 @@
 import Package from '@npmcli/package-json';
 import chalk from 'chalk';
+import { oneLine } from 'common-tags';
 
 import {
   CodeStyleSetupOptions as SetupOptions,
@@ -17,16 +18,19 @@ const concurrently_opts = '--raw --group';
 
 const test_file_glob = '**/*.@(spec|test).*';
 
-export type AddNPMScriptsOptions = Pick<
-  SetupOptions,
-  | 'languages'
-  | 'technologies'
-  | 'builder'
-  | 'runtime'
-  | 'overwrite'
-  | 'library'
-  | 'input_dir'
-  | 'output_dir'
+export type AddNPMScriptsOptions = Required<
+  Pick<
+    SetupOptions,
+    | 'project_type'
+    | 'languages'
+    | 'technologies'
+    | 'builder'
+    | 'runtime'
+    | 'overwrite'
+    | 'library'
+    | 'input_dir'
+    | 'output_dir'
+  >
 >;
 
 export async function add_npm_scripts(
@@ -64,14 +68,14 @@ type BuildScripts = {
   prepublishOnly?: string;
 };
 export function _generate_build_script({
+  project_type,
   languages,
   technologies,
   builder,
   library,
   input_dir,
   output_dir,
-  overwrite = false,
-}: AddNPMScriptsOptions): {
+}: Omit<AddNPMScriptsOptions, 'overwrite' | 'runtime'>): {
   scripts: BuildScripts;
   dependencies: Dependencies;
 } {
@@ -128,8 +132,18 @@ export function _generate_build_script({
     // build JS
     switch (builder) {
       case 'esbuild':
-        scripts['build:js'] =
-          `${deps.d.depend('esbuild')} --tsconfig=tsconfig.build.json $(${deps.d.depend('glob')} '${input_dir}/**/*.?(c|m)[jt]s' --ignore '${test_file_glob}') --outdir=${output_dir} --sourcemap=inline --platform=node --target=node18 --format=${technologies.includes('esm') ? 'esm' : 'cjs'}`;
+        scripts['build:js'] = oneLine`
+          ${deps.d.depend('esbuild')}
+            --tsconfig=tsconfig.build.json
+            $(${deps.d.depend('glob')}
+              '${input_dir}/**/*.?(c|m)[jt]s'
+              --ignore '${test_file_glob}'
+            )
+            --outdir=${output_dir}
+            --sourcemap=inline
+            --platform=${project_type !== 'web-app' ? 'node' : 'browser'}
+            --target=${project_type !== 'web-app' ? 'node18' : 'es6'}
+            --format=${technologies.includes('esm') ? 'esm' : 'cjs'}`;
         break;
       case 'swc':
         deps.d.depend('@swc/core');
@@ -214,14 +228,13 @@ export function _generate_lint_script({
           throw new TypeError(`Unexpected linter type "${linter as string}"`);
       }
     },
-    {},
+    {
+      lint: `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:lint:*"`,
+    },
   );
 
   return {
-    scripts: {
-      ...steps,
-      lint: `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:lint:*"`,
-    },
+    scripts: steps,
     dependencies: deps,
   };
 }

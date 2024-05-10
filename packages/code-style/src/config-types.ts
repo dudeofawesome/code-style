@@ -10,7 +10,7 @@ export type Technology =
   | 'esm'
   | 'commonjs';
 export type Builder = 'tsc' | 'esbuild' | 'swc' | 'bun' | 'babel' | 'none';
-export type Runtime = 'nodejs' | 'bun';
+export type Runtime = 'nodejs' | 'bun' | undefined;
 
 export interface CodeStyleSetupOptions {
   /** The general type of the project. */
@@ -18,7 +18,7 @@ export interface CodeStyleSetupOptions {
   /** Languages that will be used in the project. */
   languages: Language[];
   /** The runtime that will be used. */
-  runtime?: Runtime;
+  runtime: Runtime;
   /** The builder that will be used. */
   builder: Builder;
   /** The source directory. */
