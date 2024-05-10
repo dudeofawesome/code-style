@@ -115,7 +115,7 @@ export function _generate_build_script({
     //   }
     // }
 
-    scripts.build = `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:build:*"`;
+    scripts.build = `${deps.d.depend('concurrently')} ${concurrently_opts} 'npm:build:*'`;
 
     if (library) {
       // build types
@@ -229,7 +229,7 @@ export function _generate_lint_script({
       }
     },
     {
-      lint: `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:lint:*"`,
+      lint: `${deps.d.depend('concurrently')} ${concurrently_opts} 'npm:lint:*'`,
     },
   );
 
@@ -312,7 +312,7 @@ export function _generate_check_script({
 
   return {
     scripts: {
-      check: `${deps.d.depend('concurrently')} ${concurrently_opts} "npm:test" "npm:lint"`,
+      check: `${deps.d.depend('concurrently')} ${concurrently_opts} 'npm:test' 'npm:lint'`,
     },
     dependencies: deps,
   };

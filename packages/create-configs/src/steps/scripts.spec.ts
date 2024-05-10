@@ -11,7 +11,7 @@ describe('scripts', () => {
       });
 
       it(`should create lint scripts`, () => {
-        expect(output.scripts.lint).toMatch(/concurrently.+"npm:lint:\*"/u);
+        expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
         expect(output.scripts['lint:js']).toMatch(/^eslint /u);
         expect(output.scripts['lint:js']).toMatch(/ --ext /u);
         expect(
@@ -30,7 +30,7 @@ describe('scripts', () => {
       });
 
       it(`should create lint scripts`, () => {
-        expect(output.scripts.lint).toMatch(/concurrently.+"npm:lint:\*"/u);
+        expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
         expect(output.scripts['lint:js']).toMatch(/^eslint /u);
         expect(output.scripts['lint:js']).toMatch(/ --ext /u);
         expect(
@@ -49,7 +49,7 @@ describe('scripts', () => {
       });
 
       it(`should create lint scripts`, () => {
-        expect(output.scripts.lint).toMatch(/concurrently.+"npm:lint:\*"/u);
+        expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
         expect(output.scripts['lint:css']).toMatch(/^stylelint /u);
         expect(output.scripts['lint:css']).toMatch(/\{css\}/u);
       });
@@ -65,7 +65,7 @@ describe('scripts', () => {
       });
 
       it(`should create lint scripts`, () => {
-        expect(output.scripts.lint).toMatch(/concurrently.+"npm:lint:\*"/u);
+        expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
         expect(output.scripts['lint:css']).toMatch(/^stylelint /u);
         expect(output.scripts['lint:css']).toMatch(/[^s]css/u);
         expect(output.scripts['lint:css']).toMatch(/scss/u);
@@ -88,7 +88,7 @@ describe('scripts', () => {
       });
 
       it(`should create build scripts`, () => {
-        expect(output.scripts.build).toMatch(/concurrently.+"npm:build:\*"/u);
+        expect(output.scripts.build).toMatch(/concurrently.+'npm:build:\*'/u);
         expect(output.scripts['build:js']).toMatch(/^esbuild /u);
         expect(output.scripts['build:js']).not.toMatch(/\n/u);
       });
