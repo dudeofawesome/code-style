@@ -137,8 +137,7 @@ export function _generate_build_script({
             --tsconfig=tsconfig.build.json
             $(${deps.d.depend('glob')}
               '${input_dir}/**/*.?(c|m)[jt]s'
-              --ignore '${test_file_glob}'
-            )
+              --ignore '${test_file_glob}')
             --outdir=${output_dir}
             --sourcemap=inline
             --platform=${project_type !== 'web-app' ? 'node' : 'browser'}
@@ -271,16 +270,18 @@ export function _generate_test_script({
             [
               `node $NODE_OPTS --import=${deps.d.depend('tsx')}`,
               `--test $(${deps.d.depend('glob')}`,
-              ...['**/node_modules/**', `**/${output_dir}/**`].map(
-                (ig) => `--ignore '${ig}'`,
-              ),
-              ...[
-                // Based on the default test file patterns:
-                //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
-                `'**/*[.-_]test.?(c|m)[jt]s'`,
-                `'**/test?(-*).?(c|m)[jt]s'`,
-                `'**/test/**/*.?(c|m)[jt]s'`,
-              ],
+              [
+                ...['**/node_modules/**', `**/${output_dir}/**`].map(
+                  (ig) => `--ignore '${ig}'`,
+                ),
+                ...[
+                  // Based on the default test file patterns:
+                  //   https://nodejs.org/api/test.html#running-tests-from-the-command-line
+                  `'**/*[.-_]test.?(c|m)[jt]s'`,
+                  `'**/test?(-*).?(c|m)[jt]s'`,
+                  `'**/test/**/*.?(c|m)[jt]s'`,
+                ],
+              ].join(' ') + ')',
             ].join(' '),
           ].join('; '),
           'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,
