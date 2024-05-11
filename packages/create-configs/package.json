@@ -38,16 +38,17 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
+    "@code-style/code-style": "^2.0.0-31",
     "@inquirer/prompts": "^5.0.0",
     "@npmcli/package-json": "^5.1.0",
     "chalk": "^5.3.0",
     "common-tags": "^1.8.2",
     "json5": "^2.2.3",
+    "prettier": "^3.1.0",
     "yaml": "^2.3.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@code-style/code-style": "^2.0.0-31",
     "@code-style/eslint-config": "^2.0.0-31",
     "@code-style/eslint-config-cli": "^2.0.0-31",
     "@code-style/eslint-config-esmodule": "^2.0.0-31",
