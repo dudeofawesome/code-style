@@ -1,6 +1,6 @@
 {
   "name": "@code-style/create-configs",
-  "version": "2.0.0-30",
+  "version": "2.0.0-31",
   "description": "A script to create configuration files to conform to code style standards.",
   "keywords": [
     "style",
@@ -47,15 +47,15 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@code-style/code-style": "^2.0.0-30",
-    "@code-style/eslint-config": "^2.0.0-30",
-    "@code-style/eslint-config-cli": "^2.0.0-30",
-    "@code-style/eslint-config-esmodule": "^2.0.0-30",
-    "@code-style/eslint-config-jest": "^2.0.0-30",
-    "@code-style/eslint-config-node": "^2.0.0-30",
-    "@code-style/eslint-config-typescript": "^2.0.0-30",
-    "@code-style/jest-configs": "^2.0.0-30",
-    "@code-style/typescript-configs": "^2.0.0-30",
+    "@code-style/code-style": "^2.0.0-31",
+    "@code-style/eslint-config": "^2.0.0-31",
+    "@code-style/eslint-config-cli": "^2.0.0-31",
+    "@code-style/eslint-config-esmodule": "^2.0.0-31",
+    "@code-style/eslint-config-jest": "^2.0.0-31",
+    "@code-style/eslint-config-node": "^2.0.0-31",
+    "@code-style/eslint-config-typescript": "^2.0.0-31",
+    "@code-style/jest-configs": "^2.0.0-31",
+    "@code-style/typescript-configs": "^2.0.0-31",
     "@json-types/tsconfig": "^0.5.0",
     "@types/common-tags": "^1.8.3",
     "@types/node": "^20.12.11",
