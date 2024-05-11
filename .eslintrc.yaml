@@ -11,6 +11,7 @@ ignorePatterns:
   - '**/test/*/**'
   - 'packages/code-style'
   - 'packages/create-configs'
+  - 'packages/eslint-config'
   - 'packages/eslint-config-typescript'
   - 'packages/eslint-plugin-nest'
   - 'packages/jest-configs'

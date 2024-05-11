@@ -30,8 +30,12 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node18 --format=cjs",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*') --outdir=dist --sourcemap=inline --platform=node --target=node18 --format=cjs",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "check": "concurrently --raw --group 'npm:test' 'npm:lint'",
+    "lint": "concurrently --raw --group 'npm:lint:*'",
+    "lint:js": "eslint . --ext ts,json --cache",
+    "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
@@ -47,9 +51,20 @@
     "eslint-plugin-promise": "^6.1.1"
   },
   "devDependencies": {
+    "@code-style/code-style": "^2.0.0-30",
+    "@code-style/eslint-config": "^2.0.0-30",
+    "@code-style/eslint-config-cli": "^2.0.0-30",
+    "@code-style/eslint-config-esmodule": "^2.0.0-30",
+    "@code-style/eslint-config-node": "^2.0.0-30",
+    "@code-style/eslint-config-typescript": "^2.0.0-30",
+    "@code-style/typescript-configs": "^2.0.0-30",
     "@types/eslint": "^8.44.2",
-    "@types/node": "^20.6.3",
-    "tsx": "^4.9.4"
+    "@types/node": "^20.12.11",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.21.1",
+    "glob": "^10.3.14",
+    "tsx": "^4.9.4",
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "prettier": "^3.1.0"
