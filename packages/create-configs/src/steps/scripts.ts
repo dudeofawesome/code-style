@@ -270,7 +270,7 @@ export function _generate_test_script({
             [
               `node $NODE_OPTS --import=${deps.d.depend('tsx')}`,
               `--test $(${deps.d.depend('glob')}`,
-              [
+              `${[
                 ...['**/node_modules/**', `**/${output_dir}/**`].map(
                   (ig) => `--ignore '${ig}'`,
                 ),
@@ -281,7 +281,7 @@ export function _generate_test_script({
                   `'**/test?(-*).?(c|m)[jt]s'`,
                   `'**/test/**/*.?(c|m)[jt]s'`,
                 ],
-              ].join(' ') + ')',
+              ].join(' ')})`,
             ].join(' '),
           ].join('; '),
           'test:debug': `NODE_OPTS='--inspect-brk' npm run test`,

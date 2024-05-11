@@ -130,7 +130,7 @@ describe('scripts', () => {
   });
 });
 
-export function test_no_shell_globs(scripts: string[]) {
+function test_no_shell_globs(scripts: string[]) {
   // eslint-disable-next-line jest/require-top-level-describe
   it(`shouldn't allow the shell to expand globs`, () => {
     expect.hasAssertions();
@@ -143,7 +143,7 @@ export function test_no_shell_globs(scripts: string[]) {
   });
 }
 
-export function test_matched_braces(scripts: string[]) {
+function test_matched_braces(scripts: string[]) {
   // eslint-disable-next-line jest/require-top-level-describe
   it(`should match opening & closing braces`, () => {
     expect.hasAssertions();
