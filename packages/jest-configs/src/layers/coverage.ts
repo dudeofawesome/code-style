@@ -6,6 +6,7 @@ const ext_glob = String.raw`?(c|m)(j|t)s?(x)`;
 export const config: Config = {
   collectCoverage: true,
   coverageDirectory: './coverage',
+  coverageReporters: ['clover', 'json', 'lcov'],
   collectCoverageFrom: [`**/*.${ext_glob}`],
   coveragePathIgnorePatterns: [
     [
