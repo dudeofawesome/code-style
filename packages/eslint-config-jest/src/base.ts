@@ -34,6 +34,9 @@ const config: ESLint.ConfigData = {
 
         /** Require blocks to have valid titles. */
         'jest/valid-title': ['error', { ignoreTypeOfDescribeName: true }],
+
+        /** Don't warn on setting error messages via jest-expect-message */
+        'jest/valid-expect': ['error', { maxArgs: 2 }],
       },
     },
   ],

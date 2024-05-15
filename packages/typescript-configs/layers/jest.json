@@ -1,1 +1,11 @@
-{}
+{
+  "compilerOptions": {
+    "types": [
+      "jest", // ensure jest types are brought in to global scope
+
+      "jest-extended", // add more matchers
+      "jest-expect-message", // allow customized error messages
+      "jest-chain" // chain should come after all other jest matchers
+    ]
+  }
+}
