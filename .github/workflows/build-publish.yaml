@@ -62,7 +62,7 @@ jobs:
       - name: 'Build jsonschema 🏗️'
         run: 'npm run build:jsonschema --workspace packages/code-style'
       - name: 'Publish files to Github Releases 🚀'
-        uses: 'softprops/action-gh-release@9d7c94cfd0a1f3ed45544c887983e9fa900f0564' # v2
+        uses: 'softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191' # v2
         with:
           tag_name: '${{ steps.get-package-version.outputs.version }}'
           prerelease: "${{ contains(steps.get-package-version.outputs.version, '-') }}"
