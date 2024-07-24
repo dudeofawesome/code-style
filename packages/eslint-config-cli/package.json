@@ -30,12 +30,12 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.2",
+    "@types/eslint": "^9.0.0",
     "@types/node": "^20.6.3",
     "tsx": "^4.9.4"
   },
   "peerDependencies": {
-    "eslint": "^8.49.0"
+    "eslint": "^9.0.0"
   },
   "engines": {
     "node": ">=18"
