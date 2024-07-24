@@ -37,13 +37,13 @@
   },
   "dependencies": {
     "@rushstack/eslint-patch": "^1.10.2",
-    "eslint-plugin-jest": "^27.4.0"
+    "eslint-plugin-jest": "^28.0.0"
   },
   "devDependencies": {
     "tsx": "^4.9.4"
   },
   "peerDependencies": {
-    "eslint": "^8.49.0",
+    "eslint": "^9.0.0",
     "jest": "*"
   },
   "engines": {
