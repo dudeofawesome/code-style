@@ -58,7 +58,7 @@ If you'd like to maintain git-blame information, you can use the following metho
 1. Run Prettier
 
     ```sh
-    prettier -w
+    prettier -w .
     ```
 
 1. Commit changes
