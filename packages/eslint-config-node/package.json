@@ -38,12 +38,12 @@
     "eslint-plugin-n": "^17.4.0"
   },
   "devDependencies": {
-    "@types/eslint": "^8.56.10",
+    "@types/eslint": "^9.0.0",
     "@types/node": "^20.6.3",
     "tsx": "^4.9.4"
   },
   "peerDependencies": {
-    "eslint": "^8.49.0"
+    "eslint": "^9.0.0"
   },
   "engines": {
     "node": ">=18"
