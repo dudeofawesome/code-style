@@ -10,7 +10,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "eslint": "^8.56.0",
+    "eslint": "^9.0.0",
     "stylelint": "^16.3.1"
   },
   "devDependencies": {
