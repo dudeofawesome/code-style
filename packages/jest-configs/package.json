@@ -1,6 +1,6 @@
 {
   "name": "@code-style/jest-configs",
-  "version": "2.0.0-32",
+  "version": "2.0.0",
   "description": "My Jest configs",
   "keywords": [
     "jest",

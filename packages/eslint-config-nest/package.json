@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-nest",
-  "version": "2.0.0-32",
+  "version": "2.0.0",
   "description": "My nest ESLint config",
   "keywords": [
     "style",

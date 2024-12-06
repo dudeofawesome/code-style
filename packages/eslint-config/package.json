@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config",
-  "version": "2.0.0-32",
+  "version": "2.0.0",
   "description": "My base ESLint config",
   "keywords": [
     "style",
@@ -51,13 +51,13 @@
     "eslint-plugin-promise": "^6.1.1"
   },
   "devDependencies": {
-    "@code-style/code-style": "^2.0.0-32",
+    "@code-style/code-style": "^2.0.0",
     "@code-style/eslint-config": "^2.0.0-32",
-    "@code-style/eslint-config-cli": "^2.0.0-32",
-    "@code-style/eslint-config-esmodule": "^2.0.0-32",
-    "@code-style/eslint-config-node": "^2.0.0-32",
-    "@code-style/eslint-config-typescript": "^2.0.0-32",
-    "@code-style/typescript-configs": "^2.0.0-32",
+    "@code-style/eslint-config-cli": "^2.0.0",
+    "@code-style/eslint-config-esmodule": "^2.0.0",
+    "@code-style/eslint-config-node": "^2.0.0",
+    "@code-style/eslint-config-typescript": "^2.0.0",
+    "@code-style/typescript-configs": "^2.0.0",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.12.11",
     "concurrently": "^8.2.2",
