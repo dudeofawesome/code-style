@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-plugin-nest",
-  "version": "2.0.0",
+  "version": "2.0.0-32",
   "description": "My Nest ESLint rules",
   "keywords": [
     "style",
@@ -32,10 +32,10 @@
     "@typescript-eslint/utils": "^7.0.0"
   },
   "devDependencies": {
-    "@code-style/eslint-config": "^2.0.0",
+    "@code-style/eslint-config": "^2.0.0-32",
     "@code-style/eslint-config-node": "^2.0.0-32",
     "@code-style/eslint-config-typescript": "^2.0.0-32",
-    "@code-style/jest-configs": "^2.0.0",
+    "@code-style/jest-configs": "^2.0.0-32",
     "@code-style/typescript-configs": "^2.0.0-32",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.6.3",
