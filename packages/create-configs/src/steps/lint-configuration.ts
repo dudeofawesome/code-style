@@ -140,7 +140,7 @@ export function _generate_eslint_config({
 
   return {
     content: [
-      `# In order to update the this config, update:`,
+      `# In order to update the config, update:`,
       _generate_dependency_list(config)
         .map((p) => `#   ${p}`)
         .join('\n'),
@@ -195,7 +195,7 @@ export function _generate_stylelint_config(languages: Language[]): ConfigFile {
 
   return {
     content: [
-      `# In order to update the this config, update ${config.extends.join(', ')}`,
+      `# In order to update the config, update ${config.extends.join(', ')}`,
       stringify(config),
     ].join('\n'),
     dependencies: deps,

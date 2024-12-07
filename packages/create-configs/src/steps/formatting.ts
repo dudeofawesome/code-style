@@ -25,7 +25,7 @@ export async function create_prettier_config(
         /**
          * https://prettier.io/docs/en/
          * Prettier configuration file
-         * In order to update the this config, update @code-style/code-style
+         * In order to update the config, update @code-style/code-style
          */
         import config from '${deps.d.depend('@code-style/code-style', { v })}/prettierrc';
         export default config;

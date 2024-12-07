@@ -95,7 +95,7 @@ export function _generate_base_ts_config({
 
   return {
     content: stripIndent`
-    // In order to update the this config, update @code-style/typescript-configs
+    // In order to update the config, update @code-style/typescript-configs
     ${JSON.stringify(config, null, 2)}
   `,
     dependencies: deps,
