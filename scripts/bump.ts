@@ -53,7 +53,10 @@ async function bump(type: string, { dryRun = true }: BumpOptions = {}) {
   await run(`npm install`, dryRun);
 
   log('Committing changes.');
-  await run(`git add package*.json **/package*.json`, dryRun);
+  await run(
+    `git add package*.json packages/*/package*.json utils/package*.json`,
+    dryRun,
+  );
   await run(`git commit --message "🚀🔖 release v${new_version}"`, dryRun);
   await run(
     `git tag "v${new_version}" --message "🚀 release v${new_version}"`,
