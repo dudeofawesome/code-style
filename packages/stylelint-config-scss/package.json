@@ -1,6 +1,6 @@
 {
   "name": "@code-style/stylelint-config-scss",
-  "version": "2.0.0-32",
+  "version": "2.0.0-33",
   "description": "My stylelint configs",
   "keywords": [
     "stylelint",

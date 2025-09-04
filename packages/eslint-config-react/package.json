@@ -1,6 +1,6 @@
 {
   "name": "@code-style/eslint-config-react",
-  "version": "2.0.0-32",
+  "version": "2.0.0-33",
   "description": "My react ESLint config",
   "keywords": [
     "style",
