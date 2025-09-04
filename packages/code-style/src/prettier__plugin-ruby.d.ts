@@ -20,7 +20,6 @@ declare module '@prettier/plugin-ruby' {
      */
     rubySingleQuote: boolean;
   } & Options;
-  const plugin: Plugin;
 
-  export default plugin;
+  export const { parsers, options }: Plugin;
 }

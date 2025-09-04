@@ -2,8 +2,10 @@
 
 import { execSync } from 'child_process';
 import deepmerge from 'deepmerge';
-import type { RubyConfig } from '@prettier/plugin-ruby';
 import type { Config } from 'prettier';
+import type { RubyConfig } from '@prettier/plugin-ruby';
+import * as plugin_ruby from '@prettier/plugin-ruby';
+import * as plugin_packagejson from 'prettier-plugin-packagejson';
 
 const is_prettier_gem_installed: boolean = (() => {
   try {
@@ -50,12 +52,12 @@ const option_sets: Record<string, Config | RubyConfig> = {
 
   package_json: {
     // TODO(0): consider switching to `prettier-plugin-pkg`
-    plugins: ['prettier-plugin-packagejson'],
+    plugins: [plugin_packagejson],
   },
 
   ruby: is_prettier_gem_installed
     ? {
-        plugins: ['@prettier/plugin-ruby'],
+        plugins: [plugin_ruby],
 
         rubySingleQuote: true,
         // rubyPlugins: ['plugin/single_quotes'],
