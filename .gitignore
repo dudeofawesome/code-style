@@ -6,6 +6,8 @@ npm-debug.log
 # output
 dist/
 coverage/
+# npm pack output
+code-style-*-*.*.*.tgz
 
 # caches
 .eslintcache
