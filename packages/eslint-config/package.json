@@ -62,7 +62,7 @@
     "@types/node": "^20.12.11",
     "concurrently": "^8.2.2",
     "esbuild": "^0.21.1",
-    "glob": "^10.3.14",
+    "glob": "^11.0.0",
     "tsx": "^4.9.4",
     "typescript": "^5.4.5"
   },
