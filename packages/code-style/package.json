@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "build": "concurrently --group --prefix none \"npm:build:*\"",
-    "build:jsonschema": "typescript-json-schema src/config-types.ts CodeStyleRCFile > codestylerc.schema.json",
+    "build:jsonschema": "typescript-json-schema tsconfig.jsonschema.json CodeStyleRCFile > codestylerc.schema.json",
     "build:ts": "tsc",
     "lint": "eslint .",
     "prepublishOnly": "npm run build",

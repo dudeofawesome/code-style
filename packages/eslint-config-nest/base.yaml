@@ -1,9 +1,0 @@
-extends:
-  - 'plugin:@code-style/eslint-plugin-nest/recommended'
-
-rules:
-  # Disallow importing files from `@nestjs/terminus` since it includes a bunch of incorrect types.
-  no-restricted-imports:
-    - 'error'
-    - patterns:
-        - '@nestjs/terminus/dist/*'
