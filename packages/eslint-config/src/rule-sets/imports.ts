@@ -77,6 +77,14 @@ const config: Linter.Config[] = [
     },
   },
   {
+    // flat config files must have a default export
+    name: '@code-style/eslint-config/rule-sets/imports/eslint-config-files',
+    files: ['**/eslint.config.*js', '**/eslint.config.*ts'],
+    rules: {
+      'import/no-default-export': 'off',
+    },
+  },
+  {
     name: '@code-style/eslint-config/rule-sets/imports/config-files',
     files: ['*.config.js'],
     rules: {

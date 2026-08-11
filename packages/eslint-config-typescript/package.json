@@ -65,6 +65,7 @@
     "provenance": true
   },
   "dependencies": {
+    "eslint-import-resolver-typescript": "^4.4.5",
     "typescript-eslint": "^8.67.0"
   }
 }

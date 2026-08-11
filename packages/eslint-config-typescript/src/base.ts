@@ -1,20 +1,32 @@
 import type { Linter } from 'eslint';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import importX from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 
 import { test_file_patterns, ts_file_patterns } from './utils.js';
 
 /**
+ * Start from import-x's shipped typescript settings, but swap its legacy
+ * `resolver: { typescript: true }` (which needs the old resolver interface)
+ * for the modern `resolver-next` API.
  * import-x publishes its settings under the `import-x/*` keys; duplicate them
  * under `import/*` as well since we register the plugin under the `import`
  * namespace (see `@code-style/eslint-config`).
  */
-const import_typescript_settings = {
+const typescript_resolver = [createTypeScriptImportResolver()];
+const import_x_settings: Record<string, unknown> = {
   ...importX.flatConfigs.typescript.settings,
+};
+delete import_x_settings['import-x/resolver'];
+import_x_settings['import-x/resolver-next'] = typescript_resolver;
+
+const import_typescript_settings = {
+  ...import_x_settings,
   ...Object.fromEntries(
-    Object.entries(importX.flatConfigs.typescript.settings ?? {}).map(
-      ([key, value]) => [key.replace(/^import-x\//u, 'import/'), value],
-    ),
+    Object.entries(import_x_settings).map(([key, value]) => [
+      key.replace(/^import-x\//u, 'import/'),
+      value,
+    ]),
   ),
 };
 
@@ -150,6 +162,17 @@ const config = [
 
       // TODO(2): create a linter rule to handle correlation between class-validator types, swagger types, and typescript types
     },
+  },
+
+  {
+    /**
+     * Config files (eslint.config.mjs and friends) usually sit outside the
+     * project's tsconfig `include`, which makes type-aware parsing fail on
+     * them. Lint them without type information instead.
+     */
+    ...tseslint.configs.disableTypeChecked,
+    name: '@code-style/eslint-config-typescript/disable-type-checked-config-files',
+    files: ['**/eslint.config.*js', '**/eslint.config.*ts'],
   },
 
   {

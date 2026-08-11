@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/base.d.ts",
@@ -60,6 +61,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "type": "module"
+  }
 }

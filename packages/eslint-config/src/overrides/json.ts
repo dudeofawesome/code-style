@@ -1,11 +1,43 @@
-import type { Linter } from 'eslint';
+import type { Linter, Rule } from 'eslint';
 import jsonFiles from 'eslint-plugin-json-files';
+
+/**
+ * eslint-plugin-json-files@5 still calls rule-context methods that ESLint 10
+ * removed (`context.getFilename()` and friends). Shim them onto the context
+ * via the prototype chain until upstream ships an ESLint 10-compatible
+ * release.
+ * TODO: drop once eslint-plugin-json-files supports ESLint 10 natively.
+ */
+function shim_removed_context_methods(rule: Rule.RuleModule): Rule.RuleModule {
+  return {
+    ...rule,
+    create: (context) =>
+      rule.create(
+        Object.create(context, {
+          getFilename: { value: () => context.filename },
+          getPhysicalFilename: { value: () => context.physicalFilename },
+          getSourceCode: { value: () => context.sourceCode },
+          getCwd: { value: () => context.cwd },
+        }) as Rule.RuleContext,
+      ),
+  };
+}
+
+const patched_json_files: typeof jsonFiles = {
+  ...jsonFiles,
+  rules: Object.fromEntries(
+    Object.entries(jsonFiles.rules ?? {}).map(([id, rule]) => [
+      id,
+      shim_removed_context_methods(rule),
+    ]),
+  ),
+};
 
 const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/overrides/json',
     files: ['**/*.json'],
-    plugins: { 'json-files': jsonFiles },
+    plugins: { 'json-files': patched_json_files },
     processor: jsonFiles.processors['.json'],
     rules: {
       // eslint-plugin-prettier breaks JSON linting (https://github.com/prettier/eslint-plugin-prettier/issues/570)

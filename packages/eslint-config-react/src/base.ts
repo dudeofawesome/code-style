@@ -3,8 +3,18 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 
+import { patch_plugin_for_eslint_10 } from './compat.js';
+
+const patched_react = patch_plugin_for_eslint_10(
+  reactPlugin as Parameters<typeof patch_plugin_for_eslint_10>[0],
+);
+const patched_jsx_a11y = patch_plugin_for_eslint_10(jsxA11y);
+
 const config = [
-  reactPlugin.configs.flat.recommended,
+  {
+    ...reactPlugin.configs.flat.recommended,
+    plugins: { react: patched_react },
+  },
 
   {
     /**
@@ -21,7 +31,10 @@ const config = [
     },
   },
 
-  jsxA11y.flatConfigs.recommended,
+  {
+    ...jsxA11y.flatConfigs.recommended,
+    plugins: { 'jsx-a11y': patched_jsx_a11y },
+  },
 
   {
     name: '@code-style/eslint-config-react/base',

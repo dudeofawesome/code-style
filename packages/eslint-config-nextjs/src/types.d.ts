@@ -5,6 +5,7 @@
 
 declare module '@next/eslint-plugin-next' {
   import type { ESLint, Linter } from 'eslint';
+
   const plugin: ESLint.Plugin & {
     configs: {
       recommended: Linter.Config;
