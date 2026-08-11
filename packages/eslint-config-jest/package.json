@@ -17,11 +17,21 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
-  "type": "commonjs",
+  "type": "module",
   "exports": {
-    ".": "./dist/base.js",
-    "./base": "./dist/base.js",
-    "./lenient": "./dist/lenient.js"
+    ".": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./base": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./lenient": {
+      "types": "./dist/lenient.d.ts",
+      "default": "./dist/lenient.js"
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/base.js",
   "files": [
@@ -29,25 +39,25 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node18 --format=cjs",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node20 --format=esm",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@rushstack/eslint-patch": "^1.10.2",
-    "eslint-plugin-jest": "^27.4.0"
+    "eslint-plugin-jest": "^29.16.0",
+    "globals": "^16.0.0"
   },
   "devDependencies": {
     "tsx": "^4.9.4"
   },
   "peerDependencies": {
-    "eslint": "^8.49.0",
+    "eslint": "^10.0.0",
     "jest": "*"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "publishConfig": {
     "access": "public",
