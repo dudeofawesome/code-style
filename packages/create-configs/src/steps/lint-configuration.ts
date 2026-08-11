@@ -155,7 +155,7 @@ export async function create_eslint_config({
   languages,
   technologies,
   lenient,
-  overwrite = true,
+  overwrite,
 }: Pick<
   SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
@@ -205,7 +205,7 @@ export function _generate_stylelint_config(languages: Language[]): ConfigFile {
 export async function create_stylelint_config({
   languages,
   lenient,
-  overwrite = true,
+  overwrite,
 }: Pick<SetupOptions, 'languages' | 'lenient' | 'overwrite'>): Promise<
   ConfigFile['dependencies'] | undefined
 > {

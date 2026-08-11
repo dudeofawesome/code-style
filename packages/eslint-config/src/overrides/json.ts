@@ -33,12 +33,21 @@ const patched_json_files: typeof jsonFiles = {
   ),
 };
 
+/**
+ * ESLint 10's `--cache` requires processors to carry a `meta` object when
+ * serializing the config; json-files@5's processor doesn't have one.
+ */
+const json_processor: Linter.Processor = {
+  meta: { name: 'json-files/.json', version: '5' },
+  ...jsonFiles.processors['.json'],
+};
+
 const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/overrides/json',
     files: ['**/*.json'],
     plugins: { 'json-files': patched_json_files },
-    processor: jsonFiles.processors['.json'],
+    processor: json_processor,
     rules: {
       // eslint-plugin-prettier breaks JSON linting (https://github.com/prettier/eslint-plugin-prettier/issues/570)
       'prettier/prettier': 'off',

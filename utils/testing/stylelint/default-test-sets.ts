@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import { Config } from 'stylelint';
-import { testNoFail, testRuleFail } from '.';
+import { testNoFail, testRuleFail } from './index.js';
 
 export function defaultTestSet(config: Config): void {
   void describe('[standard tests] passes', () => {

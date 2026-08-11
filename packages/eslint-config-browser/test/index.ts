@@ -2,10 +2,10 @@ import { describe, it } from 'node:test';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import { testRuleFail } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import browser from '@code-style/eslint-config-browser';
 
-const linter = initESLint({
-  extends: ['@code-style', '@code-style/browser'],
-});
+const linter = initESLint([...base, ...browser]);
 
 void describe('eslint-config-browser', () => {
   defaultTestSet(linter);

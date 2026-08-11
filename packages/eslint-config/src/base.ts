@@ -34,6 +34,17 @@ const config: Linter.Config[] = [
     name: '@code-style/eslint-config/ignores',
     ignores: ['**/dist/', '**/out/', '**/coverage/'],
   },
+  {
+    /**
+     * Make the whole JS/TS file family lintable. The eslintrc versions of
+     * these configs were run with `--ext ts,js,json`, and eslintrc linted any
+     * file it was handed; flat config only covers `*.{js,mjs,cjs}` unless a
+     * config object matches other extensions explicitly.
+     */
+    name: '@code-style/eslint-config/lintable-files',
+    files: ['**/*.?(m|c)@(t|j)s?(x)'],
+    rules: {},
+  },
   js.configs.recommended,
   prettierRecommended,
   promisePlugin.configs['flat/recommended'],

@@ -47,6 +47,10 @@
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
+  "dependencies": {
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "typescript-eslint": "^8.67.0"
+  },
   "devDependencies": {
     "@types/common-tags": "^1.8.4",
     "@types/node": "^20.6.3",
@@ -63,9 +67,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "dependencies": {
-    "eslint-import-resolver-typescript": "^4.4.5",
-    "typescript-eslint": "^8.67.0"
   }
 }

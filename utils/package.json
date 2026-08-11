@@ -2,6 +2,15 @@
   "name": "@code-style/utils",
   "version": "2.0.0-35",
   "private": true,
+  "type": "module",
+  "exports": {
+    "./path": "./path.ts",
+    "./testing/eslint": "./testing/eslint/index.ts",
+    "./testing/eslint/*": "./testing/eslint/*.ts",
+    "./testing/stylelint": "./testing/stylelint/index.ts",
+    "./testing/stylelint/*": "./testing/stylelint/*.ts",
+    "./testing/assert/*": "./testing/assert/*.ts"
+  },
   "scripts": {
     "lint": "concurrently --raw --group \"npm:lint:*\"",
     "lint:js": "eslint .",
@@ -19,6 +28,5 @@
   },
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
-  },
-  "type": "module"
+  }
 }

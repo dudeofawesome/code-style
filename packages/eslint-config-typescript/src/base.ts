@@ -95,8 +95,16 @@ const config = [
         },
       ],
 
-      /** Require switches on union types to handle all cases. */
-      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+      /**
+       * Require switches on union types to handle all cases.
+       * `considerDefaultExhaustiveForUnions` preserves the typescript-eslint
+       * v7 behavior this config was written against: a `default` clause
+       * satisfies exhaustiveness.
+       */
+      '@typescript-eslint/switch-exhaustiveness-check': [
+        'error',
+        { considerDefaultExhaustiveForUnions: true },
+      ],
 
       /** Disallow empty classes, unless they're decorated. */
       '@typescript-eslint/no-extraneous-class': [

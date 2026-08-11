@@ -18,9 +18,8 @@ describe('lint-configuration', () => {
 
   describe('_generate_eslint_config', () => {
     it(`should generate valid config`, async () => {
-      const { _generate_eslint_config } = await import(
-        './lint-configuration.js'
-      );
+      const { _generate_eslint_config } =
+        await import('./lint-configuration.js');
 
       const output = _generate_eslint_config({
         project_type: 'web-app',
@@ -52,9 +51,8 @@ describe('lint-configuration', () => {
     });
 
     it(`should generate valid lenient config`, async () => {
-      const { _generate_eslint_config } = await import(
-        './lint-configuration.js'
-      );
+      const { _generate_eslint_config } =
+        await import('./lint-configuration.js');
 
       const output = _generate_eslint_config({
         project_type: 'web-app',
@@ -95,9 +93,8 @@ describe('lint-configuration', () => {
 
   describe('_transform_eslint_package_name', () => {
     it(`should transform eslint package names`, async () => {
-      const { _transform_eslint_package_name } = await import(
-        './lint-configuration.js'
-      );
+      const { _transform_eslint_package_name } =
+        await import('./lint-configuration.js');
 
       expect(_transform_eslint_package_name('foo')).toEqual(
         'eslint-config-foo',

@@ -13,10 +13,16 @@ interface NestPluginConfigs {
   recommended_flat: Linter.Config[];
 }
 
+/**
+ * Filled in below — the configs must reference the plugin object, so they
+ * can't be created until it exists.
+ */
+const plugin_configs: NonNullable<ESLint.Plugin['configs']> = {};
+
 const plugin: ESLint.Plugin = {
   meta: { name: '@code-style/eslint-plugin-nest', version },
   rules,
-  configs: {},
+  configs: plugin_configs,
 };
 
 const recommended: Linter.Config[] = [
@@ -33,7 +39,7 @@ const recommended: Linter.Config[] = [
   },
 ];
 
-Object.assign(plugin.configs!, {
+Object.assign(plugin_configs, {
   recommended,
   recommended_flat: recommended,
 });

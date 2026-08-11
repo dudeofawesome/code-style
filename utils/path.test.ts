@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import { doesNotReject, match, equal } from 'node:assert';
 import { cwd } from 'node:process';
 import { join } from 'node:path';
-import { find_node_modules_path, path_exists } from './path';
+import { find_node_modules_path, path_exists } from './path.js';
 
 void describe('path', () => {
   void describe('find_node_modules_path', () => {

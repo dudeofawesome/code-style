@@ -1,5 +1,6 @@
 import { describe, it } from 'node:test';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import {
   testNoFail,
@@ -7,21 +8,15 @@ import {
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 import { codeBlock } from 'common-tags';
+import base from '@code-style/eslint-config';
+import base_lenient from '@code-style/eslint-config/lenient';
+import esmodule from '@code-style/eslint-config-esmodule';
+import typescript from '@code-style/eslint-config-typescript';
+import typescript_lenient from '@code-style/eslint-config-typescript/lenient';
 
 const linter = initESLint(
-  {
-    extends: [
-      '@code-style/eslint-config',
-      '@code-style/eslint-config/lenient',
-      '@code-style/eslint-config-esmodule',
-      '@code-style/eslint-config-typescript',
-      '@code-style/eslint-config-typescript/lenient',
-    ],
-    parserOptions: {
-      ecmaVersion: 2022,
-    },
-  },
-  { cwd: join(__dirname, 'fixture') },
+  [...base, ...base_lenient, ...esmodule, ...typescript, ...typescript_lenient],
+  { cwd: join(dirname(fileURLToPath(import.meta.url)), 'fixture') },
 );
 
 void describe('eslint-config-typescript lenient', () => {
@@ -45,8 +40,8 @@ void describe('eslint-config-typescript lenient', () => {
         files: [
           {
             code: codeBlock`
-              Number(a);
-              const a = 10;
+              foo();
+              function foo(): void {}
             `,
             ts: true,
           },
@@ -117,7 +112,7 @@ void describe('eslint-config-typescript lenient', () => {
           {
             code: codeBlock`
               let foo = 'foo';
-              foo = 'bar';
+              if (foo === 'foo') foo = 'bar';
               if (foo) Number();
             `,
             ts: true,

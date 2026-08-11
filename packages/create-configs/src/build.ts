@@ -28,10 +28,10 @@ export async function build({
   builder,
   input_dir = 'src',
   output_dir = 'dist',
-  technologies = [],
-  library = false,
-  lenient = false,
-  overwrite = false,
+  technologies,
+  library,
+  lenient,
+  overwrite,
 }: SetupOptions) {
   const options: Required<SetupOptions> = {
     project_type,
@@ -80,8 +80,9 @@ export async function build({
         ? create_jest_config(options).then(merge_deps(deps))
         : null,
     ]
-      .filter(Boolean)
-      .flat(),
+      .flat()
+      // a type-guard filter so the aggregate's type contains no `null`s
+      .filter(<T>(task: T): task is NonNullable<T> => task != null),
   );
 
   await install_dependencies({ dependencies: deps, runtime });

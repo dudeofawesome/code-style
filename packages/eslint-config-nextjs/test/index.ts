@@ -5,16 +5,19 @@ import {
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import esmodule from '@code-style/eslint-config-esmodule';
+import browser from '@code-style/eslint-config-browser';
+import react from '@code-style/eslint-config-react';
+import nextjs from '@code-style/eslint-config-nextjs';
 
-const linter = initESLint({
-  extends: [
-    '@code-style/eslint-config',
-    '@code-style/eslint-config-esmodule',
-    '@code-style/eslint-config-browser',
-    '@code-style/eslint-config-react',
-    '@code-style/eslint-config-nextjs',
-  ],
-});
+const linter = initESLint([
+  ...base,
+  ...esmodule,
+  ...browser,
+  ...react,
+  ...nextjs,
+]);
 
 void describe('eslint-config-nextjs', () => {
   defaultTestSet(linter);

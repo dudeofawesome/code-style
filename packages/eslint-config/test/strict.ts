@@ -6,8 +6,9 @@ import {
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
 
-const linter = initESLint({ extends: ['@code-style/eslint-config'] });
+const linter = initESLint([...base]);
 
 void describe('eslint-config strict', () => {
   defaultTestSet(linter);
@@ -72,8 +73,11 @@ void describe('eslint-config strict', () => {
 
     void it(`should fail no-console`, async () => {
       const res = await linter.lintText(`console.log('foo');\n`);
-      // this gets 2 errors due to `console` not being defined
-      strictEqual(res[0]?.messages[0]?.ruleId, 'no-console');
+      // this also gets a `no-undef` error due to `console` not being defined
+      strictEqual(
+        res[0]?.messages.some((m) => m.ruleId === 'no-console'),
+        true,
+      );
     });
 
     void it(`should fail es module import`, () =>
