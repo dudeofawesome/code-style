@@ -36,7 +36,16 @@ const config = [
     ...tseslint.configs.stylisticTypeChecked,
   ].map((c) => ({
     ...c,
-    files: ts_file_patterns,
+    /**
+     * The `eslint-recommended` member disables core rules TypeScript makes
+     * redundant. Its eslintrc ancestor only applied to TS files (plain JS
+     * isn't necessarily type-checked), so keep that scoping; everything else
+     * deliberately covers JS too.
+     */
+    files:
+      c.name === 'typescript-eslint/eslint-recommended'
+        ? ['**/*.?(m|c)ts?(x)']
+        : ts_file_patterns,
     ignores: ['**/*.json'],
   })),
 
