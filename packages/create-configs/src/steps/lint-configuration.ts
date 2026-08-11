@@ -1,5 +1,4 @@
 import { stringify } from 'yaml';
-import type { ESLint } from 'eslint';
 import type { Config } from 'stylelint';
 import {
   CodeStyleSetupOptions as SetupOptions,
@@ -15,28 +14,13 @@ import {
   version as v,
 } from '../utils.js';
 
-/** @private */
-export function _transform_eslint_package_name(extend: string): string {
-  if (extend.includes('eslint-config')) return extend;
-
-  if (extend.startsWith('@')) {
-    return extend
-      .replace(/^(@[^/]+)\/(\S+)$/iu, '$1/eslint-config-$2')
-      .replace(/^(@[^/]+)$/iu, '$1/eslint-config');
-  } else {
-    return extend.replace(/^([^@/]+)$/iu, 'eslint-config-$1');
-  }
-}
-
-/** @private */
-export function _generate_dependency_list(config: ESLint.ConfigData): string[] {
-  if (Array.isArray(config.extends)) {
-    return config.extends.map(_transform_eslint_package_name);
-  } else if (typeof config.extends === 'string') {
-    return [_transform_eslint_package_name(config.extends)];
-  } else {
-    return [];
-  }
+interface EslintConfigEntry {
+  /** package the config array comes from */
+  pkg: string;
+  /** subpath within the package */
+  subpath?: 'lenient';
+  /** identifier the import is bound to */
+  alias: string;
 }
 
 /** @private */
@@ -50,104 +34,93 @@ export function _generate_eslint_config({
   'project_type' | 'languages' | 'technologies' | 'lenient'
 >): ConfigFile {
   const deps = new Dependencies();
-  const config: ESLint.ConfigData & { extends: string[] } = {
-    root: true,
-    extends: [deps.d.depend('@code-style/eslint-config', { v })],
-    parserOptions: {
-      ecmaVersion: 2022,
-    },
-  };
-  if (lenient)
-    config.extends.push(
-      `${deps.d.depend('@code-style/eslint-config', { v })}/lenient`,
-    );
+  const entries: EslintConfigEntry[] = [];
+
+  function add(pkg: string, alias: string, subpath?: 'lenient'): void {
+    deps.d.depend(pkg, { v });
+    entries.push({
+      pkg,
+      subpath,
+      alias: subpath == null ? alias : `${alias}_${subpath}`,
+    });
+  }
+
+  add('@code-style/eslint-config', 'base');
+  if (lenient) add('@code-style/eslint-config', 'base', 'lenient');
 
   switch (project_type) {
     case 'web-app':
-      config.extends.push(
-        deps.d.depend('@code-style/eslint-config-browser', { v }),
-      );
+      add('@code-style/eslint-config-browser', 'browser');
 
       if (technologies.includes('react') || technologies.includes('nextjs')) {
         deps.p.add(['react', 'react-dom']);
-        config.extends.push(
-          deps.d.depend('@code-style/eslint-config-react', { v }),
-        );
+        add('@code-style/eslint-config-react', 'react');
       }
       if (technologies.includes('nextjs')) {
         deps.p.add(['react', 'react-dom']);
-        config.extends.push(
-          deps.d.depend('@code-style/eslint-config-nextjs', { v }),
-        );
+        add('@code-style/eslint-config-nextjs', 'nextjs');
       }
       break;
     case 'backend':
-      config.extends.push(
-        deps.d.depend('@code-style/eslint-config-node', { v }),
-      );
-      if (lenient)
-        config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-node', { v })}/lenient`,
-        );
+      add('@code-style/eslint-config-node', 'node');
+      if (lenient) add('@code-style/eslint-config-node', 'node', 'lenient');
 
       if (technologies.includes('nestjs')) {
-        config.extends.push(
-          deps.d.depend('@code-style/eslint-config-nest', { v }),
-        );
+        add('@code-style/eslint-config-nest', 'nest');
       }
       break;
     case 'cli':
-      config.extends.push(
-        deps.d.depend('@code-style/eslint-config-node', { v }),
-      );
-      if (lenient)
-        config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-node', { v })}/lenient`,
-        );
+      add('@code-style/eslint-config-node', 'node');
+      if (lenient) add('@code-style/eslint-config-node', 'node', 'lenient');
 
-      config.extends.push(
-        deps.d.depend('@code-style/eslint-config-cli', { v }),
-      );
-      if (lenient)
-        config.extends.push(
-          `${deps.d.depend('@code-style/eslint-config-cli', { v })}/lenient`,
-        );
+      add('@code-style/eslint-config-cli', 'cli');
+      if (lenient) add('@code-style/eslint-config-cli', 'cli', 'lenient');
       break;
   }
 
   if (languages.includes('ts')) {
-    config.extends.push(
-      deps.d.depend('@code-style/eslint-config-typescript', { v }),
-    );
+    add('@code-style/eslint-config-typescript', 'typescript');
     if (lenient)
-      config.extends.push(
-        `${deps.d.depend('@code-style/eslint-config-typescript', { v })}/lenient`,
-      );
+      add('@code-style/eslint-config-typescript', 'typescript', 'lenient');
   }
 
   if (technologies.includes('jest')) {
-    config.extends.push(deps.d.depend('@code-style/eslint-config-jest', { v }));
-    if (lenient)
-      config.extends.push(
-        `${deps.d.depend('@code-style/eslint-config-jest', { v })}/lenient`,
-      );
+    add('@code-style/eslint-config-jest', 'jest');
+    if (lenient) add('@code-style/eslint-config-jest', 'jest', 'lenient');
   }
 
   if (technologies.includes('esm'))
-    config.extends.push(
-      deps.d.depend('@code-style/eslint-config-esmodule', { v }),
-    );
+    add('@code-style/eslint-config-esmodule', 'esmodule');
 
-  return {
-    content: [
-      `# In order to update the config, update:`,
-      _generate_dependency_list(config)
-        .map((p) => `#   ${p}`)
-        .join('\n'),
-      stringify(config),
-    ].join('\n'),
-    dependencies: deps,
-  };
+  /**
+   * The generated config imports `eslint/config`, and the `eslint` binary no
+   * longer arrives transitively (it's a peer of the config packages), so it
+   * must be a direct devDependency.
+   */
+  deps.d.depend('eslint');
+
+  const source_packages = [...new Set(entries.map((entry) => entry.pkg))];
+
+  const content = [
+    `// In order to update the config, update:`,
+    source_packages.map((pkg) => `//   ${pkg}`).join('\n'),
+    `import { defineConfig } from 'eslint/config';`,
+    '',
+    entries
+      .map(
+        (entry) =>
+          `import ${entry.alias} from '${entry.pkg}${
+            entry.subpath == null ? '' : `/${entry.subpath}`
+          }';`,
+      )
+      .join('\n'),
+    '',
+    `export default defineConfig(${entries
+      .map((entry) => entry.alias)
+      .join(', ')});`,
+  ].join('\n');
+
+  return { content, dependencies: deps };
 }
 
 export async function create_eslint_config({
@@ -160,10 +133,17 @@ export async function create_eslint_config({
   SetupOptions,
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
 >): Promise<ConfigFile['dependencies'] | undefined> {
-  const preferred = '.eslintrc.yaml';
+  const preferred = 'eslint.config.mjs';
   if (
     await verify_missing({
-      path: [preferred, /^\.?eslint(rc|\.config)\.([mc]?js|ya?ml|json)$/u],
+      path: [
+        preferred,
+        // legacy eslintrc files (unsupported by ESLint 10) and `.eslintignore`
+        /^\.eslintrc(\.([cm]?js|ya?ml|json))?$/u,
+        '.eslintignore',
+        // other flat config filenames
+        /^eslint\.config\.([cm]?[jt]s)$/u,
+      ],
       remove: overwrite,
     })
   ) {

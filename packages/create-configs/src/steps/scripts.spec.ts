@@ -17,11 +17,9 @@ describe('scripts', () => {
 
       it(`should create lint scripts`, () => {
         expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
-        expect(output.scripts['lint:js']).toMatch(/^eslint /u);
-        expect(output.scripts['lint:js']).toMatch(/ --ext /u);
-        expect(
-          output.scripts['lint:js']?.match(/--ext (\S+)\b/u)?.[1]?.split(','),
-        ).toEqual(['ts', 'tsx', 'json']);
+        // flat config's files globs govern extensions; no --ext
+        expect(output.scripts['lint:js']).toEqual('eslint . --cache');
+        expect(output.scripts['lint:js']).not.toMatch(/ --ext /u);
       });
 
       test_no_shell_globs(Object.values(output.scripts));
@@ -37,11 +35,9 @@ describe('scripts', () => {
 
       it(`should create lint scripts`, () => {
         expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
-        expect(output.scripts['lint:js']).toMatch(/^eslint /u);
-        expect(output.scripts['lint:js']).toMatch(/ --ext /u);
-        expect(
-          output.scripts['lint:js']?.match(/--ext (\S+)\b/u)?.[1]?.split(','),
-        ).toEqual(['js', 'ts', 'json']);
+        // flat config's files globs govern extensions; no --ext
+        expect(output.scripts['lint:js']).toEqual('eslint . --cache');
+        expect(output.scripts['lint:js']).not.toMatch(/ --ext /u);
       });
 
       test_no_shell_globs(Object.values(output.scripts));

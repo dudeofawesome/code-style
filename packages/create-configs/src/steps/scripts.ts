@@ -191,19 +191,10 @@ export function _generate_lint_script({
     (scripts, linter) => {
       switch (linter) {
         case 'eslint':
+          // flat config's `files` globs govern which extensions get linted
           return {
             ...scripts,
-            'lint:js': `${deps.d.depend('@code-style/eslint-config', { cmd: 'eslint', v })} . --ext ${languages
-              .filter((l) => ['js', 'ts'].includes(l))
-              .reduce<string[]>(
-                (extensions, ext) => [
-                  ext,
-                  ...(technologies.includes('react') ? [`${ext}x`] : []),
-                  ...extensions,
-                ],
-                ['json'],
-              )
-              .join(',')} --cache`,
+            'lint:js': `${deps.d.depend('eslint')} . --cache`,
           };
         case 'stylelint':
           return {
