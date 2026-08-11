@@ -16,32 +16,46 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
+  "type": "module",
   "exports": {
-    ".": "./base.yaml",
-    "./base": "./base.yaml",
-    "./*.yaml": "./*.yaml"
+    ".": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./base": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./package.json": "./package.json"
   },
-  "main": "base.yaml",
+  "main": "./dist/base.js",
   "files": [
-    "./base.yaml"
+    "./dist/"
   ],
   "scripts": {
+    "build": "concurrently --raw --group 'npm:build:*'",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*') --outdir=dist --sourcemap=inline --platform=node --target=node20 --format=esm",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@code-style/eslint-plugin-nest": "2.0.0-32"
+    "@code-style/eslint-plugin-nest": "^2.0.0-35"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.2",
-    "@types/node": "^20.6.3",
-    "tsx": "^4.9.4"
+    "@types/node": "^20.12.11",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.21.1",
+    "glob": "^10.3.14",
+    "tsx": "^4.9.4",
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
-    "eslint": "^8.49.0"
+    "eslint": "^10.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "publishConfig": {
     "access": "public",

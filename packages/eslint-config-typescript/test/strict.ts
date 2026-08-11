@@ -1,53 +1,42 @@
 import { describe, it } from 'node:test';
 import { deepStrictEqual } from 'node:assert';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { codeBlock } from 'common-tags';
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import {
   testNoFail,
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import esmodule from '@code-style/eslint-config-esmodule';
+import typescript from '@code-style/eslint-config-typescript';
 
-const linter = initESLint(
-  {
-    extends: [
-      '@code-style/eslint-config',
-      '@code-style/eslint-config-esmodule',
-      '@code-style/eslint-config-typescript',
-    ],
-  },
-  { cwd: join(__dirname, 'fixture') },
-);
+const linter = initESLint([...base, ...esmodule, ...typescript], {
+  cwd: join(dirname(fileURLToPath(import.meta.url)), 'fixture'),
+});
 
 void describe('lint rules strict', async () => {
+  // flat config normalizes rule severities to numbers
   const calculated = (await linter.calculateConfigForFile(
     'src/index.ts',
-  )) as Pick<
-    ESLint.ConfigData,
-    | 'env'
-    | 'globals'
-    | 'ignorePatterns'
-    | 'noInlineConfig'
-    | 'parser'
-    | 'parserOptions'
-    | 'plugins'
-    | 'reportUnusedDisableDirectives'
-    | 'rules'
-    | 'settings'
-  >;
+  )) as Pick<Linter.Config, 'languageOptions' | 'plugins' | 'settings'> & {
+    rules?: Record<string, unknown[]>;
+  };
 
   void it(`should have rules from eslint-config-typescript`, () => {
-    deepStrictEqual(calculated.rules?.['@typescript-eslint/no-namespace'], [
-      'error',
-    ]);
+    deepStrictEqual(
+      (calculated.rules?.['@typescript-eslint/no-namespace'] ?? [])[0],
+      2,
+    );
   });
   void it(`should have rules from eslint-config-esmodule`, () => {
-    deepStrictEqual(calculated.rules?.['import/no-commonjs'], ['error']);
+    deepStrictEqual((calculated.rules?.['import/no-commonjs'] ?? [])[0], 2);
   });
   void it(`should have rules from eslint-config`, () => {
-    deepStrictEqual(calculated.rules?.['no-constructor-return'], ['error']);
+    deepStrictEqual((calculated.rules?.['no-constructor-return'] ?? [])[0], 2);
   });
 });
 
@@ -72,8 +61,8 @@ void describe('eslint-config-typescript strict', () => {
         files: [
           {
             code: codeBlock`
-              Number(a);
-              const a = 10;
+              foo();
+              function foo(): void {}
             `,
             ts: true,
           },
@@ -130,7 +119,7 @@ void describe('eslint-config-typescript strict', () => {
           {
             code: codeBlock`
               let foo = 'foo';
-              foo = 'bar';
+              if (foo === 'foo') foo = 'bar';
               if (foo) Number();
             `,
             ts: true,
@@ -146,7 +135,7 @@ void describe('eslint-config-typescript strict', () => {
           {
             code: codeBlock`
               let foo: unknown = 'foo';
-              foo = 'bar';
+              if (foo === 'foo') foo = 'bar';
               if (foo) Number();
             `,
             ts: true,

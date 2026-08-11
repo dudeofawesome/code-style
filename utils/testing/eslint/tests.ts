@@ -5,8 +5,13 @@ import { tmpdir } from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { ESLint } from 'eslint';
 
-import { FilePathResult, FilePathOpts, filePath } from '.';
-import { find_node_modules_path } from '../../path';
+import {
+  FilePathResult,
+  FilePathOpts,
+  filePath,
+  recreateWithCwd,
+} from './index.js';
+import { find_node_modules_path } from '../../path.js';
 
 export function noLintMessage(lint_results: ESLint.LintResult[]) {
   strictEqual(
@@ -82,10 +87,11 @@ export async function testRuleFail({
     specificLintMessage(res, ruleId);
   } else {
     const { tmp_dir, cleanup } = await setup_tmp_dir(_files);
+    const scoped_linter = recreateWithCwd(linter, tmp_dir);
 
     try {
       specificLintMessage(
-        await linter.lintFiles(
+        await scoped_linter.lintFiles(
           _files.filter((f) => f.lint).map((f) => join(tmp_dir, f.path)),
         ),
         ruleId,
@@ -117,10 +123,11 @@ export async function testNoFail({
     noLintMessage(res);
   } else {
     const { tmp_dir, cleanup } = await setup_tmp_dir(_files);
+    const scoped_linter = recreateWithCwd(linter, tmp_dir);
 
     try {
       noLintMessage(
-        await linter.lintFiles(
+        await scoped_linter.lintFiles(
           _files.filter((f) => f.lint).map((f) => join(tmp_dir, f.path)),
         ),
       );

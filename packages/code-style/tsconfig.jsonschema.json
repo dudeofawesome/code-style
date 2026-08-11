@@ -1,0 +1,14 @@
+// Dedicated config for `build:jsonschema` (typescript-json-schema can't
+// resolve the array-`extends` used in tsconfig.json, and must not auto-load
+// hoisted `@types/*` packages).
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "types": []
+  },
+  "files": ["src/config-types.ts"]
+}

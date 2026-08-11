@@ -10,6 +10,7 @@ import {
   writeFile,
 } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert';
 import { cwd } from 'node:process';
 import { format, Options } from 'prettier';
@@ -123,7 +124,7 @@ export type VerifyMissingScriptOptions = Omit<
 export async function verify_missing_script({
   path,
   json_paths: _json_paths,
-  overwrite = false,
+  overwrite,
   reject = false,
 }: VerifyMissingScriptOptions): Promise<boolean> {
   const json_paths = Array.isArray(_json_paths) ? _json_paths : [_json_paths];
@@ -189,7 +190,7 @@ export class DependencySet extends Set<string> {
     { cmd: command = dependency, v: version }: DependOptions = {},
   ): string {
     assert(
-      dependency.match(/^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u) !=
+      /^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u.exec(dependency) !=
         null,
       `Must be a valid package name.`,
     );
@@ -267,7 +268,7 @@ export async function find_nearest_package(
 }
 
 export const version: string = await readFile(
-  await find_nearest_package(import.meta.dirname),
+  await find_nearest_package(dirname(fileURLToPath(import.meta.url))),
   'utf-8',
 )
   .then((str) => JSON.parse(str) as unknown)

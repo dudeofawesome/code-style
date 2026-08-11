@@ -1,16 +1,19 @@
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
 
-const config: ESLint.ConfigData = {
-  rules: {
-    // `__iterator__` is deprecated.
-    'no-iterator': 'error',
+const config: Linter.Config[] = [
+  {
+    name: '@code-style/eslint-config/rule-sets/deprecated',
+    rules: {
+      // `__iterator__` is deprecated.
+      'no-iterator': 'error',
 
-    // `__proto__` is deprecated.
-    'no-proto': 'error',
+      // `__proto__` is deprecated.
+      'no-proto': 'error',
 
-    // Disallows allow `var`, preferring `let` or `const` instead.
-    'no-var': 'error',
+      // Disallows allow `var`, preferring `let` or `const` instead.
+      'no-var': 'error',
+    },
   },
-};
+];
 
-export = config;
+export default config;

@@ -33,7 +33,7 @@ export async function create_vscode_config({
   languages,
   technologies,
   output_dir,
-  overwrite = false,
+  overwrite,
 }: CreateVSCodeConfigOptions): Promise<Dependencies | undefined> {
   const deps = new Dependencies();
 
@@ -55,7 +55,7 @@ export async function create_vscode_config({
                 .catch(() => '{}')
                 .then((buf) => buf.toString())
                 .then((str) => json5.parse<Record<string, unknown>>(str))
-                .catch(() => ({}) as Record<string, unknown>)),
+                .catch(() => ({}))),
 
               ...{
                 'editor.formatOnSave': true,
@@ -173,7 +173,7 @@ export async function create_vscode_config({
           .catch(() => '{}')
           .then((buf) => buf.toString())
           .then((str) => json5.parse<LaunchJson>(str))
-          .catch(() => ({}) as LaunchJson);
+          .catch((): LaunchJson => ({}));
 
         function is_attach(cfg: LaunchConfiguration): boolean {
           return cfg.name === 'Attach';
@@ -204,7 +204,7 @@ export async function create_vscode_config({
                       ]
                     : []),
                 ],
-              } as LaunchJson)}
+              })}
             `,
           ),
           overwrite,

@@ -142,7 +142,7 @@ export async function create_ts_config({
   library,
   input_dir,
   output_dir,
-  overwrite = true,
+  overwrite,
   lenient,
 }: CreateTSConfigOptions): Promise<Dependencies | undefined> {
   const base = 'tsconfig.json';
@@ -181,7 +181,7 @@ export async function create_ts_config({
 export async function set_package_type({
   technologies,
   library,
-  overwrite = true,
+  overwrite,
 }: Pick<SetupOptions, 'technologies' | 'library' | 'overwrite'>) {
   if (overwrite || (await exec(`npm pkg get type`)).stdout === '{}') {
     const type: 'commonjs' | 'module' =

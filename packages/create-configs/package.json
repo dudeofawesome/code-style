@@ -26,11 +26,11 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*' ) --outdir=dist --sourcemap=inline --platform=node --target=node18 --format=esm",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*' ) --outdir=dist --sourcemap=inline --platform=node --target=node20 --format=esm",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "check": "concurrently --raw --group 'npm:test' 'npm:lint'",
     "lint": "concurrently --raw --group 'npm:lint:*'",
-    "lint:js": "eslint . --ext ts,js,json --cache",
+    "lint:js": "eslint . --cache",
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
     "start": "node bin/create-configs.js",
@@ -70,7 +70,7 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "publishConfig": {
     "access": "public",

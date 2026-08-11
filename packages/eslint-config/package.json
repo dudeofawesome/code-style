@@ -16,13 +16,29 @@
   },
   "license": "MIT",
   "author": "Louis Orleans <louis@orleans.io>",
-  "type": "commonjs",
+  "type": "module",
   "exports": {
-    ".": "./dist/base.js",
-    "./base": "./dist/base.js",
-    "./lenient": "./dist/lenient.js",
-    "./rule-sets/*": "./dist/rule-sets/*.js",
-    "./overrides/*": "./dist/overrides/*.js"
+    ".": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./base": {
+      "types": "./dist/base.d.ts",
+      "default": "./dist/base.js"
+    },
+    "./lenient": {
+      "types": "./dist/lenient.d.ts",
+      "default": "./dist/lenient.js"
+    },
+    "./rule-sets/*": {
+      "types": "./dist/rule-sets/*.d.ts",
+      "default": "./dist/rule-sets/*.js"
+    },
+    "./overrides/*": {
+      "types": "./dist/overrides/*.d.ts",
+      "default": "./dist/overrides/*.js"
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/base.js",
   "files": [
@@ -30,25 +46,25 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*') --outdir=dist --sourcemap=inline --platform=node --target=node18 --format=cjs",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*') --outdir=dist --sourcemap=inline --platform=node --target=node20 --format=esm",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "check": "concurrently --raw --group 'npm:test' 'npm:lint'",
     "lint": "concurrently --raw --group 'npm:lint:*'",
-    "lint:js": "eslint . --ext ts,json --cache",
+    "lint:js": "eslint . --cache",
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.1.0",
-    "@rushstack/eslint-patch": "^1.10.2",
-    "eslint": "^8.49.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-json-files": "^4.1.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-promise": "^6.1.1"
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.7.0",
+    "@eslint/js": "^10.0.0",
+    "eslint-config-prettier": "^10.1.0",
+    "eslint-plugin-import-x": "^4.17.0",
+    "eslint-plugin-json-files": "^5.1.0",
+    "eslint-plugin-prettier": "^5.5.0",
+    "eslint-plugin-promise": "^7.3.0",
+    "globals": "^16.0.0"
   },
   "devDependencies": {
     "@code-style/code-style": "^2.0.0-35",
@@ -58,19 +74,20 @@
     "@code-style/eslint-config-node": "^2.0.0-35",
     "@code-style/eslint-config-typescript": "^2.0.0-35",
     "@code-style/typescript-configs": "^2.0.0-35",
-    "@types/eslint": "^8.44.2",
     "@types/node": "^20.12.11",
     "concurrently": "^8.2.2",
     "esbuild": "^0.21.1",
+    "eslint": "^10.0.0",
     "glob": "^10.3.14",
     "tsx": "^4.9.4",
     "typescript": "^5.4.5"
   },
   "peerDependencies": {
+    "eslint": "^10.0.0",
     "prettier": "^3.1.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "publishConfig": {
     "access": "public",

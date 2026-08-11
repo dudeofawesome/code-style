@@ -6,6 +6,7 @@
     "@code-style/typescript-configs/layers/library"
   ],
   "compilerOptions": {
+    "rootDir": "./",
     "baseUrl": "src/",
     "outDir": "dist/"
   },

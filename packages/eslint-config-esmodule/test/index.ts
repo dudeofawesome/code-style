@@ -6,10 +6,10 @@ import {
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import esmodule from '@code-style/eslint-config-esmodule';
 
-const linter = initESLint({
-  extends: ['@code-style', '@code-style/esmodule'],
-});
+const linter = initESLint([...base, ...esmodule]);
 
 void describe('eslint-config-esmodule base', () => {
   defaultTestSet(linter);

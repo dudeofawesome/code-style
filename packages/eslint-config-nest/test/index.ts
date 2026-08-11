@@ -1,23 +1,21 @@
 import { describe, it } from 'node:test';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import {
   testRuleFail,
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import esmodule from '@code-style/eslint-config-esmodule';
+import node from '@code-style/eslint-config-node';
+import typescript from '@code-style/eslint-config-typescript';
+import nest from '@code-style/eslint-config-nest';
 
 const linter = initESLint(
-  {
-    extends: [
-      '@code-style/eslint-config',
-      '@code-style/eslint-config-esmodule',
-      '@code-style/eslint-config-node',
-      '@code-style/eslint-config-typescript',
-      '@code-style/eslint-config-nest',
-    ],
-  },
-  { cwd: join(__dirname, 'fixture') },
+  [...base, ...esmodule, ...node, ...typescript, ...nest],
+  { cwd: join(dirname(fileURLToPath(import.meta.url)), 'fixture') },
 );
 
 void describe('eslint-config-nest strict', () => {

@@ -1,23 +1,8 @@
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
 
-const config: ESLint.ConfigData = {
-  overrides: [
-    {
-      files: ['*.json'],
-      extends: './json.js',
-    },
-    {
-      files: [
-        '**/test/**',
-        '**/__test__/**',
-        '*.test.*',
-        '*.spec.*',
-        '*.unit.*',
-        '*.e2e.*',
-      ],
-      extends: './testing.js',
-    },
-  ],
-};
+import json from './json.js';
+import testing from './testing.js';
 
-export = config;
+const config: Linter.Config[] = [...json, ...testing];
+
+export default config;

@@ -1,12 +1,17 @@
-import '@rushstack/eslint-patch/modern-module-resolution';
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
+import nextPlugin from '@next/eslint-plugin-next';
 
-const config: ESLint.ConfigData = {
-  extends: ['plugin:@next/eslint-plugin-next/recommended'],
-  rules: {
-    /** NextJS requires page components to be default exports. */
-    'import/no-default-export': 'off',
+const config: Linter.Config[] = [
+  // eslint-disable-next-line import/no-named-as-default-member -- the plugin is CJS; `configs` is only reachable through the default export
+  nextPlugin.configs.recommended,
+
+  {
+    name: '@code-style/eslint-config-nextjs/base',
+    rules: {
+      /** NextJS requires page components to be default exports. */
+      'import/no-default-export': 'off',
+    },
   },
-};
+];
 
-export = config;
+export default config;

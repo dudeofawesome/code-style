@@ -5,10 +5,10 @@ import {
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import base from '@code-style/eslint-config';
+import node from '@code-style/eslint-config-node';
 
-const linter = initESLint({
-  extends: ['@code-style/eslint-config', '@code-style/eslint-config-node'],
-});
+const linter = initESLint([...base, ...node]);
 
 void describe('eslint-config-node strict', () => {
   defaultTestSet(linter);

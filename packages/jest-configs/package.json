@@ -35,14 +35,14 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --ext ts,js,json",
+    "lint": "eslint .",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@swc/jest": "^0.2.36",
     "esbuild-jest": "^0.5.0",
     "jest-junit": "^16.0.0",
-    "ts-jest": "^29.1.2"
+    "ts-jest": "~29.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.6.3",
@@ -68,7 +68,7 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "publishConfig": {
     "access": "public",

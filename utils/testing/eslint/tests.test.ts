@@ -1,13 +1,13 @@
 import { describe, it } from 'node:test';
 import { rejects } from 'node:assert';
 import { codeBlock } from 'common-tags';
+import base from '@code-style/eslint-config';
+import node from '@code-style/eslint-config-node';
 import { initESLint } from '@code-style/utils/testing/eslint';
 
-import { testRuleFail } from './tests';
+import { testRuleFail } from './tests.js';
 
-const linter = initESLint({
-  extends: ['@code-style/eslint-config', '@code-style/eslint-config-node'],
-});
+const linter = initESLint([...base, ...node]);
 
 void describe('tests', () => {
   void describe('testRuleFail', () => {
