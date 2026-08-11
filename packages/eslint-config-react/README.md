@@ -12,12 +12,16 @@ My React eslint config
     npm i -D @code-style/eslint-config-react
     ```
 
-1. Add the plugin to your ESLint config.
+1. Add the config to your `eslint.config.mjs`.
 
-    ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-react'
+    ```js
+    import { defineConfig } from 'eslint/config';
+
+    import base from '@code-style/eslint-config';
+    import browser from '@code-style/eslint-config-browser';
+    import react from '@code-style/eslint-config-react';
+
+    export default defineConfig(base, browser, react);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

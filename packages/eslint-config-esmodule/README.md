@@ -12,12 +12,17 @@ My ES Module eslint config
     npm i -D @code-style/eslint-config-esmodule
     ```
 
-1. Add the plugin to your ESLint config.
+1. Add the config to your `eslint.config.mjs`.
 
-    ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-esmodule'
+    ```js
+    import { defineConfig } from 'eslint/config';
+
+    import base from '@code-style/eslint-config';
+    import esmodule from '@code-style/eslint-config-esmodule';
+
+    export default defineConfig(base, esmodule);
     ```
+
+    > **Layering order matters:** this config must be layered after `@code-style/eslint-config` (it re-enables the ESM syntax that the base config bans).
 
     You'll also likely want to have some of my other ESLint configs for your environment.

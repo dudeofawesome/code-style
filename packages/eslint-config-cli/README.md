@@ -12,12 +12,18 @@ My CLI project eslint config
     npm i -D @code-style/eslint-config-cli
     ```
 
-1. Add the plugin to your ESLint config.
+1. Add the config to your `eslint.config.mjs`.
 
-    ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-cli'
+    ```js
+    import { defineConfig } from 'eslint/config';
+
+    import base from '@code-style/eslint-config';
+    import node from '@code-style/eslint-config-node';
+    import cli from '@code-style/eslint-config-cli';
+
+    export default defineConfig(base, node, cli);
     ```
+
+    > **Layering order matters:** this config relies on `@code-style/eslint-config-node` being layered before it.
 
     You'll also likely want to have some of my other ESLint configs for your environment.

@@ -1,15 +1,33 @@
-# Upgrading to ESLint v9 flat configs
+# ESLint flat config migration — status
 
-## Dependencies that have yet to add support for flat configs
+**Done.** As of v3, every `@code-style/eslint-config*` package is a native
+[flat config](https://eslint.org/docs/latest/use/configure/configuration-files)
+targeting **ESLint 10**. The eslintrc format is not supported by ESLint 10 (or
+by these packages) anymore.
 
-- [ ] [eslint-plugin-import / eslint-plugin-i](https://github.com/import-js/eslint-plugin-import/issues/2948)
-- [x] [eslint-plugin-json-files](https://github.com/kellyselden/eslint-plugin-json-files) - no config provided
+| Release line | Config format | ESLint | Status |
+| --- | --- | --- | --- |
+| 2.x (`2.0.0-N`) | `.eslintrc.*` | ^8.49 | frozen — no further releases planned |
+| 3.x | flat (`eslint.config.mjs`) | ^10 | active |
+
+Consumers migrating from 2.x: see [migrating-v2-to-v3.md](./migrating-v2-to-v3.md).
+
+## Historical blockers (all since resolved upstream)
+
+- [x] eslint-plugin-import — replaced with `eslint-plugin-import-x`
+      (registered under the `import` namespace, so rule IDs are unchanged)
+- [x] eslint-plugin-json-files — works as a rule bag + explicit processor
+      (with a small ESLint 10 context shim; see
+      `packages/eslint-config/src/overrides/json.ts`)
 - [x] eslint-plugin-prettier
-- [ ] [eslint-plugin-promise](https://github.com/eslint-community/eslint-plugin-promise/issues/449)
-- [x] eslint-plugin-jest
-- [x] eslint-plugin-n
-- [ ] [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/pull/891)
-- [x] eslint-plugin-react
-- [ ] [eslint-plugin-react-hooks](https://github.com/facebook/react/issues/28313)
-- [x] @typescript-eslint/\*
-- [x] [@eslint-community/eslint-plugin-eslint-comments](https://github.com/eslint-community/eslint-plugin-eslint-comments/issues/182)
+- [x] eslint-plugin-promise — v7
+- [x] eslint-plugin-jest — v29
+- [x] eslint-plugin-n — v18
+- [x] eslint-plugin-jsx-a11y — flat configs shipped in 6.10 (ESLint 10
+      support still pending upstream; we shim the removed context methods)
+- [x] eslint-plugin-react — flat configs shipped in 7.35+ (ESLint 10 support
+      still pending upstream; we shim the removed context methods)
+- [x] eslint-plugin-react-hooks — v7 (we pin the classic rule pair; adopting
+      the React Compiler rules is a deliberate future change)
+- [x] @typescript-eslint/\* — v8 via the `typescript-eslint` meta-package
+- [x] @eslint-community/eslint-plugin-eslint-comments — `/configs` subpath

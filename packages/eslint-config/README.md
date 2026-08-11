@@ -4,6 +4,24 @@ A set of ESLint rules customized for code corectness.
 
 **The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
+## Usage
+
+1. Install this config as a dev dependency.
+
+    ```sh
+    npm i -D @code-style/eslint-config
+    ```
+
+1. Add the config to your `eslint.config.mjs`.
+
+    ```js
+    import { defineConfig } from 'eslint/config';
+
+    import base from '@code-style/eslint-config';
+
+    export default defineConfig(base);
+    ```
+
 You're probably looking to use this with one of our other configs:
 
 -   [`@code-style/node`](../eslint-config-node/README.md)
