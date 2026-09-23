@@ -1,0 +1,16 @@
+// In order to update the this config, update @code-style/typescript-configs
+{
+  "extends": [
+    "@code-style/typescript-configs/roles/node",
+    "@code-style/typescript-configs/layers/esmodule",
+    "@code-style/typescript-configs/layers/library",
+    "@code-style/typescript-configs/layers/jest"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist/",
+    "types": ["node", "jest", "jest-extended", "jest-expect-message"]
+  },
+  "include": ["./"],
+  "exclude": ["dist/", "coverage/"]
+}

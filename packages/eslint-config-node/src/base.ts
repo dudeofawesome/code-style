@@ -1,5 +1,6 @@
 import '@rushstack/eslint-patch/modern-module-resolution';
 import type { ESLint } from 'eslint';
+import { test_file_patterns } from '@code-style/utils/constants';
 
 const config: ESLint.ConfigData = {
   extends: ['plugin:eslint-plugin-n/recommended-module'],
@@ -74,7 +75,7 @@ const config: ESLint.ConfigData = {
      * Using synchronous methods ties up the thread, preventing other requests
      *   from being handled while waiting on I/O.
      */
-    'n/no-sync': 'error',
+    'n/no-sync': ['error', { allowAtRootLevel: true }],
 
     // Defer to import/no-extraneous-dependencies.
     'n/no-extraneous-import': 'off',
@@ -109,13 +110,8 @@ const config: ESLint.ConfigData = {
   overrides: [
     {
       files: [
-        // test files
-        '**/test/**',
-        '**/__test__/**',
-        '*.test.*',
-        '*.spec.*',
-        '*.unit.*',
-        '*.e2e.*',
+        ...test_file_patterns,
+
         // config files
         '*.config.*',
         '*.configuration.*',

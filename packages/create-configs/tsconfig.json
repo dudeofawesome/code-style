@@ -9,5 +9,5 @@
     "outDir": "dist/"
   },
   "include": ["./"],
-  "exclude": ["dist/", "coverage/", "bin/"]
+  "exclude": ["dist/", "coverage/"]
 }

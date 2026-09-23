@@ -8,6 +8,8 @@
     // prevent unexpected behavior with missing `break` statements
     "noFallthroughCasesInSwitch": true,
     // type-check .d.ts files
-    "skipLibCheck": false
+    "skipLibCheck": false,
+    // require type annotation of exports
+    "isolatedDeclarations": true
   }
 }

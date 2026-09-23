@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import '@code-style/utils/testing/assert/matchers';
+import '@code-style/testing/assert/matchers';
 import { Dependencies, DependencySet, is_dependencies_array } from './utils.js';
 
 describe('utils', () => {

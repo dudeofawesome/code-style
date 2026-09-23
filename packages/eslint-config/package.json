@@ -37,10 +37,11 @@
     "lint:js": "eslint . --ext ts,json --cache",
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
-    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
-    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTS\" jest",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
+    "@code-style/utils": "^2.0.0-32",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.1.0",
     "@rushstack/eslint-patch": "^1.10.2",
     "eslint": "^8.49.0",
@@ -58,8 +59,10 @@
     "@code-style/eslint-config-node": "^2.0.0-32",
     "@code-style/eslint-config-typescript": "^2.0.0-32",
     "@code-style/typescript-configs": "^2.0.0-32",
+    "@types/common-tags": "^1.8.4",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.12.11",
+    "common-tags": "^1.8.2",
     "concurrently": "^8.2.2",
     "esbuild": "^0.21.1",
     "glob": "^10.3.14",

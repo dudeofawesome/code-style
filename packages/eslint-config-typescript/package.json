@@ -33,8 +33,8 @@
     "lint:js": "eslint . --ext ts,mts,cts,js,json",
     "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
-    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' --ignore '**/fixture?(s)/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
-    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTS\" jest",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
     "@rushstack/eslint-patch": "^1.10.2",

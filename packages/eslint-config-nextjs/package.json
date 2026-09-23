@@ -29,9 +29,12 @@
     "build": "concurrently --raw --group 'npm:build:*'",
     "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node18 --format=cjs",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "lint": "concurrently --raw --group 'npm:lint:*'",
+    "lint:js": "eslint . --ext ts,json --cache",
+    "lint:types": "tsc --noEmit --pretty",
     "prepublishOnly": "npm run build",
-    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
-    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTS\" jest",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^14.1.1",

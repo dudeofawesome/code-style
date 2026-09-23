@@ -23,8 +23,11 @@
     "./base.yaml"
   ],
   "scripts": {
-    "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",
-    "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
+    "lint": "concurrently --raw --group 'npm:lint:*'",
+    "lint:js": "eslint . --ext ts,json --cache",
+    "lint:types": "tsc --noEmit --pretty",
+    "test": "NODE_OPTIONS=\"--experimental-vm-modules $NODE_OPTS\" jest",
+    "test:debug": "NODE_OPTS='--inspect-brk' npm run test -- --runInBand"
   },
   "dependencies": {
     "stylelint": "^16.3.1",

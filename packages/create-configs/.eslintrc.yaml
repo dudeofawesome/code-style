@@ -15,5 +15,3 @@ extends:
   - '@code-style/eslint-config-esmodule'
 parserOptions:
   ecmaVersion: 2022
-ignorePatterns:
-  - '/bin/'

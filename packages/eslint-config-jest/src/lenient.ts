@@ -1,5 +1,5 @@
 import type { ESLint } from 'eslint';
-import { test_file_patterns } from './utils';
+import { test_file_patterns } from '@code-style/utils/constants';
 
 const config: ESLint.ConfigData = {
   overrides: [

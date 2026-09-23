@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll, jest } from '@jest/globals';
 import { parse } from 'yaml';
-import '@code-style/utils/testing/assert/matchers';
+import '@code-style/testing/assert/matchers';
 import * as utils from '../utils.js';
 
 describe('lint-configuration', () => {

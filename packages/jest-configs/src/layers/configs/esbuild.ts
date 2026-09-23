@@ -6,4 +6,6 @@ export const config = {
   sourcemap: 'inline',
   platform: 'node',
   target: 'node18',
+  bundle: false,
+  external: ['*'],
 } as BuildOptions;

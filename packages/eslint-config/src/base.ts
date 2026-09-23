@@ -27,7 +27,15 @@ const config: ESLint.ConfigData = {
   env: {
     commonjs: true,
   },
-  ignorePatterns: ['**/dist/**', '**/out/**', '**/coverage/**', '!.*'],
+  ignorePatterns: [
+    '**/dist/**',
+    '**/out/**',
+    '**/coverage/**',
+    // ESLint ignores hidden files by default. We don't want that.
+    '!.*',
+    // [devenv.sh](https://devenv.sh/) uses deep symlinks, which breaks ESLint.
+    '**/.devenv/**',
+  ],
 };
 
 export = config;

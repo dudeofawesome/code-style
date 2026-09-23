@@ -26,8 +26,7 @@
     "upgrade-packages": "scripts/upgrade-packages.sh"
   },
   "workspaces": [
-    "packages/*",
-    "utils"
+    "packages/*"
   ],
   "scripts": {
     "build": "scripts/build.sh",

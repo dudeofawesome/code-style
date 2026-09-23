@@ -69,7 +69,7 @@ const config: ESLint.ConfigData = {
 
   overrides: [
     {
-      files: ['jest.config.*js'],
+      files: ['jest*.config.*js'],
       rules: {
         'import/no-default-export': 'off',
       },

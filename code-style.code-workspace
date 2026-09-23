@@ -23,7 +23,8 @@
     { "path": "packages/stylelint-config" },
     { "path": "packages/stylelint-config-scss" },
     { "path": "packages/typescript-configs" },
-    { "path": "utils" },
+    { "path": "packages/utils" },
+    { "path": "packages/testing" },
   ],
   "settings": {
     "typescript.tsdk": "./node_modules/typescript/lib",
@@ -44,7 +45,7 @@
     ],
 
     "files.exclude": {
-      "**/dist/": true,
+      "**/dist/": false,
       "**/coverage/": true,
     },
 
@@ -109,13 +110,6 @@
       "eslint-config-node",
       "eslint-config-react",
       "eslint-config-typescript",
-      "eslint-npm-hoist-packages",
-      "eslint-npm-hoist-packages-esmodule",
-      "eslint-npm-hoist-packages-jest",
-      "eslint-npm-hoist-packages-nextjs",
-      "eslint-npm-hoist-packages-node",
-      "eslint-npm-hoist-packages-react",
-      "eslint-npm-hoist-packages-typescript",
       "rubocop-config",
       "stylelint-config",
       "stylelint-config-scss",

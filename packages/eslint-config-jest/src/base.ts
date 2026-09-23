@@ -1,6 +1,6 @@
 import '@rushstack/eslint-patch/modern-module-resolution';
 import type { ESLint } from 'eslint';
-import { test_file_patterns } from './utils';
+import { test_file_patterns } from '@code-style/utils/constants';
 
 const config: ESLint.ConfigData = {
   overrides: [
@@ -35,8 +35,11 @@ const config: ESLint.ConfigData = {
         /** Require blocks to have valid titles. */
         'jest/valid-title': ['error', { ignoreTypeOfDescribeName: true }],
 
-        /** Don't warn on setting error messages via jest-expect-message */
-        'jest/valid-expect': ['error', { maxArgs: 2 }],
+        /** Allow any function whose name starts with expect */
+        'jest/expect-expect': [
+          'error',
+          { assertFunctionNames: ['expect', 'expect*'] },
+        ],
       },
     },
   ],

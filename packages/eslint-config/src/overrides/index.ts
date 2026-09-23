@@ -1,4 +1,5 @@
 import type { ESLint } from 'eslint';
+import { test_file_patterns } from '@code-style/utils/constants';
 
 const config: ESLint.ConfigData = {
   overrides: [
@@ -7,14 +8,7 @@ const config: ESLint.ConfigData = {
       extends: './json.js',
     },
     {
-      files: [
-        '**/test/**',
-        '**/__test__/**',
-        '*.test.*',
-        '*.spec.*',
-        '*.unit.*',
-        '*.e2e.*',
-      ],
+      files: test_file_patterns,
       extends: './testing.js',
     },
   ],
