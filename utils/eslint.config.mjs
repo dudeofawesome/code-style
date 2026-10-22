@@ -7,6 +7,14 @@ import { config as typescript } from '@code-style/eslint-config-typescript';
 import { config as testing } from '@code-style/eslint-config/overrides/testing';
 
 export default defineConfig(base, node, esmodule, typescript, {
-  files: ['**/testing/**'],
+  files: [
+    '**/test/**',
+    '**/testing/**',
+    '**/__test__/**',
+    '**/*.test.*',
+    '**/*.spec.*',
+    '**/*.unit.*',
+    '**/*.e2e.*',
+  ],
   extends: [testing],
 });
