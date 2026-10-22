@@ -120,4 +120,68 @@ describe('lint-configuration', () => {
       );
     });
   });
+
+  describe('_convert_legacy_eslint_config', () => {
+    it(`should carry over rules, ignores, and overrides`, async () => {
+      const { _convert_legacy_eslint_config } = await import(
+        './lint-configuration.js'
+      );
+
+      const output = _convert_legacy_eslint_config(
+        {
+          root: true,
+          extends: ['@code-style/eslint-config'],
+          env: { node: true },
+          ignorePatterns: ['/generated/'],
+          rules: { 'no-console': 'off' },
+          overrides: [
+            {
+              files: ['*.test.ts', 'src/legacy/**'],
+              excludedFiles: 'src/legacy/keep.ts',
+              rules: { 'max-lines': 'off' },
+            },
+          ],
+        },
+        '# build output\ndist\n',
+      );
+
+      expect(output.ignores).toStrictEqual(['generated/', '**/dist']);
+      // (the set matcher compares array entries by reference, so check each config)
+      expect(output.configs).toHaveLength(2);
+      expect(output.configs[0]).toEqual({ rules: { 'no-console': 'off' } });
+      expect(output.configs[1]).toEqual({
+        files: ['**/*.test.ts', 'src/legacy/**'],
+        ignores: ['src/legacy/keep.ts'],
+        rules: { 'max-lines': 'off' },
+      });
+      // `root` & `extends` are replaced by the generated config
+      expect(output.unmigrated).toStrictEqual(['env']);
+    });
+  });
+
+  describe('_generate_eslint_config with a legacy config', () => {
+    it(`should include the carried over config`, async () => {
+      const { _generate_eslint_config } = await import(
+        './lint-configuration.js'
+      );
+
+      const output = _generate_eslint_config(
+        {
+          project_type: 'backend',
+          languages: ['js'],
+          technologies: [],
+          lenient: false,
+        },
+        { ignores: ['**/dist'], configs: [{ rules: { 'no-console': 'off' } }] },
+      );
+
+      expect(import_specifiers(output.content)[0]).toBe('eslint/config');
+      expect(output.content).toContain(
+        `import { defineConfig, globalIgnores } from 'eslint/config';`,
+      );
+      expect(output.content).toContain(
+        `export default defineConfig(globalIgnores(["**/dist"]), base, node, {"rules":{"no-console":"off"}});`,
+      );
+    });
+  });
 });

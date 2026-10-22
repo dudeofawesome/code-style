@@ -1,4 +1,8 @@
-import { stringify } from 'yaml';
+import { readFile } from 'node:fs/promises';
+import { convertIgnorePatternToMinimatch } from '@eslint/config-helpers';
+import chalk from 'chalk';
+import type { Linter } from 'eslint';
+import { parse, stringify } from 'yaml';
 import type { Config } from 'stylelint';
 import {
   CodeStyleSetupOptions as SetupOptions,
@@ -23,16 +27,25 @@ interface EslintConfigEntry {
   alias: string;
 }
 
+/** Config carried over from an existing eslintrc config. */
+interface LegacyConfig {
+  ignores: string[];
+  configs: Linter.Config[];
+}
+
 /** @private */
-export function _generate_eslint_config({
-  project_type,
-  languages,
-  technologies,
-  lenient,
-}: Pick<
-  SetupOptions,
-  'project_type' | 'languages' | 'technologies' | 'lenient'
->): ConfigFile {
+export function _generate_eslint_config(
+  {
+    project_type,
+    languages,
+    technologies,
+    lenient,
+  }: Pick<
+    SetupOptions,
+    'project_type' | 'languages' | 'technologies' | 'lenient'
+  >,
+  legacy: LegacyConfig = { ignores: [], configs: [] },
+): ConfigFile {
   const deps = new Dependencies();
   const entries: EslintConfigEntry[] = [];
 
@@ -99,7 +112,9 @@ export function _generate_eslint_config({
   const content = [
     `// In order to update the config, update:`,
     source_packages.map((pkg) => `//   ${pkg}`).join('\n'),
-    `import { defineConfig } from 'eslint/config';`,
+    legacy.ignores.length > 0
+      ? `import { defineConfig, globalIgnores } from 'eslint/config';`
+      : `import { defineConfig } from 'eslint/config';`,
     '',
     entries
       .map(
@@ -110,12 +125,92 @@ export function _generate_eslint_config({
       )
       .join('\n'),
     '',
-    `export default defineConfig(${entries
-      .map((entry) => entry.alias)
-      .join(', ')});`,
+    `export default defineConfig(${[
+      ...(legacy.ignores.length > 0
+        ? [`globalIgnores(${JSON.stringify(legacy.ignores)})`]
+        : []),
+      ...entries.map((entry) => entry.alias),
+      ...legacy.configs.map((config) => JSON.stringify(config)),
+    ].join(', ')});`,
   ].join('\n');
 
   return { content, dependencies: deps };
+}
+
+/** Top-level eslintrc keys whose values the generated config replaces. */
+const replaced_eslintrc_keys = new Set(['root', 'extends', 'parserOptions']);
+
+/** Converts an eslintrc `files` pattern (matched against basenames when it has no `/`). */
+function convert_eslintrc_glob(pattern: string): string {
+  return pattern.includes('/')
+    ? pattern.replace(/^\.?\//u, '')
+    : `**/${pattern}`;
+}
+
+/**
+ * Converts the rules & ignores a project added to its eslintrc config into
+ * flat config, so they survive replacing it.
+ * @private
+ */
+export function _convert_legacy_eslint_config(
+  eslintrc: Linter.LegacyConfig,
+  eslintignore = '',
+): LegacyConfig & { unmigrated: string[] } {
+  const unmigrated = Object.keys(eslintrc).filter(
+    (key) =>
+      !replaced_eslintrc_keys.has(key) &&
+      !['rules', 'ignorePatterns', 'overrides'].includes(key),
+  );
+
+  const ignores = [
+    ...[eslintrc.ignorePatterns ?? []].flat(),
+    ...eslintignore
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line !== '' && !line.startsWith('#')),
+  ].map((pattern) => convertIgnorePatternToMinimatch(pattern));
+
+  const configs: Linter.Config[] = [];
+  if (eslintrc.rules != null && Object.keys(eslintrc.rules).length > 0) {
+    configs.push({ rules: eslintrc.rules });
+  }
+  for (const override of eslintrc.overrides ?? []) {
+    const { files, excludedFiles, rules, ...rest } = override;
+    unmigrated.push(...Object.keys(rest).map((key) => `overrides[].${key}`));
+    if (rules == null) continue;
+    configs.push({
+      files: [files].flat().map(convert_eslintrc_glob),
+      ...(excludedFiles != null
+        ? { ignores: [excludedFiles].flat().map(convert_eslintrc_glob) }
+        : {}),
+      rules,
+    });
+  }
+
+  return { ignores, configs, unmigrated };
+}
+
+async function read_legacy_eslint_config(): Promise<LegacyConfig> {
+  const eslintrc = await Promise.any(
+    ['.eslintrc', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json'].map(
+      async (path) =>
+        parse(await readFile(path, 'utf-8')) as Linter.LegacyConfig,
+    ),
+  ).catch(() => ({}));
+  const eslintignore = await readFile('.eslintignore', 'utf-8').catch(() => '');
+
+  const { unmigrated, ...legacy } = _convert_legacy_eslint_config(
+    eslintrc,
+    eslintignore,
+  );
+  if (unmigrated.length > 0) {
+    console.warn(
+      chalk.yellow(
+        `Couldn't migrate these eslintrc settings, so add them to eslint.config.mjs by hand: ${unmigrated.join(', ')}`,
+      ),
+    );
+  }
+  return legacy;
 }
 
 export async function create_eslint_config({
@@ -129,6 +224,8 @@ export async function create_eslint_config({
   'project_type' | 'languages' | 'technologies' | 'lenient' | 'overwrite'
 >): Promise<ConfigFile['dependencies'] | undefined> {
   const preferred = 'eslint.config.mjs';
+  // read before the old config gets removed
+  const legacy = await read_legacy_eslint_config();
   if (
     await verify_missing({
       path: [
@@ -142,12 +239,10 @@ export async function create_eslint_config({
       remove: overwrite,
     })
   ) {
-    const config = _generate_eslint_config({
-      project_type,
-      languages,
-      technologies,
-      lenient,
-    });
+    const config = _generate_eslint_config(
+      { project_type, languages, technologies, lenient },
+      legacy,
+    );
 
     await create_file(preferred, await prettify(preferred, config.content));
 

@@ -155,7 +155,7 @@ export function _generate_build_script({
         break;
       default:
         console.warn(
-          chalk.yellow`Build scripts using "${builder}" are not at this time`,
+          chalk.yellow(`Build scripts using "${builder}" are not at this time`),
         );
     }
   }

@@ -2,7 +2,7 @@
 
 v3 replaces the `.eslintrc` configs with [flat configs](https://eslint.org/docs/latest/use/configure/configuration-files) for **ESLint 10**, which requires Node `^20.19.0 || ^22.13.0 || >=24`.
 
-The easiest way to migrate is to re-run [create-configs](../packages/create-configs/README.md) with `overwrite` enabled. It replaces your `.eslintrc.yaml` with an `eslint.config.mjs`, so copy any rules you've added to your `.eslintrc.yaml` into the new config afterwards.
+The easiest way to migrate is to re-run [create-configs](../packages/create-configs/README.md) with `overwrite` enabled. It replaces your `.eslintrc` & `.eslintignore` with an `eslint.config.mjs`, carrying over your rules, ignore patterns, and overrides' rules. It warns about any other settings (eg: `env`), which you'll need to add yourself.
 
 To migrate by hand:
 
