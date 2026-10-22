@@ -13,7 +13,18 @@ export function initESLint(
   const linter = new ESLint({
     // `true` = don't look for an eslint.config.* file; use `overrideConfig` alone
     overrideConfigFile: true,
-    overrideConfig: config,
+    overrideConfig: [
+      ...config,
+      /**
+       * typescript-eslint switches to "single run" mode when `CI=true`, which
+       * builds its programs from files on disk; tests lint in-memory code.
+       */
+      {
+        languageOptions: {
+          parserOptions: { disallowAutomaticSingleRunInference: true },
+        },
+      },
+    ],
     ...options,
   });
   init_registry.set(linter, { config, options });
