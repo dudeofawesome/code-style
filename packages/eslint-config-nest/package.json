@@ -18,17 +18,10 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./base": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./package.json": "./package.json"
+    ".": "./dist/base.js",
+    "./*": "./dist/*.js"
   },
-  "main": "./dist/base.js",
+  "main": "dist/base.js",
   "files": [
     "./dist/"
   ],
@@ -44,12 +37,8 @@
     "@code-style/eslint-plugin-nest": "^2.0.0-35"
   },
   "devDependencies": {
-    "@types/node": "^20.12.11",
-    "concurrently": "^8.2.2",
-    "esbuild": "^0.21.1",
-    "glob": "^10.3.14",
-    "tsx": "^4.9.4",
-    "typescript": "^5.4.5"
+    "@types/node": "^20.6.3",
+    "tsx": "^4.9.4"
   },
   "peerDependencies": {
     "eslint": "^10.0.0"

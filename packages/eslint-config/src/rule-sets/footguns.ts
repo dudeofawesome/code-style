@@ -1,6 +1,8 @@
+import { fixupPluginRules } from '@eslint/compat';
 import type { Linter } from 'eslint';
+import jsonFiles from 'eslint-plugin-json-files';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/rule-sets/footguns',
     rules: {
@@ -52,6 +54,26 @@ const config: Linter.Config[] = [
       'no-empty': ['error', { allowEmptyCatch: true }],
     },
   },
-];
+  {
+    name: '@code-style/eslint-config/rule-sets/footguns/json',
+    files: ['**/*.json'],
+    // eslint-plugin-json-files still calls rule-context methods ESLint 10 removed
+    plugins: { 'json-files': fixupPluginRules(jsonFiles) },
+    rules: {
+      // Prevent having the same package in dependencies and devDependencies.
+      'json-files/require-unique-dependency-names': 'error',
 
-export default config;
+      // Require that specific ranges are specified in `package.json` `dependencies`.
+      'json-files/restrict-ranges': [
+        'error',
+        {
+          versionHint: 'caret',
+          dependencyTypes: ['dependencies', 'devDependencies'],
+        },
+      ],
+
+      // Require that `engines` are specified in `package.json`.
+      'json-files/require-engines': 'error',
+    },
+  },
+];

@@ -8,11 +8,11 @@ import {
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 import { codeBlock } from 'common-tags';
-import base from '@code-style/eslint-config';
-import base_lenient from '@code-style/eslint-config/lenient';
-import esmodule from '@code-style/eslint-config-esmodule';
-import typescript from '@code-style/eslint-config-typescript';
-import typescript_lenient from '@code-style/eslint-config-typescript/lenient';
+import { config as base } from '@code-style/eslint-config';
+import { config as base_lenient } from '@code-style/eslint-config/lenient';
+import { config as esmodule } from '@code-style/eslint-config-esmodule';
+import { config as typescript } from '@code-style/eslint-config-typescript';
+import { config as typescript_lenient } from '@code-style/eslint-config-typescript/lenient';
 
 const linter = initESLint(
   [...base, ...base_lenient, ...esmodule, ...typescript, ...typescript_lenient],

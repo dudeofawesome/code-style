@@ -12,15 +12,14 @@ My Typescript eslint config
     npm i -D @code-style/eslint-config-typescript
     ```
 
-1. Add the config to your `eslint.config.mjs`.
+1. Add the plugin to your ESLint config.
 
-    ```js
-    import { defineConfig } from 'eslint/config';
+    ```diff
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as typescript } from '@code-style/eslint-config-typescript';
 
-    import base from '@code-style/eslint-config';
-    import typescript from '@code-style/eslint-config-typescript';
-
-    export default defineConfig(base, typescript);
+    -export default defineConfig(base);
+    +export default defineConfig(base, typescript);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

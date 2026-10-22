@@ -19,19 +19,9 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./base": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./lenient": {
-      "types": "./dist/lenient.d.ts",
-      "default": "./dist/lenient.js"
-    },
-    "./package.json": "./package.json"
+    ".": "./dist/base.js",
+    "./base": "./dist/base.js",
+    "./lenient": "./dist/lenient.js"
   },
   "main": "dist/base.js",
   "files": [
@@ -46,8 +36,7 @@
     "test:debug": "NODE_OPTS='--inspect-brk' npm run test"
   },
   "dependencies": {
-    "eslint-plugin-jest": "^29.16.0",
-    "globals": "^16.0.0"
+    "eslint-plugin-jest": "^29.16.0"
   },
   "devDependencies": {
     "tsx": "^4.9.4"

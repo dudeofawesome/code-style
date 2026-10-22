@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/lenient',
     rules: {
@@ -14,11 +14,15 @@ const config: Linter.Config[] = [
       'no-param-reassign': 'off',
       'import/order': 'off',
       'import/newline-after-import': 'off',
+      'n/prefer-global/buffer': 'off',
+      'n/prefer-global/text-decoder': 'off',
+      'n/prefer-global/text-encoder': 'off',
+      'n/prefer-global/url-search-params': 'off',
+      'n/prefer-global/url': 'off',
+      'n/no-process-env': 'off',
       'promise/always-return': 'off',
       'no-throw-literal': 'off',
       'no-unused-vars': 'off',
     },
   },
 ];
-
-export default config;

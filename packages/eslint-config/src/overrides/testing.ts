@@ -1,19 +1,14 @@
 import type { Linter } from 'eslint';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/overrides/testing',
-    files: [
-      '**/test/**',
-      '**/__test__/**',
-      '**/*.test.*',
-      '**/*.spec.*',
-      '**/*.unit.*',
-      '**/*.e2e.*',
-    ],
     rules: {
       // Allow console logging in tests
       'no-console': 'off',
+
+      // Allow test to import unpublished files.
+      'n/no-unpublished-import': 'off',
 
       // Allow test files to be any length.
       'max-lines': 'off',
@@ -23,8 +18,24 @@ const config: Linter.Config[] = [
        * This can be useful for accessing Typescript `private` properties & methods.
        */
       'dot-notation': 'off',
+      '@typescript-eslint/dot-notation': 'off',
+
+      // Allow `any` in tests.
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+
+      // Allow non-null assertions in tests.
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+
+      // Simplify testing methods.
+      '@typescript-eslint/unbound-method': 'off',
+
+      // Allow tests to throw literals.
+      '@typescript-eslint/only-throw-error': 'off',
     },
   },
 ];
-
-export default config;

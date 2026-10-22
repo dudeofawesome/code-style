@@ -3,7 +3,7 @@ import jestPlugin from 'eslint-plugin-jest';
 
 import { test_file_patterns } from './utils.js';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     ...jestPlugin.configs['flat/recommended'],
     name: '@code-style/eslint-config-jest/recommended',
@@ -42,5 +42,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

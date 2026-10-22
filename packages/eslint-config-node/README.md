@@ -12,15 +12,14 @@ My node eslint config
     npm i -D @code-style/eslint-config-node
     ```
 
-1. Add the config to your `eslint.config.mjs`.
+1. Add the plugin to your ESLint config.
 
-    ```js
-    import { defineConfig } from 'eslint/config';
+    ```diff
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as node } from '@code-style/eslint-config-node';
 
-    import base from '@code-style/eslint-config';
-    import node from '@code-style/eslint-config-node';
-
-    export default defineConfig(base, node);
+    -export default defineConfig(base);
+    +export default defineConfig(base, node);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

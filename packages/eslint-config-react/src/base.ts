@@ -1,49 +1,32 @@
-import type { Linter } from 'eslint';
+import { fixupPluginRules } from '@eslint/compat';
+import type { ESLint, Linter } from 'eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 
-import { patch_plugin_for_eslint_10 } from './compat.js';
-
-const patched_react = patch_plugin_for_eslint_10(
-  reactPlugin as Parameters<typeof patch_plugin_for_eslint_10>[0],
-);
-const patched_jsx_a11y = patch_plugin_for_eslint_10(jsxA11y);
-
-const config = [
+export const config: Linter.Config[] = [
+  // eslint-plugin-react & eslint-plugin-jsx-a11y still call rule-context methods ESLint 10 removed
   {
     ...reactPlugin.configs.flat.recommended,
-    plugins: { react: patched_react },
+    plugins: { react: fixupPluginRules(reactPlugin) },
   },
-
-  {
-    /**
-     * react-hooks is pinned to the classic rule pair instead of its v6+
-     * `recommended` config: the modern recommended set bundles the React
-     * Compiler rules, and adopting those should be a deliberate versioned
-     * change to this package, not a side effect of a plugin bump.
-     */
-    name: '@code-style/eslint-config-react/react-hooks',
-    plugins: { 'react-hooks': reactHooks },
-    rules: {
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-    },
-  },
-
   {
     ...jsxA11y.flatConfigs.recommended,
-    plugins: { 'jsx-a11y': patched_jsx_a11y },
+    plugins: { 'jsx-a11y': fixupPluginRules(jsxA11y) },
   },
-
   {
     name: '@code-style/eslint-config-react/base',
+    // pinned to the rules the eslintrc `recommended` config enabled; v6+'s adds the React Compiler rules
+    plugins: { 'react-hooks': reactHooks as ESLint.Plugin },
     settings: {
       react: {
         version: 'detect',
       },
     },
     rules: {
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
       /**
        * Limit max element nesting to reduce component complexity.
        * This simplifies components & enables better testing.
@@ -62,6 +45,4 @@ const config = [
       'react/jsx-key': 'error',
     },
   },
-] as unknown as Linter.Config[];
-
-export default config;
+];

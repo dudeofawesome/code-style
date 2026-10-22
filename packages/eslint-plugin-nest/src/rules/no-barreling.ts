@@ -7,7 +7,6 @@ const createRule = ESLintUtils.RuleCreator(
 
 export const no_barreling = createRule({
   name: 'no-barreling',
-  defaultOptions: [],
   meta: {
     type: 'problem',
     hasSuggestions: true,
@@ -19,24 +18,31 @@ export const no_barreling = createRule({
       delete_export: 'Delete this export declaration',
     },
     schema: [],
+    defaultOptions: [],
   },
   create(context) {
     return {
-      ExportAllDeclaration: (node) => {
-        if (node.exportKind === 'type') return;
-
-        context.report({
-          node,
-          messageId: 'not_allowed',
-          suggest: [
-            {
-              messageId: 'delete_export',
-              fix(fixer) {
-                return fixer.remove(node);
+      Program: (node) => {
+        if (
+          node.body.find(
+            (node) =>
+              node.type === 'ExportAllDeclaration' &&
+              node.exportKind !== 'type',
+          ) != null
+        ) {
+          context.report({
+            node,
+            messageId: 'not_allowed',
+            suggest: [
+              {
+                messageId: 'delete_export',
+                fix(fixer) {
+                  return fixer.remove(node);
+                },
               },
-            },
-          ],
-        });
+            ],
+          });
+        }
       },
     };
   },

@@ -55,7 +55,7 @@ export async function create_vscode_config({
                 .catch(() => '{}')
                 .then((buf) => buf.toString())
                 .then((str) => json5.parse<Record<string, unknown>>(str))
-                .catch(() => ({}))),
+                .catch((): Record<string, unknown> => ({}))),
 
               ...{
                 'editor.formatOnSave': true,

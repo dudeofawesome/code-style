@@ -2,17 +2,13 @@ import type { Linter } from 'eslint';
 import nPlugin from 'eslint-plugin-n';
 import globals from 'globals';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   nPlugin.configs['flat/recommended-module'],
 
   {
-    name: '@code-style/eslint-config-node/language-options',
+    name: '@code-style/eslint-config-node/base',
     languageOptions: {
       ecmaVersion: 2022, // Version is inline with Node 16
-      /**
-       * Parse as CommonJS. `@code-style/eslint-config-esmodule`, layered
-       * after this config, switches parsing back to `module`.
-       */
       sourceType: 'commonjs',
       globals: {
         ...globals.node,
@@ -24,10 +20,6 @@ const config: Linter.Config[] = [
         module: 'writable',
       },
     },
-  },
-
-  {
-    name: '@code-style/eslint-config-node/base',
     rules: {
       // Allow unspecified radix in `parseInt` since Node has a consistent radix.
       radix: 'off',
@@ -115,16 +107,14 @@ const config: Linter.Config[] = [
   },
 
   {
-    name: '@code-style/eslint-config-node/typescript',
-    files: ['**/*.?(m|c)ts?(x)'],
-    rules: {
-      /** Disable this rule since Typescript checks imports for us. */
-      'n/no-missing-import': 'off',
-    },
+    // `.mjs` files are always ES modules (eg: `eslint.config.mjs`)
+    name: '@code-style/eslint-config-node/mjs-files',
+    files: ['**/*.mjs'],
+    languageOptions: { sourceType: 'module' },
   },
 
   {
-    name: '@code-style/eslint-config-node/testing-and-config-files',
+    name: '@code-style/eslint-config-node/test-and-config-files',
     files: [
       // test files
       '**/test/**',
@@ -139,12 +129,6 @@ const config: Linter.Config[] = [
       '**/config.*',
       '**/configuration.*',
     ],
-    rules: {
-      'n/no-process-env': 'off',
-      // Allow test to import unpublished files.
-      'n/no-unpublished-import': 'off',
-    },
+    rules: { 'n/no-process-env': 'off' },
   },
 ];
-
-export default config;

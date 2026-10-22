@@ -16,7 +16,7 @@ ruleTester.run('my-rule', no_barreling, {
       errors: [
         {
           messageId: 'not_allowed',
-          suggestions: [{ messageId: 'delete_export', output: `` }],
+          suggestions: [{ messageId: 'delete_export', output: '' }],
         },
       ],
     },
@@ -26,13 +26,7 @@ const foo = 'foo'`,
       errors: [
         {
           messageId: 'not_allowed',
-          suggestions: [
-            {
-              messageId: 'delete_export',
-              output: `
-const foo = 'foo'`,
-            },
-          ],
+          suggestions: [{ messageId: 'delete_export', output: '' }],
         },
       ],
     },
@@ -42,13 +36,7 @@ export type * from './test'`,
       errors: [
         {
           messageId: 'not_allowed',
-          suggestions: [
-            {
-              messageId: 'delete_export',
-              output: `
-export type * from './test'`,
-            },
-          ],
+          suggestions: [{ messageId: 'delete_export', output: '' }],
         },
       ],
     },

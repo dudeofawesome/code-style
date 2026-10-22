@@ -117,7 +117,8 @@ export async function interactive_setup(
           (() => {
             const disabled =
               `The configurator doesn't yet have support for React Native, but you can still configure it manually` as
-                string | boolean;
+                | string
+                | boolean;
             return {
               name: 'React Native',
               value: 'react-native',
@@ -324,7 +325,7 @@ export async function question_default<T>(
   default_answer?: T,
   use_default: boolean = false,
 ): Promise<T> {
-  return use_default ? (default_answer ?? question()) : question();
+  return use_default ? default_answer ?? question() : question();
 }
 
 export async function validate_path(

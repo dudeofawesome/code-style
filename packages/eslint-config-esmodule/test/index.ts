@@ -6,8 +6,8 @@ import {
   testRuleFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
-import base from '@code-style/eslint-config';
-import esmodule from '@code-style/eslint-config-esmodule';
+import { config as base } from '@code-style/eslint-config';
+import { config as esmodule } from '@code-style/eslint-config-esmodule';
 
 const linter = initESLint([...base, ...esmodule]);
 

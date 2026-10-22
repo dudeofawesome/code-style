@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/rule-sets/imports',
     rules: {
@@ -70,18 +70,19 @@ const config: Linter.Config[] = [
     },
   },
   {
-    name: '@code-style/eslint-config/rule-sets/imports/jest-config-files',
-    files: ['**/jest.config.*js'],
+    // these tools require their config files to default export
+    name: '@code-style/eslint-config/rule-sets/imports/default-export-config-files',
+    files: ['**/jest.config.*js', '**/eslint.config.*'],
     rules: {
       'import/no-default-export': 'off',
     },
   },
   {
-    // flat config files must have a default export
-    name: '@code-style/eslint-config/rule-sets/imports/eslint-config-files',
-    files: ['**/eslint.config.*js', '**/eslint.config.*ts'],
+    // `.mjs` files are always ES modules (eg: `eslint.config.mjs`)
+    name: '@code-style/eslint-config/rule-sets/imports/mjs-files',
+    files: ['**/*.mjs'],
     rules: {
-      'import/no-default-export': 'off',
+      'no-restricted-syntax': 'off',
     },
   },
   {
@@ -92,5 +93,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

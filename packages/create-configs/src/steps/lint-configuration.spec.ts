@@ -3,8 +3,8 @@ import '@code-style/utils/testing/assert/matchers';
 import * as utils from '../utils.js';
 
 function import_specifiers(content: string): string[] {
-  return [...content.matchAll(/^import .* from '([^']+)';$/gmu)].map(
-    (match) => match[1] as string,
+  return [...content.matchAll(/^import .* from '([^']+)';$/gmu)].flatMap(
+    (match) => match[1] ?? [],
   );
 }
 
@@ -23,8 +23,9 @@ describe('lint-configuration', () => {
 
   describe('_generate_eslint_config', () => {
     it(`should generate valid config`, async () => {
-      const { _generate_eslint_config } =
-        await import('./lint-configuration.js');
+      const { _generate_eslint_config } = await import(
+        './lint-configuration.js'
+      );
 
       const output = _generate_eslint_config({
         project_type: 'web-app',
@@ -55,8 +56,9 @@ describe('lint-configuration', () => {
     });
 
     it(`should generate valid lenient config`, async () => {
-      const { _generate_eslint_config } =
-        await import('./lint-configuration.js');
+      const { _generate_eslint_config } = await import(
+        './lint-configuration.js'
+      );
 
       const output = _generate_eslint_config({
         project_type: 'web-app',
@@ -93,8 +95,9 @@ describe('lint-configuration', () => {
     });
 
     it(`should generate cli lenient config`, async () => {
-      const { _generate_eslint_config } =
-        await import('./lint-configuration.js');
+      const { _generate_eslint_config } = await import(
+        './lint-configuration.js'
+      );
 
       const output = _generate_eslint_config({
         project_type: 'cli',
@@ -103,7 +106,7 @@ describe('lint-configuration', () => {
         lenient: true,
       });
 
-      // cli/lenient exists as of v3 (it was a dead subpath in v2)
+      // eslint-config-cli has no lenient config
       expect(import_specifiers(output.content)).toStrictEqual([
         'eslint/config',
         '@code-style/eslint-config',
@@ -111,10 +114,9 @@ describe('lint-configuration', () => {
         '@code-style/eslint-config-node',
         '@code-style/eslint-config-node/lenient',
         '@code-style/eslint-config-cli',
-        '@code-style/eslint-config-cli/lenient',
       ]);
       expect(output.content).toContain(
-        'export default defineConfig(base, base_lenient, node, node_lenient, cli, cli_lenient);',
+        'export default defineConfig(base, base_lenient, node, node_lenient, cli);',
       );
     });
   });

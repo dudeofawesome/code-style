@@ -18,19 +18,8 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./base": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./lenient": {
-      "types": "./dist/lenient.d.ts",
-      "default": "./dist/lenient.js"
-    },
-    "./package.json": "./package.json"
+    ".": "./dist/base.js",
+    "./*": "./dist/*.js"
   },
   "main": "dist/base.js",
   "files": [
@@ -49,6 +38,7 @@
   },
   "dependencies": {
     "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-import-x": "^4.17.0",
     "typescript-eslint": "^8.67.0"
   },
   "devDependencies": {

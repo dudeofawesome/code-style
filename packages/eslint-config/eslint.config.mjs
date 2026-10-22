@@ -6,14 +6,10 @@
 //   @code-style/eslint-config-esmodule
 import { defineConfig } from 'eslint/config';
 
-import node from '@code-style/eslint-config-node';
-import cli from '@code-style/eslint-config-cli';
-import typescript from '@code-style/eslint-config-typescript';
-import esmodule from '@code-style/eslint-config-esmodule';
-import base from '@code-style/eslint-config';
+import { config as node } from '@code-style/eslint-config-node';
+import { config as cli } from '@code-style/eslint-config-cli';
+import { config as typescript } from '@code-style/eslint-config-typescript';
+import { config as esmodule } from '@code-style/eslint-config-esmodule';
+import { config as base } from '@code-style/eslint-config';
 
-export default defineConfig(base, node, cli, typescript, esmodule, {
-  // flat config modules export their config arrays as default exports
-  files: ['src/**'],
-  rules: { 'import/no-default-export': 'off' },
-});
+export default defineConfig(base, node, cli, typescript, esmodule);

@@ -2,7 +2,7 @@ import type { Linter } from 'eslint';
 
 import { test_file_patterns } from './utils.js';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config-jest/lenient',
     files: test_file_patterns,
@@ -16,5 +16,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

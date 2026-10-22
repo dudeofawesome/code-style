@@ -12,15 +12,14 @@ My browser eslint config
     npm i -D @code-style/eslint-config-browser
     ```
 
-1. Add the config to your `eslint.config.mjs`.
+1. Add the plugin to your ESLint config.
 
-    ```js
-    import { defineConfig } from 'eslint/config';
+    ```diff
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as browser } from '@code-style/eslint-config-browser';
 
-    import base from '@code-style/eslint-config';
-    import browser from '@code-style/eslint-config-browser';
-
-    export default defineConfig(base, browser);
+    -export default defineConfig(base);
+    +export default defineConfig(base, browser);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

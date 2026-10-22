@@ -173,9 +173,8 @@ type LintScripts = {
 /** @private */
 export function _generate_lint_script({
   languages,
-  technologies,
   builder,
-}: Pick<AddNPMScriptsOptions, 'languages' | 'technologies' | 'builder'>): {
+}: Pick<AddNPMScriptsOptions, 'languages' | 'builder'>): {
   scripts: LintScripts;
   dependencies: Dependencies;
 } {
@@ -191,7 +190,6 @@ export function _generate_lint_script({
     (scripts, linter) => {
       switch (linter) {
         case 'eslint':
-          // flat config's `files` globs govern which extensions get linted
           return {
             ...scripts,
             'lint:js': `${deps.d.depend('eslint')} . --cache`,

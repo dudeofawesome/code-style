@@ -1,12 +1,9 @@
 import type { Linter } from 'eslint';
 
-import { ts_file_patterns } from './utils.js';
-
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config-typescript/lenient',
-    files: ts_file_patterns,
-    ignores: ['**/*.json'],
+    files: ['**/*.?(m|c)@(t|j)s?(x)'],
     rules: {
       /** Allow some non-boolean type conditionals. */
       '@typescript-eslint/strict-boolean-expressions': [
@@ -47,5 +44,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

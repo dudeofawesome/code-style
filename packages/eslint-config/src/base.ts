@@ -1,49 +1,44 @@
 import type { Linter } from 'eslint';
-import eslintCommentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
+import { recommended as eslint_comments_recommended } from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import js from '@eslint/js';
-import importX from 'eslint-plugin-import-x';
+import {
+  flatConfigs as import_x_configs,
+  importX,
+} from 'eslint-plugin-import-x';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import promisePlugin from 'eslint-plugin-promise';
 import globals from 'globals';
 
-import bugs from './rule-sets/bugs.js';
-import deprecated from './rule-sets/deprecated.js';
-import footguns from './rule-sets/footguns.js';
-import imports from './rule-sets/imports.js';
-import miscellaneous from './rule-sets/miscellaneous.js';
-import modernCode from './rule-sets/modern-code.js';
-import promises from './rule-sets/promises.js';
-import readability from './rule-sets/readability.js';
-import security from './rule-sets/security.js';
-import overrides from './overrides/index.js';
+import { config as bugs } from './rule-sets/bugs.js';
+import { config as deprecated } from './rule-sets/deprecated.js';
+import { config as footguns } from './rule-sets/footguns.js';
+import { config as imports } from './rule-sets/imports.js';
+import { config as miscellaneous } from './rule-sets/miscellaneous.js';
+import { config as modern_code } from './rule-sets/modern-code.js';
+import { config as promises } from './rule-sets/promises.js';
+import { config as readability } from './rule-sets/readability.js';
+import { config as security } from './rule-sets/security.js';
+import { config as overrides } from './overrides/index.js';
 
 /**
- * eslint-plugin-import-x registers its rules under the `import-x` namespace.
- * We register the plugin under `import` to keep the `import/*` rule IDs (and
- * every consumer's inline disable comment) working, so its recommended rules
- * need their namespace remapped to match.
+ * eslint-plugin-import-x is registered under the `import` namespace to keep
+ * the `import/*` rule IDs, so its recommended rules need renaming to match.
  */
 const import_recommended_rules: Linter.RulesRecord = Object.fromEntries(
-  Object.entries(importX.flatConfigs.recommended.rules ?? {}).map(
+  Object.entries(import_x_configs.recommended.rules ?? {}).map(
     ([rule, severity]) => [rule.replace(/^import-x\//u, 'import/'), severity],
   ),
 );
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/ignores',
     ignores: ['**/dist/', '**/out/', '**/coverage/'],
   },
   {
-    /**
-     * Make the whole JS/TS file family lintable. The eslintrc versions of
-     * these configs were run with `--ext ts,js,json`, and eslintrc linted any
-     * file it was handed; flat config only covers `*.{js,mjs,cjs}` unless a
-     * config object matches other extensions explicitly.
-     */
-    name: '@code-style/eslint-config/lintable-files',
+    // flat config only lints `*.{js,mjs,cjs}` unless a config matches other extensions
+    name: '@code-style/eslint-config/files',
     files: ['**/*.?(m|c)@(t|j)s?(x)'],
-    rules: {},
   },
   js.configs.recommended,
   prettierRecommended,
@@ -53,14 +48,14 @@ const config: Linter.Config[] = [
     plugins: { import: importX },
     rules: import_recommended_rules,
   },
-  eslintCommentsConfigs.recommended,
+  eslint_comments_recommended,
 
   ...bugs,
   ...deprecated,
   ...footguns,
   ...imports,
   ...miscellaneous,
-  ...modernCode,
+  ...modern_code,
   ...promises,
   ...readability,
   ...security,
@@ -71,17 +66,9 @@ const config: Linter.Config[] = [
     name: '@code-style/eslint-config/language-options',
     languageOptions: {
       ecmaVersion: 2022,
-      /**
-       * The eslintrc versions of these configs always parsed as ESM (via
-       * `plugin:import/recommended`), relying on `no-restricted-syntax` to
-       * report ESM syntax as rule violations rather than parse errors.
-       * `@code-style/eslint-config-node` narrows this to `commonjs`;
-       * `@code-style/eslint-config-esmodule` sets it back to `module`.
-       */
+      // matches the eslintrc config, which parsed as `module` via `plugin:import/recommended`
       sourceType: 'module',
-      globals: { ...globals.commonjs },
+      globals: globals.commonjs,
     },
   },
 ];
-
-export default config;

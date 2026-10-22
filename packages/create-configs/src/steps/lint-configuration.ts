@@ -74,7 +74,6 @@ export function _generate_eslint_config({
       if (lenient) add('@code-style/eslint-config-node', 'node', 'lenient');
 
       add('@code-style/eslint-config-cli', 'cli');
-      if (lenient) add('@code-style/eslint-config-cli', 'cli', 'lenient');
       break;
   }
 
@@ -92,11 +91,7 @@ export function _generate_eslint_config({
   if (technologies.includes('esm'))
     add('@code-style/eslint-config-esmodule', 'esmodule');
 
-  /**
-   * The generated config imports `eslint/config`, and the `eslint` binary no
-   * longer arrives transitively (it's a peer of the config packages), so it
-   * must be a direct devDependency.
-   */
+  // the config packages only peer-depend on eslint
   deps.d.depend('eslint');
 
   const source_packages = [...new Set(entries.map((entry) => entry.pkg))];
@@ -109,7 +104,7 @@ export function _generate_eslint_config({
     entries
       .map(
         (entry) =>
-          `import ${entry.alias} from '${entry.pkg}${
+          `import { config as ${entry.alias} } from '${entry.pkg}${
             entry.subpath == null ? '' : `/${entry.subpath}`
           }';`,
       )

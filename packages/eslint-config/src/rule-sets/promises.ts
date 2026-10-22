@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/rule-sets/promises',
     rules: {
@@ -27,5 +27,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

@@ -1,6 +1,8 @@
+import { fixupPluginRules } from '@eslint/compat';
 import type { Linter } from 'eslint';
+import jsonFiles from 'eslint-plugin-json-files';
 
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config/rule-sets/readability',
     rules: {
@@ -33,6 +35,17 @@ const config: Linter.Config[] = [
       ],
     },
   },
+  {
+    name: '@code-style/eslint-config/rule-sets/readability/json',
+    files: ['**/*.json'],
+    // eslint-plugin-json-files still calls rule-context methods ESLint 10 removed
+    plugins: { 'json-files': fixupPluginRules(jsonFiles) },
+    rules: {
+      /**
+       * Require keys in package.json to be sorted, improving readability &
+       * consistency across projects.
+       */
+      'json-files/sort-package-json': 'warn',
+    },
+  },
 ];
-
-export default config;

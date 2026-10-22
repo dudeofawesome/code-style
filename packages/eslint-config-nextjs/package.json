@@ -18,15 +18,8 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./base": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./package.json": "./package.json"
+    ".": "./dist/base.js",
+    "./*": "./dist/*.js"
   },
   "main": "dist/base.js",
   "files": [
@@ -34,7 +27,7 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*') --outdir=dist/ --sourcemap=inline --platform=node --target=node20 --format=esm",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.spec.*' --ignore '**/*.d.ts') --outdir=dist/ --sourcemap=inline --platform=node --target=node20 --format=esm",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "prepublishOnly": "npm run build",
     "test": "node $NODE_OPTS --import=tsx --test $(glob --ignore '**/node_modules/**' --ignore '**/dist/**' '**/*[.-_]test.?(c|m)[jt]s' '**/test?(-*).?(c|m)[jt]s' '**/test/**/*.?(c|m)[jt]s')",

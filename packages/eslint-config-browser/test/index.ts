@@ -2,8 +2,8 @@ import { describe, it } from 'node:test';
 import { initESLint } from '@code-style/utils/testing/eslint';
 import { testRuleFail } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
-import base from '@code-style/eslint-config';
-import browser from '@code-style/eslint-config-browser';
+import { config as base } from '@code-style/eslint-config';
+import { config as browser } from '@code-style/eslint-config-browser';
 
 const linter = initESLint([...base, ...browser]);
 

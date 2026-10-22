@@ -81,8 +81,7 @@ export async function build({
         : null,
     ]
       .flat()
-      // a type-guard filter so the aggregate's type contains no `null`s
-      .filter(<T>(task: T): task is NonNullable<T> => task != null),
+      .filter((task) => task != null),
   );
 
   await install_dependencies({ dependencies: deps, runtime });

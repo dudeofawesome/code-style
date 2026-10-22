@@ -12,15 +12,14 @@ My Jest eslint config
     npm i -D @code-style/eslint-config-jest
     ```
 
-1. Add the config to your `eslint.config.mjs`.
+1. Add the plugin to your ESLint config.
 
-    ```js
-    import { defineConfig } from 'eslint/config';
+    ```diff
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as jest } from '@code-style/eslint-config-jest';
 
-    import base from '@code-style/eslint-config';
-    import jest from '@code-style/eslint-config-jest';
-
-    export default defineConfig(base, jest);
+    -export default defineConfig(base);
+    +export default defineConfig(base, jest);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

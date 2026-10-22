@@ -1,8 +1,8 @@
 import type { Linter } from 'eslint';
 import nestPlugin from '@code-style/eslint-plugin-nest';
 
-const config: Linter.Config[] = [
-  ...nestPlugin.configs.recommended,
+export const config: Linter.Config[] = [
+  nestPlugin.configs.recommended,
 
   {
     name: '@code-style/eslint-config-nest/base',
@@ -17,5 +17,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

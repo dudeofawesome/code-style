@@ -12,14 +12,11 @@ describe('scripts', () => {
       const output = _generate_lint_script({
         builder: 'esbuild',
         languages: ['ts'],
-        technologies: ['react'],
       });
 
       it(`should create lint scripts`, () => {
         expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
-        // flat config's files globs govern extensions; no --ext
         expect(output.scripts['lint:js']).toEqual('eslint . --cache');
-        expect(output.scripts['lint:js']).not.toMatch(/ --ext /u);
       });
 
       test_no_shell_globs(Object.values(output.scripts));
@@ -30,14 +27,11 @@ describe('scripts', () => {
       const output = _generate_lint_script({
         builder: 'esbuild',
         languages: ['ts', 'js'],
-        technologies: [],
       });
 
       it(`should create lint scripts`, () => {
         expect(output.scripts.lint).toMatch(/concurrently.+'npm:lint:\*'/u);
-        // flat config's files globs govern extensions; no --ext
         expect(output.scripts['lint:js']).toEqual('eslint . --cache');
-        expect(output.scripts['lint:js']).not.toMatch(/ --ext /u);
       });
 
       test_no_shell_globs(Object.values(output.scripts));
@@ -48,7 +42,6 @@ describe('scripts', () => {
       const output = _generate_lint_script({
         builder: 'esbuild',
         languages: ['css'],
-        technologies: [],
       });
 
       it(`should create lint scripts`, () => {
@@ -65,7 +58,6 @@ describe('scripts', () => {
       const output = _generate_lint_script({
         builder: 'esbuild',
         languages: ['css', 'scss'],
-        technologies: [],
       });
 
       it(`should create lint scripts`, () => {

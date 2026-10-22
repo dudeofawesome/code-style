@@ -5,8 +5,8 @@ import {
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
-import base from '@code-style/eslint-config';
-import jest from '@code-style/eslint-config-jest';
+import { config as base } from '@code-style/eslint-config';
+import { config as jest } from '@code-style/eslint-config-jest';
 
 const linter = initESLint([...base, ...jest]);
 

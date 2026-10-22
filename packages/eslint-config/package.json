@@ -18,27 +18,11 @@
   "author": "Louis Orleans <louis@orleans.io>",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./base": {
-      "types": "./dist/base.d.ts",
-      "default": "./dist/base.js"
-    },
-    "./lenient": {
-      "types": "./dist/lenient.d.ts",
-      "default": "./dist/lenient.js"
-    },
-    "./rule-sets/*": {
-      "types": "./dist/rule-sets/*.d.ts",
-      "default": "./dist/rule-sets/*.js"
-    },
-    "./overrides/*": {
-      "types": "./dist/overrides/*.d.ts",
-      "default": "./dist/overrides/*.js"
-    },
-    "./package.json": "./package.json"
+    ".": "./dist/base.js",
+    "./base": "./dist/base.js",
+    "./lenient": "./dist/lenient.js",
+    "./rule-sets/*": "./dist/rule-sets/*.js",
+    "./overrides/*": "./dist/overrides/*.js"
   },
   "main": "dist/base.js",
   "files": [
@@ -46,7 +30,7 @@
   ],
   "scripts": {
     "build": "concurrently --raw --group 'npm:build:*'",
-    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*') --outdir=dist --sourcemap=inline --platform=node --target=node20 --format=esm",
+    "build:js": "esbuild --tsconfig=tsconfig.build.json $(glob 'src/**/*.?(c|m)[jt]s' --ignore '**/*.@(spec|test).*' --ignore '**/*.d.ts') --outdir=dist --sourcemap=inline --platform=node --target=node20 --format=esm",
     "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "check": "concurrently --raw --group 'npm:test' 'npm:lint'",
     "lint": "concurrently --raw --group 'npm:lint:*'",
@@ -58,6 +42,7 @@
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.0",
+    "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.0",
     "eslint-config-prettier": "^10.1.0",
     "eslint-plugin-import-x": "^4.17.0",
@@ -77,7 +62,6 @@
     "@types/node": "^20.12.11",
     "concurrently": "^8.2.2",
     "esbuild": "^0.21.1",
-    "eslint": "^10.0.0",
     "glob": "^10.3.14",
     "tsx": "^4.9.4",
     "typescript": "^5.4.5"

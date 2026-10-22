@@ -1,10 +1,6 @@
 import type { Linter } from 'eslint';
 
-/**
- * NOTE: this config relies on `@code-style/eslint-config-node` being layered
- * before it (it references the `n/` plugin namespace registered there).
- */
-const config: Linter.Config[] = [
+export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config-cli/base',
     rules: {
@@ -19,5 +15,3 @@ const config: Linter.Config[] = [
     },
   },
 ];
-
-export default config;

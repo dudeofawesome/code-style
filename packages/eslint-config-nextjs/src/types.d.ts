@@ -7,12 +7,8 @@ declare module '@next/eslint-plugin-next' {
   import type { ESLint, Linter } from 'eslint';
 
   const plugin: ESLint.Plugin & {
-    configs: {
-      recommended: Linter.Config;
-      'core-web-vitals': Linter.Config;
-      'recommended-legacy': Linter.LegacyConfig;
-      'core-web-vitals-legacy': Linter.LegacyConfig;
-    };
+    configs: { recommended: Linter.Config };
   };
+  // eslint-disable-next-line import/no-default-export
   export default plugin;
 }

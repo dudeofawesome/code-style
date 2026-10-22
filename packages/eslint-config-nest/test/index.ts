@@ -7,11 +7,11 @@ import {
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
-import base from '@code-style/eslint-config';
-import esmodule from '@code-style/eslint-config-esmodule';
-import node from '@code-style/eslint-config-node';
-import typescript from '@code-style/eslint-config-typescript';
-import nest from '@code-style/eslint-config-nest';
+import { config as base } from '@code-style/eslint-config';
+import { config as esmodule } from '@code-style/eslint-config-esmodule';
+import { config as node } from '@code-style/eslint-config-node';
+import { config as typescript } from '@code-style/eslint-config-typescript';
+import { config as nest } from '@code-style/eslint-config-nest';
 
 const linter = initESLint(
   [...base, ...esmodule, ...node, ...typescript, ...nest],

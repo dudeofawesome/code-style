@@ -4,7 +4,6 @@
     "@code-style/typescript-configs/layers/esmodule"
   ],
   "compilerOptions": {
-    "rootDir": "./",
     "baseUrl": "src/",
     "outDir": "dist/"
   },

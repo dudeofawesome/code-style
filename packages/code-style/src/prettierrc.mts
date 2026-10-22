@@ -40,6 +40,7 @@ function resolve_plugin(
      * so we resolve the package's path here instead.
      */
     return (
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins -- only runs in vscode's bundled node
       import.meta
         .resolve(plugin)
         /**
