@@ -12,7 +12,10 @@ import {
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
 import { config as base } from '@code-style/eslint-config';
 import { config as esmodule } from '@code-style/eslint-config-esmodule';
-import { config as typescript } from '@code-style/eslint-config-typescript';
+import {
+  config as typescript,
+  files,
+} from '@code-style/eslint-config-typescript';
 
 const linter = initESLint([...base, ...esmodule, ...typescript], {
   cwd: join(dirname(fileURLToPath(import.meta.url)), 'fixture'),
@@ -34,6 +37,24 @@ void describe('lint rules strict', async () => {
   });
   void it(`should have rules from eslint-config`, () => {
     strictEqual(calculated.rules?.['no-constructor-return']?.[0], 2);
+  });
+
+  void it(`should apply rule changes scoped to its files`, async () => {
+    const overlaid = initESLint(
+      [
+        ...base,
+        ...esmodule,
+        ...typescript,
+        { files, rules: { '@typescript-eslint/no-explicit-any': 'warn' } },
+      ],
+      { cwd: join(dirname(fileURLToPath(import.meta.url)), 'fixture') },
+    );
+    const { rules } = (await overlaid.calculateConfigForFile(
+      'src/index.ts',
+    )) as { rules?: Record<string, unknown[]> };
+    strictEqual(rules?.['@typescript-eslint/no-explicit-any']?.[0], 1);
+    // and doesn't break linting files the typescript config doesn't cover
+    await overlaid.calculateConfigForFile('package.json');
   });
 
   void it(`should relax rules in test files`, async () => {

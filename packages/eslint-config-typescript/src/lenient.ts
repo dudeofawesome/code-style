@@ -1,9 +1,11 @@
 import type { Linter } from 'eslint';
 
+import { files } from './base.js';
+
 export const config: Linter.Config[] = [
   {
     name: '@code-style/eslint-config-typescript/lenient',
-    files: ['**/*.?(m|c)@(t|j)s?(x)'],
+    files,
     rules: {
       /** Allow some non-boolean type conditionals. */
       '@typescript-eslint/strict-boolean-expressions': [

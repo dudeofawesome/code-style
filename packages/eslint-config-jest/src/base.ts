@@ -3,6 +3,9 @@ import jestPlugin from 'eslint-plugin-jest';
 
 import { test_file_patterns } from './utils.js';
 
+/** The files this config applies to. Scope your own `jest/*` rule changes to these. */
+export const files = test_file_patterns;
+
 export const config: Linter.Config[] = [
   {
     ...jestPlugin.configs['flat/recommended'],

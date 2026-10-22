@@ -3,7 +3,8 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import { flatConfigs as import_x_configs } from 'eslint-plugin-import-x';
 import { configs as tseslint_configs } from 'typescript-eslint';
 
-const files = ['**/*.?(m|c)@(t|j)s?(x)'];
+/** The files this config applies to. Scope your own `@typescript-eslint/*` rule changes to these. */
+export const files = ['**/*.?(m|c)@(t|j)s?(x)'];
 
 export const config: Linter.Config[] = [
   ...[

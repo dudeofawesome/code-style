@@ -4,6 +4,8 @@ A set of ESLint rules customized for code corectness.
 
 **The easiest way to get started with this project is to use our [setup script](https://www.npmjs.com/package/@code-style/create-configs).**
 
+To add your own rules on top, see [Customizing the ESLint configs](https://github.com/dudeofawesome/code-style/blob/main/docs/customizing-eslint.md).
+
 You're probably looking to use this with one of our other configs:
 
 -   [`@code-style/node`](../eslint-config-node/README.md)
