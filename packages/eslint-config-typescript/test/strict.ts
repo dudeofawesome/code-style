@@ -35,6 +35,13 @@ void describe('lint rules strict', async () => {
   void it(`should have rules from eslint-config`, () => {
     strictEqual(calculated.rules?.['no-constructor-return']?.[0], 2);
   });
+
+  void it(`should relax rules in test files`, async () => {
+    const { rules } = (await linter.calculateConfigForFile(
+      'src/index.test.ts',
+    )) as { rules?: Record<string, unknown[]> };
+    strictEqual(rules?.['@typescript-eslint/no-non-null-assertion']?.[0], 0);
+  });
 });
 
 void describe('eslint-config-typescript strict', () => {

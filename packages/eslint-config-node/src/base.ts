@@ -131,4 +131,20 @@ export const config: Linter.Config[] = [
     ],
     rules: { 'n/no-process-env': 'off' },
   },
+
+  {
+    name: '@code-style/eslint-config-node/test-files',
+    files: [
+      '**/test/**',
+      '**/__test__/**',
+      '**/*.test.*',
+      '**/*.spec.*',
+      '**/*.unit.*',
+      '**/*.e2e.*',
+    ],
+    rules: {
+      // Allow test to import unpublished files.
+      'n/no-unpublished-import': 'off',
+    },
+  },
 ];

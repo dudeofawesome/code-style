@@ -41,6 +41,10 @@ export const config: Linter.Config[] = [
 
       /** Allow floating promises. */
       '@typescript-eslint/no-floating-promises': 'off',
+
+      /** Mirror `@code-style/eslint-config/lenient`'s `dot-notation` & `no-throw-literal`. */
+      '@typescript-eslint/dot-notation': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
     },
   },
 ];

@@ -20,6 +20,9 @@ void describe('eslint-config-node lenient', () => {
         linter,
         files: [{ code: `const { readFileSync } = require('fs');` }],
       }));
+
+    void it(`should pass n/no-process-env`, () =>
+      testNoFail({ linter, files: [{ code: `process.env.FOO;\n` }] }));
   });
 
   void describe('fails', () => {
