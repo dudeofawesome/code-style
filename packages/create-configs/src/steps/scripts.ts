@@ -155,7 +155,7 @@ export function _generate_build_script({
         break;
       default:
         console.warn(
-          chalk.yellow`Build scripts using "${builder}" are not at this time`,
+          chalk.yellow(`Build scripts using "${builder}" are not at this time`),
         );
     }
   }
@@ -173,9 +173,8 @@ type LintScripts = {
 /** @private */
 export function _generate_lint_script({
   languages,
-  technologies,
   builder,
-}: Pick<AddNPMScriptsOptions, 'languages' | 'technologies' | 'builder'>): {
+}: Pick<AddNPMScriptsOptions, 'languages' | 'builder'>): {
   scripts: LintScripts;
   dependencies: Dependencies;
 } {
@@ -193,17 +192,7 @@ export function _generate_lint_script({
         case 'eslint':
           return {
             ...scripts,
-            'lint:js': `${deps.d.depend('@code-style/eslint-config', { cmd: 'eslint', v })} . --ext ${languages
-              .filter((l) => ['js', 'ts'].includes(l))
-              .reduce<string[]>(
-                (extensions, ext) => [
-                  ext,
-                  ...(technologies.includes('react') ? [`${ext}x`] : []),
-                  ...extensions,
-                ],
-                ['json'],
-              )
-              .join(',')} --cache`,
+            'lint:js': `${deps.d.depend('eslint')} . --cache`,
           };
         case 'stylelint':
           return {

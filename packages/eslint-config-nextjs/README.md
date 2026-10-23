@@ -15,9 +15,11 @@ My Next.JS eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-nextjs'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as nextjs } from '@code-style/eslint-config-nextjs';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, nextjs);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

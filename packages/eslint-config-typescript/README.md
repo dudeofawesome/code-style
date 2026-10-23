@@ -15,9 +15,11 @@ My Typescript eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-typescript'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as typescript } from '@code-style/eslint-config-typescript';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, typescript);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

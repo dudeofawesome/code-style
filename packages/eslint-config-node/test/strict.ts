@@ -5,10 +5,10 @@ import {
   testNoFail,
 } from '@code-style/utils/testing/eslint/tests';
 import { defaultTestSet } from '@code-style/utils/testing/eslint/default-test-sets';
+import { config as base } from '@code-style/eslint-config';
+import { config as node } from '@code-style/eslint-config-node';
 
-const linter = initESLint({
-  extends: ['@code-style/eslint-config', '@code-style/eslint-config-node'],
-});
+const linter = initESLint([...base, ...node]);
 
 void describe('eslint-config-node strict', () => {
   defaultTestSet(linter);
@@ -16,6 +16,17 @@ void describe('eslint-config-node strict', () => {
   void describe('passes', () => {
     void it(`should pass radix`, () =>
       testNoFail({ linter, files: [{ code: `parseInt('10');\n` }] }));
+
+    void it(`should parse .mjs files as esm`, () =>
+      testNoFail({
+        linter,
+        files: [
+          {
+            path: 'eslint.config.mjs',
+            code: `import { join } from 'node:path';\n\nexport default join;\n`,
+          },
+        ],
+      }));
   });
 
   void describe('fails', () => {

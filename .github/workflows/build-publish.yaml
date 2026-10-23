@@ -51,14 +51,17 @@ jobs:
         with:
           install-modules: false
 
-      - name: 'Publish to NPM 🚀'
-        env:
-          NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
-        uses: 'dudeofawesome/actions/npm-publish@a850bdff4354bdb891a86116f0378f8a890e2c16' # v1
-
       - name: 'Get package version 🔖'
         id: 'get-package-version'
         run: 'echo "version=v$(npm pkg get version | jq --raw-output)" >> "$GITHUB_OUTPUT"'
+
+      - name: 'Publish to NPM 🚀'
+        env:
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
+          # keep prereleases off the `latest` dist-tag
+          npm_config_tag: "${{ contains(steps.get-package-version.outputs.version, '-') && 'next' || 'latest' }}"
+        uses: 'dudeofawesome/actions/npm-publish@a850bdff4354bdb891a86116f0378f8a890e2c16' # v1
+
       - name: 'Build jsonschema 🏗️'
         run: 'npm run build:jsonschema --workspace packages/code-style'
       - name: 'Publish files to Github Releases 🚀'

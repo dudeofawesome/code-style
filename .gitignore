@@ -11,3 +11,4 @@ code-style-*-*.*.*.tgz
 
 # caches
 .eslintcache
+*.tsbuildinfo

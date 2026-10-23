@@ -15,9 +15,11 @@ My React eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-react'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as react } from '@code-style/eslint-config-react';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, react);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

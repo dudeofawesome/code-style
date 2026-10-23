@@ -15,9 +15,11 @@ My ES Module eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-esmodule'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as esmodule } from '@code-style/eslint-config-esmodule';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, esmodule);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

@@ -15,9 +15,11 @@ My CLI project eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-cli'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as cli } from '@code-style/eslint-config-cli';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, cli);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

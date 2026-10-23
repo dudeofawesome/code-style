@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
 
-import { areSetsEqual } from './set-matcher';
+import { areSetsEqual } from './set-matcher.js';
 
 void describe('set-matcher', () => {
   void describe(areSetsEqual.name, () => {

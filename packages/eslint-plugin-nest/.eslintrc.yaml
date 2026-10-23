@@ -1,9 +1,0 @@
-root: true
-extends:
-  - '@code-style'
-  - '@code-style/esmodule'
-  - '@code-style/node'
-  - '@code-style/jest'
-  - '@code-style/typescript'
-ignorePatterns:
-  - '/jest.config.mjs'

@@ -6,8 +6,11 @@
     "@code-style/typescript-configs/layers/library"
   ],
   "compilerOptions": {
+    "rootDir": "./",
     "baseUrl": "src/",
-    "outDir": "dist/"
+    "outDir": "dist/",
+    // eslint-plugin-import-x's bundled types reference packages it doesn't declare
+    "skipLibCheck": true
   },
   "include": ["./"],
   "exclude": ["dist/", "coverage/"]

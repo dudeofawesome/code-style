@@ -1,6 +1,15 @@
-import { describe, it, expect } from '@jest/globals';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { describe, it, expect, beforeEach, afterEach } from '@jest/globals';
 import '@code-style/utils/testing/assert/matchers';
-import { Dependencies, DependencySet, is_dependencies_array } from './utils.js';
+import {
+  Dependencies,
+  DependencySet,
+  file_exists,
+  is_dependencies_array,
+  verify_missing,
+} from './utils.js';
 
 describe('utils', () => {
   describe('DependencySet', () => {
@@ -82,6 +91,56 @@ describe('utils', () => {
       expect(is_dependencies_array([])).toBe(false);
       expect(is_dependencies_array(['foo'])).toBe(false);
       expect(is_dependencies_array([new Dependencies()])).toBe(true);
+    });
+  });
+
+  describe('verify_missing', () => {
+    const prettier_paths = [
+      '.prettierrc.mjs',
+      /^\.?prettier(rc|\.config)?(\.(json[5c]?|ya?ml|toml|[mc]?js))?$/u,
+    ];
+    const original_cwd = process.cwd();
+    let dir: string;
+
+    beforeEach(async () => {
+      dir = await mkdtemp(join(tmpdir(), 'verify-missing-'));
+      process.chdir(dir);
+    });
+    afterEach(async () => {
+      process.chdir(original_cwd);
+      await rm(dir, { recursive: true, force: true });
+    });
+
+    it('should be true when no file matches', async () => {
+      await expect(verify_missing({ path: prettier_paths })).resolves.toBe(
+        true,
+      );
+    });
+
+    it('should be false when a file matches and remove is off', async () => {
+      await writeFile('.prettierrc.json', '{}');
+      await expect(verify_missing({ path: prettier_paths })).resolves.toBe(
+        false,
+      );
+      await expect(file_exists('.prettierrc.json')).resolves.toEqual([
+        '.prettierrc.json',
+      ]);
+    });
+
+    it('should throw when a file matches and reject is on', async () => {
+      await writeFile('.prettierrc.json', '{}');
+      await expect(
+        verify_missing({ path: prettier_paths, reject: true }),
+      ).rejects.toThrow('.prettierrc.json');
+    });
+
+    it('should remove a file matched by several patterns', async () => {
+      // both patterns match, which used to race to delete the file twice
+      await writeFile('.prettierrc.mjs', 'export default {};');
+      await expect(
+        verify_missing({ path: prettier_paths, remove: true }),
+      ).resolves.toBe(true);
+      await expect(file_exists('.prettierrc.mjs')).resolves.toBe(false);
     });
   });
 });

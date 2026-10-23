@@ -10,6 +10,7 @@ import {
   writeFile,
 } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert';
 import { cwd } from 'node:process';
 import { format, Options } from 'prettier';
@@ -79,31 +80,25 @@ export async function verify_missing({
   reject = false,
 }: VerifyMissingOptions): Promise<boolean> {
   const paths = Array.isArray(path) ? path : [path];
-  return Promise.all(
-    paths.map(async (path) => {
-      const existing_files = await file_exists(path);
-      if (existing_files !== false) {
-        if (remove) {
-          await Promise.all(
-            existing_files.map((existing_file) => rm(existing_file)),
-          );
-          return true;
-        } else {
-          const message = `File "${path}" already exists.`;
-          if (reject) {
-            throw new Error(message);
-          } else {
-            console.info(message);
-            return false;
-          }
-        }
-      } else {
-        return true;
-      }
-    }),
-  )
-    .then(() => true)
-    .catch(() => false);
+  // patterns can match the same file, so collect every match before deleting
+  const existing_files = [
+    ...new Set(
+      (await Promise.all(paths.map((path) => file_exists(path)))).flatMap(
+        (files) => (files === false ? [] : files),
+      ),
+    ),
+  ];
+
+  if (existing_files.length === 0) return true;
+  if (remove) {
+    await Promise.all(existing_files.map((existing_file) => rm(existing_file)));
+    return true;
+  }
+
+  const message = `File "${existing_files.join('", "')}" already exists.`;
+  if (reject) throw new Error(message);
+  console.info(message);
+  return false;
 }
 
 export type VerifyMissingScriptOptions = Omit<
@@ -123,7 +118,7 @@ export type VerifyMissingScriptOptions = Omit<
 export async function verify_missing_script({
   path,
   json_paths: _json_paths,
-  overwrite = false,
+  overwrite,
   reject = false,
 }: VerifyMissingScriptOptions): Promise<boolean> {
   const json_paths = Array.isArray(_json_paths) ? _json_paths : [_json_paths];
@@ -189,7 +184,7 @@ export class DependencySet extends Set<string> {
     { cmd: command = dependency, v: version }: DependOptions = {},
   ): string {
     assert(
-      dependency.match(/^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u) !=
+      /^(?:[a-z0-9-_.]+|@[a-z0-9-_.]+\/[a-z0-9-_.]+)$/u.exec(dependency) !=
         null,
       `Must be a valid package name.`,
     );
@@ -267,7 +262,7 @@ export async function find_nearest_package(
 }
 
 export const version: string = await readFile(
-  await find_nearest_package(import.meta.dirname),
+  await find_nearest_package(dirname(fileURLToPath(import.meta.url))),
   'utf-8',
 )
   .then((str) => JSON.parse(str) as unknown)

@@ -1,11 +1,12 @@
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
 
-const config: ESLint.ConfigData = {
-  rules: {
-    // Disallow `eval`.
-    'no-eval': 'error',
-    'no-implied-eval': 'error',
+export const config: Linter.Config[] = [
+  {
+    name: '@code-style/eslint-config/rule-sets/security',
+    rules: {
+      // Disallow `eval`.
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+    },
   },
-};
-
-export = config;
+];

@@ -46,13 +46,11 @@
     }
   ],
   "material-icon-theme.files.associations": {
-    "eslint-config*/*.yaml": "eslint",
     "styleint-config/*.yaml": "stylelint",
     "typescript-configs/**/*.json": "tsconfig",
     "javascript-configs/**/*.json": "jsconfig"
   },
   "yaml.schemas": {
-    "https://json.schemastore.org/eslintrc": ["eslint-config*/**/*.yaml"],
     "https://json.schemastore.org/stylelintrc.json": ["stylelint-config/*.yaml"]
   },
   "cSpell.words": ["esmodule"]

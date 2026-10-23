@@ -40,7 +40,7 @@
     "build": "concurrently --group --prefix none \"npm:build:*\"",
     "build:jsonschema": "typescript-json-schema src/config-types.ts CodeStyleRCFile > codestylerc.schema.json",
     "build:ts": "tsc",
-    "lint": "eslint . --ext ts,mts,cts,js,json",
+    "lint": "eslint .",
     "prepublishOnly": "npm run build",
     "test": "echo 'No tests'; exit 0"
   },

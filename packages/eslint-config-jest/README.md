@@ -15,9 +15,11 @@ My Jest eslint config
 1. Add the plugin to your ESLint config.
 
     ```diff
-     extends:
-         - '@code-style/eslint-config'
-    +    - '@code-style/eslint-config-jest'
+     import { config as base } from '@code-style/eslint-config';
+    +import { config as jest } from '@code-style/eslint-config-jest';
+
+    -export default defineConfig(base);
+    +export default defineConfig(base, jest);
     ```
 
     You'll also likely want to have some of my other ESLint configs for your environment.

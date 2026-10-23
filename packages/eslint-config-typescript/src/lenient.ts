@@ -1,51 +1,52 @@
-import '@rushstack/eslint-patch/modern-module-resolution';
-import type { ESLint } from 'eslint';
+import type { Linter } from 'eslint';
 
-const config: ESLint.ConfigData = {
-  overrides: [
-    {
-      files: ['*.?(m|c)@(t|j)s?(x)'],
-      excludedFiles: '*.json',
-      rules: {
-        /** Allow some non-boolean type conditionals. */
-        '@typescript-eslint/strict-boolean-expressions': [
-          'error',
-          {
-            allowAny: true,
-            allowString: false,
-            allowNullableString: false,
-            allowNumber: false,
-            allowNullableNumber: false,
-            allowNullableObject: true,
-            allowNullableBoolean: true,
-          },
-        ],
+import { files } from './base.js';
 
-        /** Don't ensure switches on union types handle all cases. */
-        '@typescript-eslint/switch-exhaustiveness-check': 'off',
+export const config: Linter.Config[] = [
+  {
+    name: '@code-style/eslint-config-typescript/lenient',
+    files,
+    rules: {
+      /** Allow some non-boolean type conditionals. */
+      '@typescript-eslint/strict-boolean-expressions': [
+        'error',
+        {
+          allowAny: true,
+          allowString: false,
+          allowNullableString: false,
+          allowNumber: false,
+          allowNullableNumber: false,
+          allowNullableObject: true,
+          allowNullableBoolean: true,
+        },
+      ],
 
-        /** Allow unused vars. */
-        '@typescript-eslint/no-unused-vars': 'off',
+      /** Don't ensure switches on union types handle all cases. */
+      '@typescript-eslint/switch-exhaustiveness-check': 'off',
 
-        /** Allow `any`. */
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
+      /** Allow unused vars. */
+      '@typescript-eslint/no-unused-vars': 'off',
 
-        /** Allow non-null assertions. */
-        '@typescript-eslint/no-non-null-assertion': 'off',
+      /** Allow `any`. */
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
 
-        /** Allow for loops. */
-        '@typescript-eslint/prefer-for-of': 'off',
+      /** Allow non-null assertions. */
+      '@typescript-eslint/no-non-null-assertion': 'off',
 
-        /** Allow floating promises. */
-        '@typescript-eslint/no-floating-promises': 'off',
-      },
+      /** Allow for loops. */
+      '@typescript-eslint/prefer-for-of': 'off',
+
+      /** Allow floating promises. */
+      '@typescript-eslint/no-floating-promises': 'off',
+
+      /** Mirror `@code-style/eslint-config/lenient`'s `dot-notation` & `no-throw-literal`. */
+      '@typescript-eslint/dot-notation': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
     },
-  ],
-};
-
-export = config;
+  },
+];
