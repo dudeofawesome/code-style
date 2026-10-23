@@ -40,84 +40,75 @@ export async function create_vscode_config({
   await mkdir('.vscode/').catch(() => {});
 
   await Promise.allSettled([
-    Promise.resolve('.vscode/settings.json')
-      .then((path) =>
-        verify_missing({ path, remove: false, reject: true }).then(() => path),
-      )
-      .then(async (path) =>
-        create_file(
+    Promise.resolve('.vscode/settings.json').then(async (path) =>
+      create_file(
+        path,
+        await prettify(
           path,
-          await prettify(
-            path,
-            JSON.stringify({
-              // bring in existing settings
-              ...(await readFile(path)
-                .catch(() => '{}')
-                .then((buf) => buf.toString())
-                .then((str) => json5.parse<Record<string, unknown>>(str))
-                .catch((): Record<string, unknown> => ({}))),
+          JSON.stringify({
+            // bring in existing settings
+            ...(await readFile(path)
+              .catch(() => '{}')
+              .then((buf) => buf.toString())
+              .then((str) => json5.parse<Record<string, unknown>>(str))
+              .catch((): Record<string, unknown> => ({}))),
 
-              ...{
-                'editor.formatOnSave': true,
-                'editor.formatOnType': true,
-                'editor.formatOnPaste': true,
-                'editor.defaultFormatter': 'esbenp.prettier-vscode',
-                'eslint.validate': [
-                  'typescript',
-                  'javascript',
-                  'typescriptreact',
-                  'javascriptreact',
-                  'json',
-                  'jsonc',
-                ],
+            ...{
+              'editor.formatOnSave': true,
+              'editor.formatOnType': true,
+              'editor.formatOnPaste': true,
+              'editor.defaultFormatter': 'esbenp.prettier-vscode',
+              'eslint.validate': [
+                'typescript',
+                'javascript',
+                'typescriptreact',
+                'javascriptreact',
+                'json',
+                'jsonc',
+              ],
 
-                'files.exclude': {
-                  ...(output_dir != null
-                    ? { [`**/${output_dir}/`]: true }
-                    : {}),
-                  ...(technologies.includes('nextjs')
-                    ? { '.next/': true }
-                    : {}),
-                  '**/coverage/': true,
-                },
+              'files.exclude': {
+                ...(output_dir != null ? { [`**/${output_dir}/`]: true } : {}),
+                ...(technologies.includes('nextjs') ? { '.next/': true } : {}),
+                '**/coverage/': true,
               },
+            },
 
-              ...(languages.includes('js') || languages.includes('ts')
-                ? {
-                    'typescript.format.enable': false,
-                    'javascript.format.enable': false,
+            ...(languages.includes('js') || languages.includes('ts')
+              ? {
+                  'typescript.format.enable': false,
+                  'javascript.format.enable': false,
 
-                    'typescript.tsdk': `./node_modules/${deps.d.depend('typescript')}/lib`,
+                  'typescript.tsdk': `./node_modules/${deps.d.depend('typescript')}/lib`,
 
-                    ...(languages.includes('ts') &&
-                    technologies.includes('jest')
-                      ? {}
-                      : {
-                          'nodejs-testing.extensions': [
-                            {
-                              extensions: ['mjs', 'cjs', 'js'],
-                              parameters: [],
-                            },
-                            {
-                              extensions: ['mts', 'cts', 'ts'],
-                              parameters: [`--import=${deps.d.depend('tsx')}`],
-                            },
-                          ],
-                        }),
-                  }
-                : {}),
-              ...(languages.includes('rb')
-                ? {
-                    '[ruby]': {
-                      'editor.defaultFormatter': 'esbenp.prettier-vscode',
-                    },
-                  }
-                : {}),
-            }),
-          ),
-          overwrite,
+                  ...(languages.includes('ts') && technologies.includes('jest')
+                    ? {}
+                    : {
+                        'nodejs-testing.extensions': [
+                          {
+                            extensions: ['mjs', 'cjs', 'js'],
+                            parameters: [],
+                          },
+                          {
+                            extensions: ['mts', 'cts', 'ts'],
+                            parameters: [`--import=${deps.d.depend('tsx')}`],
+                          },
+                        ],
+                      }),
+                }
+              : {}),
+            ...(languages.includes('rb')
+              ? {
+                  '[ruby]': {
+                    'editor.defaultFormatter': 'esbenp.prettier-vscode',
+                  },
+                }
+              : {}),
+          }),
         ),
+        overwrite,
       ),
+    ),
 
     Promise.resolve('.vscode/extensions.json')
       .then((path) =>
@@ -163,27 +154,23 @@ export async function create_vscode_config({
         ),
       ),
 
-    Promise.resolve('.vscode/launch.json')
-      .then((path) =>
-        verify_missing({ path, remove: false, reject: true }).then(() => path),
-      )
-      .then(async (path) => {
-        // bring in existing settings
-        const existing = await readFile(path)
-          .catch(() => '{}')
-          .then((buf) => buf.toString())
-          .then((str) => json5.parse<LaunchJson>(str))
-          .catch((): LaunchJson => ({}));
+    Promise.resolve('.vscode/launch.json').then(async (path) => {
+      // bring in existing settings
+      const existing = await readFile(path)
+        .catch(() => '{}')
+        .then((buf) => buf.toString())
+        .then((str) => json5.parse<LaunchJson>(str))
+        .catch((): LaunchJson => ({}));
 
-        function is_attach(cfg: LaunchConfiguration): boolean {
-          return cfg.name === 'Attach';
-        }
+      function is_attach(cfg: LaunchConfiguration): boolean {
+        return cfg.name === 'Attach';
+      }
 
-        return create_file(
+      return create_file(
+        path,
+        await prettify(
           path,
-          await prettify(
-            path,
-            stripIndent`
+          stripIndent`
               // https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations
               ${JSON.stringify({
                 ...existing,
@@ -206,10 +193,10 @@ export async function create_vscode_config({
                 ],
               })}
             `,
-          ),
-          overwrite,
-        );
-      }),
+        ),
+        overwrite,
+      );
+    }),
   ]);
 
   return deps;

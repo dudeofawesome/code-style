@@ -80,31 +80,25 @@ export async function verify_missing({
   reject = false,
 }: VerifyMissingOptions): Promise<boolean> {
   const paths = Array.isArray(path) ? path : [path];
-  return Promise.all(
-    paths.map(async (path) => {
-      const existing_files = await file_exists(path);
-      if (existing_files !== false) {
-        if (remove) {
-          await Promise.all(
-            existing_files.map((existing_file) => rm(existing_file)),
-          );
-          return true;
-        } else {
-          const message = `File "${path}" already exists.`;
-          if (reject) {
-            throw new Error(message);
-          } else {
-            console.info(message);
-            return false;
-          }
-        }
-      } else {
-        return true;
-      }
-    }),
-  )
-    .then(() => true)
-    .catch(() => false);
+  // patterns can match the same file, so collect every match before deleting
+  const existing_files = [
+    ...new Set(
+      (await Promise.all(paths.map((path) => file_exists(path)))).flatMap(
+        (files) => (files === false ? [] : files),
+      ),
+    ),
+  ];
+
+  if (existing_files.length === 0) return true;
+  if (remove) {
+    await Promise.all(existing_files.map((existing_file) => rm(existing_file)));
+    return true;
+  }
+
+  const message = `File "${existing_files.join('", "')}" already exists.`;
+  if (reject) throw new Error(message);
+  console.info(message);
+  return false;
 }
 
 export type VerifyMissingScriptOptions = Omit<
